@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="./default.png" type="Source">
+    <name>Sift In</name>
+    <shortDescription>Parse SIft</shortDescription>
+    
+    <fullDescription>
+        <intro>Insert long description here...</intro>
+        <option name="short name of first option (like in the dialog)">description of first option</option>
+        <option name="short name of second option (like in the dialog)">description of second option</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="VCFin">VCF</inPort>
+        <outPort index="0" name="VCF1">VCF1</outPort>
+        <outPort index="1" name="VCF2">VCF2</outPort>
+    </ports>    
+    
+</knimeNode>

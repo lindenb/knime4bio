@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+
+  <extension
+         point="org.knime.workbench.repository.categories">
+      <category
+            description="Next Generation Sequencing"
+            level-id="ngs"
+            name="NGS"
+            path="/"/>
+     <category
+            description="SQL"
+            level-id="sql"
+            name="SQL"
+            path="/"/>
+      <category
+            description="LINUX"
+            level-id="linux"
+            name="LINUX"
+            path="/"/>
+   </extension>
+   
+   
+   <extension
+         point="org.knime.workbench.repository.nodes">
+         <!--
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.rs.RsFilterNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.rs.RsFilterNodeFactory"/>
+   
+     <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"/> 
+          
+     <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.havingid.HavingIdNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.havingid.HavingIdNodeFactory"/>
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"/>
+      
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"/>      
+       
+       <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory"/>      
+       
+       <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.qual.QualNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.qual.QualNodeFactory"/>
+       
+      
+        <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.ensembl.EnsemblGCNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.ensembl.EnsemblGCNodeFactory"/>
+        <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.region.RegionNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.region.RegionNodeFactory"/>
+            
+        <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.gn.GeneNameNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.gn.GeneNameNodeFactory"/>     
+            
+          <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.bam.view.BamViewNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.bam.view.BamViewNodeFactory"/>  -->
+          <node
+            category-path="linux"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"/>
+         <node
+            category-path="linux"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.tail.TailNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.unix.tail.TailNodeFactory"/>
+         <node
+            category-path="linux"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"/>   
+            
+         <!--
+         <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.basic.BasicPredictionNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.basic.BasicPredictionNodeFactory"/>  
+          <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.rsid.RsIdNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.rsid.RsIdNodeFactory"/>
+            
+           <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc.UcscTranscriptNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc.UcscTranscriptNodeFactory"/>
+    	  <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.homopolymer.HomoPolymerNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.homopolymer.HomoPolymerNodeFactory"/>
+            
+          <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.winnerloser.WinnerLoserNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.winnerloser.WinnerLoserNodeFactory"  />
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory"  />   
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.goa.GoAnnotationNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.goa.GoAnnotationNodeFactory"  />     
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bed.InRegionNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.bed.InRegionNodeFactory"  />
+          
+            <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory"  />       
+          
+          
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.localucsc.LocalUcscPredictionNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.LocalUcscPredictionNodeFactory" 
+            />        
+            
+            -->
+          <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"/>
+           
+          
+          <node 
+          	category-path="sql"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.sql.query.SqlQueryNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.sql.query.SqlQueryNodeFactory" 
+            />  
+          
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bin.BinNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.bin.BinNodeFactory" 
+            />  
+          
+          
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbygene.GroupByGeneNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbygene.GroupByGeneNodeFactory" 
+            />  
+          
+           <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbysnp.GroupBySnpNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbysnp.GroupBySnpNodeFactory" 
+            /> 
+          
+          <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory" 
+            /> 
+          
+   </extension>
+   
+</plugin>

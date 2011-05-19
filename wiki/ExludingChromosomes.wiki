@@ -1,0 +1,5 @@
+you want to remove a chromosome from a VCF file.
+
+Create a row filter:
+
+

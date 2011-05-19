@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="Knime4Bio" url="http://code.google.com/p/knime4bio/">
+      Knime4Bio
+   </description>
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.1.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.1">
+      <category name="Knime"/>
+   </feature>
+   <category-def name="Knime" label="Knime">
+      <description>
+         Custom nodes for http://knime.org
+      </description>
+   </category-def>
+</site>

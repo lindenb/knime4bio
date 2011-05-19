@@ -1,0 +1,77 @@
+options {
+	STATIC=false;
+	IGNORE_CASE=true;
+	}
+
+
+PARSER_BEGIN(QueryParser)
+package fr.inserm.umr915.knime4ngs.nodes.sql.query;
+import org.knime.core.data.DataTableSpec;
+import org.knime.core.data.DataColumnSpec;
+/**
+ *
+ * JSONParser
+ *
+ */
+@SuppressWarnings("unchecked")
+public class QueryParser
+	{
+	public static class Column
+		{
+		public int index0;
+		public String name;
+		public int dataColumnIndex;
+		public DataColumnSpec dataColumnSpec;
+		}
+	private DataTableSpec inSpec;
+	private java.util.List<Column> columns= new java.util.ArrayList<Column>();
+	private StringBuilder query=new StringBuilder();
+	
+	public QueryParser(DataTableSpec inSpec,String sql)  throws ParseException
+		{
+		this(new java.io.StringReader(sql));
+		this.inSpec=inSpec;
+		parse();
+		}
+	
+	public java.util.List<Column> getColumns()
+		{
+		return columns;
+		}
+	public String getQuery()
+		{
+		return query.toString();
+		}
+	}
+PARSER_END(QueryParser)
+
+TOKEN : /* LITERALS */
+{
+  <#ESCAPE_CHAR: "\\" ["n","t","b","r","f","\\","'","\""] >
+| <SIMPLE_QUOTE_LITERAL: "\'" ( (~["\'","\\","\n","\r"]) | <ESCAPE_CHAR> )* "\'" >
+| <DOUBLE_QUOTE_LITERAL: "\"" ( (~["\"","\\","\n","\r"]) | <ESCAPE_CHAR> )* "\"" >
+| <COLUMN: "?" (~[" ","\t","\r","\n"])+ >
+| <ANY: ~[] >
+}
+
+
+
+public void parse(): { Token t;}
+	{
+	( 
+	  t=<ANY> {query.append(t.image);}
+	| t=<SIMPLE_QUOTE_LITERAL> {query.append(t.image);}
+	| t=<DOUBLE_QUOTE_LITERAL> {query.append(t.image);}
+	| t=<COLUMN> {
+		query.append("?");
+		Column c=new Column();
+		c.index0= columns.size();
+		c.name=t.image.substring(1);
+		c.dataColumnIndex = this.inSpec.findColumnIndex(c.name);
+		if(c.dataColumnIndex==-1) throw new ParseException("undefined column name "+ c.name);
+		c.dataColumnSpec= this.inSpec.getColumnSpec(c.dataColumnIndex);
+		columns.add(c);
+		}
+	)+ <EOF>
+	}
+

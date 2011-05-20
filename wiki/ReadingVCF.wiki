@@ -22,8 +22,17 @@ return s;
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF03.png]
 ==Extract the Sample Index==
 Just return the file Index in the list of file
+
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF04.png]
+
 ==Process each VCF in a sub-workflow==
+
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
+
+and append the iteration index
+
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF07.png]
+
 ==Join Sample-Name & VCF==
+
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF06.png]

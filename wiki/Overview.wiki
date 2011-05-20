@@ -7,7 +7,7 @@
     * ExtractGeneName
     * FilterPrediction
     * FilterQuality
-    * RemoveRS 
+    * RemoveRS  
     * SnpInGene
     * FilterDepth
   * GeneOntology

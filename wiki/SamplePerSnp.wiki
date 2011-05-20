@@ -1,0 +1,13 @@
+=Motivation=
+
+Remove Mutations carried by more than/ less than 'x' samples
+
+=Solution=
+
+Use a 'Sample/Snp' Node
+
+[https://knime4bio.googlecode.com/svn/wiki/SamplePerSnp01.png]
+
+and use a 'Numeric Row Filter' filtering the new column 'sample.per.snp'
+
+[https://knime4bio.googlecode.com/svn/wiki/SamplePerSnp02.png]

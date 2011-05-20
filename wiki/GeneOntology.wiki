@@ -1,0 +1,17 @@
+=Motivation=
+
+We want to filter the genes on *GeneOntology*
+
+=Solution=
+
+Create a 'File Re' node reading a QuickGoURL:
+
+e.g: http://www.ebi.ac.uk/QuickGO/GAnnotation?tax=9606&relType=IP=&goid=GO:0001654&format=tsv
+
+[https://knime4bio.googlecode.com/svn/wiki/GeneOntology01.png]
+
+Then join  (Join Node) this table with another table using the gene symbols
+
+
+[https://knime4bio.googlecode.com/svn/wiki/GeneOntology02.png]
+

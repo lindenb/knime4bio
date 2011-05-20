@@ -1,0 +1,17 @@
+==Motivation==
+you want to only keep the mutations having a DEPTH greater than a given value
+==Solution==
+Create a Java Snpippet Row Filter
+{{{
+for(String s:$INFO$.split("[;]"))
+  {
+  if(!s.startsWith("DP=")) continue;
+  s=s.substring(3);
+  int depth=Integer.parseInt(s);
+  return depth>4;
+  }
+System.err.println("Cannot find Depth in "+ $INFO$ );
+return true;
+}}}
+
+[https://knime4bio.googlecode.com/svn/wiki/FilterDepth.png]

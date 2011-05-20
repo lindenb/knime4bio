@@ -29,6 +29,13 @@ Just return the file Index in the list of file
 
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
 
+  * ExludingChromosomes 
+  * FilterQuality 
+  * FilterPrediction
+  * RemoveRS
+  * SnpInGene
+  * FilterPrediction
+
 and append the iteration index
 
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF07.png]

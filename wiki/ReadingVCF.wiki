@@ -31,6 +31,7 @@ Just return the file Index in the list of file
 
   * ExludingChromosomes 
   * FilterQuality 
+  * FilterDepth
   * FilterPrediction
   * [RemoveRS]
   * SnpInGene

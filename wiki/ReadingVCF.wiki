@@ -1,0 +1,10 @@
+==Motivation==
+Reading a set of VCF files.
+==Solution==
+
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF01.png]
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF02.png]
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF03.png]
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF04.png]
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
+[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF06.png]

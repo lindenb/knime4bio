@@ -37,7 +37,7 @@ public class JoinPosNodeDialog extends DefaultNodeSettingsPane
        	
        	addDialogComponent(new DialogComponentColumnNameSelection(
                new SettingsModelColumnName( JoinPosNodeModel.POS2_COL_PROPERTY, JoinPosNodeModel.DEFAULT_POS2_COL),
-                  "Position Left",
+                  "Position Right",
                   1,
                   new DataTypeColumnFilter(IntCell.TYPE)
       			));

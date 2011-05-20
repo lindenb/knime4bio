@@ -32,7 +32,7 @@ Just return the file Index in the list of file
   * ExludingChromosomes 
   * FilterQuality 
   * FilterPrediction
-  * RemoveRS
+  * [RemoveRS]
   * SnpInGene
   * FilterPrediction
 

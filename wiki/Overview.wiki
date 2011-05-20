@@ -4,9 +4,11 @@
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
   * ReadingVCF
     * ExludingChromosomes
-  * ExtractGeneName
+    * ExtractGeneName
     * FilterPrediction
     * FilterQuality
+    * RemoveRS 
+    * SnpInGene
     * FilterDepth
   * GeneOntology
   * RenameColumns

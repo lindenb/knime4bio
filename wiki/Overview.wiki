@@ -2,12 +2,12 @@
 
 [https://knime4bio.googlecode.com/svn/wiki/BigPicture01.png]
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
-  * ReadingVCF
+  * [ReadingVCF]
     * ExludingChromosomes
     * ExtractGeneName
     * FilterPrediction
     * FilterQuality
-    * RemoveRS  
+    * [RemoveRS]  
     * SnpInGene
     * FilterDepth
   * GeneOntology

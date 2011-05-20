@@ -141,6 +141,12 @@
             />        
             
             -->
+            
+         <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.joinpos.JoinPosNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.joinpos.JoinPosNodeFactory"  />
+            
           <node
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"

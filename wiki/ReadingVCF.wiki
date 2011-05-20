@@ -1,10 +1,29 @@
-==Motivation==
+=Motivation=
 Reading a set of VCF files.
-==Solution==
+=Solution=
+
+we loop over each file in a give director. Another column containing the name of the sample is joined at the end.
 
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF01.png]
+
+==Create a List File Node==
+list the *.vcf.gz files in a given directory
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF02.png]
+==Extract the Sample Name==
+in the current case, the sample name is extracted from the file path.
+{{{
+String s=$Location$ ;
+int i=s.indexOf("Brs");
+s=s.substring(i);
+i=s.indexOf(".");
+s=s.substring(0,i);
+return s;
+}}}
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF03.png]
+==Extract the Sample Index==
+Just return the file Index in the list of file
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF04.png]
+==Process each VCF in a sub-workflow==
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
+==Join Sample-Name & VCF==
 [https://knime4bio.googlecode.com/svn/wiki/ReadingVCF06.png]

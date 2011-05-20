@@ -2,7 +2,7 @@
 <feature
       id="fr.inserm.umr915.knime4ngs.feature"
       label="Knime4bio"
-      version="1.0.1"
+      version="1.0.3"
       provider-name="Pierre Lindenbaum">
 
    <description url="http://code.google.com/p/knime4bio/">

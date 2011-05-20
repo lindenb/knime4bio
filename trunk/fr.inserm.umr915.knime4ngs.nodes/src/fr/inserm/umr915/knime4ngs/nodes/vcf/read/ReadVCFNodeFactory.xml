@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="./../default.png" type="Source">
+    <name>Read VCF</name>
+    
+    <shortDescription>
+       Reads one or more VCF File
+    </shortDescription>
+    
+    <fullDescription>
+        <intro>eads one or more VCF File</intro>
+        
+        
+        <option name="short name of first option (like in the dialog)">description of first option</option>
+        <option name="short name of second option (like in the dialog)">description of second option</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Input">Input</inPort>
+        <outPort index="0" name="VCF">Description of first output port...</outPort>
+        <outPort index="1" name="Headers">Headers</outPort>
+    </ports>    
+</knimeNode>

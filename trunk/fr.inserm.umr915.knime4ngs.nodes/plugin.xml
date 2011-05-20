@@ -177,7 +177,10 @@
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory" 
             /> 
-          
+          <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"/> 
    </extension>
    
 </plugin>

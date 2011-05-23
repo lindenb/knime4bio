@@ -1,4 +1,4 @@
-package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in;
+package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in;
 
 import org.knime.core.node.NodeDialogPane;
 import org.knime.core.node.NodeFactory;
@@ -11,15 +11,15 @@ import org.knime.core.node.NodeView;
  *
  * @author Pierre Lindenbaum
  */
-public class SiftInNodeFactory 
-        extends NodeFactory<SiftInNodeModel> {
+public class PolyphenInNodeFactory 
+        extends NodeFactory<PolyphenInNodeModel> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public SiftInNodeModel createNodeModel() {
-        return new SiftInNodeModel();
+    public PolyphenInNodeModel createNodeModel() {
+        return new PolyphenInNodeModel();
     }
 
     /**
@@ -34,8 +34,8 @@ public class SiftInNodeFactory
      * {@inheritDoc}
      */
     @Override
-    public NodeView<SiftInNodeModel> createNodeView(final int viewIndex,
-            final SiftInNodeModel nodeModel)
+    public NodeView<PolyphenInNodeModel> createNodeView(final int viewIndex,
+            final PolyphenInNodeModel nodeModel)
         {
         throw new IllegalStateException("No view Defined");
         }
@@ -53,7 +53,7 @@ public class SiftInNodeFactory
      */
     @Override
     public NodeDialogPane createNodeDialogPane() {
-        return new SiftInNodeDialog();
+        return new PolyphenInNodeDialog();
     }
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Sift Out</name>
-    <shortDescription> Merge some VCF files</shortDescription>
+    <shortDescription>Generates data for SIFT</shortDescription>
     
     <fullDescription>
         <intro>Insert long description here...</intro>
@@ -12,7 +12,6 @@
     
     <ports>
         <inPort index="0" name="VCF">VCF</inPort>
-        <outPort index="0" name="SIFT">SIFT</outPort>
     </ports>    
     
 </knimeNode>

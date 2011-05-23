@@ -1,15 +1,8 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out;
 
-import java.io.File;
+
 import java.io.PrintWriter;
-import java.util.List;
-
-
-import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
-
-
-import fr.inserm.umr915.knime4ngs.corelib.bio.Position;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.AbstractPredictionOutNodeModel;
 
 
@@ -28,9 +21,8 @@ public class PolyphenOutNodeModel extends AbstractPredictionOutNodeModel
     /**
      * Constructor for the node model.
      */
-    protected PolyphenOutNodeModel()
+    public PolyphenOutNodeModel()
     	{
-        super(1,0);
     	}
     
    @Override
@@ -41,9 +33,9 @@ public class PolyphenOutNodeModel extends AbstractPredictionOutNodeModel
   
    
     @Override
-    protected void write(PrintWriter out, Position pos, String ref, String alt)
+    protected void write(PrintWriter out, String chrom,int  pos, String ref, String alt)
     	{
-    	out.print(pos.getChromosome()+":"+pos.getPosition());
+    	out.print(chrom+":"+pos);
     	out.print('\t');
     	out.print(ref+"/"+alt);
     	out.println();

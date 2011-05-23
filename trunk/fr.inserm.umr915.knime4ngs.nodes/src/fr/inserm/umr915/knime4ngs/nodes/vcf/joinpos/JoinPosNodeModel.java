@@ -8,8 +8,10 @@ import java.util.List;
 
 
 import org.knime.base.data.append.column.AppendedColumnRow;
+import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
+import org.knime.core.data.DataType;
 import org.knime.core.data.RowIterator;
 import org.knime.core.data.RowKey;
 
@@ -106,7 +108,7 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 			{
 			return new Position(
 				StringCell.class.cast(r.getCell(chromCol)).getStringValue(),
-				IntCell.class.cast(r.getCell(posCol)).getIntValue()-1
+				IntCell.class.cast(r.getCell(posCol)).getIntValue()
 				);
 			}
 		@Override
@@ -123,7 +125,7 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
      */
     protected JoinPosNodeModel()
     	{
-        super(2,2);
+        super(2,1);
     	}
     
 
@@ -135,7 +137,6 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
             ) throws Exception
             {
 			BufferedDataContainer container1=null;
-			BufferedDataContainer container2=null;
 			try
 		    	{
 		        // the data table spec of the single output table, 
@@ -159,7 +160,6 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 				
 				DataTableSpec merged=new DataTableSpec(inDataTableSpec1,inDataTableSpec2);
 		        container1 = exec.createDataContainer(merged);
-		        container2 = exec.createDataContainer(inDataTableSpec1);
 		        
 		       
 		        double total=bedTable.getRowCount();
@@ -190,7 +190,7 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 		        			{
 		        			DataRow row2=buffer.getFirst();
 		        			Position position2 = sorter2.make(row2);
-		        			int i= position2.getChromosome().compareTo(position1.getChromosome());
+		        			int i= position2.compareTo(position1);
 		        			if(i>0) break;
 		        			if(i<0)
 		        				{
@@ -219,7 +219,7 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 		        				prev2=position2;
 		        				
 		        				
-		        				int i= position2.getChromosome().compareTo(position1.getChromosome());
+		        				int i= position2.compareTo(position1);
 		        				if(i>0)
 		        					{
 		        					buffer.add(row2);
@@ -240,7 +240,16 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 							}
 						else
 							{
-							container2.addRowToTable(row);
+							DataCell empty[]=new DataCell[inDataTableSpec2.getNumColumns()];
+		        			for(int i=0;i< empty.length;++i)
+		        				{
+		        				empty[i]=DataType.getMissingCell();
+		        				}
+		        			outIndex++;
+		        			container1.addRowToTable(new AppendedColumnRow(
+			        				RowKey.createRowKey(outIndex),	
+			        				row, empty));
+							
 							}
 		        		exec.checkCanceled();
 		            	exec.setProgress(nRow/total,"Joining....");
@@ -260,12 +269,10 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 		        
 				// once we are done, we close the container and return its table
 				safeClose(container1);
-				safeClose(container2);
+				
 		        BufferedDataTable out1 = container1.getTable();
-		        BufferedDataTable out2 = container2.getTable();
 		        container1=null;
-		        container2=null;
-		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
+		        BufferedDataTable array[]= new BufferedDataTable[]{out1};
 		    	return array;
 		    	}
 		catch(Exception err)
@@ -277,7 +284,6 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
 		finally
 			{
 			safeClose(container1);
-			safeClose(container2);
 			}
        }
     
@@ -289,9 +295,7 @@ public class JoinPosNodeModel extends AbstractVCFNodeModel
     		throw new InvalidSettingsException("Expected two tables");
     		}
     	DataTableSpec in=inSpecs[0];
-    	DataTableSpec merged=new DataTableSpec(in,inSpecs[1]);
-    	
-    	return new DataTableSpec[]{merged,in};
+    	return new DataTableSpec[]{new DataTableSpec(in,inSpecs[1])};
     	}
     
     @Override

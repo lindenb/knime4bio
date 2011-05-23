@@ -202,7 +202,13 @@
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory" 
+            />
+          <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam.SamContextNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam.SamContextNodeFactory" 
             /> 
+         
           <node
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"

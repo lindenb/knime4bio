@@ -13,7 +13,6 @@
     <ports>
         <inPort index="0" name="In-Port 1">Left VCF</inPort>
         <inPort index="1" name="In-Port 2">Right Data</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
-        <outPort index="1" name="Dicarded">Dicarded VCF2</outPort>
+        <outPort index="0" name="out">VCF1</outPort>
     </ports>
 </knimeNode>

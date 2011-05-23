@@ -91,7 +91,27 @@
             category-path="linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"/>   
-            
+         
+         <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"/>
+      
+      	 <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"/>
+         
+         <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in.PolyphenInNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in.PolyphenInNodeFactory"/> 
+         
+         <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"/>
+          
          <!--
          <node
             category-path="ngs"

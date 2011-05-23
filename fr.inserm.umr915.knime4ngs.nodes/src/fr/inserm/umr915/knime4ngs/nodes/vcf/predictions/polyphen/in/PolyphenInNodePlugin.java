@@ -2,22 +2,28 @@
  * $Revision$ $Date$ $Author$
  *
  */
-package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out;
+package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
+ * This is the eclipse bundle activator.
+ * Note: KNIME node developers probably won't have to do anything in here, 
+ * as this class is only needed by the eclipse platform/plugin mechanism.
+ * If you want to move/rename this file, make sure to change the plugin.xml
+ * file in the project root directory accordingly.
+ *
  * @author Pierre Lindenbaum
  */
-public class SiftOutNodePlugin extends Plugin {
+public class PolyphenInNodePlugin extends Plugin {
     // The shared instance.
-    private static SiftOutNodePlugin plugin;
+    private static PolyphenInNodePlugin plugin;
 
     /**
      * The constructor.
      */
-    public SiftOutNodePlugin() {
+    public PolyphenInNodePlugin() {
         super();
         plugin = this;
     }
@@ -51,7 +57,7 @@ public class SiftOutNodePlugin extends Plugin {
      * 
      * @return Singleton instance of the Plugin
      */
-    public static SiftOutNodePlugin getDefault() {
+    public static PolyphenInNodePlugin getDefault() {
         return plugin;
     }
 

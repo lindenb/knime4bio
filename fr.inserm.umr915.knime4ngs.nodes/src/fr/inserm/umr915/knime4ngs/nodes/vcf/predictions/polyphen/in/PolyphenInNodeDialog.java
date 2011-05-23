@@ -1,4 +1,4 @@
-package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in;
+package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in;
 
 import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
@@ -13,9 +13,9 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.AbstractPredictionInNode
 /**
  * @author Pierre Lindenbaum
  */
-public class SiftInNodeDialog extends DefaultNodeSettingsPane
+public class PolyphenInNodeDialog extends DefaultNodeSettingsPane
 	{
-    protected SiftInNodeDialog()
+    protected PolyphenInNodeDialog()
     	{
     	addDialogComponent(new DialogComponentColumnNameSelection(
                 new SettingsModelColumnName(
@@ -56,7 +56,7 @@ public class SiftInNodeDialog extends DefaultNodeSettingsPane
                 new SettingsModelColumnName(
                 		AbstractPredictionInNodeModel.PREDICTION_COL_PROPERTY,
                 		AbstractPredictionInNodeModel.DEFAULT_PREDICTION_COL),
-                   "Sift position",
+                   "Polyphen position",
                    1,
                    new DataTypeColumnFilter(StringCell.TYPE)
        			));

@@ -33,9 +33,11 @@ import org.knime.core.node.ExecutionMonitor;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.NodeLogger;
 import org.knime.core.node.NodeModel;
+import org.knime.core.node.NodeSettings;
 import org.knime.core.node.NodeSettingsRO;
 import org.knime.core.node.NodeSettingsWO;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.port.PortType;
 
 
@@ -239,6 +241,13 @@ public abstract class AbstractNodeModel  extends NodeModel
 			}
 		return index;
 		}
+	
+	public int findColumnIndex(DataTableSpec dataTableSpec,SettingsModelColumnName colName,DataType dataType)
+		throws InvalidSettingsException
+		{
+		return findColumnIndex(dataTableSpec,colName.getColumnName(),dataType);
+		}
+	
 	
 	protected String getString(DataRow row,int index)
 		{

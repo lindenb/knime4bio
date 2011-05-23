@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
-
-import fr.inserm.umr915.knime4ngs.corelib.bio.Position;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.AbstractPredictionOutNodeModel;
 
 
@@ -25,9 +23,8 @@ public class SiftOutNodeModel extends AbstractPredictionOutNodeModel
     /**
      * Constructor for the node model.
      */
-    protected SiftOutNodeModel()
+    public SiftOutNodeModel()
     	{
-        super(1,0);
         }
     
     @Override
@@ -37,13 +34,12 @@ public class SiftOutNodeModel extends AbstractPredictionOutNodeModel
 	   	}
     
     @Override
-    protected  void write(PrintWriter out,Position pos,String ref,String alt)
+    protected  void write(PrintWriter out,String chrom,int pos,String ref,String alt)
     	{
-    	String s=pos.getChromosome();
-    	if(s.toLowerCase().startsWith("chr")) s=s.substring(3);
-    	out.print(s);
+    	if(chrom.toLowerCase().startsWith("chr")) chrom=chrom.substring(3);
+    	out.print(chrom);
     	out.print(',');
-    	out.print(pos.getPosition());
+    	out.print(pos);
     	out.print(',');
     	out.print('1');
     	out.print(',');

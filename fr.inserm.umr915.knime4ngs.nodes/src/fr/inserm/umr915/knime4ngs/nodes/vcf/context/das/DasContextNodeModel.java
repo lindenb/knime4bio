@@ -69,7 +69,7 @@ public class DasContextNodeModel extends AbstractVCFNodeModel
 	
 	/** das URI */
 	static final String DAS_URI_PROPERTY="das.uri";
-	static final String DEFAULT_DAS_URI="http://genome.ucsc.edu/cgi-bin/das/hg19";
+	static final String DEFAULT_DAS_URI="http://genome.ucsc.edu/cgi-bin/das/hg19/dna";
 	private final SettingsModelString m_dasUri =new SettingsModelString(DAS_URI_PROPERTY,DEFAULT_DAS_URI);
 	
 	
@@ -173,7 +173,7 @@ public class DasContextNodeModel extends AbstractVCFNodeModel
 		        		int leftLen=extend;
 		        		if(pos0-leftLen<1) leftLen=pos0-1;
 		        		
-						String uri=m_dasUri.getStringValue()+"/dna?segment="+URLEncoder.encode(chrom, "UTF-8")
+						String uri=m_dasUri.getStringValue()+"?segment="+URLEncoder.encode(chrom, "UTF-8")
 							+":"+(pos0-leftLen)+","+(pos0+extend);
 												
 						try
@@ -240,7 +240,8 @@ public class DasContextNodeModel extends AbstractVCFNodeModel
     		{
     		throw new InvalidSettingsException("Expected one table");
     		}
-
+    	findColumnIndex(inSpecs[0], m_chromColumn,StringCell.TYPE);
+    	findColumnIndex(inSpecs[0], m_posColumn,IntCell.TYPE);
     	return new DataTableSpec[]{createSpec(inSpecs[0])};
     	}
     

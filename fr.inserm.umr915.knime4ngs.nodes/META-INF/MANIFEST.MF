@@ -8,7 +8,8 @@ Bundle-ClassPath: knime4ngs.jar
 Require-Bundle: org.eclipse.core.runtime,
  org.knime.workbench.core,
  org.knime.workbench.repository,
- org.knime.base
+ org.knime.base,
+ net.sf.picard;bundle-version="1.35.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: fr.inserm.umr915.knime4ngs.corelib.bio,
  fr.inserm.umr915.knime4ngs.corelib.knime,
@@ -51,6 +52,7 @@ Export-Package: fr.inserm.umr915.knime4ngs.corelib.bio,
    org.osgi.framework,
    org.knime.core.node.defaultnodesettings",
  fr.inserm.umr915.knime4ngs.nodes.vcf.context.das,
+ fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam,
  fr.inserm.umr915.knime4ngs.nodes.vcf.groupbygene;
   uses:="fr.inserm.umr915.knime4ngs.nodes.vcf,
    org.knime.core.node,

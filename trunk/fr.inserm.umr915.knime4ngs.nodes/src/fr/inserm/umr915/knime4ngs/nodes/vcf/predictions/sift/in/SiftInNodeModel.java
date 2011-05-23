@@ -35,7 +35,8 @@ public class SiftInNodeModel extends AbstractPredictionInNodeModel
     	String cell=StringCell.class.cast(c).getStringValue();
 		String variant[]=comma.split(cell);
 		if(!variant[0].startsWith("chr")) variant[0]="chr"+variant[0];
-		if(variant[3].length()!=3 || variant[3].charAt(1)!='/')
+		if( variant.length<4 ||
+			variant[3].length()<2 || variant[3].charAt(1)!='/')
 			{
 			throw new IllegalArgumentException(cell);
 			}

@@ -2,12 +2,14 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
 
 
 import org.knime.base.data.append.column.AppendedColumnRow;
+import org.knime.base.data.sort.SortedTable;
 import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
@@ -42,7 +44,21 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 	protected final SettingsModelColumnName m_predictionCol =
         new SettingsModelColumnName(PREDICTION_COL_PROPERTY,DEFAULT_PREDICTION_COL);
 	
-	
+	private  class PreditionComparator implements Comparator<DataRow>
+		{
+		int predCol;
+		@Override
+		public int compare(DataRow r1, DataRow r2)
+			{
+			Mutation m1 = makeMutation(r1);
+			Mutation m2 = makeMutation(r2);
+			return m1.compareTo(m2);
+			}
+		Mutation makeMutation(DataRow r)
+			{
+			return makeMutationPrediction(r.getCell(predCol));
+			}
+		};
 	
     /**
      * Constructor for the node model.
@@ -91,13 +107,14 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 						inDataTableSpec1.findColumnIndex(this.m_refCol.getColumnName()),
 						inDataTableSpec1.findColumnIndex(this.m_altCol.getColumnName())
 					);
-				int predCol=findColumnIndex(inDataTableSpec2, this.m_predictionCol, IntCell.TYPE);
 				
 				
 				DataTableSpec merged=new DataTableSpec(inDataTableSpec1,inDataTableSpec2);
 		        container1 = exec.createDataContainer(merged);
 		        
-		        
+		        PreditionComparator cmp=new PreditionComparator();
+		        cmp.predCol=findColumnIndex(inDataTableSpec2, this.m_predictionCol, StringCell.TYPE);
+		        SortedTable sorted=new SortedTable(table2,cmp,false, exec);
 		       
 		        double total=table1.getRowCount();
 		        int nRow=0;
@@ -109,7 +126,7 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 		        LinkedList<DataRow> buffer=new LinkedList<DataRow>();
 		        try {
 		        	iter1=table1.iterator();
-		        	iter2=table2.iterator();
+		        	iter2=sorted.iterator();
 		        	while(iter1.hasNext())
 		        		{
 		        		++nRow;
@@ -130,36 +147,18 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 		        			{
 		        			for(String alt: alts(position0.getRef(),position0.getAlt()))
 			        			{
+		        				
 		        				Mutation position1=new Mutation(
 		        						position0.getPosition(),
 		        						position0.getRef(), alt);
 		        				
-				        		while(!buffer.isEmpty())
-				        			{
-				        			DataRow row2=buffer.getFirst();
-				        			Mutation position2 = makeMutationPrediction(row2.getCell(predCol));
-				        			int i= compare(position2,position1);
-				        			if(i>0) break;
-				        			if(i<0)
-				        				{
-				        				buffer.removeFirst();
-				        				continue;
-				        				}
-				        			if(!same(position2,position1)) continue;
-				        			outIndex++;
-				        			found.add(new AppendedColumnRow(
-				        				RowKey.createRowKey(outIndex),	
-				        				row, row2));
-				        			break;
-				        			}
-								
-				        		
-				        		if(found.isEmpty())
-				        			{
-				        			while(iter2.hasNext())
+		        				if(buffer.isEmpty() ||
+		        					compare(cmp.makeMutation(buffer.getFirst()),position1)<=0)
+		        					{
+			        				while(iter2.hasNext())
 				        				{
 				        				DataRow row2=iter2.next();
-				        				Mutation position2=makeMutationPrediction(row2.getCell(predCol));
+				        				Mutation position2=cmp.makeMutation(row2);
 				        				if(prev2!=null && compare(prev2,position2)>0)
 						        			{
 						        			throw new IOException("Input should be sorted on CHROM/POS/REF/ALT but found "+
@@ -169,20 +168,38 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 				        				
 				        				
 				        				int i=compare(position2,position1);
+				        				if(i<0) continue;
+				        				buffer.add(row2);
 				        				if(i>0)
 				        					{
-				        					buffer.add(row2);
 				        					break;
 				        					}
-				        				if(i<0) continue;
-				        				if(!same(position2,position1)) continue;
-				        				
-				        				outIndex++;
-					        			found.add(new AppendedColumnRow(
-					        				RowKey.createRowKey(outIndex),	
-					        				row, row2));
-					        			break;
 				        				}
+		        					}
+		        				
+		        				
+		        				int index=0;
+				        		while(index < buffer.size())
+				        			{
+				        			DataRow row2=buffer.get(index);
+				        			Mutation position2 = cmp.makeMutation(row2);
+				        			int i= compare(position2,position1);
+				        			if(i>0) break;
+				        			if(i<0)
+				        				{
+				        				buffer.remove(index);
+				        				continue;
+				        				}
+				        			
+				        			index++;
+				        			if(!same(position2,position1))
+				        				{
+				        				continue;
+				        				}
+				        			outIndex++;
+				        			found.add(new AppendedColumnRow(
+				        				RowKey.createRowKey(outIndex),	
+				        				row, row2));
 				        			}
 			        			}//end of loop(alts())
 		        			}//end if atgc(ref)
@@ -252,7 +269,7 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
          findColumnIndex(inSpecs[0],m_refCol,StringCell.TYPE);
          findColumnIndex(inSpecs[0],m_altCol,StringCell.TYPE);
          findColumnIndex(inSpecs[1],m_predictionCol,StringCell.TYPE);
-    	return super.configure(inSpecs);
+    	return new DataTableSpec[]{new DataTableSpec(inSpecs[0],inSpecs[1])};
     	}
     
     @Override

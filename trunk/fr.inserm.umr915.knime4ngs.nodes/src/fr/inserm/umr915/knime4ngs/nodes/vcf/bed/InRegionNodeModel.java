@@ -1,15 +1,18 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.bed;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-import org.knime.base.data.sort.SortedTable;
+import org.knime.base.data.append.column.AppendedColumnRow;
+import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
+import org.knime.core.data.DataType;
 import org.knime.core.data.RowIterator;
-
+import org.knime.core.data.RowKey;
 import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.BufferedDataContainer;
@@ -17,7 +20,6 @@ import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
-import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 
 
@@ -37,26 +39,30 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
  */
 public class InRegionNodeModel extends AbstractVCFNodeModel
 	{
-
-	final static String DEFAULT_CHROM_COL="chrom";
-	static final String CHROM_COL_PROPERTY="chrom.col";
+	final static String DEFAULT_CHROM1_COL="CHROM";
+	static final String CHROM1_COL_PROPERTY="chrom1.col";
+	final static String DEFAULT_POS_COL="POS";
+	static final String POS_COL_PROPERTY="pos.col";
+	final static String DEFAULT_CHROM2_COL="chrom";
+	static final String CHROM2_COL_PROPERTY="chrom2.col";
 	final static String DEFAULT_START_COL="start";
 	static final String START_COL_PROPERTY="start.col";
-	final static String DEFAULT_END_COL="end";
 	static final String END_COL_PROPERTY="end.col";
+	final static String DEFAULT_END_COL="end";
 	
+
 	
-	final static boolean DEFAULT_ZERO=true;
-	static final String ZERO_PROPERTY="zero.based";
-	
-	private final SettingsModelColumnName m_chromCol =
-        new SettingsModelColumnName(CHROM_COL_PROPERTY,DEFAULT_CHROM_COL);
+	private final SettingsModelColumnName m_chrom1Col =
+        new SettingsModelColumnName(CHROM1_COL_PROPERTY,DEFAULT_CHROM1_COL);
+	private final SettingsModelColumnName m_posCol =
+        new SettingsModelColumnName(POS_COL_PROPERTY,DEFAULT_POS_COL);
+	private final SettingsModelColumnName m_chrom2Col =
+        new SettingsModelColumnName(CHROM2_COL_PROPERTY,DEFAULT_CHROM2_COL);
 	private final SettingsModelColumnName m_start =
         new SettingsModelColumnName(START_COL_PROPERTY,DEFAULT_START_COL);
 	private final SettingsModelColumnName m_end =
         new SettingsModelColumnName(END_COL_PROPERTY,DEFAULT_END_COL);
-	private final SettingsModelBoolean m_isZeroBased =
-        new SettingsModelBoolean(ZERO_PROPERTY,DEFAULT_ZERO);
+	
 	
 	
     /**
@@ -64,17 +70,10 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
      */
     protected InRegionNodeModel()
     	{
-        super(2,2);
+        super(2,1);
     	}
     
-    private Segment toZeroBased(Segment seg)
-    	{
-    	if(!this.m_isZeroBased.getBooleanValue())
-    		{
-    		seg=new Segment(seg.getChromosome(), seg.getChromStart()-1,seg.getChromEnd()-1);
-    		}
-    	return seg;
-    	}
+   
     
     @Override
     protected BufferedDataTable[] execute(
@@ -83,7 +82,7 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
             ) throws Exception
             {
 			BufferedDataContainer container1=null;
-			BufferedDataContainer container2=null;
+			
 			try
 		    	{
 		        // the data table spec of the single output table, 
@@ -96,96 +95,149 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 
 				
 				BedKSorter bedsorter=new BedKSorter(
-						inDataTableSpec2.findColumnIndex(this.m_chromCol.getColumnName()),
+						inDataTableSpec2.findColumnIndex(this.m_chrom2Col.getColumnName()),
 						inDataTableSpec2.findColumnIndex(this.m_start.getColumnName()),
 						inDataTableSpec2.findColumnIndex(this.m_end.getColumnName())
 						);
-				System.err.println("Sort BED");
-				SortedTable sortedBed=new SortedTable(bedTable, bedsorter,false, exec);
+				
+			
 				
 				PositionKSorter vcfSorter=new PositionKSorter(
-					findColumnIndex(inDataTableSpec1, "CHROM",StringCell.TYPE),
-					findColumnIndex(inDataTableSpec1, "POS",IntCell.TYPE)
+					findColumnIndex(inDataTableSpec1,this.m_chrom1Col.getColumnName(),StringCell.TYPE),
+					findColumnIndex(inDataTableSpec1,this.m_posCol.getColumnName(),IntCell.TYPE)
 					);
-				System.err.println("Sort VCF");
-				SortedTable sortedVCF=new SortedTable(vcfTable, vcfSorter,false, exec);
 				
-		        container1 = exec.createDataContainer(inDataTableSpec1);
-		        container2 = exec.createDataContainer(inDataTableSpec1);
+				
+				
+		        container1 = exec.createDataContainer(new DataTableSpec(
+		        		inDataTableSpec1,
+						bedTable.getDataTableSpec()
+						));
+
 		        
 		       
-		        double total=bedTable.getRowCount();
+		        double total=vcfTable.getRowCount();
 		        int nRow=0;
+		        int outCount=0;
 		        RowIterator itervcf=null;
 		        RowIterator iterbed=null;
-		        LinkedList<Segment> buffer=new LinkedList<Segment>();
+		        Position prevVCF=null;
+		        Segment prevBed=null;
+		        LinkedList<DataRow> buffer=new LinkedList<DataRow>();
 		        try {
-		        	itervcf=sortedVCF.iterator();
-		        	iterbed=sortedBed.iterator();
+		        	itervcf=vcfTable.iterator();
+		        	iterbed=bedTable.iterator();
 		        	while(itervcf.hasNext())
 		        		{
 		        		++nRow;
 		        		DataRow row=itervcf.next();
-		        		Position position1= vcfSorter.make(row);
-		        		Position position0= new Position(position1.getChromosome(), position1.getPosition()-1);
-		        		boolean found=false;
+		        		Position position0= vcfSorter.make(row);
 		        		
-		        		while(!buffer.isEmpty())
+		        		
+		        		if(prevVCF!=null && prevVCF.compareTo(position0)>0)
 		        			{
-		        			Segment seg=buffer.getFirst();
+		        			throw new IOException(
+		        				"Expected sorted VCF file  but found "+prevVCF+" > "+position0	
+		        				);
+		        			}
+		        		prevVCF=position0;
+		        		List<DataRow> found=new ArrayList<DataRow>();
+		        		
+		        		
+		        		boolean willCallNext=true;
+		        		int buffIndex=0;
+		        		while(buffIndex< buffer.size())
+		        			{
+		        			DataRow r=buffer.get(buffIndex);
+		        			Segment seg=bedsorter.make(r);
+		        			
 		        			int i= seg.getChromosome().compareTo(position0.getChromosome());
-		        			if(i>0) break;
+		        			if(i>0)
+		        				{
+		        				willCallNext=false;
+		        				break;
+		        				}
 		        			if(i<0)
 		        				{
-		        				buffer.removeFirst();
+		        				
+		        				buffer.remove(buffIndex);
 		        				continue;
 		        				}
-		        			i= seg.getChromEnd()-position0.getPosition();
-		        			if(i<=0)
+		        			if( seg.getChromStart()>position0.getPosition())
 		        				{
-		        				buffer.removeFirst();
+		        				willCallNext=false;
+		        				break;
+		        				}
+
+		        			if(seg.getChromEnd() < position0.getPosition())
+		        				{
+		        				buffIndex++;
+		        				//buffer.remove(buffIndex); non
 		        				continue;
 		        				}
-		        			found=true;
-		        			break;
+		        			found.add(r);
+		        			buffIndex++;
 		        			}
 						
-		        		
-		        		if(!found)
-		        			{
+		        		if(willCallNext)
+			        		{
 		        			while(iterbed.hasNext())
 		        				{
-		        				Segment seg=toZeroBased(bedsorter.make(iterbed.next()));
+		        				DataRow bedRow=iterbed.next();
+		        				Segment seg=bedsorter.make(bedRow);
+		        				if(prevBed!=null && prevBed.compareTo(seg)>0)
+				        			{
+				        			throw new IOException(
+				        				"Expected a sorted segment file  but found "+prevBed+" > "+seg	
+				        				);
+				        			}
+		        				prevBed=seg;
+		        				
 		        				int i= seg.getChromosome().compareTo(position0.getChromosome());
 		        				if(i>0)
 		        					{
-		        					buffer.add(seg);
+		        					buffer.add(bedRow);
 		        					break;
 		        					}
 		        				if(i<0) continue;
-		        				i= seg.getChromStart() - position0.getPosition();
-		        				if(i>=0)
+		        				if( seg.getChromStart()>position0.getPosition())
 		        					{
-		        					found=(i==0);
-		        					buffer.add(seg);
+		        					buffer.add(bedRow);
 		        					break;
 		        					}
-		        				i= seg.getChromEnd() - position0.getPosition();
-		        				if(i<=0) continue;
-		        				buffer.add(seg);
-		        				found=true;
-		        				break;
+		        				if(seg.getChromEnd() < position0.getPosition())
+		        					{
+		        					continue;
+		        					}
+		        				buffer.add(bedRow);
+		        				found.add(bedRow);
 		        				}
-		        			}
+			        			
+			        		}
 		        		
-		        		
-		        		if(found)
+		        		if(!found.isEmpty())
 							{
-		        			container1.addRowToTable(row);
+		        			for(DataRow r2:found)
+			        			{
+			        			container1.addRowToTable(new AppendedColumnRow(
+			        				RowKey.createRowKey(++outCount),	
+			        				row,
+			        				r2
+			        				));
+			        			}
 							}
 						else
 							{
-							container2.addRowToTable(row);
+							DataCell empty[]=new DataCell[inDataTableSpec2.getNumColumns()];
+		        			for(int i=0;i< empty.length;++i)
+		        				{
+		        				empty[i]=DataType.getMissingCell();
+		        				}
+							container1.addRowToTable(new AppendedColumnRow(
+			        				RowKey.createRowKey(++outCount),	
+			        				row,
+			        				empty
+			        				));
 							}
 		        		exec.checkCanceled();
 		            	exec.setProgress(nRow/total,"Filtering....");
@@ -208,10 +260,8 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
 		        
-		        container2.close();
-		        BufferedDataTable out2 = container2.getTable();
-		        container2=null;
-		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
+		      
+		        BufferedDataTable array[]= new BufferedDataTable[]{out1};
 		    	return array;
 		    	}
 		catch(Exception err)
@@ -222,8 +272,7 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 			}
 		finally
 			{
-			if(container1!=null) container1.close();
-			if(container2!=null) container2.close();
+			safeClose(container1);
 			}
        }
     
@@ -235,19 +284,20 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
     		throw new InvalidSettingsException("Expected two tables");
     		}
     	DataTableSpec in=inSpecs[0];
-    	findColumnIndex(in, "CHROM",StringCell.TYPE);
-		findColumnIndex(in, "POS",IntCell.TYPE);
+    	findColumnIndex(in,this.m_chrom1Col,StringCell.TYPE);
+		findColumnIndex(in, this.m_posCol,IntCell.TYPE);
     	
-    	return new DataTableSpec[]{in,in};
+    	return new DataTableSpec[]{new DataTableSpec(in,inSpecs[1]) };
     	}
     
     @Override
     protected List<SettingsModel> getSettingsModel() {
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
-    	L.add(this.m_chromCol);
+    	L.add(this.m_chrom1Col);
+    	L.add(this.m_posCol);
+    	L.add(this.m_chrom2Col);
     	L.add(this.m_start);
     	L.add(this.m_end);
-    	L.add(this.m_isZeroBased);
     	return L;
     	}
 	}

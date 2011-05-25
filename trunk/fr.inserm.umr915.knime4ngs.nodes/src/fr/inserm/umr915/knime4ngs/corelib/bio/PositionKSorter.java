@@ -16,7 +16,9 @@ implements Comparator<DataRow>
 	public PositionKSorter(int chromCol, int posCol)
 		{
 		this.chromCol = chromCol;
+		if(this.chromCol<0) throw new IllegalArgumentException("CHROM col <0");
 		this.posCol = posCol;
+		if(this.posCol<0) throw new IllegalArgumentException("POS col <0");
 		}
 	
 	public Position make(DataRow row)

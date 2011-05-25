@@ -1,26 +1,21 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.localucsc;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
 
 
+
+import net.sf.picard.reference.IndexedFastaSequenceFile;
 
 import org.knime.base.data.append.column.AppendedColumnRow;
 import org.knime.core.data.DataCell;
@@ -41,6 +36,12 @@ import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
+import org.knime.core.node.port.PortObject;
+import org.knime.core.node.port.PortObjectSpec;
+import org.knime.core.node.port.PortType;
+import org.knime.core.node.port.database.DatabasePortObject;
+import org.knime.core.node.port.database.DatabasePortObjectSpec;
+import org.knime.core.node.port.database.DatabaseQueryConnectionSettings;
 import org.knime.core.node.ExecutionContext;
 
 
@@ -347,22 +348,22 @@ class KnownGene
 		return this.exonStarts.length;
 		}
 	
-	public static KnownGene parse(String tokens[])
+	public static KnownGene parse(ResultSet row) throws SQLException
 		{
 		KnownGene g=new KnownGene();
-		g.name=tokens[0];
-		g.chrom=tokens[1];
-		g.strand=tokens[2].charAt(0);
-		g.txStart=Integer.parseInt(tokens[3]);
-		g.txEnd=Integer.parseInt(tokens[4]);
-		g.cdsStart=Integer.parseInt(tokens[5]);
-		g.cdsEnd=Integer.parseInt(tokens[6]);
-		int exons=Integer.parseInt(tokens[7]);
+		g.name=row.getString("name");
+		g.chrom=row.getString("chrom");
+		g.strand=row.getString("strand").charAt(0);
+		g.txStart=row.getInt("txStart");
+		g.txEnd=row.getInt("txEnd");
+		g.cdsStart=row.getInt("cdsStart");
+		g.cdsEnd=row.getInt("cdsEnd");
+		int exons=row.getInt("exonCount");
 		g.exonStarts=new int[exons];
 		g.exonEnds=new int[exons];
-		String ss[]=tokens[8].split(",");
+		String ss[]=row.getString("exonStarts").split(",");
 		for(int i=0;i< exons;++i) g.exonStarts[i]=Integer.parseInt(ss[i]);
-		ss=tokens[9].split(",");
+		ss=row.getString("exonEnds").split(",");
 		for(int i=0;i< exons;++i) g.exonEnds[i]=Integer.parseInt(ss[i]);
 		return g;
 		}
@@ -469,10 +470,11 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 	final boolean DEFAULT_SHOW_PEP=false;
 	private SettingsModelBoolean m_showProteinSequence=new SettingsModelBoolean(PROPERTY_SHOW_PEP,DEFAULT_SHOW_PEP);
 	
-	final static String PROPERTY_BUILD="build";
-	final static String BUILDS[]={"hg18","hg19"};
-	final static String DEFAULT_BUILD=BUILDS[1];
-	private SettingsModelString m_build=new SettingsModelString(PROPERTY_BUILD,DEFAULT_BUILD);
+	/** das URI */
+	static final String REFERENCE_URI_PROPERTY="ref.genome";
+	static final String DEFAULT_REFERENCE_URI="hg19.fa";
+	private final SettingsModelString m_refUri =new SettingsModelString(REFERENCE_URI_PROPERTY,DEFAULT_REFERENCE_URI);
+	
 	
 	
 	static private class Consequence
@@ -526,11 +528,9 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 		private byte[] array;
 		private int chromStart;
 		
-		GenomicSeq(RandomAccessFile io,int chromStart,int chromEnd) throws IOException
+		GenomicSeq(net.sf.picard.reference.IndexedFastaSequenceFile indexedFasta,String chrom,int chromStart,int chromEnd) throws IOException
 			{
-			this.array=new byte[chromEnd-chromStart];
-			io.seek(chromStart);
-			io.readFully(this.array);
+			this.array=indexedFasta.getSubsequenceAt(chrom,chromStart,chromEnd).getBases();
 			this.chromStart=chromStart;
 			}
 		
@@ -612,7 +612,10 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
      */
     protected LocalUcscPredictionNodeModel()
     	{
-        super(1,1);
+        super(
+        		new PortType[]{BufferedDataTable.TYPE,DatabasePortObject.TYPE},
+        		new PortType[]{BufferedDataTable.TYPE}
+        		);
     	}
     
    
@@ -718,25 +721,30 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
     	
     	return array.toArray(new DataCell[array.size()]);
     	}
- 
+    @Override
+    protected BufferedDataTable[] execute(final BufferedDataTable[] inData,
+            final ExecutionContext exec)
+        throws Exception {
+            throw new IllegalStateException("Should not happen");
+    	}
+    
+   
     
     @Override
-    protected BufferedDataTable[] execute(
-    		final BufferedDataTable[] inData,
-            final ExecutionContext exec
-            ) throws Exception
+    protected BufferedDataTable[] execute(final PortObject[] inData, final ExecutionContext exec) throws Exception
             {
     		BufferedDataContainer container1=null;
-			Pattern tab=Pattern.compile("[\t]");
     		int nRow=0;
-    		
-			Set<String> chromosomes=new TreeSet<String>();
+    		DatabaseQueryConnectionSettings dbsettings=null;
+		
 			
   
 		        // the data table spec of the single output table, 
 	        // the table will have three columns:
-			BufferedDataTable inTable=inData[0];
+			BufferedDataTable inTable=(BufferedDataTable)inData[0];
 	       
+			//sql config
+			DatabasePortObject inDbConfig=(DatabasePortObject)inData[1];
 			
 			DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
 			
@@ -745,105 +753,46 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 			int refCol= inDataTableSpec.findColumnIndex(m_refCol.getColumnName());
 			int altCol=inDataTableSpec.findColumnIndex(m_altCol.getColumnName());
 			
-	        container1 = exec.createDataContainer(new DataTableSpec(inDataTableSpec,createDataTableSpec()));
+			
+		net.sf.picard.reference.IndexedFastaSequenceFile indexedFasta=new IndexedFastaSequenceFile(new File(m_refUri.getStringValue()));	
+			
+	     container1 = exec.createDataContainer(new DataTableSpec(inDataTableSpec,createDataTableSpec()));
 	        
-	        CloseableRowIterator iter=null;
-	        try {
-				iter=inTable.iterator();
-				while(iter.hasNext())
-					{
-					DataRow row=iter.next();
-					String k=getString(row, chromCol);
-					if(k==null) continue;
-					chromosomes.add(k);
-					}
-				}	 
-	       finally
-				{
-				safeClose(iter);
-				iter=null;
-				}
-	       
-	      File fastaFile=null;
-	      File knownGeneFile=null;
+	      CloseableRowIterator iter=null;
+	      Connection con=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet resultSet=null;
+	      GenomicSeq genomicSeq=null;
 	      try
 	      	{
-	    	//download knownGene 
-	    	knownGeneFile=File.createTempFile("_knownGene", ".txt.gz");
-		    knownGeneFile.deleteOnExit(); 
-	    	URL url=new URL("http://hgdownload.cse.ucsc.edu/goldenPath/"+m_build.getStringValue()+"/database/knownGene.txt.gz");
-	    	exec.setMessage("downloading knownGene");
-	    	exec.setProgress("downloading knownGene");
-	    	FileOutputStream fout=new FileOutputStream(knownGeneFile);
-	    	InputStream in=new BufferedInputStream(url.openStream());
-	    	byte array[]=new byte[4096];
-	    	int nRead=0;
-	    	while((nRead=in.read(array))!=-1)
-	    		{
-	    		fout.write(array, 0, nRead);
-	    		}
-	    	fout.flush();
-	    	fout.close();
-	    	in.close();
-		    
-		    
-	    	  
-	    	for(String chromosome: chromosomes)
-	    		{
-	    		GenomicSeq genomicSeq=null;
-	    		int chromosome_length=0;
-	    		//download this chromosome
-	    		fastaFile=File.createTempFile("_"+chromosome, ".fa");
-	    		fastaFile.deleteOnExit(); 
-		    	url=new URL("http://hgdownload.cse.ucsc.edu/goldenPath/"+m_build.getStringValue()+"/chromosomes/"+chromosome+".fa.gz");
-		    	RandomAccessFile fastaIO=new RandomAccessFile(fastaFile,"rw");
-		    	in=new BufferedInputStream(new GZIPInputStream(url.openStream()));
-		    	exec.setMessage("downloading "+chromosome+".fa");
-		    	exec.setProgress("downloading "+chromosome+".fa");
-		    	int c=in.read();
-		    	if(c==-1) throw new IOException("Cannot read "+url);
-		    	if(c!='>') throw new IOException("Doesn't start with '>' "+url);
-		    	while((c=in.read())!=-1 && c!='\n')//read line
-		    		{
-		    		//skip fasta header
-		    		}
-		    	while((nRead=in.read(array))!=-1)
-		    		{
-		    		int j=0;
-		    		for(int x=0;x< nRead;++x)
-		    			{	
-		    			if(Character.isWhitespace(array[x])) continue;
-		    			array[j]=array[x];
-		    			++j;
-		    			}
-		    		chromosome_length+=j;
-		    		fastaIO.write(array, 0, j);
-		    		}
-		    	in.close();
-	    		
-		    	//load all genes for this chromosome
-		    	List<KnownGene> knownGenes=new ArrayList<KnownGene>();
-		    	BufferedReader r=new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(knownGeneFile))));
-		    	String line;
-		    	while((line=r.readLine())!=null)
-		    		{
-		    		KnownGene kg=KnownGene.parse(tab.split(line));
-		    		if(kg==null || !kg.getChrom().equals(chromosome)) continue;
-		    		knownGenes.add(kg);
- 		    		}
-		    	r.close();
+	    	 dbsettings =  new DatabaseQueryConnectionSettings(
+              		inDbConfig.getConnectionModel(),
+              		getCredentialsProvider()
+              		);
+	    	 con=dbsettings.createConnection();
+	    	 pstmt=con.prepareStatement("select * from knownGene where chrom=? and not(txStart> ? or txEnd<=?)");
 	    		
 	    		iter=inTable.iterator();
 	    		while(iter.hasNext())
 	    			{
 	    			DataRow row=iter.next();
 					String k=getString(row, chromCol);
-					if(k==null) continue;
-					if(!k.equals(chromosome)) continue;
 					int position0= getInt(row, posCol)-1;
 					String refBase=getString(row,refCol).toUpperCase();
 					String alt=getString(row, altCol).toUpperCase();
 					boolean found=false;
+					List<KnownGene> knownGenes=new ArrayList<KnownGene>();
+					pstmt.setString(1, k);
+					pstmt.setInt(2, position0);
+					pstmt.setInt(3, position0);
+					resultSet=pstmt.executeQuery();
+					while(resultSet.next())
+						{
+						KnownGene kg=KnownGene.parse(resultSet);
+						knownGenes.add(kg);
+						}
+					resultSet.close();
+					
 					for(KnownGene gene:knownGenes)
 						{
 						if(position0>=gene.getTxEnd()) continue;
@@ -855,7 +804,7 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 			            		(alt.equals("A") || alt.equals("T") || alt.equals("G") || alt.equals("C"))
 			            		)
 				        		{
-			            		GeneticCode geneticCode=GeneticCode.getByChromosome(chromosome);
+			            		GeneticCode geneticCode=GeneticCode.getByChromosome(gene.getChrom());
 
 				        		
 				        		
@@ -865,7 +814,7 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 				        	        )
 			    	            	{
 			    	            	int start=Math.max(gene.getTxStart()-100,0);
-			    	            	genomicSeq=new GenomicSeq(fastaIO,start,Math.min(gene.getTxEnd()+100, chromosome_length));
+			    	            	genomicSeq=new GenomicSeq(indexedFasta,gene.getChrom(),start,gene.getTxEnd()+100);
 			    	            	}
 				        		
 				        		if(refBase!=null && !String.valueOf(genomicSeq.charAt(position0)).equalsIgnoreCase(refBase))
@@ -1287,15 +1236,12 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 						++nRow;	
 			            container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(nRow),row,createDataCell(new Consequence())));
 						}
-					exec.setMessage("Reading mutations for "+chromosome);
-					exec.setProgress("Reading mutations for "+chromosome);
+					
 					exec.checkCanceled();
 	    			}//while(iter.hasNext());
 	    		safeClose(iter);
 	    		
-	    		fastaIO.close();
-	    		fastaFile.delete();
-	    		}
+	    		
 	    	safeClose(container1);
 	        
 			// once we are done, we close the container and return its table
@@ -1317,35 +1263,49 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 			{
 			safeClose(iter);
 			safeClose(container1);
-			knownGeneFile.delete();
+			try {if( resultSet!=null)  resultSet.close(); } catch (Exception e) { }
+			try {if( pstmt!=null)  pstmt.close(); } catch (Exception e) { }
+			try {if( con!=null)  con.close(); } catch (Exception e) { }
 			}
        }
     
     @Override
-    protected DataTableSpec[] configure(DataTableSpec[] inSpecs)
+    protected DataTableSpec[] configure(PortObjectSpec[] inSpecs)
     		throws InvalidSettingsException {
-    	if(inSpecs==null || inSpecs.length!=1)
+    	if(inSpecs==null || inSpecs.length!=2)
     		{
-    		throw new InvalidSettingsException("Expected one table");
+    		throw new InvalidSettingsException("Expected two tables");
     		}
+    	if(! (inSpecs[0] instanceof DataTableSpec)) throw new InvalidSettingsException("node0: expected a DataTableSpec");
+    	DataTableSpec in=(DataTableSpec)inSpecs[0];
+    	findColumnIndex(in,m_chromCol,StringCell.TYPE);
+    	findColumnIndex(in,m_pos1Col,IntCell.TYPE);
+    	findColumnIndex(in,m_refCol,StringCell.TYPE);
+    	findColumnIndex(in,m_altCol,StringCell.TYPE);
     	
-    	DataTableSpec in=inSpecs[0];
-
+    	if(! (inSpecs[1] instanceof DatabasePortObjectSpec)) throw new InvalidSettingsException("node1: expected a DatabasePortObjectSpec but got "+inSpecs[1].getClass());
     	return new DataTableSpec[]{new DataTableSpec(in,createDataTableSpec())};
     	}
 
+ 
+    
+    @Override
+    protected DataTableSpec[] configure(DataTableSpec[] inSpecs)
+    		throws InvalidSettingsException {
+    	throw new IllegalStateException("should not happen");
+    	}
+    
     @Override
     protected List<SettingsModel> getSettingsModel()
     	{
     	List<SettingsModel> L=new ArrayList<SettingsModel>(super.getSettingsModel());
     	L.add(m_refCol);
     	L.add(m_altCol);
-    	L.add(m_build);
+    	L.add(m_refUri);
     	L.add(m_chromCol);
     	L.add(m_pos1Col);
     	L.add(m_showProteinSequence);
     	L.add(m_showRNASequence);
-    	L.add(m_build);
     	return L;
     	}
     

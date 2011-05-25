@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Prediction UCSC</name>
-    <shortDescription>Prediction UCSC using KnownGene</shortDescription>
+    <name>BAM</name>
+    <shortDescription>Displays a locak BAM file</shortDescription>
     
     <fullDescription>
-        <intro>Prediction UCSC using KnownGene</intro>
+        <intro>Displays a locak BAM file</intro>
         <option name="short name of first option (like in the dialog)">description of first option</option>
         <option name="short name of second option (like in the dialog)">description of second option</option>
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In1">VCF</inPort>
-        <inPort index="1" name="In2">Database Connection</inPort>
-        <outPort index="0" name="Out">Annotated VCF</outPort>
-    </ports>    
+        <inPort index="0" name="input1">VCF</inPort>
+        <inPort index="1" name="input2">Table Sample/BAM</inPort>
+    </ports>   
+    <views>
+    	<view index="0" name="view0">View Bam</view>
+    </views>
 </knimeNode>

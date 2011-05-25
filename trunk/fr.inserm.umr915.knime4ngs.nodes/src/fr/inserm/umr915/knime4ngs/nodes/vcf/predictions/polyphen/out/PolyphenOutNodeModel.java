@@ -16,7 +16,7 @@ public class PolyphenOutNodeModel extends AbstractPredictionOutNodeModel
 	{
 	static final String FILENAME_PROPERTY="file.name";
 	static final String DEFAULT_FILENAME="input.polyphen";
-	protected final SettingsModelString m_filename = null;
+	protected final SettingsModelString m_filename = new SettingsModelString(FILENAME_PROPERTY, DEFAULT_FILENAME);
 	
     /**
      * Constructor for the node model.

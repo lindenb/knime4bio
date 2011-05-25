@@ -60,7 +60,7 @@ public int compareTo(Segment o)
 	if(i!=0) return i;
 	i= chromStart-o.chromStart;
 	if(i!=0) return i;
-	i= chromEnd-o.chromEnd;
+	//i= chromEnd-o.chromEnd; NO! Not required, UCSC only sort on chrom/chromStart not chromEnd
 	return i;
 	}
 

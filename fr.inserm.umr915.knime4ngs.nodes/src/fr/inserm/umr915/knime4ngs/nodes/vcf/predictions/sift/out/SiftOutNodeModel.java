@@ -8,16 +8,13 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.AbstractPredictionOutNod
 
 
 /**
- * This is the model implementation of VCFSource.
- * Reads a VCF file
- *
  * @author Pierre Lindenbaum
  */
 public class SiftOutNodeModel extends AbstractPredictionOutNodeModel
 	{
 	static final String FILENAME_PROPERTY="file.name";
 	static final String DEFAULT_FILENAME="input.sift";
-	protected final SettingsModelString m_filename = null;
+	protected final SettingsModelString m_filename = new SettingsModelString(FILENAME_PROPERTY,DEFAULT_FILENAME);
 	
 	
     /**

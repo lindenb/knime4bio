@@ -1,11 +1,13 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.localucsc;
 
+import javax.swing.JFileChooser;
+
 import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
 import org.knime.core.node.defaultnodesettings.DialogComponentBoolean;
 import org.knime.core.node.defaultnodesettings.DialogComponentColumnNameSelection;
-import org.knime.core.node.defaultnodesettings.DialogComponentStringSelection;
+import org.knime.core.node.defaultnodesettings.DialogComponentFileChooser;
 import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
@@ -18,14 +20,10 @@ public class LocalUcscPredictionNodeDialog extends DefaultNodeSettingsPane
     protected LocalUcscPredictionNodeDialog()
     	{
     	//build
-    	addDialogComponent(new DialogComponentStringSelection(
-    			new SettingsModelString(
-    					LocalUcscPredictionNodeModel.PROPERTY_BUILD,
-    	    			LocalUcscPredictionNodeModel.DEFAULT_BUILD
-    	    			),
-    			"Build",
-    			LocalUcscPredictionNodeModel.BUILDS
-    			));
+    	addDialogComponent(new DialogComponentFileChooser(
+                new SettingsModelString(
+                		LocalUcscPredictionNodeModel.REFERENCE_URI_PROPERTY, LocalUcscPredictionNodeModel.DEFAULT_REFERENCE_URI),
+                    "ref.genome",JFileChooser.OPEN_DIALOG,".fa",".fasta"));
         //show RNA
     	addDialogComponent(
 			new DialogComponentBoolean(new SettingsModelBoolean(LocalUcscPredictionNodeModel.PROPERTY_SHOW_RNA, false),

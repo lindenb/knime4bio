@@ -234,6 +234,7 @@ public abstract class AbstractNodeModel  extends NodeModel
 	public int findColumnIndex(DataTableSpec dataTableSpec,String name,DataType dataType)
 	throws InvalidSettingsException
 		{
+		if(name==null) throw new NullPointerException("undefined column name");
 		int index=findColumnIndex(dataTableSpec,name);
 		if(dataTableSpec.getColumnSpec(name).getType()!=dataType)
 			{

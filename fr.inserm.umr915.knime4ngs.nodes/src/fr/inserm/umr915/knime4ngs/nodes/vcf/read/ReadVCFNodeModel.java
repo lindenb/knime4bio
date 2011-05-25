@@ -154,8 +154,7 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 						}
 						
 					if(	qual!=null &&
-	        			(qual< m_minQual.getIntValue() ||
-	        			qual> m_minQual.getIntValue()))
+	        			qual< m_minQual.getIntValue())
 	        			{
 						continue;
 	        			}

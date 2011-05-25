@@ -530,7 +530,7 @@ public class LocalUcscPredictionNodeModel extends AbstractNodeModel
 		
 		GenomicSeq(net.sf.picard.reference.IndexedFastaSequenceFile indexedFasta,String chrom,int chromStart,int chromEnd) throws IOException
 			{
-			this.array=indexedFasta.getSubsequenceAt(chrom,chromStart,chromEnd).getBases();
+			this.array=indexedFasta.getSubsequenceAt(chrom,chromStart+1,chromEnd).getBases();
 			this.chromStart=chromStart;
 			}
 		

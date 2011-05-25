@@ -2,9 +2,9 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.ensembl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.knime.core.data.DataRow;
@@ -16,8 +16,8 @@ import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelStringArray;
-
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 public class EnsemblGCNodeModel extends AbstractVCFNodeModel
@@ -53,8 +53,12 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		};
 	
 	
-	static final String GC_PROPERTY="ensembl.gc";
+	final static String PROPERTY_INFO_COL="vcf.info.col";
+	final static String DEFAULT_INFO_COL="INFO";
+	private SettingsModelColumnName m_infoCol=new SettingsModelColumnName(PROPERTY_INFO_COL,DEFAULT_INFO_COL);
 	
+	
+	static final String GC_PROPERTY="ensembl.gc";
 	private SettingsModelStringArray selected_gc=new SettingsModelStringArray(GC_PROPERTY, DEFAULT_CHOICE);
 
     /**
@@ -80,12 +84,12 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 				BufferedDataTable inTable=inData[0];
 		       
 				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
-				int infoColumn= inDataTableSpec.findColumnIndex("INFO");
-				if(infoColumn==-1) throw new IllegalArgumentException("Cannot find column \"INFO\"");
+				int infoColumn= inDataTableSpec.findColumnIndex(m_infoCol.getColumnName());
+				if(infoColumn==-1) throw new IllegalArgumentException("Cannot find column \""+m_infoCol.getColumnName()+"\"");
 		        container1 = exec.createDataContainer(inDataTableSpec);
 		        container2 = exec.createDataContainer(inDataTableSpec);
 		        
-		        Set<String> predictions=new HashSet<String>();
+		        Set<String> predictions=new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
 		        predictions.addAll(Arrays.asList(selected_gc.getStringArrayValue()));
 		        
 		        Pattern semicolon=Pattern.compile("[\\;]");
@@ -133,15 +137,15 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 					}
 				finally
 					{
-					if(iter!=null) iter.close();
+					safeClose(iter);
 					}
 		        
 				// once we are done, we close the container and return its table
-		        container1.close();
+		        safeClose(container1);
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
 		        
-		        container2.close();
+		        safeClose(container2);
 		        BufferedDataTable out2 = container2.getTable();
 		        container2=null;
 		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
@@ -149,14 +153,13 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		    	}
 		catch(Exception err)
 			{
-			getLogger().error("Boum", err);
 			err.printStackTrace();
 			throw err;
 			}
 		finally
 			{
-			if(container1!=null) container1.close();
-			if(container2!=null) container2.close();
+			safeClose(container1);
+			safeClose(container2);
 			}
        }
     
@@ -170,7 +173,7 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
     		}
     	
     	DataTableSpec in=inSpecs[0];
-    	findColumnIndex(in, "INFO",StringCell.TYPE);
+    	findColumnIndex(in, m_infoCol,StringCell.TYPE);
     	
     	
     	return new DataTableSpec[]{in,in};
@@ -180,6 +183,7 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
     protected List<SettingsModel> getSettingsModel() {
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
     	L.add(this.selected_gc);
+    	L.add(this.m_infoCol);
     	return L;
     	}
     

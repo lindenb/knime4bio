@@ -1,0 +1,265 @@
+options {
+	STATIC=false;
+	DEBUG_TOKEN_MANAGER=false;
+	DEBUG_PARSER=false;
+	IGNORE_CASE=true;
+	}
+PARSER_BEGIN(SQLSchemaParser)
+package fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic;
+import java.util.*;
+import java.io.*;
+
+public class SQLSchemaParser
+	{
+	public static class Table
+			{
+			public String name;
+			public List<Column> columns=new ArrayList<Column>();
+			public int findColumnIndex(String name)
+				{
+				for(int i=0;i< columns.size();++i)
+					{
+					Column c=columns.get(i);
+					if(c.name.equalsIgnoreCase(name)) return i;
+					}
+				return -1;
+				}
+			public Column findColumn(String name)
+				{
+				int i=findColumnIndex(name);
+				if(i==-1) return null;
+				return columns.get(i);
+				}
+			public boolean contains(String name)
+				{
+				return findColumnIndex(name)!=-1;
+				}
+			public Column get(int i)
+				{
+				return columns.get(i);
+				}
+			}
+			
+	public static class Column
+			{
+			String name;
+			boolean nil;
+			 Class<?> type;
+			}
+    private Table theTable=null;
+	
+	}	
+PARSER_END(SQLSchemaParser)
+
+SKIP:{
+ " "
+|"\n"
+| <"--" (~["\n"])* "\n">
+| <"/*" (~["\n"])* "*/">
+}
+
+TOKEN:
+{
+  <DROP: "DROP">
+| <CREATE: "CREATE">
+| <USE: "USE">
+| <TABLE: "TABLE">
+| <TEMPORARY: "TEMPORARY">
+| <DATABASE: "DATABASE">
+| <IF: "IF">
+| <ON: "ON">
+| <UPDATE:"UPDATE">
+| <NOT: "NOT">
+| <NULL: "NULL">
+| <EXISTS: "EXISTS">
+| <SET: ("SET"|"set")>
+| <ENUM: ("ENUM"|"enum")>
+| <KEY: "KEY">
+| <VARCHAR: "varchar">
+| <CHAR: "char">
+| <DEFAULTVALUE: ("default"|"DEFAULT")>
+| <CURRENT_TIMESTAMP: "CURRENT_TIMESTAMP">
+| <AUTO_INCREMENT: "auto_increment">
+| <LONGBLOB:"longblob">
+| <BLOB:"blob">
+| <BIGINT:"bigint">
+| <INTEGER:"int">
+| <SMALLINT:"smallint">
+| <DATETIME:"datetime">
+| <TIMESTAMP:"timestamp">
+| <DATE: "date">
+| <DOUBLE:"double">
+| <FLOAT:"float">
+| <MEDIUMBLOG:"mediumblob">
+| <TINYINT:"tinyint">
+| <TEXT:("longtext"|"tinytext"|"text"|"mediumtext")>
+| <UNSIGNED:"unsigned">
+| <SIGNED:"signed">
+| <UNIQUE:"UNIQUE">
+| <PRIMARY:"PRIMARY">
+| <CHARACTER:"character">
+| <COLLATE:"collate">
+}
+
+TOKEN:
+{
+  <#LETTER:(["a"-"z"]|["A"-"Z"]|"_")>
+| <#DIGIT:["0"-"9"]>
+| <INT: <DIGIT>(<DIGIT>)* >
+| <IDENTIFIER1: <LETTER> (<DIGIT>|<LETTER>)*  >
+| <IDENTIFIER2: "`"(<IDENTIFIER1>) "`" >
+| <VARIABLE: "@"("@")?<IDENTIFIER1> >
+| <EQ:"=">
+| <SEMICOLON:";">
+| <LPAR:"(">
+| <RPAR:")">
+| <COMMA:",">
+| <#ESCAPE_CHAR: "\\" ["n","t","b","r","f","\\","'","\""] >
+| <SIMPLE_QUOTE_LITERAL: "\'"( (~["\'","\\","\n","\r"])| <ESCAPE_CHAR>)* "\'">
+| <DOUBLE_QUOTE_LITERAL: "\""( (~["\'","\\","\n","\r"])| <ESCAPE_CHAR>)* "\"">
+}
+
+
+
+public Table input():{}
+	{
+	((
+	 drop()
+	| set()
+	|create()
+	|use()
+	| <SEMICOLON>
+	)* <EOF> )
+		{
+		return theTable;
+		}
+	}
+private void use():{}
+	{
+	<USE> identifier() <SEMICOLON>
+	}
+	
+private void create():{}
+	{
+	<CREATE> (createDatabase()|createTable()) <SEMICOLON>
+	}
+private void drop():{}
+	{
+	<DROP> <TABLE> (<IF> <EXISTS>)? identifier() <SEMICOLON>
+	}
+
+private void set():{}
+	{
+	<SET> (identifier()|<VARIABLE> ) <EQ> (identifier()|<VARIABLE> ) <SEMICOLON>
+	}
+
+private void createDatabase():{String s;}
+	{
+	(<DATABASE> s=identifier())
+		{
+		
+		}
+	}
+
+private void createTable():{this.theTable= new Table(); String tableName; Column col=null;}
+	{
+	(<TEMPORARY>)? <TABLE>
+	(<IF> <NOT> <EXISTS> )?
+	((tableName=identifier())  <LPAR>
+	(col=component() { if(col!=null) this.theTable.columns.add(col);}
+	(<COMMA> col=component() { if(col!=null) this.theTable.columns.add(col);} )* )
+	<RPAR> ( identifier() | <AUTO_INCREMENT> | <EQ> | <DEFAULTVALUE> | <INT> )* )
+		{
+		this.theTable.name = tableName;
+		}
+	}
+
+private Column component():{Column c=null;}
+	{
+	(
+    key()
+	| c=column() { return c;}
+	) { return c;}
+	}
+
+private void key():{}
+	{
+	(<UNIQUE>|<PRIMARY>)?
+	<KEY> (identifier())? <LPAR> identifier() (<LPAR> integer() <RPAR>)?
+	(<COMMA>  identifier() (<LPAR> integer() <RPAR>)? )* <RPAR>
+	
+	
+	}
+
+private Column column():{Column c=new Column();String s; Class<?> javaType=null;boolean nil=true;}
+	{
+	(
+	s=identifier()
+	javaType=colType() ((<NOT> { nil=false;} )?  <NULL>)?  (<AUTO_INCREMENT>)?  (<DEFAULTVALUE> (<NULL>|<CURRENT_TIMESTAMP>|quoted()|integer()))? (onUpdate())?
+	) {
+	  c.name=s;
+	  c.type=javaType;
+	  c.nil=nil;
+	  return c;
+	  }
+	}
+
+private void onUpdate():{}
+	{
+	<ON> <UPDATE> (<NULL>|<CURRENT_TIMESTAMP>|quoted()|integer())
+	}
+
+private Class<?> colType():{Class<?> t;}
+	{
+	(
+	  (<VARCHAR>|<CHAR>) (dimension())? (charset())?  {  t=String.class;   }
+	| (<LONGBLOB>|<MEDIUMBLOG>|<BLOB>|<TEXT>) {  t=String.class;}
+	| <INTEGER>  (dimension())? (<SIGNED>|<UNSIGNED>)? { t=Integer.class; }
+	| (<SMALLINT>|<TINYINT>)  (dimension())? (<SIGNED>|<UNSIGNED>)? { t=Integer.class; }
+	| (<DATETIME>|<DATE>|<TIMESTAMP>) { t=String.class; }
+	| <ENUM> stringset()  (charset())? {  t=String.class; }
+	| <SET> stringset() {  t=String.class;}
+	| <FLOAT> {  t= Double.class;}
+	| <DOUBLE> {  t= Double.class;}
+	| <BIGINT>  (dimension())? (<SIGNED>|<UNSIGNED>)? {  t=String.class;}
+	) { return t;}
+	}
+
+private void stringset():{}
+	{
+	(<LPAR> quoted() (<COMMA> quoted() )* <RPAR>)
+	}
+
+private void charset():{}
+	{
+	<CHARACTER> <SET> (identifier()|quoted()) (<COLLATE> (identifier()|quoted()) )?
+	}
+
+private void dimension():{}
+	{
+	<LPAR> integer() <RPAR>
+	}
+
+private String identifier():{Token t;String s;}
+	{
+	(
+	t=<IDENTIFIER1> {s=t.image;}
+	|t=<IDENTIFIER2>  {s=t.image.substring(1,t.image.length()-1);}
+	)
+		{
+		return s;
+		}
+	}
+
+private int integer():{Token t;}
+	{
+	t=<INT> { return Integer.parseInt(t.image); }
+	}
+
+private String quoted():{Token t;}
+	{
+	(
+	  t=<SIMPLE_QUOTE_LITERAL> { return t.image;}
+        | t=<DOUBLE_QUOTE_LITERAL> { return t.image;}
+	)	
+	}

@@ -69,8 +69,8 @@ public class LocalBamNodeModel  extends AbstractVCFNodeModel
 	int chromColumn=-1;
 	int posColumn=-1;
 	int sampleColumn=-1;
-	Map<String, File> sample2bam=new HashMap<String, File>();
-	private BufferedDataTable internalDataTable=null;
+	
+	private BufferedDataTable internalDataTables[]=null;
     /**
      * Constructor for the node model.
      */
@@ -80,42 +80,46 @@ public class LocalBamNodeModel  extends AbstractVCFNodeModel
     	}
    
     
+    Map<String, File> fillMap(BufferedDataTable inData) throws InvalidSettingsException
+    	{
+    	Map<String, File> sample2bam=new HashMap<String, File>();
+    	int bamColumn=findColumnIndex(inData.getSpec(),m_bamColumn,StringCell.TYPE);
+		int sampleColumn=findColumnIndex(inData.getSpec(),m_sample2Column,StringCell.TYPE);
+		CloseableRowIterator iter=null;
+		try
+			{
+			iter=inData.iterator();
+			while(iter.hasNext())
+				{
+				DataRow row=iter.next();
+				String sample= getString(row, sampleColumn);
+				String bam= getString(row, bamColumn);
+				if(bam==null || bam.isEmpty()) continue;
+				File bamFile=new File(bam);
+				if(!bamFile.exists() ||
+					!bamFile.isFile() || 
+					!bamFile.canRead() ||
+					!bamFile.getName().toLowerCase().endsWith(".bam"))
+					{
+					throw new IllegalArgumentException("bad file:"+bamFile);
+					}
+				sample2bam.put(sample, bamFile);
+				}
+			return sample2bam;
+			}
+		finally
+			{
+			safeClose(iter);
+			}
+    	}
+    
     @Override
     protected BufferedDataTable[] execute(
     		final BufferedDataTable[] inData,
             final ExecutionContext exec
             ) throws Exception
         {
-		this.sample2bam.clear();
-		
-		
-			int bamColumn=findColumnIndex(inData[1].getSpec(),m_bamColumn,StringCell.TYPE);
-			int sampleColumn=findColumnIndex(inData[1].getSpec(),m_sample2Column,StringCell.TYPE);
-			CloseableRowIterator iter=null;
-			try
-				{
-				iter=inData[1].iterator();
-				while(iter.hasNext())
-					{
-					DataRow row=iter.next();
-					String sample= getString(row, sampleColumn);
-					String bam= getString(row, bamColumn);
-					if(bam==null || bam.isEmpty()) continue;
-					File bamFile=new File(bam);
-					if(!bamFile.exists() ||
-						!bamFile.isFile() || 
-						!bamFile.canRead() ||
-						!bamFile.getName().toLowerCase().endsWith(".bam"))
-						{
-						throw new IllegalArgumentException("bad file:"+bamFile);
-						}
-					this.sample2bam.put(sample, bamFile);
-					}
-				}
-			finally
-				{
-				safeClose(iter);
-				}
+    	fillMap(inData[1]);
 		setInternalTables(inData);
 		return new BufferedDataTable[0];
         }
@@ -149,31 +153,30 @@ public class LocalBamNodeModel  extends AbstractVCFNodeModel
 	@Override
 	public BufferedDataTable[] getInternalTables()
 		{
-		if(this.internalDataTable==null) return new BufferedDataTable[0];
-		return new BufferedDataTable[]{this.internalDataTable};
+		if(this.internalDataTables==null) return new BufferedDataTable[0];
+		return this.internalDataTables;
 		}
 
 
 	@Override
 	public void setInternalTables(BufferedDataTable[] tables)
 		{
-		if(tables==null || tables.length==0)
+		if(tables==null || tables.length!=2)
 			{
-			this.internalDataTable=null;
+			this.internalDataTables=null;
 			return;
 			}
 		
-		this.internalDataTable=tables[0];
+		this.internalDataTables=tables;
 		}
 
     @Override
     protected void reset()
     	{
-    	this.sample2bam.clear();
     	this.chromColumn=-1;
     	this.posColumn=-1;
     	this.sampleColumn=-1;
-    	this.internalDataTable=null;
+    	this.internalDataTables=null;
     	super.reset();
     	}
     

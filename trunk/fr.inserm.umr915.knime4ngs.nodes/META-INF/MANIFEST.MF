@@ -76,4 +76,5 @@ Export-Package: fr.inserm.umr915.knime4ngs.corelib.bio,
    org.eclipse.core.runtime,
    org.osgi.framework,
    org.knime.core.node.defaultnodesettings"
+Import-Package: fr.inserm.umr915.knime4ngs.corelib.knime
 

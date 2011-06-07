@@ -246,7 +246,11 @@
        <node
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.snp.NcbiSnpNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.snp.NcbiSnpNodeFactory"/>   
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.snp.NcbiSnpNodeFactory"/>
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.view.NcbiViewNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.view.NcbiViewNodeFactory"/>   
    </extension>
    
 </plugin>

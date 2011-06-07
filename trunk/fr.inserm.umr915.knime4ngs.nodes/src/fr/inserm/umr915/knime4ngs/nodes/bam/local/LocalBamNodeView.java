@@ -99,7 +99,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 				Integer highlight
 				) throws Exception
 				{
-				
+				System.err.println("calling bamImage");
 				if(refSeq==null  || refSeq.trim().isEmpty())
 					{
 					throw new IllegalArgumentException("bad chromosome");
@@ -109,7 +109,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 					throw new IllegalArgumentException("bad chromStart:"+chromStart);
 					}
 				
-				
+				System.err.println("2calling bamImage");
 		
 				
 				
@@ -235,6 +235,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 					}
 				catch (Exception err)
 					{
+					err.printStackTrace();
 					throw err;
 					}
 				finally
@@ -395,20 +396,37 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 	@Override
 	protected void modelChanged()
 		{
-		disposeBameThread();
+		disposeBamThread();
 		//System.err.println("model changed called");
 		chromColumn=-1;
 		posColumn=-1;
 		sampleColumn=-1;
 		sample2bam.clear();
+		
+		
 		BufferedDataTable tables[]=nodeModel.getInternalTables();
-		if(tables!=null && tables.length>0)
+		
+		Map<String,File> map=null;
+		if(tables!=null && tables.length>1)
+			{
+			try
+				{
+				map=this.nodeModel.fillMap(tables[1]);
+				}
+			catch(Throwable err)
+				{
+				err.printStackTrace();
+				tables=null;
+				}
+			}
+		
+		if(tables!=null && tables.length>1)
 			{
 			this.chromColumn=this.nodeModel.chromColumn;
 			this.posColumn=this.nodeModel.posColumn;
 			this.sampleColumn=this.nodeModel.sampleColumn;
 			this.sample2bam.clear();
-			this.sample2bam.putAll(this.nodeModel.sample2bam);
+			this.sample2bam.putAll(map);
 			this.tableModel.setDataTable(tables[0]);
 			}
 		else
@@ -427,7 +445,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 	@Override
 	protected void onClose()
 		{
-		disposeBameThread();
+		disposeBamThread();
 		this.tableModel.dispose();
 		}
 	
@@ -435,7 +453,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 	
 	
 
-private synchronized void disposeBameThread()
+private synchronized void disposeBamThread()
 	{
 	if(bamThread!=null)
 		{

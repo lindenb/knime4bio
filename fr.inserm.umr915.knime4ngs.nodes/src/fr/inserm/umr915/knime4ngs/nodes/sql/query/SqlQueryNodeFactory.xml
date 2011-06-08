@@ -11,8 +11,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">SQL Config</inPort>
-        <inPort index="1" name="In-Port name">Input2</inPort>
+        <inPort index="0" name="In-Port name">Input</inPort>
         <outPort index="0" name="Out-Port name">Output1</outPort>
         <outPort index="1" name="Out-Port name">Output2</outPort>
     </ports>

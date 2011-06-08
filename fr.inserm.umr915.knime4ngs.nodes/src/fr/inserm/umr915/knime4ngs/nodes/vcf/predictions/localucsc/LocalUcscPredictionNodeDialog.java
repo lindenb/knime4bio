@@ -4,7 +4,6 @@ import javax.swing.JFileChooser;
 
 import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
-import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
 import org.knime.core.node.defaultnodesettings.DialogComponentBoolean;
 import org.knime.core.node.defaultnodesettings.DialogComponentColumnNameSelection;
 import org.knime.core.node.defaultnodesettings.DialogComponentFileChooser;
@@ -13,9 +12,10 @@ import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
 import fr.inserm.umr915.knime4ngs.corelib.knime.DataTypeColumnFilter;
+import fr.inserm.umr915.knime4ngs.nodes.sql.AbstractSqlNodeSettingsPane;
 
 
-public class LocalUcscPredictionNodeDialog extends DefaultNodeSettingsPane
+public class LocalUcscPredictionNodeDialog extends AbstractSqlNodeSettingsPane
 	{
     protected LocalUcscPredictionNodeDialog()
     	{

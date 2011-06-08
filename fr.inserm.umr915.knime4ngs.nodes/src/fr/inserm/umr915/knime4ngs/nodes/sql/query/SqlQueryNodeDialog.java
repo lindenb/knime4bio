@@ -2,13 +2,14 @@ package fr.inserm.umr915.knime4ngs.nodes.sql.query;
 
 import java.util.Arrays;
 
-import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
 import org.knime.core.node.defaultnodesettings.DialogComponentMultiLineString;
 import org.knime.core.node.defaultnodesettings.DialogComponentStringSelection;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
+import fr.inserm.umr915.knime4ngs.nodes.sql.AbstractSqlNodeSettingsPane;
 
-public class SqlQueryNodeDialog extends DefaultNodeSettingsPane
+
+public class SqlQueryNodeDialog extends AbstractSqlNodeSettingsPane
 	{
     protected SqlQueryNodeDialog()
     	{

@@ -93,8 +93,8 @@ public class BinNodeModel extends AbstractVCFNodeModel
 		        // the table will have three columns:
 				BufferedDataTable inTable=inData[0];
 				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
-		        int colStart= inDataTableSpec.findColumnIndex(m_colStart.getStringValue());
-		        int colEnd= inDataTableSpec.findColumnIndex(m_colEnd.getStringValue());
+		        int colStart= findColumnIndex(inDataTableSpec,m_colStart,IntCell.TYPE);
+		        int colEnd= findColumnIndex(inDataTableSpec,m_colEnd,IntCell.TYPE);
 				
 		        container1 = exec.createDataContainer(createDataTableSpec(inDataTableSpec));
 		      
@@ -181,7 +181,8 @@ public class BinNodeModel extends AbstractVCFNodeModel
     		{
     		throw new InvalidSettingsException("Expected one table");
     		}
-    	
+    	findColumnIndex(inSpecs[0],m_colStart,IntCell.TYPE);
+        findColumnIndex(inSpecs[0],m_colEnd,IntCell.TYPE);
     	return new DataTableSpec[]{createDataTableSpec(inSpecs[0])};
     	}
     

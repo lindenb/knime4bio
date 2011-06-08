@@ -12,7 +12,6 @@
     
     <ports>
         <inPort index="0" name="In1">VCF</inPort>
-        <inPort index="1" name="In2">Database Connection</inPort>
         <outPort index="0" name="Out">Annotated VCF</outPort>
     </ports>    
 </knimeNode>

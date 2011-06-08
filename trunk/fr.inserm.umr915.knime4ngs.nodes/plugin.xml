@@ -233,7 +233,11 @@
        <node
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.GenericUCSCNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.GenericUCSCNodeFactory"/>     
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.GenericUCSCNodeFactory"/>    
+       <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.MysqlUCSCNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.MysqlUCSCNodeFactory"/>  
        
        <node
             category-path="ngs"

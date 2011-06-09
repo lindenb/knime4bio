@@ -144,10 +144,7 @@
             id="fr.inserm.umr915.knime4ngs.nodes.goa.GoAnnotationNodeFactory"  />     
           
           
-            <node 
-          	category-path="ngs"
-          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory" 
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory"  />       
+                 
           
           
            <node 
@@ -157,7 +154,12 @@
             />        
             
             -->
-            
+        
+         <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory"  /> 
+        
          <node 
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.joinpos.JoinPosNodeFactory" 

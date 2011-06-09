@@ -2,12 +2,12 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>BAM</name>
-    <shortDescription>Displays a locak BAM file</shortDescription>
+    <shortDescription>Displays a local BAM file</shortDescription>
     
     <fullDescription>
         <intro>Displays a local BAM file</intro>
-        <option name="chrom">The CHROM column</option>
-        <option name="pos">The POS column. The genomic position (1-based)</option>
+        <option name="CHROM">The VCF CHROM column</option>
+        <option name="POS">The VCF POS column. The genomic position (1-based)</option>
         <option name="sample1">The Sample Column in the first table</option>
         <option name="uri">The full path to a BAM file in  2nd table</option>
         <option name="sample2">The Sample Column in the 2nd table</option>

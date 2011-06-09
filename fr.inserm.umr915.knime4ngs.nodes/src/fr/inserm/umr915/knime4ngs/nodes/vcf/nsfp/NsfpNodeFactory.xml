@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>NSFP</name>
-    <shortDescription>NSFP</shortDescription>
+    <name>dbNSFP</name>
+    <shortDescription>dbNSFP: functional predictions from multiple algorithms for the comprehensive collection of human non-synonymous SNPs (NSs)</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Join data with NSFP 1.1 database (<a href="http://sites.google.com/site/jpopgen/dbNSFP">http://sites.google.com/site/jpopgen/dbNSFP</a> )</intro>
+        <option name="Path">Path to <b>Zipped</b> version of NSFP (<b>NOT</b> 7-zip). Each entry must be sorted on chrom/position.</option>
+        <option name="CHROM">VCF CHROM column</option>
+        <option name="POS">VCF POS column</option>
+        <option name="REF">VCF REF column</option>
+        <option name="ALT">VCF ALT column</option>
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">List of VCF</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
+        <inPort index="0" name="In-Port name">VCF in</inPort>
+        <outPort index="0" name="Accepted">VCF out</outPort>
     </ports>    
 
 </knimeNode>

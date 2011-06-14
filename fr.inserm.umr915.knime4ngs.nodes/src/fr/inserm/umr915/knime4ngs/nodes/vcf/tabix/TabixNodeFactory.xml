@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>Tabix</name>
+    <shortDescription>Join a file indexed with TABIX</shortDescription>
+    
+    <fullDescription>
+        <intro>Join a file indexed with TABIX (<a href="http://samtools.sourceforge.net/tabix.shtml">http://samtools.sourceforge.net/tabix.shtml</a>)</intro>
+        <option name="CHROM">The CHROM column in the VCF</option>
+        <option name="POS">The POS column in the VCF</option>
+        <option name="Tabix File">The file indexed with tabix</option>
+        <option name="Prefix">Column prefix for the tabix columns</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port 1">VCF In</inPort>
+        <outPort index="0" name="out">VCF Out</outPort>
+    </ports>
+</knimeNode>

@@ -262,6 +262,11 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"/>   
+            
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.tabix.TabixNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.tabix.TabixNodeFactory"/>
    </extension>
    
 </plugin>

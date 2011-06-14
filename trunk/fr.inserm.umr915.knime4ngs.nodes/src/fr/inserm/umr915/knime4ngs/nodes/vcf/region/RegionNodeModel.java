@@ -8,14 +8,12 @@ import org.knime.base.data.sort.SortedTable;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.container.CloseableRowIterator;
-import org.knime.core.data.def.DoubleCell;
 import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
-import org.knime.core.node.defaultnodesettings.SettingsModelDouble;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 

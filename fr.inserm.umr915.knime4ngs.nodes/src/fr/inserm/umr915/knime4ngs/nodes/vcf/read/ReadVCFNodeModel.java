@@ -137,7 +137,10 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 					
 					
 					String tokens[]=tab.split(line);
-					if(tokens.length<9) throw new IOException("Error "+line);
+					if(tokens.length<9)
+						{
+						throw new IOException("Error "+line);
+						}
 					
 					
 					Float qual=null;

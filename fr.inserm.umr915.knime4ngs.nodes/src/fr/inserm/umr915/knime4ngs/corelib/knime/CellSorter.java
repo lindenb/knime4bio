@@ -48,6 +48,8 @@ public static CellSorter getCellSorterByType(DataType type)
 				{
 				return StringCell.class.cast(c).getStringValue();
 				}
+			@Override
+			public String toString() { return "String"; }
 			};
 		}
 	else if(type.equals(IntCell.TYPE))
@@ -59,6 +61,8 @@ public static CellSorter getCellSorterByType(DataType type)
 				{
 				return IntCell.class.cast(c).getIntValue();
 				}
+			@Override
+			public String toString() { return "Int"; }
 			};
 		}
 	else if(type.equals(LongCell.TYPE))
@@ -70,6 +74,8 @@ public static CellSorter getCellSorterByType(DataType type)
 				{
 				return LongCell.class.cast(c).getLongValue();
 				}
+			@Override
+			public String toString() { return "Long"; }
 			};
 		}
 	else if(type.equals(DoubleCell.TYPE))
@@ -81,6 +87,8 @@ public static CellSorter getCellSorterByType(DataType type)
 				{
 				return DoubleCell.class.cast(c).getDoubleValue();
 				}
+			@Override
+			public String toString() { return "Double"; }
 			};
 		}
 	else if(type.equals(BooleanCell.TYPE))
@@ -92,6 +100,8 @@ public static CellSorter getCellSorterByType(DataType type)
 				{
 				return BooleanCell.class.cast(c).getBooleanValue();
 				}
+			@Override
+			public String toString() { return "Boolean"; }
 			};
 		}
 	throw new IllegalArgumentException("CellSorter hasn't been designed for "+type);

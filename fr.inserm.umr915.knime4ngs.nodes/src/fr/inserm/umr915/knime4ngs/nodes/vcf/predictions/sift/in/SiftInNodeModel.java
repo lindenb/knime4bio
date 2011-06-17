@@ -38,7 +38,7 @@ public class SiftInNodeModel extends AbstractPredictionInNodeModel
 		if( variant.length<4 ||
 			variant[3].length()<2 || variant[3].charAt(1)!='/')
 			{
-			throw new IllegalArgumentException(cell);
+			throw new IllegalArgumentException("uuhh bad cell: \""+cell+"\"");
 			}
 		Position pos= new Position(variant[0],Integer.parseInt(variant[1]));
 		Mutation mutation=new Mutation(

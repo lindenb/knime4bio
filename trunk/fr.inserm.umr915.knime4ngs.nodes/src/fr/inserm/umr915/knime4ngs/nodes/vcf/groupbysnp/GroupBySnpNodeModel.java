@@ -145,22 +145,26 @@ public class GroupBySnpNodeModel extends AbstractVCFNodeModel
 		CloseableRowIterator iter=null;
 		
 		Sorter sorter=new Sorter();
-		sorter.chromColumn = inSpecs.findColumnIndex(this.m_chromColumn.getStringValue());
-		sorter.sampleColumn = inSpecs.findColumnIndex(this.m_sampleColumn.getStringValue());
-		sorter.positionColumn = inSpecs.findColumnIndex(this.m_posColumn.getStringValue());
-		sorter.refColumn = inSpecs.findColumnIndex(this.m_refColumn.getStringValue());
-		sorter.altColumn = inSpecs.findColumnIndex(this.m_altColumn.getStringValue());
+		sorter.chromColumn = findColumnIndex(inSpecs,this.m_chromColumn,StringCell.TYPE);
+		sorter.sampleColumn = findColumnIndex(inSpecs,this.m_sampleColumn,StringCell.TYPE);
+		sorter.positionColumn = findColumnIndex(inSpecs,this.m_posColumn,IntCell.TYPE);
+		sorter.refColumn = findColumnIndex(inSpecs,this.m_refColumn,StringCell.TYPE);
+		sorter.altColumn = findColumnIndex(inSpecs,this.m_altColumn,StringCell.TYPE);
 	
 		List<Integer> leftIndexes=new ArrayList<Integer>();
 		for(String s:this.m_leftColumn.getIncludeList())
 			{
-			leftIndexes.add(inSpecs.findColumnIndex(s));
+			int n=inSpecs.findColumnIndex(s);
+			if(leftIndexes.contains(n)) continue;
+			leftIndexes.add(n);
 			}
 		
 		List<Integer> topIndexes=new ArrayList<Integer>();
 		for(String s:this.m_topColumn.getIncludeList())
 			{
-			topIndexes.add(inSpecs.findColumnIndex(s));
+			int n=inSpecs.findColumnIndex(s);
+			if(leftIndexes.contains(n)) continue;//don't add if already in left
+			topIndexes.add(n);
 			}
 		
 		
@@ -188,7 +192,7 @@ public class GroupBySnpNodeModel extends AbstractVCFNodeModel
 			for(String s:sampleNames) sample2column.put(s, sample2column.size());
 			
 			
-			List<DataColumnSpec> specList=new ArrayList<DataColumnSpec>();
+			final List<DataColumnSpec> specList=new ArrayList<DataColumnSpec>();
 			specList.add(inSpecs.getColumnSpec(sorter.chromColumn));
 			specList.add(inSpecs.getColumnSpec(sorter.positionColumn));
 			specList.add(inSpecs.getColumnSpec(sorter.refColumn));
@@ -255,7 +259,7 @@ public class GroupBySnpNodeModel extends AbstractVCFNodeModel
 							}
 						else
 							{
-							getLogger().warn("mutation defined twice for "+sample+" "+r);
+							getLogger().warn("mutation defined twice for "+sample+":\n"+r);
 							}
 						sample2count.put(sample,count+1);
 						}
@@ -288,6 +292,7 @@ public class GroupBySnpNodeModel extends AbstractVCFNodeModel
 									cells.add(r.getCell(idx));
 									}
 								ok=true;
+								break;
 								}
 							if(!ok)
 								{
@@ -298,7 +303,7 @@ public class GroupBySnpNodeModel extends AbstractVCFNodeModel
 								}
 							}
 						}
-					
+					System.err.println(""+cells.size());for(Object o:cells) System.err.println("\t"+o);
 					++outIndex;
 					container.addRowToTable(new DefaultRow(RowKey.createRowKey(outIndex),cells));
 					

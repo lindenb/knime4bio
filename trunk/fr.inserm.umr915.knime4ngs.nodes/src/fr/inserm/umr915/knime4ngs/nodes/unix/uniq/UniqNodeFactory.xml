@@ -5,7 +5,7 @@
     <shortDescription>Output the uniq rows from a sorted table</shortDescription>
     
     <fullDescription>
-        <intro>Output the uniq rows from a sorted table</intro>
+        <intro>Output the uniq rows from a sorted table. A <b>Column Resorter</b> Might be needed</intro>
         <option name="short name of first option (like in the dialog)">description of first option</option>
         <option name="short name of second option (like in the dialog)">description of second option</option>
     </fullDescription>

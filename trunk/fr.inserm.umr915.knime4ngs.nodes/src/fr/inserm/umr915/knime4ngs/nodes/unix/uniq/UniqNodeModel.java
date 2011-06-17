@@ -60,6 +60,10 @@ public class UniqNodeModel extends AbstractNodeModel
 				}
 			return 0;
 			}
+		@Override
+		public String toString() {
+			return "Sorter: indexes:"+indexes+" "+comparators;
+			}
 		}
 	
     /**
@@ -124,7 +128,7 @@ public class UniqNodeModel extends AbstractNodeModel
 							}
 						else if(diff>0)
 							{
-							throw new ExecuteException("Expected rows to be sorted: but got "+prev +" and then "+r);
+							throw new ExecuteException("Expected rows to be sorted with "+sorter+" but got\n"+prev +"\nand\nthen "+r);
 							}
 						else
 							{

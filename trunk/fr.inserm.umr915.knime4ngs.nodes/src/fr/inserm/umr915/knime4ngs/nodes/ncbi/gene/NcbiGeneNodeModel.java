@@ -80,6 +80,7 @@ public class NcbiGeneNodeModel extends AbstractNcbiEUtilsNodeModel
 			++depth;
 			StartElement s=evt.asStartElement();
 			String localName=s.getName().getLocalPart();
+			//if(localName.equals("Gene-track_geneid")) System.err.println("depth+"+depth);
 			if(localName.equals("Entrezgene") && depth==2)
 				{
 				curr=new DataCell[]{
@@ -90,7 +91,7 @@ public class NcbiGeneNodeModel extends AbstractNcbiEUtilsNodeModel
 						};
 				list.add(curr);
 				}
-			else if(localName.equals("Gene-track_geneid") && curr[0].isMissing() && depth==4)
+			else if(localName.equals("Gene-track_geneid") && curr[0].isMissing() && depth==5)
 				{
 				curr[0]=new IntCell(Integer.parseInt(reader.getElementText()));
 				--depth;

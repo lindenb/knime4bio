@@ -2,17 +2,17 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>Ensembl GC</name>
-    <shortDescription>Ensembl GC Prediction</shortDescription>
+    <shortDescription>Filters VCF on Ensembl GC Prediction</shortDescription>
     
     <fullDescription>
-        <intro>Ensembl GC Prediction</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Filters VCF on Ensembl GC Prediction</intro>
+        <option name="CQ">The column containing the prediction (to extract this data from the INFO column use a <b>Extract INFO</b> Node.
+        Possible values are comma-delimited</option>
+        <option name="Prediction">The type of prediction to keep</option>
     </fullDescription>
     
     <ports>
         <inPort index="0" name="In-Port name">List of VCF</inPort>
         <outPort index="0" name="Accepted">Accepted VCF1</outPort>
-        <outPort index="1" name="Dicarded">Dicarded VCF2</outPort>
     </ports>
 </knimeNode>

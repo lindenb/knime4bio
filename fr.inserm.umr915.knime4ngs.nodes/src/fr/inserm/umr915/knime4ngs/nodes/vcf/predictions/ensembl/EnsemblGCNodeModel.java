@@ -53,9 +53,9 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		};
 	
 	
-	final static String PROPERTY_INFO_COL="vcf.info.col";
-	final static String DEFAULT_INFO_COL="INFO";
-	private SettingsModelColumnName m_infoCol=new SettingsModelColumnName(PROPERTY_INFO_COL,DEFAULT_INFO_COL);
+	final static String PROPERTY_CQ_COL="cq.col";
+	final static String DEFAULT_CQ_COL="CQ";
+	private SettingsModelColumnName m_cqCol=new SettingsModelColumnName(PROPERTY_CQ_COL,DEFAULT_CQ_COL);
 	
 	
 	static final String GC_PROPERTY="ensembl.gc";
@@ -66,7 +66,7 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
      */
     protected EnsemblGCNodeModel()
     	{
-        super(1,2);
+        super(1,1);
     	}
    
     @Override
@@ -76,7 +76,7 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
             ) throws Exception
             {
 			BufferedDataContainer container1=null;
-			BufferedDataContainer container2=null;
+		
 			try
 		    	{
 		        // the data table spec of the single output table, 
@@ -84,15 +84,15 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 				BufferedDataTable inTable=inData[0];
 		       
 				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
-				int infoColumn= inDataTableSpec.findColumnIndex(m_infoCol.getColumnName());
-				if(infoColumn==-1) throw new IllegalArgumentException("Cannot find column \""+m_infoCol.getColumnName()+"\"");
+				int cqColumn=findColumnIndex(inDataTableSpec, m_cqCol,StringCell.TYPE);
+				
 		        container1 = exec.createDataContainer(inDataTableSpec);
-		        container2 = exec.createDataContainer(inDataTableSpec);
+		       
 		        
 		        Set<String> predictions=new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
 		        predictions.addAll(Arrays.asList(selected_gc.getStringArrayValue()));
 		        
-		        Pattern semicolon=Pattern.compile("[\\;]");
+		     
 		        Pattern comma=Pattern.compile("[,]");
 		        double total=inTable.getRowCount();
 		        int nRow=0;
@@ -103,29 +103,21 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		        		{
 		        		++nRow;
 		        		DataRow row=iter.next();
-		        		String info=StringCell.class.cast(row.getCell(infoColumn)).getStringValue();
-						boolean ok=false;
-						for(String token:semicolon.split(info))
-							{
-							if(!token.startsWith("GC=")) continue;
-							for(String s:comma.split(token.substring(3)))
+		        	
+		        		if(!row.getCell(cqColumn).isMissing())
+			        		{
+			        		String content=StringCell.class.cast(row.getCell(cqColumn)).getStringValue();
+							
+							for(String s:comma.split(content))
 								{
 								if(predictions.contains(s))
 									{
-									ok=true;
+									container1.addRowToTable(row);
 									break;
 									}
 								}
-							}	
+			        		}
 						
-		        		if(ok)
-							{
-		        			container1.addRowToTable(row);
-							}
-						else
-							{
-							container2.addRowToTable(row);
-							}
 		        		}
 		        	exec.checkCanceled();
 	            	exec.setProgress(nRow/total,"Filtering....");
@@ -144,11 +136,8 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		        safeClose(container1);
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
-		        
-		        safeClose(container2);
-		        BufferedDataTable out2 = container2.getTable();
-		        container2=null;
-		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
+		       
+		        BufferedDataTable array[]= new BufferedDataTable[]{out1};
 		    	return array;
 		    	}
 		catch(Exception err)
@@ -159,7 +148,6 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
 		finally
 			{
 			safeClose(container1);
-			safeClose(container2);
 			}
        }
     
@@ -173,17 +161,15 @@ public class EnsemblGCNodeModel extends AbstractVCFNodeModel
     		}
     	
     	DataTableSpec in=inSpecs[0];
-    	findColumnIndex(in, m_infoCol,StringCell.TYPE);
-    	
-    	
-    	return new DataTableSpec[]{in,in};
+    	findColumnIndex(in, m_cqCol,StringCell.TYPE);   	
+    	return new DataTableSpec[]{in};
     	}
     
     @Override
     protected List<SettingsModel> getSettingsModel() {
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
     	L.add(this.selected_gc);
-    	L.add(this.m_infoCol);
+    	L.add(this.m_cqCol);
     	return L;
     	}
     

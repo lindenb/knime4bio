@@ -15,7 +15,7 @@ public class EnsemblGCNodeDialog extends DefaultNodeSettingsPane
     	{
     	//columns
     	addDialogComponent(new DialogComponentColumnNameSelection(
-    			new SettingsModelColumnName(EnsemblGCNodeModel.PROPERTY_INFO_COL, EnsemblGCNodeModel.DEFAULT_INFO_COL),
+    			new SettingsModelColumnName(EnsemblGCNodeModel.PROPERTY_CQ_COL, EnsemblGCNodeModel.DEFAULT_CQ_COL),
     			"INFO", 0, true, false,
     			new DataTypeColumnFilter(StringCell.TYPE)));
     	

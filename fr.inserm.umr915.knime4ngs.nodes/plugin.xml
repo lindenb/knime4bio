@@ -271,6 +271,11 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.kgview.KgViewNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.kgview.KgViewNodeFactory"/>
+            
+     <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"/>
    </extension>
    
 </plugin>

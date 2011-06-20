@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>Extract INFO</name>
+    <shortDescription>Extracts a value from a INFO column in a VCF file</shortDescription>
+    
+    <fullDescription>
+        <intro>Extracts a value from a INFO column in a VCF file.</intro>
+        <option name="INFO">the INFO column in the VCF</option>
+        <option name="DataType">The type of data to be extracted (int, double, boolean, etc... )</option>
+    	<option name="Flag">the name of the flag to be extracted</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port 1">VCF</inPort>
+        <outPort index="0" name="out">VCF1</outPort>
+    </ports>
+</knimeNode>

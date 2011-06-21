@@ -36,10 +36,7 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"/> 
           
-     <node
-            category-path="ngs"
-            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.havingid.HavingIdNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.havingid.HavingIdNodeFactory"/>
+     
       <node
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"
@@ -55,11 +52,7 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory"/>      
        
-       <node
-            category-path="ngs"
-            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.qual.QualNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.qual.QualNodeFactory"/>
-       
+ 
       
        
         <node
@@ -276,6 +269,14 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"/>
+     <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"/>
+      <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"/>
    </extension>
    
 </plugin>

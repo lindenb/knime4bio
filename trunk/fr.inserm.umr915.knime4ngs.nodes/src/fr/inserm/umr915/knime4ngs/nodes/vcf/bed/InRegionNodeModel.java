@@ -185,6 +185,7 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 		        				{
 		        				DataRow bedRow=iterbed.next();
 		        				Segment seg=bedsorter.make(bedRow);
+		        				if(seg==null) continue;
 		        				if(prevBed!=null && prevBed.compareTo(seg)>0)
 				        			{
 				        			throw new IOException(
@@ -286,6 +287,10 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
     	DataTableSpec in=inSpecs[0];
     	findColumnIndex(in,this.m_chrom1Col,StringCell.TYPE);
 		findColumnIndex(in, this.m_posCol,IntCell.TYPE);
+		
+		findColumnIndex(inSpecs[1],this.m_chrom2Col,StringCell.TYPE);
+		findColumnIndex(inSpecs[1], this.m_start,IntCell.TYPE);
+		findColumnIndex(inSpecs[1], this.m_end,IntCell.TYPE);
     	
     	return new DataTableSpec[]{new DataTableSpec(in,inSpecs[1]) };
     	}

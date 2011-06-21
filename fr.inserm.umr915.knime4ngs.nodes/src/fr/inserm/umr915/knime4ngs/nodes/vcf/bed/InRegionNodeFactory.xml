@@ -5,9 +5,12 @@
     <shortDescription>Intersects BED</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Intersects BED</intro>
+        <option name="CHROM">VCF input. Chromosome column</option>
+        <option name="POS">VCF input. POS column</option>
+        <option name="chrom">BED input. Chromosome column</option>
+        <option name="chromStart">BED input. chromStart column</option>
+        <option name="chromEnd">BED input. chromEnd column</option>
     </fullDescription>
     
     <ports>

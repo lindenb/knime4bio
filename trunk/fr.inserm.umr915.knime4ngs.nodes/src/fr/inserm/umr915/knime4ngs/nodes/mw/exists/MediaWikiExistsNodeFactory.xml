@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>MediaWiki exists</name>
+    <shortDescription>Tests if a page exist in MediaWiki</shortDescription>
+    
+    <fullDescription>
+        <intro>Tests if a page exist in a MediaWiki installation</intro>
+        <option name="URI">MediaWiki 'api.php' uri</option>
+        <option name="column">The column to search in mediawiki</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port name">Input</inPort>
+        <outPort index="0" name="Out-Port name">Output</outPort>
+    </ports>    
+    
+</knimeNode>

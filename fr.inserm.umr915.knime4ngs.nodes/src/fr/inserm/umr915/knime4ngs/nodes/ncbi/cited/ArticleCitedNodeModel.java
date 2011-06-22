@@ -43,7 +43,7 @@ import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 
 
 /**
- * @author Pierre Lindenbaum
+ * ArticleCitedNodeModel
  */
 public class ArticleCitedNodeModel extends AbstractNodeModel
 	{

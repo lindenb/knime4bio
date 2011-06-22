@@ -27,7 +27,7 @@ public class MediaWikiExportNodeModel extends AbstractNodeModel
     /**
      * Constructor for the node model.
      */
-    protected MediaWikiExportNodeModel()
+    public MediaWikiExportNodeModel()
     	{
         super(1,0);
     	}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>Wiggle</name>
+    <shortDescription>Join a sorted Wiggle file</shortDescription>
+    
+    <fullDescription>
+        <intro>Join a sorted WIG file</intro>
+        <option name="CHROM">The CHROM column</option>
+        <option name="POS">The POS column (first base is '1')</option>
+        <option name="Wig URI">URI of the <a href="https://cgwb.nci.nih.gov/goldenPath/help/wiggle.html">WIG</a> (possibly gzipped); Eitheir fixed or variable intervals.</option>
+        <option name="Column-name">New Column name</option>
+         <option name="Use step">Use start+'wig.step' instead of start+'wig.span' to get the end of a genomic region.</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port 1">Input</inPort>
+        <outPort index="0" name="out">Output</outPort>
+    </ports>
+</knimeNode>

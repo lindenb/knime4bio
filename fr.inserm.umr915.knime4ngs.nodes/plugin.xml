@@ -277,6 +277,11 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"/>
+      
+       <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.wig.WigNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.wig.WigNodeFactory"/>
    </extension>
    
 </plugin>

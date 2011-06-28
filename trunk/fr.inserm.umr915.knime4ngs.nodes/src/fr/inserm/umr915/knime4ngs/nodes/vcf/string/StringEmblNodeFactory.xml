@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>STRING</name>
+    <shortDescription>Queries the Embl STRING database</shortDescription>
+    
+    <fullDescription>
+        <intro>Queries the <a href="http://string.embl.de/">Embl String database</a>. <b>STRING</b>:Known and Predicted Protein-Protein Interactions</intro>
+        <option name="Gene">A column containing the <b>Gene</b> name.</option>
+        <option name="taxon">NCBI Taxon ID</option>
+        <option name="score">Embl STRING score; See <a href="http://string.embl.de/help/index.jsp?topic=/org.string-db.docs/api.html">http://string.embl.de/help/index.jsp?topic=/org.string-db.docs/api.html</a></option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port name">input</inPort>
+        <outPort index="0" name="Accepted">output</outPort>
+    </ports>    
+
+</knimeNode>

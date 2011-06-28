@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.knime.workbench.repository,
  org.knime.base,
  net.sf.picard;bundle-version="1.35.0",
- com.mysql.jdbc;bundle-version="5.1.12"
+ com.mysql.jdbc;bundle-version="5.1.12",
+ org.broad.igv.bbfile;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: fr.inserm.umr915.knime4ngs.corelib.bio,
  fr.inserm.umr915.knime4ngs.corelib.knime,

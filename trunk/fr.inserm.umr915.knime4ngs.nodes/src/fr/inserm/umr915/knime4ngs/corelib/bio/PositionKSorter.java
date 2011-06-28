@@ -23,6 +23,7 @@ implements Comparator<DataRow>
 	
 	public Position make(DataRow row)
 		{
+		if(row.getCell(chromCol).isMissing() || row.getCell(posCol).isMissing()) return null;
 		String chrom=StringCell.class.cast(row.getCell(chromCol)).getStringValue();
 		int pos=IntCell.class.cast(row.getCell(posCol)).getIntValue();
 		return new Position(chrom, pos);

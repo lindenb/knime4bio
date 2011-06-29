@@ -32,7 +32,9 @@ public class SiftInNodeModel extends AbstractPredictionInNodeModel
     @Override
     protected Mutation makeMutationPrediction(DataCell c)
     	{
+    	if(c.isMissing()) return null;
     	String cell=StringCell.class.cast(c).getStringValue();
+    	if(cell.equalsIgnoreCase("Coordinates")) return null;
 		String variant[]=comma.split(cell);
 		if(!variant[0].startsWith("chr")) variant[0]="chr"+variant[0];
 		if( variant.length<4 ||

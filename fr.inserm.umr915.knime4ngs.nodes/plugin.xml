@@ -288,8 +288,8 @@
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.bbfile.BigBedFileNodeFactory"/>
        <node
             category-path="ngs"
-            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory"/>
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"/>
    </extension>
    
 </plugin>

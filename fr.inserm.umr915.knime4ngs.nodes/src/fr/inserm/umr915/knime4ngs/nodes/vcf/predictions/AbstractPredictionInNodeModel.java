@@ -52,6 +52,9 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 			{
 			Mutation m1 = makeMutation(r1);
 			Mutation m2 = makeMutation(r2);
+			if(m1==null && m2==null) return 0;
+			if(m1==null && m2!=null) return -1;
+			if(m1!=null && m2==null) return 1;
 			return m1.compareTo(m2);
 			}
 		Mutation makeMutation(DataRow r)
@@ -132,7 +135,7 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 		        		++nRow;
 		        		DataRow row=iter1.next();
 		        		Mutation position0= sorter1.make(row);
-		        		
+		        		if(position0==null) continue;
 		        		
 		        		if(prev1!=null && prev1.compareTo(position0)>0)
 		        			{
@@ -159,6 +162,7 @@ public abstract class AbstractPredictionInNodeModel extends AbstractPredictionNo
 				        				{
 				        				DataRow row2=iter2.next();
 				        				Mutation position2=cmp.makeMutation(row2);
+				        				if(position2==null) continue;
 				        				if(prev2!=null && compare(prev2,position2)>0)
 						        			{
 						        			throw new IOException("Input should be sorted on CHROM/POS/REF/ALT but found "+

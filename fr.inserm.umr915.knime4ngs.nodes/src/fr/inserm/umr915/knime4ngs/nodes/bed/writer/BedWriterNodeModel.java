@@ -6,13 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
-import org.knime.core.data.IntValue;
 import org.knime.core.data.container.CloseableRowIterator;
+import org.knime.core.data.def.IntCell;
+import org.knime.core.data.def.StringCell;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
+import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
 
@@ -33,11 +35,11 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
 	static final String FILENAME_PROPERTY="file.name";
 	static final String OFFSET_PROPERTY="base.offset";
 	static final String CHROMOSOME_COL_PROPERTY="chrom.column";
-	static final String DEFAULT_CHROM_COL_PROPERTY="chrom";
+	static final String DEFAULT_CHROM_COL_PROPERTY="CHROM";
 	static final String CHROMSTART_COL_PROPERTY="chromStart.column";
-	static final String DEFAULT_CHROMSTART_COL_PROPERTY="start";
+	static final String DEFAULT_CHROMSTART_COL_PROPERTY="POS";
 	static final String CHROMEND_COL_PROPERTY="chromEnd.column";
-	static final String DEFAULT_CHROMEND_COL_PROPERTY="end";
+	static final String DEFAULT_CHROMEND_COL_PROPERTY="POS";
 	static final String NAME_COL_PROPERTY="name.column";
 	static final String DEFAULT_NAME_COL_PROPERTY="name";
 	
@@ -46,14 +48,14 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
         new SettingsModelBoolean(OFFSET_PROPERTY,true);
 	private final SettingsModelString m_filename =
         new SettingsModelString(FILENAME_PROPERTY,DEFAULT_FILENAME_PROPERTY);
-	private final SettingsModelString m_colChrom =
-        new SettingsModelString(CHROMOSOME_COL_PROPERTY,DEFAULT_CHROM_COL_PROPERTY);
-	private final SettingsModelString m_colChromStart =
-        new SettingsModelString(CHROMSTART_COL_PROPERTY,DEFAULT_CHROMSTART_COL_PROPERTY);
-	private final SettingsModelString m_colChromEnd =
-        new SettingsModelString(CHROMEND_COL_PROPERTY,DEFAULT_CHROMEND_COL_PROPERTY);
-	private final SettingsModelString m_colName =
-        new SettingsModelString(NAME_COL_PROPERTY,DEFAULT_NAME_COL_PROPERTY);
+	private final SettingsModelColumnName m_colChrom =
+        new SettingsModelColumnName(CHROMOSOME_COL_PROPERTY,DEFAULT_CHROM_COL_PROPERTY);
+	private final SettingsModelColumnName m_colChromStart =
+        new SettingsModelColumnName(CHROMSTART_COL_PROPERTY,DEFAULT_CHROMSTART_COL_PROPERTY);
+	private final SettingsModelColumnName m_colChromEnd =
+        new SettingsModelColumnName(CHROMEND_COL_PROPERTY,DEFAULT_CHROMEND_COL_PROPERTY);
+	private final SettingsModelColumnName m_colName =
+        new SettingsModelColumnName(NAME_COL_PROPERTY,DEFAULT_NAME_COL_PROPERTY);
 	
     /**
      * Constructor for the node model.
@@ -76,13 +78,13 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
 		        // the table will have three columns:
 				BufferedDataTable inTable=inData[0];
 				DataTableSpec tableSpec=inTable.getDataTableSpec();
-		        int colChrom=findColumnIndex(tableSpec, m_colChrom.getStringValue());
-		        int colChromStart=findColumnIndex(tableSpec, m_colChromStart.getStringValue());
+		        int colChrom=findColumnIndex(tableSpec, m_colChrom,StringCell.TYPE);
+		        int colChromStart=findColumnIndex(tableSpec, m_colChromStart,IntCell.TYPE);
 		        int shift=(m_dataAreOneBase.getBooleanValue()?-1:0);
 		        int colChromEnd= -1;
 		        if(m_colChromEnd.getStringValue()!=null)
 		        	{
-		        	colChromEnd=tableSpec.findColumnIndex(m_colChromEnd.getStringValue());
+		        	colChromEnd=findColumnIndex(tableSpec,m_colChromEnd,IntCell.TYPE);
 		        	}
 		        if(colChromEnd==-1) colChromEnd=colChromStart;
 		        int colName=-1;
@@ -102,11 +104,19 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
 		        		{
 		        		++nRow;
 		        		DataRow row=iter.next();
-		        		out.print(org.knime.core.data.StringValue.class.cast(row.getCell(colChrom)).getStringValue());
+		        		if(row.getCell(colChrom).isMissing()) continue;
+		        		if(row.getCell(colChromStart).isMissing()) continue;
+		        		if(colChromEnd!=-1 && row.getCell(colChromEnd).isMissing()) continue;
+		        		if(colName!=-1 && row.getCell(colName).isMissing()) continue;
+		        		
+		        		String chrom=StringCell.class.cast(row.getCell(colChrom)).getStringValue();
+		        		int chromStart=IntCell.class.cast(row.getCell(colChromStart)).getIntValue()+shift;
+		        		int chromEnd=IntCell.class.cast(row.getCell(colChromEnd)).getIntValue()+shift+(colChromEnd==colChromStart?1:0);
+		        		out.print(chrom);
 						out.print("\t");
-						out.print(IntValue.class.cast(row.getCell(colChromStart)).getIntValue()+shift);
+						out.print(chromStart);
 						out.print("\t");
-						out.print(IntValue.class.cast(row.getCell(colChromEnd)).getIntValue()+shift+(colChromEnd==colChromStart?1:0));
+						out.print(chromEnd);
 						out.print("\t");
 						out.print("+");
 						out.print("\t");
@@ -121,7 +131,7 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
 		        		out.println();
 		        		}
 		        	exec.checkCanceled();
-	            	exec.setProgress(nRow/total,"Filtering....");
+	            	exec.setProgress(nRow/total,"Exporting to BED....");
 					} 
 		        catch (Exception e)
 					{

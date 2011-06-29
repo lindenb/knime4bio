@@ -71,17 +71,18 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
     private DataTableSpec createVcfDataColumnSpec()
 		{
 		DataColumnSpec[] allColSpecs = new DataColumnSpec[11];
-		allColSpecs[0] =  new DataColumnSpecCreator("SAMPLE", StringCell.TYPE).createSpec();
-	    allColSpecs[1] =  new DataColumnSpecCreator("CHROM", StringCell.TYPE).createSpec();
-	    allColSpecs[2] =  new DataColumnSpecCreator("POS", IntCell.TYPE).createSpec();
-	    allColSpecs[3] =  new DataColumnSpecCreator("ID", StringCell.TYPE).createSpec();
-	    allColSpecs[4] =  new DataColumnSpecCreator("REF", StringCell.TYPE).createSpec();
-	    allColSpecs[5] =  new DataColumnSpecCreator("ALT", StringCell.TYPE).createSpec();
-	    allColSpecs[6] =  new DataColumnSpecCreator("QUAL", DoubleCell.TYPE).createSpec();
-	    allColSpecs[7] =  new DataColumnSpecCreator("FILTER", StringCell.TYPE).createSpec();
-	    allColSpecs[8] =  new DataColumnSpecCreator("INFO", StringCell.TYPE).createSpec();
-	    allColSpecs[9] =  new DataColumnSpecCreator("FORMAT", StringCell.TYPE).createSpec();
-	    allColSpecs[10] = new DataColumnSpecCreator("CALL", StringCell.TYPE).createSpec();
+		
+	    allColSpecs[0] =  new DataColumnSpecCreator("CHROM", StringCell.TYPE).createSpec();
+	    allColSpecs[1] =  new DataColumnSpecCreator("POS", IntCell.TYPE).createSpec();
+	    allColSpecs[2] =  new DataColumnSpecCreator("ID", StringCell.TYPE).createSpec();
+	    allColSpecs[3] =  new DataColumnSpecCreator("REF", StringCell.TYPE).createSpec();
+	    allColSpecs[4] =  new DataColumnSpecCreator("ALT", StringCell.TYPE).createSpec();
+	    allColSpecs[5] =  new DataColumnSpecCreator("QUAL", DoubleCell.TYPE).createSpec();
+	    allColSpecs[6] =  new DataColumnSpecCreator("FILTER", StringCell.TYPE).createSpec();
+	    allColSpecs[7] =  new DataColumnSpecCreator("INFO", StringCell.TYPE).createSpec();
+	    allColSpecs[8] =  new DataColumnSpecCreator("FORMAT", StringCell.TYPE).createSpec();
+	    allColSpecs[9] = new DataColumnSpecCreator("CALL", StringCell.TYPE).createSpec();
+	    allColSpecs[10] =  new DataColumnSpecCreator("SAMPLE", StringCell.TYPE).createSpec();
 	    return new DataTableSpec( allColSpecs);
 		}
 
@@ -139,7 +140,7 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 					String tokens[]=tab.split(line);
 					if(tokens.length<9)
 						{
-						throw new IOException("Error "+line);
+						throw new IOException("Error expected 9 columns but got "+tokens.length +" in "+line);
 						}
 					
 					
@@ -147,12 +148,15 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 					
 						
 					try {
-						qual=Float.parseFloat(tokens[5]);
+						if(!(tokens[5].equals(".") || tokens[5].isEmpty()))
+							{
+							qual=Float.parseFloat(tokens[5]);
+							}
 						} 
 					catch (Exception e)
 						{
 						e.printStackTrace();
-						getLogger().info("Cannot parse "+tokens[5]);
+						getLogger().info("Cannot parse QUAL:"+tokens[5]);
 						qual=null;
 						}
 						
@@ -163,18 +167,18 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 	        			}
 					
 					DataCell[] cells = new DataCell[11];
-					cells[0] = sample;
-					cells[1] = new StringCell(tokens[0]); //chrom
-		            cells[2] = new IntCell(Integer.parseInt(tokens[1])); //pos
-		            cells[3] = new StringCell(tokens[2].equals(".")?"":tokens[2]);//id
-		            cells[4] = new StringCell(tokens[3].toUpperCase());//ref
-		            cells[5] = new StringCell(tokens[4].toUpperCase());//alt
-		            cells[6] = new DoubleCell(Double.parseDouble(tokens[5]));//qual
-		            cells[7] = (tokens[6].isEmpty() || tokens[6].equals(".")? DataType.getMissingCell():new StringCell(tokens[6]));//filter
-		            cells[8] = new StringCell(tokens[7]);//info
-		            cells[9] = new StringCell(tokens[8]);//format
-		            cells[10] = new StringCell(tokens[9]);//call
-		           
+					
+					cells[0] = new StringCell(tokens[0]); //chrom
+		            cells[1] = new IntCell(Integer.parseInt(tokens[1])); //pos
+		            cells[2] = new StringCell(tokens[2].equals(".")?"":tokens[2]);//id
+		            cells[3] = new StringCell(tokens[3].toUpperCase());//ref
+		            cells[4] = new StringCell(tokens[4].toUpperCase());//alt
+		            cells[5] = new DoubleCell(Double.parseDouble(tokens[5]));//qual
+		            cells[6] = (tokens[6].isEmpty() || tokens[6].equals(".")? DataType.getMissingCell():new StringCell(tokens[6]));//filter
+		            cells[7] = new StringCell(tokens[7]);//info
+		            cells[8] = new StringCell(tokens[8]);//format
+		            cells[9] = new StringCell(tokens[9]);//call
+		            cells[10] = sample;
 		            ++nRows1;
 			        container1.addRowToTable(new DefaultRow(
 			        		RowKey.createRowKey(nRows1),

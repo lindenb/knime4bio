@@ -30,6 +30,7 @@ public class PolyphenInNodeModel extends AbstractPredictionInNodeModel
     @Override
     protected Mutation makeMutationPrediction(DataCell c)
     	{
+    	if(c.isMissing()) return null;
     	//chr1:877831.TC.uc001abw.1
     	
     	String cell=StringCell.class.cast(c).getStringValue();

@@ -290,6 +290,15 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"/>
+            
+       <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.bed.writer.BedWriterNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.bed.writer.BedWriterNodeFactory"/>
+        <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"/>
    </extension>
    
 </plugin>

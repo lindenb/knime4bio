@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>Uniprot</name>
+    <shortDescription>Finds features in Uniprot entries</shortDescription>
+    
+    <fullDescription>
+        <intro>Finds features in Uniprot entries</intro>
+        <option name="ACN">Column containing the Uniprot accession number</option>
+        <option name="POS">position in the peptidic sequence (first amino acid has index=1)</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port name">VCF</inPort>
+        <outPort index="0" name="Substitution">Annotation</outPort>
+    </ports>    
+   
+</knimeNode>

@@ -4,6 +4,8 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +26,7 @@ import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
+import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import fr.inserm.umr915.knime4ngs.corelib.bio.uniprot.Entry;
 import fr.inserm.umr915.knime4ngs.corelib.bio.uniprot.FeatureType;
@@ -39,7 +42,7 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 public class UniprotNodeModel extends AbstractVCFNodeModel
 	{
 	static final String ACC_PROPERTY="uniprot.acc";
-	static final String ACC_DEFAULT="Uniprot";
+	static final String ACC_DEFAULT="Uniprot.acn";
 	private SettingsModelColumnName m_accCol =new SettingsModelColumnName(
 			UniprotNodeModel.ACC_PROPERTY,
 			UniprotNodeModel.ACC_DEFAULT
@@ -265,5 +268,15 @@ public class UniprotNodeModel extends AbstractVCFNodeModel
 		findColumnIndex(inSpecs[0],m_posCol,IntCell.TYPE);
     	return new DataTableSpec[]{new DataTableSpec(inSpecs[0],createDataTableSpec())};
     	}
+    
+    @Override
+    protected List<SettingsModel> getSettingsModel() {
+    	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
+    	L.add(this.m_accCol);
+    	L.add(this.m_posCol);
+    	return L;
+    	}
+    
+    
 	}
 

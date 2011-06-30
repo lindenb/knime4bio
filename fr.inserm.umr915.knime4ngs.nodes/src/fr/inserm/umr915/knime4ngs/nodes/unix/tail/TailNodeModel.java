@@ -49,6 +49,7 @@ public class TailNodeModel extends AbstractNodeModel
             ) throws Exception
             {
 		BufferedDataContainer container1=null;
+		
 		try
 	    	{
 	        // the data table spec of the single output table, 
@@ -68,9 +69,9 @@ public class TailNodeModel extends AbstractNodeModel
 	        		DataRow r=iter.next();
 	        		++nRow;
 	        		exec.checkCanceled();
-	            	exec.setProgress(nRow/total,"Tail....");
+	            	exec.setProgress(nRow/(float)total,"Tail....");
 	            	
-	        		if(nRow+this.m_rowCount.getIntValue() < total)
+	        		if(nRow+this.m_rowCount.getIntValue() <= total)
 	        			{
 	        			continue;
 	        			}

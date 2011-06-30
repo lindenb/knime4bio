@@ -44,7 +44,7 @@ public class UniprotNodeFactory
      */
     @Override
     public boolean hasDialog() {
-        return false;
+        return true;
     }
 
     /**
@@ -52,7 +52,7 @@ public class UniprotNodeFactory
      */
     @Override
     public NodeDialogPane createNodeDialogPane() {
-    	throw new IllegalStateException();
+      return new UniprotNodeDialog();
     }
 
 }

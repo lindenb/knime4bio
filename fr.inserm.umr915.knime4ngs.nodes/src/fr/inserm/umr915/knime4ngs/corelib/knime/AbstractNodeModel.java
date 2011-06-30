@@ -224,7 +224,7 @@ public abstract class AbstractNodeModel  extends NodeModel
 		int index;
 		if((index=dataTableSpec.findColumnIndex(name))==-1)
 			{
-			throw new InvalidSettingsException("Node "+this.getNodeName()+" column \""+name+"\"");
+			throw new InvalidSettingsException("Node "+this.getNodeName()+": cannot find column title= \""+name+"\"");
 			}
 		return index;
 		}

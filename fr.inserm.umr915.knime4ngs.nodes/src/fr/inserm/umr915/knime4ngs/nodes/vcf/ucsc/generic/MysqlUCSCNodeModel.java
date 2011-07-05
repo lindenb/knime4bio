@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,6 +65,19 @@ public class MysqlUCSCNodeModel
 	final static boolean POS_ONE_DEFAULT=true;
 	private final SettingsModelBoolean m_positionOneBased=new SettingsModelBoolean(POS_ONE_BASED,POS_ONE_DEFAULT);
 	
+	
+	final static String STOP_PROPERTY="ucsc.stop.at.first";
+	static final boolean STOP_DEFAULT=false;
+	private final SettingsModelBoolean m_stopAtFirst =
+        new SettingsModelBoolean(STOP_PROPERTY,STOP_DEFAULT);
+	
+	private final Comparator<Integer> reverseIntCmp=new Comparator<Integer>()
+		{
+		@Override
+		public int compare(Integer i1, Integer i2) {
+			return i2.compareTo(i1);
+			}
+		};
 	
 	class BedSorter
 	implements Comparator<DataCell[]>
@@ -155,9 +170,10 @@ public class MysqlUCSCNodeModel
 		        double total=vcfTable.getRowCount();
 		        int nRow=0;
 		        int outCount=0;
-		        
+		        String prevChrom=null;
+		        Integer prevPos=null;
 		        RowIterator itervcf=null;
-		        
+		        List<DataCell[]> buffer=new ArrayList<DataCell[]>();
 		        BufferedReader in=null;
 		        try {
 		        	itervcf=vcfTable.iterator();
@@ -167,7 +183,6 @@ public class MysqlUCSCNodeModel
 		        		DataRow row=itervcf.next();
 		        		//System.err.println(row);
 		        		boolean found=false;
-		        		
 		        		
 		        		
 		        		do
@@ -185,6 +200,28 @@ public class MysqlUCSCNodeModel
 		        		
 		        		String chrom=StringCell.class.cast(row.getCell(chromCol)).getStringValue();
 		        		int pos=IntCell.class.cast(row.getCell(posCol)).getIntValue();
+		        		/* already saw this position ? */
+		        		if(prevChrom!=null && prevChrom.equals(chrom) &&
+		        			prevPos!=null && prevPos.equals(pos))
+		        			{
+		        			if(!buffer.isEmpty())
+		        				{
+		        				for(DataCell cells[]:buffer)
+		        					{
+		        					container1.addRowToTable(new AppendedColumnRow(
+					        				RowKey.createRowKey(++outCount),	
+					        				row,
+					        				cells
+					        				));
+		        					}
+		        				found=true;
+		        				}
+		        			break;
+		        			}
+		        		prevChrom=chrom;
+		        		prevPos=pos;
+		        		buffer.clear();
+		        		
 		        		pstmt.setString(1, chrom);
 		        		if(m_positionOneBased.getBooleanValue())
 			        		{
@@ -208,6 +245,11 @@ public class MysqlUCSCNodeModel
 		        				{
 		        				bins=UcscBin.getBins(pos, pos);
 		        				}
+		        			//sort as bin with hight depth comes first
+		        			if(m_stopAtFirst.getBooleanValue())
+			        			{
+			        			Arrays.sort(bins,reverseIntCmp);
+			        			}
 		        			}
 		        		//loop over all the bins (if any)
 		        		for(;;)
@@ -225,19 +267,22 @@ public class MysqlUCSCNodeModel
 			        			{
 			        			//System.err.println(outCount);
 			        			DataCell cells[]=handler.parse(resultset);
+			        			buffer.add(cells);
 			        			container1.addRowToTable(new AppendedColumnRow(
 				        				RowKey.createRowKey(++outCount),	
 				        				row,
 				        				cells
 				        				));
 			        			found=true;
+			        			if(m_stopAtFirst.getBooleanValue()) break;
 			        			}
 			        		safeClose(resultset);
+			        		if(found && m_stopAtFirst.getBooleanValue()) break;
 			        		if(bins==null || binIndex>=bins.length) break;
 			        		}
 		        		} while(false);
 		        		
-		        		
+		        		/* nothing found for this row, add empty cells */
 		        		if(!found)
 							{
 							DataCell empty[]=new DataCell[inDataTableSpec2.getNumColumns()];
@@ -252,7 +297,7 @@ public class MysqlUCSCNodeModel
 			        				));
 							}
 		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"SQL....");
+		            	exec.setProgress(nRow/total,"Mysql SQL....");
 		        		}
 					} 
 		        catch (Exception e)
@@ -323,6 +368,7 @@ public class MysqlUCSCNodeModel
     	L.add(this.m_posCol);
     	L.add(this.m_ucscHandler);
     	L.add(this.m_positionOneBased);
+    	L.add(m_stopAtFirst);
     	return L;
     	}
 	}

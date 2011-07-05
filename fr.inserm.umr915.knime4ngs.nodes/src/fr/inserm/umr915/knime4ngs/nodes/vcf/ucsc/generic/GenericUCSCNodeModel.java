@@ -56,6 +56,7 @@ public class GenericUCSCNodeModel
         new SettingsModelString(HANDLER_NAME_PROPERTY,HANDLER_NAME_DEFAULT);
 	
 	
+	
 	class BedSorter
 	implements Comparator<DataCell[]>
 		{
@@ -159,6 +160,7 @@ public class GenericUCSCNodeModel
 		        Position prevVCF=null;
 		        Segment prevBed=null;
 		        LinkedList<DataCell[]> buffer=new LinkedList<DataCell[]>();
+		        int inputIndex=0;
 		        BufferedReader in=null;
 		        try {
 		        	itervcf=vcfTable.iterator();
@@ -219,6 +221,11 @@ public class GenericUCSCNodeModel
 		        			String line=null;
 		        			while((line=in.readLine())!=null)
 		        				{
+		        				++inputIndex;
+		        				if(inputIndex%100000==0)
+		        					{
+		        					System.err.println("Reading "+line);
+		        					}
 		        				String tokens[]=delim.split(line);
 		        				DataCell bedRow[]=handler.parse(tokens);
 		        				

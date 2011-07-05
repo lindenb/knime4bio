@@ -87,7 +87,7 @@ public class UniprotNodeModel extends AbstractVCFNodeModel
     		}
     	catch(Exception err)
     		{
-    		System.err.println("Cannot parse: "+url+" "+err.getMessage());
+    		getLogger().warn("Cannot parse: "+url+" "+err.getMessage());
     		return null;
     		}
     	}

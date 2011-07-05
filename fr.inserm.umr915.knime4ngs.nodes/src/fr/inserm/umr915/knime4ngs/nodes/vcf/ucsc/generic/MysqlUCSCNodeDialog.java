@@ -42,7 +42,10 @@ public class MysqlUCSCNodeDialog extends AbstractSqlNodeSettingsPane
                 new SettingsModelBoolean( MysqlUCSCNodeModel.POS_ONE_BASED, MysqlUCSCNodeModel.POS_ONE_DEFAULT),
                    "First base is +1:"
        			));
-    	
+    	addDialogComponent(new DialogComponentBoolean(
+                new SettingsModelBoolean( MysqlUCSCNodeModel.STOP_PROPERTY, MysqlUCSCNodeModel.STOP_DEFAULT),
+                   "Only one hit by position:"
+       			));
     	}
 	}
 

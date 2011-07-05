@@ -5,9 +5,20 @@
     <shortDescription>Prediction UCSC using KnownGene</shortDescription>
     
     <fullDescription>
-        <intro>Prediction UCSC using KnownGene</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Prediction UCSC using the <b>KnownGene</b> table. 
+        
+       	 <i>Note for IRT/nantes users: use port 3316 in the JDBC uri</i>
+       </intro>
+        <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
+        <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
+        <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
+        <option name="CHROM">chromosome column</option>
+        <option name="POS">Position column (first base is 1)</option>
+        <option name="REF">REF column</option>
+        <option name="ALT">ALT column</option>
+        <option name="genome reference">Full path to reference genome indexed with samtools</option>
+        <option name="mRNA">add mRNA sequence</option>
+        <option name="protein">add protein sequence</option>
     </fullDescription>
     
     <ports>

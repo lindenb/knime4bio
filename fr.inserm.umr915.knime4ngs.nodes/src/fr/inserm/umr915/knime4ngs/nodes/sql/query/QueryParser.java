@@ -60,7 +60,13 @@ public class QueryParser implements QueryParserConstants {
                 c.index0= columns.size();
                 c.name=t.image.substring(1);
                 c.dataColumnIndex = this.inSpec.findColumnIndex(c.name);
-                if(c.dataColumnIndex==-1) {if (true) throw new ParseException("undefined column name "+ c.name);}
+                if(c.dataColumnIndex==-1) {
+                	for(int i=0;i< this.inSpec.getNumColumns();++i)
+                		{
+                		System.err.println(""+i+"\t\""+this.inSpec.getColumnSpec(i).getName()+"\" _"+c.name+"_");
+                		}
+                	if (true) throw new ParseException("undefined column name \""+ c.name+"\"");
+                	}
                 c.dataColumnSpec= this.inSpec.getColumnSpec(c.dataColumnIndex);
                 columns.add(c);
         break;

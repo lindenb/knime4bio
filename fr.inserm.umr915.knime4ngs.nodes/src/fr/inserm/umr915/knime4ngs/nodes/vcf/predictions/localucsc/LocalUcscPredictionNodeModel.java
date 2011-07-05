@@ -427,11 +427,17 @@ public class LocalUcscPredictionNodeModel extends AbstractSqlNodeModel
     	 con=createConnection();
     	 pstmt=con.prepareStatement("select * from knownGene where chrom=? and not(txStart> ? or txEnd<=?)");
     		
-    		iter=inTable.iterator();
+    	 
+    	  int inputIndex=0;
+    	  float total=inTable.getRowCount();
+    	   iter=inTable.iterator();
     		while(iter.hasNext())
     			{
     			DataRow row=iter.next();
-				String k=getString(row, chromCol);
+				++inputIndex;
+				exec.setProgress(inputIndex/total,"UCSC prediction");
+    			String k=getString(row, chromCol);
+    			if(k==null) continue;
 				int position0= getInt(row, posCol)-1;
 				String refBase=getString(row,refCol).toUpperCase();
 				String alt=getString(row, altCol).toUpperCase();

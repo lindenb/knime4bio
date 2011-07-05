@@ -31,10 +31,7 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.rs.RsFilterNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.rs.RsFilterNodeFactory"/>
    
-     <node
-            category-path="ngs"
-            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.load.VCFLoaderNodeFactory"/> 
+  
           
      
       <node

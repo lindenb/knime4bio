@@ -2,12 +2,15 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>SQL Query</name>
-    <shortDescription>SQL Query</shortDescription>
+    <shortDescription>apply a SQL Query to every row of the input table</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>apply a SQL Query to every row of the input table.</intro>
+        <option name="Query: the SQL query">The SQL query. Words starting with <b>?columnName</b> will be replace by the content of the table.</option>
+         <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
+        <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
+        <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
+        <option name="join">Join type</option>
     </fullDescription>
     
     <ports>

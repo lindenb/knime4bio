@@ -8,7 +8,7 @@
     </shortDescription>
     
     <fullDescription>
-        <intro>Reads one or more VCF File associated to a sample name.</intro>
+        <intro>Reads one or more VCF File associated to a sample name. It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped). It currently only supports one sample per VCF.</intro>
         <option name="quality">Ignore VCF data with a quality lower than this value</option>
         <option name="SAMPLE">the SAMPLE column</option>
         <option name="VCF URI">the <b>absolute</b> path-to-vcf column</option>

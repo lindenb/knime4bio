@@ -2,12 +2,21 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>UCSC SQL</name>
-    <shortDescription>Query the UCSC tables by genomic position</shortDescription>
+    <shortDescription>Query the UCSC MYSQL tables by genomic position</shortDescription>
     
-    <fullDescription>
-        <intro>Query the UCSC tables by genomic position</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+     <fullDescription>
+        <intro>Append positional data from UCSC tables from the MYSQL table stored in a UCSC database .
+          Requirement: the table containing the data should exists.
+          
+          	<i>Note for IRT/nantes users: use port 3316 in the JDBC uri</i>
+        	</intro>
+        <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
+        <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
+        <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
+        <option name="CHROM">Chromosome Column </option>
+        <option name="POS">Position column </option>
+        <option name="One based">First base has index= +1 </option>
+        <option name="table">The UCSC table to be parsed</option>
     </fullDescription>
     
     <ports>

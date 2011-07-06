@@ -1,28 +1,30 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.go;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
-
-import org.knime.core.data.DataRow;
+import org.knime.core.data.DataCell;
+import org.knime.core.data.DataColumnSpec;
+import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataTableSpec;
-import org.knime.core.data.container.CloseableRowIterator;
+import org.knime.core.data.DataType;
+import org.knime.core.data.RowKey;
+import org.knime.core.data.def.DefaultRow;
+import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
-
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
-import fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc.UcscTranscriptNodeModel;
 
 
 
@@ -37,14 +39,40 @@ public class GoNodeModel extends AbstractVCFNodeModel
 	private final SettingsModelString m_goTerms =
         new SettingsModelString(GENONTOLOGY_PROPERTY,GENONTOLOGY_DEFAULT);
 
+	static final String TAXON_PROPERTY="taxon";
+	static final int TAXON_DEFAULT=9606;
+	private final SettingsModelInteger m_taxon =
+        new SettingsModelInteger(TAXON_PROPERTY,TAXON_DEFAULT);
+	
+	
     /**
      * Constructor for the node model.
      */
-    protected GoNodeModel()
+    public GoNodeModel()
     	{
-        super(1,2);
+        super(0,1);
     	}
    
+    protected DataTableSpec createDataTableSpec()
+    	{
+    	DataColumnSpec cols[]=new DataColumnSpec[]{
+    			new DataColumnSpecCreator("DB", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("ID", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Splice", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Symbol", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Taxon", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Qualifier", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("GO ID", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("GO Name", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Reference", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Evidence", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("With", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Aspect", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Date", StringCell.TYPE).createSpec(),
+    			new DataColumnSpecCreator("Source", StringCell.TYPE).createSpec()
+    			};
+    	return new DataTableSpec(cols);
+    	}
     
     
     @Override
@@ -54,102 +82,79 @@ public class GoNodeModel extends AbstractVCFNodeModel
             ) throws Exception
             {
 			BufferedDataContainer container1=null;
-			BufferedDataContainer container2=null;
-			Set<String> goTerms=new HashSet<String>();
-			Set<String> geneNames=new HashSet<String>();
+		
 			
 			
-			for(String s: this.m_goTerms.getStringValue().split("[\n, \t]"))
-				{
-				s=s.trim().toUpperCase();
-				if(s.isEmpty()) continue;
-				if(!s.startsWith("GO:")) continue;
-				goTerms.add(s);
-				}
-			if(!goTerms.isEmpty())
-				{
-				Pattern tab=Pattern.compile("[\t]");
-				String line;
-				for(String goTerm:goTerms)
-					{
-					String uri="http://www.ebi.ac.uk/QuickGO/GAnnotation?tax=9606&relType=IP=&goid="+
-						URLEncoder.encode(goTerm,"UTF-8")+
-						"&format=tsv";
-					
-					BufferedReader in=new BufferedReader(new InputStreamReader(new URL(uri).openStream()));
-					line=in.readLine(); //skip header
-					
-					if(line==null) { in.close(); continue;}
-					while((line=in.readLine())!=null)
-						{
-						
-						exec.checkCanceled();
-						String tokens[]=tab.split(line);
-						if(tokens.length<4) continue;
-						String s=tokens[3].toUpperCase().trim();
-						if(s.isEmpty()) continue;
-						geneNames.add(s);
-						}
-					in.close();
-					}
-				}
-			
-			
+			BufferedReader in=null;
 			try
 		    	{
-		        // the data table spec of the single output table, 
-		        // the table will have three columns:
-				BufferedDataTable inTable=inData[0];
+				DataTableSpec spec=createDataTableSpec();
+		        container1 = exec.createDataContainer(spec);
 		       
-				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
-				int geneColumn = findColumnIndex(inDataTableSpec,UcscTranscriptNodeModel.KG_SYMBOL,StringCell.TYPE);
-			
+		    
+		       
+				Pattern tab=Pattern.compile("[\t]");
+				String line;
+				String goTerm=this.m_goTerms.getStringValue();
 				
+				String uri="http://www.ebi.ac.uk/QuickGO/GAnnotation?tax=" +
+					this.m_taxon.getIntValue()+
+					"&relType=IP=&goid="+
+					URLEncoder.encode(goTerm,"UTF-8")+
+					"&format=tsv";
+					
+				in=new BufferedReader(new InputStreamReader(new URL(uri).openStream()));
+				line=in.readLine(); //skip header
+				if(line==null)
+					{
+					throw new IOException("Cannot get header");
+					}
 				
-		        container1 = exec.createDataContainer(inDataTableSpec);
-		        container2 = exec.createDataContainer(inDataTableSpec);
-		        
-		        double total=inTable.getRowCount();
-		        int nRow=0;
-		        CloseableRowIterator iter=null;
-		        try {
-		        	iter=inTable.iterator();
-		        	while(iter.hasNext())
-		        		{
-		        		++nRow;
-		        		DataRow row=iter.next();
-		        		String geneSymbol= getString(row, geneColumn);
-		        		
-		        		if(geneSymbol!=null && geneNames.contains(geneSymbol.toUpperCase()))
+				String tokens[]=tab.split(line);
+				if(tokens.length!=spec.getNumColumns())
+					{
+					throw new IOException("Expected "+spec.getNumColumns()+" columns but found "+tokens.length);
+					}
+				for(int i=0;i< tokens.length;++i)
+					{
+					if(!tokens[i].equalsIgnoreCase(spec.getColumnSpec(i).getName()))
+						{
+						throw new IOException("columnn("+(i+1)+" expected "+spec.getColumnSpec(i).getName()+" but got "+tokens[i]);
+						}
+					}
+				int outIndex=0;
+				
+				while((line=in.readLine())!=null)
+					{
+					exec.checkCanceled();
+					tokens=tab.split(line);
+					DataCell cells[]=new DataCell[spec.getNumColumns()];
+					for(int i=0;i< spec.getNumColumns();++i)
+						{
+						if(tokens.length<=i || tokens[i].trim().isEmpty())
 							{
-							container1.addRowToTable(row);
+							cells[i]=DataType.getMissingCell();
+							}
+						else if(spec.getColumnSpec(i).getType().equals(IntCell.TYPE))
+							{
+							cells[i]=new IntCell(Integer.parseInt(tokens[i]));
 							}
 						else
 							{
-							container2.addRowToTable(row);
+							cells[i]=new StringCell(tokens[i]);
 							}
-		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"Filtering on GO");
-		        		}
-					} 
-		        catch (Exception e)
-					{
-					throw e;
+						}
+					container1.addRowToTable(new DefaultRow(RowKey.createRowKey(++outIndex), cells));
 					}
-				finally
-					{
-					if(iter!=null) iter.close();
-					}
-		        
+					
+				
 				// once we are done, we close the container and return its table
-		        container1.close();
+		        safeClose(container1);
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
 		        
-		        container2.close();
-		        BufferedDataTable out2 = container2.getTable();
-		        container2=null;
-		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
+		       
+		        BufferedDataTable array[]= new BufferedDataTable[]{out1};
 		    	return array;
 		    	}
 		catch(Exception err)
@@ -160,31 +165,24 @@ public class GoNodeModel extends AbstractVCFNodeModel
 			}
 		finally
 			{
-			if(container1!=null) container1.close();
-			if(container2!=null) container2.close();
+			safeClose(container1);
+			safeClose(in);
 			}
        }
     
     
     @Override
     protected DataTableSpec[] configure(DataTableSpec[] inSpecs)
-    		throws InvalidSettingsException {
-    	if(inSpecs==null || inSpecs.length!=1)
-    		{
-    		throw new InvalidSettingsException("Expected one table");
-    		}
-    	
-    	DataTableSpec in=inSpecs[0];
-    	findColumnIndex(in,UcscTranscriptNodeModel.KG_SYMBOL,StringCell.TYPE);
-    	
-    	
-    	return new DataTableSpec[]{in,in};
+    		throws InvalidSettingsException
+    	{
+    	return new DataTableSpec[]{createDataTableSpec()};
     	}
     
     @Override
     protected List<SettingsModel> getSettingsModel() {
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
     	L.add(this.m_goTerms);
+    	L.add(this.m_taxon);
     	return L;
     	}
     

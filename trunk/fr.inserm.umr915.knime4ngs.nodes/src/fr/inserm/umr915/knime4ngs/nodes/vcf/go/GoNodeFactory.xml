@@ -5,14 +5,13 @@
     <shortDescription>Gene Ontology</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Call the QuickGO API to get the protein in the domain of a given GO ID</intro>
+        <option name="Term">The GO ID. e.g: <b>GO:0003015</b></option>
+        <option name="Taxon-ID">NCBI taxon ID . Human=9606</option>
     </fullDescription>
-    
+  
     <ports>
-        <inPort index="0" name="In-Port name">List of VCF</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
+        <outPort index="0" name="QuickGO">QuickGO result</outPort>
     </ports>    
 
 </knimeNode>

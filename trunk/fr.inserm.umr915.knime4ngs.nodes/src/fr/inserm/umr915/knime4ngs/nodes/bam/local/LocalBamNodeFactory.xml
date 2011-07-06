@@ -5,7 +5,8 @@
     <shortDescription>Displays a local BAM file</shortDescription>
     
     <fullDescription>
-        <intro>Displays a local BAM file</intro>
+        <intro>Displays a local BAM file using the Picard API. Not, this node still needs to be refreshed after each KNIME session.
+        The first table contains the VCF results. The second table contains the sample name and the path to a BAM file.</intro>
         <option name="CHROM">The VCF CHROM column</option>
         <option name="POS">The VCF POS column. The genomic position (1-based)</option>
         <option name="sample1">The Sample Column in the first table</option>

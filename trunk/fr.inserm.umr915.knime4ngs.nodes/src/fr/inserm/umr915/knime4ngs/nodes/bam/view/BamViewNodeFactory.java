@@ -11,6 +11,7 @@ import org.knime.core.node.NodeView;
  *
  * @author Pierre Lindenbaum
  */
+@Deprecated
 public class BamViewNodeFactory 
         extends NodeFactory<BamViewNodeModel> {
 

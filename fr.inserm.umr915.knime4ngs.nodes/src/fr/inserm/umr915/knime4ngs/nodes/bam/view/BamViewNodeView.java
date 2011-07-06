@@ -31,6 +31,7 @@ import org.knime.core.node.BufferedDataTable;
 import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeView;
 import fr.inserm.umr915.knime4ngs.corelib.knime.BufferedDataTableModel;
 
+@Deprecated
 public class BamViewNodeView  extends AbstractNodeView<BamViewNodeModel>
 	{
 	private int chromColumn=-1;

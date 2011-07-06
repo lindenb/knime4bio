@@ -17,7 +17,7 @@ import org.knime.core.node.InvalidSettingsException;
 
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
-
+@Deprecated
 public class BamViewNodeModel  extends AbstractVCFNodeModel
 	implements BufferedDataTableHolder
 	{

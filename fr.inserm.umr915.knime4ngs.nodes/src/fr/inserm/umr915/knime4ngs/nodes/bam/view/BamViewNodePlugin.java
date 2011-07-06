@@ -16,6 +16,7 @@ import org.osgi.framework.BundleContext;
  *
  * @author Pierre Lindenbaum
  */
+@Deprecated
 public class BamViewNodePlugin extends Plugin {
     // The shared instance.
     private static BamViewNodePlugin plugin;

@@ -9,8 +9,8 @@
         
        	 <i>Note for IRT/nantes users: use port 3316 in the JDBC uri</i>
        </intro>
-        <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
-        <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
+        <option name="jdbc.uri">JDBC uri. For the ucsc mysql sever it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
+        <option name="jdbc.user">JDBC user. For the ucsc mysql sever it is: "genome"</option>
         <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
         <option name="CHROM">chromosome column</option>
         <option name="POS">Position column (first base is 1)</option>

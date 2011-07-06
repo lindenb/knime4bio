@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -423,485 +424,504 @@ public class LocalUcscPredictionNodeModel extends AbstractSqlNodeModel
       GenomicSeq genomicSeq=null;
       try
       	{
+    	Set<String> distinctChromosomes=new LinkedHashSet<String>();
+    	 iter=inTable.iterator();
+ 		while(iter.hasNext())
+ 			{
+ 			DataRow row=iter.next();
+ 			String k=getString(row, chromCol);
+			if(k==null) continue;
+			distinctChromosomes.add(k);
+ 			}
+    	safeClose(iter);
     	
-    	 con=createConnection();
-    	 pstmt=con.prepareStatement("select * from knownGene where chrom=? and not(txStart> ? or txEnd<=?)");
+    	con=createConnection();
+    	 
+    	
+    	
     		
     	 
     	  int inputIndex=0;
     	  float total=inTable.getRowCount();
-    	   iter=inTable.iterator();
-    		while(iter.hasNext())
-    			{
-    			DataRow row=iter.next();
-				++inputIndex;
-				exec.setProgress(inputIndex/total,"UCSC prediction");
-    			String k=getString(row, chromCol);
-    			if(k==null) continue;
-				int position0= getInt(row, posCol)-1;
-				String refBase=getString(row,refCol).toUpperCase();
-				String alt=getString(row, altCol).toUpperCase();
-				boolean found=false;
-				List<KnownGene> knownGenes=new ArrayList<KnownGene>();
-				pstmt.setString(1, k);
-				pstmt.setInt(2, position0);
-				pstmt.setInt(3, position0);
-				resultSet=pstmt.executeQuery();
-				while(resultSet.next())
+    	  for(String currentChromosome:distinctChromosomes)
+	    	  {
+    		  int maxKnownGeneLength=1;
+    		  List<KnownGene> knownGenesOnThisChrom=new ArrayList<KnownGene>();
+    		  pstmt=con.prepareStatement("select * from knownGene where chrom=? order by txStart,txEnd");
+    		  pstmt.setString(1, currentChromosome);
+			  resultSet=pstmt.executeQuery();
+			  while(resultSet.next())
 					{
 					KnownGene kg=KnownGene.parse(resultSet);
-					knownGenes.add(kg);
+					maxKnownGeneLength=Math.max(kg.length(), maxKnownGeneLength);
+					knownGenesOnThisChrom.add(kg);
 					}
-				resultSet.close();
-				
-				for(KnownGene gene:knownGenes)
-					{
-					if(position0>=gene.getTxEnd()) continue;
-					if(position0<gene.getTxStart()) continue;
-					found=true;
-					Consequence consequence=new Consequence();
-					consequence.gene=gene;
-					if( (refBase==null || refBase.equals("A") || refBase.equals("T") || refBase.equals("G") || refBase.equals("C")) &&
-		            		(alt.equals("A") || alt.equals("T") || alt.equals("G") || alt.equals("C"))
-		            		)
-			        		{
-		            		GeneticCode geneticCode=GeneticCode.getByChromosome(gene.getChrom());
-
-			        		
-			        		
-			        		
-			        		if(genomicSeq==null ||
-			        	     !(genomicSeq.getChromStart()<=gene.getTxStart() && gene.getTxEnd() <= genomicSeq.getChromEnd())
-			        	        )
-		    	            	{
-		    	            	int start=Math.max(gene.getTxStart()-100,0);
-		    	            	genomicSeq=new GenomicSeq(indexedFasta,gene.getChrom(),start,gene.getTxEnd()+100);
-		    	            	}
-			        		
-			        		if(refBase!=null && !String.valueOf(genomicSeq.charAt(position0)).equalsIgnoreCase(refBase))
-			        			{
-			        			System.err.println("WARNING REF!=GENOMIC SEQ!!! at "+genomicSeq.charAt(position0)+"/"+refBase);
-			        			}
-			        		
-			        		if(gene.isForward())
-			            		{
-			            		if(position0 < gene.getCdsStart())
-			            			{
-			            			consequence.type.add("UTR5");
-			            			}
-			            		else if( gene.getCdsEnd()<= position0 )
-			            			{
-			            			consequence.type.add("UTR3");
-			            			}
-			            		else
+			  resultSet.close();
+    		  
+	    	  iter=inTable.iterator();
+	    	  while(iter.hasNext())
+	    			{
+	    			DataRow row=iter.next();
+					
+	    			String k=getString(row, chromCol);
+	    			if(k==null || !k.equals(currentChromosome)) continue;
+	    			++inputIndex;
+					exec.setProgress(inputIndex/total,"UCSC prediction");
+	    			
+	    			
+	    			int position0= getInt(row, posCol)-1;
+					String refBase=getString(row,refCol).toUpperCase();
+					String alt=getString(row, altCol).toUpperCase();
+					boolean found=false;
+					
+					for(KnownGene gene:knownGenesOnThisChrom)
+						{
+						if(position0>=gene.getTxEnd()) continue;
+						if(position0<gene.getTxStart()) continue;
+						found=true;
+						Consequence consequence=new Consequence();
+						consequence.gene=gene;
+						if( (refBase==null || refBase.equals("A") || refBase.equals("T") || refBase.equals("G") || refBase.equals("C")) &&
+			            		(alt.equals("A") || alt.equals("T") || alt.equals("G") || alt.equals("C"))
+			            		)
+				        		{
+			            		GeneticCode geneticCode=GeneticCode.getByChromosome(gene.getChrom());
+	
+				        		
+				        		
+				        		
+				        		if(genomicSeq==null ||
+				        	     !(genomicSeq.getChromStart()<=gene.getTxStart() && gene.getTxEnd() <= genomicSeq.getChromEnd())
+				        	        )
+			    	            	{
+			    	            	int start=Math.max(gene.getTxStart()-100,0);
+			    	            	genomicSeq=new GenomicSeq(indexedFasta,gene.getChrom(),start,gene.getTxEnd()+100);
+			    	            	}
+				        		
+				        		if(refBase!=null && !String.valueOf(genomicSeq.charAt(position0)).equalsIgnoreCase(refBase))
+				        			{
+				        			System.err.println("WARNING REF!=GENOMIC SEQ!!! at "+genomicSeq.charAt(position0)+"/"+refBase);
+				        			}
+				        		
+				        		if(gene.isForward())
 				            		{
-				            		int exon_index=0;
-				            		while(exon_index< gene.getExonCount())
+				            		if(position0 < gene.getCdsStart())
 				            			{
-				            			KnownGene.Exon exon= gene.getExon(exon_index);
-				            			for(int i= exon.getStart();
-				            					i< exon.getEnd();
-				            					++i)
-				            				{
-				            				if(i==position0)
-				        						{
-				        						consequence.exonName= exon.getName();
-				        						}
-				            				if(i< gene.getCdsStart()) continue;
-				            				if(i>=gene.getCdsEnd()) break;
-				        					
-				        					if(consequence.wildRNA==null)
-				        						{
-				        						consequence.wildRNA=new StringBuilder();
-				        						consequence.mutRNA=new MutedSequence(consequence.wildRNA);
-				        						}
-				        					
-				        					if(i==position0)
-				        						{
-				        						consequence.type.add("EXON");
-				        						consequence.exonName=exon.getName();
-				        						consequence.position_in_cdna=consequence.wildRNA.length();
-				        						
-				        						//in splicing ?
-				        						if(exon.isSplicing(position0))
-				        							{
-				        							consequence.splicing.add("SPLICING");
-				        							
-				        							if(exon.isSplicingAcceptor(position0))
-				        								{
-				        								consequence.splicing.add("SPLICING_ACCEPTOR");
-				        								}
-				        							else  if(exon.isSplicingDonor(position0))
-				        								{
-				        								consequence.splicing.add( "SPLICING_DONOR");
-				        								}
-				        							}
-				        						}
-				        					
-				        					consequence.wildRNA.append(genomicSeq.charAt(i));
-				            				
-				            				if(i==position0)
-				            					{
-				            					consequence.mutRNA.mutations.put(
-				            							consequence.position_in_cdna,
-				            							alt.charAt(0)
-				            							);
-				            					}
-				            				
-				            				if(consequence.wildRNA.length()%3==0 && consequence.wildRNA.length()>0 && consequence.wildProt==null)
+				            			consequence.type.add("UTR5");
+				            			}
+				            		else if( gene.getCdsEnd()<= position0 )
+				            			{
+				            			consequence.type.add("UTR3");
+				            			}
+				            		else
+					            		{
+					            		int exon_index=0;
+					            		while(exon_index< gene.getExonCount())
+					            			{
+					            			KnownGene.Exon exon= gene.getExon(exon_index);
+					            			for(int i= exon.getStart();
+					            					i< exon.getEnd();
+					            					++i)
 					            				{
-				            					consequence.wildProt=new ProteinCharSequence(geneticCode,consequence.wildRNA);
-				            					consequence.mutProt=new ProteinCharSequence(geneticCode,consequence.mutRNA);
+					            				if(i==position0)
+					        						{
+					        						consequence.exonName= exon.getName();
+					        						}
+					            				if(i< gene.getCdsStart()) continue;
+					            				if(i>=gene.getCdsEnd()) break;
+					        					
+					        					if(consequence.wildRNA==null)
+					        						{
+					        						consequence.wildRNA=new StringBuilder();
+					        						consequence.mutRNA=new MutedSequence(consequence.wildRNA);
+					        						}
+					        					
+					        					if(i==position0)
+					        						{
+					        						consequence.type.add("EXON");
+					        						consequence.exonName=exon.getName();
+					        						consequence.position_in_cdna=consequence.wildRNA.length();
+					        						
+					        						//in splicing ?
+					        						if(exon.isSplicing(position0))
+					        							{
+					        							consequence.splicing.add("SPLICING");
+					        							
+					        							if(exon.isSplicingAcceptor(position0))
+					        								{
+					        								consequence.splicing.add("SPLICING_ACCEPTOR");
+					        								}
+					        							else  if(exon.isSplicingDonor(position0))
+					        								{
+					        								consequence.splicing.add( "SPLICING_DONOR");
+					        								}
+					        							}
+					        						}
+					        					
+					        					consequence.wildRNA.append(genomicSeq.charAt(i));
+					            				
+					            				if(i==position0)
+					            					{
+					            					consequence.mutRNA.mutations.put(
+					            							consequence.position_in_cdna,
+					            							alt.charAt(0)
+					            							);
+					            					}
+					            				
+					            				if(consequence.wildRNA.length()%3==0 && consequence.wildRNA.length()>0 && consequence.wildProt==null)
+						            				{
+					            					consequence.wildProt=new ProteinCharSequence(geneticCode,consequence.wildRNA);
+					            					consequence.mutProt=new ProteinCharSequence(geneticCode,consequence.mutRNA);
+						            				}
 					            				}
-				            				}
-				            			KnownGene.Intron intron= exon.getNextIntron();
-				            			if(intron!=null && intron.contains(position0))
-				            				{
-				            				consequence.intronName=intron.getName();
-				            				consequence.type.add("INTRON");
-				            				
-				            				if(intron.isSplicing(position0))
-				        						{
-				            					consequence.splicing.add("INTRON_SPLICING");
-				        						if(intron.isSplicingAcceptor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
-				        							}
-				        						else if(intron.isSplicingDonor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        							}
-				        						}
-				            				}
-				            			++exon_index;
-				            			}
-				            		}
-			            		
-			            		
-			            		}
-			            	else // reverse orientation
-			            		{
-			            	
-			            		if(position0 < gene.getCdsStart())
-			            			{
-			            			consequence.type.add("UTR3");
-			            			}
-			            		else if( gene.getCdsEnd()<=position0 )
-			            			{
-			            			consequence.type.add("UTR5");
-			            			}
-			            		else
-				            		{
-				            		int exon_index = gene.getExonCount()-1;
-				            		while(exon_index >=0)
-				            			{
-				            			KnownGene.Exon exon= gene.getExon(exon_index);
-				            			for(int i= exon.getEnd()-1;
-				            				    i>= exon.getStart();
-				            				--i)
-				            				{
-				            				if(i==position0)
-				        						{
-				            					consequence.exonName= exon.getName();
-				        						}
-				            				if(i>= gene.getCdsEnd()) continue;
-				            				if(i<  gene.getCdsStart()) break;
-				            				
-				            				if(consequence.wildRNA==null)
-				        						{
-				            					consequence.wildRNA=new StringBuilder();
-				            					consequence.mutRNA=new MutedSequence(consequence.wildRNA);
-				        						}
-				            				
-				            				if(i==position0)
-				        						{
-				            					consequence.type.add("EXON");
-				            					consequence.position_in_cdna=consequence.wildRNA.length();
-				        						
-				        						//in splicing ?
-				        						if(exon.isSplicing(position0))
-				        							{
-				        							consequence.splicing.add( "INTRON_SPLICING");
-				        							
-				        							if(exon.isSplicingAcceptor(position0))
-				        								{
-				        								consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
-				        								}
-				        							else  if(exon.isSplicingDonor(position0))
-				        								{
-				        								consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        								}
-				        							}
-				        						
-				        						
-				        						consequence.mutRNA.mutations.put(
-				        								consequence.position_in_cdna,
-				        								complement(alt.charAt(0))
-				        								);
-				        						}
-				            				
-				            				consequence.wildRNA.append(complement(genomicSeq.charAt(i)));
-				            				if( consequence.wildRNA.length()%3==0 &&
-			            						consequence.wildRNA.length()>0 &&
-			            						consequence.wildProt==null)
+					            			KnownGene.Intron intron= exon.getNextIntron();
+					            			if(intron!=null && intron.contains(position0))
 					            				{
-				            					consequence.wildProt=new ProteinCharSequence(geneticCode,consequence.wildRNA);
-				            					consequence.mutProt=new ProteinCharSequence(geneticCode,consequence.mutRNA);
+					            				consequence.intronName=intron.getName();
+					            				consequence.type.add("INTRON");
+					            				
+					            				if(intron.isSplicing(position0))
+					        						{
+					            					consequence.splicing.add("INTRON_SPLICING");
+					        						if(intron.isSplicingAcceptor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
+					        							}
+					        						else if(intron.isSplicingDonor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        							}
+					        						}
 					            				}
-				            				
-				            				}
-				            			
-				            			KnownGene.Intron intron= exon.getPrevIntron();
-				            			if(intron!=null &&
-				            				intron.contains(position0))
-				            				{
-				            				consequence.intronName=intron.getName();
-				            				consequence.type.add("INTRON");
-				            				
-				            				if(intron.isSplicing(position0))
-				        						{
-				            					consequence.splicing.add("INTRON_SPLICING");
-				        						if(intron.isSplicingAcceptor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
-				        							}
-				        						else if(intron.isSplicingDonor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        							}
-				        						}
-				            				}
-				            			--exon_index;
-				            			}
-				            		}
-			            		}//end of if reverse
-			        		if( consequence.wildProt!=null &&
-			        			consequence.mutProt!=null && 
-			        			consequence.position_in_cdna>=0)
-				    			{
-			            		int pos_aa=consequence.position_in_cdna/3;
-			            		int mod= consequence.position_in_cdna%3;
-			            		consequence.wildCodon=""+
-				            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+0)+
-				            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+1)+
-				            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+2)
-			            			;
-			            		consequence.mutCodon=""+
-				            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+0)+
-				            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+1)+
-				            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+2)
-				            			;
-			            		consequence.position_protein=pos_aa+1;
-			            		consequence.wildAA=consequence.wildProt.charAt(pos_aa);
-			            		consequence.mutAA=consequence.mutProt.charAt(pos_aa);
-				    			if(isStop(consequence.wildProt.charAt(pos_aa)) &&
-				    			   !isStop(consequence.mutProt.charAt(pos_aa)))
-				    				{
-				    				consequence.type.add("EXON_STOP_LOST");
-				    				}
-				    			else if( !isStop(consequence.wildProt.charAt(pos_aa)) &&
-				    				 isStop(consequence.mutProt.charAt(pos_aa)))
-				    				{
-				    				consequence.type.add( "EXON_STOP_GAINED");
-				    				}
-				    			else if(consequence.wildProt.charAt(pos_aa)==consequence.mutProt.charAt(pos_aa))
-				    				{
-				    				consequence.type.add("EXON_CODING_SYNONYMOUS");
-				    				}
-				    			else
-				    				{
-				    				consequence.type.add("EXON_CODING_NON_SYNONYMOUS");
-				    				}
-				    			}
-			        		}//end of simpe ATCG
-		            	else
-		            		{
-			        		Integer wildrna=null;
-			        		
-			        		
-			        		
-			        		
-			        		if(gene.isForward())
-			            		{
-			            		if(position0 < gene.getCdsStart())
-			            			{
-			            			consequence.type.add("UTR5");
-			            			}
-			            		else if( gene.getCdsEnd()<= position0 )
-			            			{
-			            			consequence.type.add("UTR3");
-			            			}
-			            		else
-				            		{
-				            		int exon_index=0;
-				            		while(exon_index< gene.getExonCount())
-				            			{
-				            			KnownGene.Exon exon= gene.getExon(exon_index);
-				            			for(int i= exon.getStart();
-				            					i< exon.getEnd();
-				            					++i)
-				            				{
-				            				if(i==position0)
-				        						{
-				            					consequence.exonName=exon.getName();
-				        						}
-				            				if(i< gene.getCdsStart()) continue;
-				            				if(i>= gene.getCdsEnd() ) break;
-				        					
-				        					if(wildrna==null)
-				        						{
-				        						wildrna=0;
-				        						}
-				        					
-				        					if(i==position0)
-				        						{
-				        						consequence.type.add("EXON");
-				        						consequence.exonName=exon.getName();
-				        						consequence.position_in_cdna=wildrna;
-				        					
-				        						//in splicing ?
-				        						if(exon.isSplicing(position0))
-				        							{
-				        							consequence.splicing.add("SPLICING");
-				        							
-				        							if(exon.isSplicingAcceptor(position0))
-				        								{
-				        								consequence.splicing.add("SPLICING_ACCEPTOR");
-				        								}
-				        							else  if(exon.isSplicingDonor(position0))
-				        								{
-				        								consequence.splicing.add("SPLICING_DONOR");
-				        								}
-				        							}
-				        						}
-				        					
-				        					wildrna++;
-				            				}
-				            			KnownGene.Intron intron= exon.getNextIntron();
-				            			if(intron!=null && intron.contains(position0))
-				            				{
-				            				consequence.intronName=intron.getName();
-				            				consequence.type.add("INTRON");
-				            				
-				            				if(intron.isSplicing(position0))
-				        						{
-				            					consequence.splicing.add("INTRON_SPLICING");
-				        						if(intron.isSplicingAcceptor(position0))
-				        							{
-				        							consequence.splicing.add( "INTRON_SPLICING_ACCEPTOR");
-				        							}
-				        						else if(intron.isSplicingDonor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        							}
-				        						}
-				            				}
-				            			++exon_index;
-				            			}
-				            		}
-			            		}
-			            	else // reverse orientation
-			            		{
-			            	
-			            		if(position0 < gene.getCdsStart())
-			            			{
-			            			consequence.type.add("UTR3");
-			            			}
-			            		else if( gene.getCdsEnd()<=position0 )
-			            			{
-			            			consequence.type.add("UTR5");
-			            			}
-			            		else
-				            		{
+					            			++exon_index;
+					            			}
+					            		}
 				            		
-				            		int exon_index = gene.getExonCount()-1;
-				            		while(exon_index >=0)
-				            			{
-				            			KnownGene.Exon exon= gene.getExon(exon_index);
-				            			for(int i= exon.getEnd()-1;
-				            				    i>= exon.getStart();
-				            				--i)
-				            				{
-				            				if(i==position0)
-				        						{
-				            					consequence.exonName= exon.getName();
-				        						}
-				            				if(i>= gene.getCdsEnd()) continue;
-				            				if(i<  gene.getCdsStart()) break;
-				            				
-				            				if(wildrna==null)
-				        						{
-				        						wildrna=0;
-				        						}
-				            				
-				            				if(i==position0)
-				        						{
-				            					consequence.type.add("EXON");
-				            					consequence.position_in_cdna=wildrna;
-				        						
-				        						//in splicing ?
-				        						if(exon.isSplicing(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING");
-				        							
-				        							if(exon.isSplicingAcceptor(position0))
-				        								{
-				        								consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
-				        								}
-				        							else  if(exon.isSplicingDonor(position0))
-				        								{
-				        								consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        								}
-				        							}
-				        						}
-				            				
-				            				wildrna++;
-				            				}
-				            			
-				            			KnownGene.Intron intron= exon.getPrevIntron();
-				            			if(intron!=null &&
-				            				intron.contains(position0))
-				            				{
-				            				consequence.intronName=intron.getName();
-				            				consequence.type.add("INTRON");
-				            				
-				            				if(intron.isSplicing(position0))
-				        						{
-				            					consequence.splicing.add("INTRON_SPLICING");
-				        						if(intron.isSplicingAcceptor(position0))
-				        							{
-				        							consequence.splicing.add( "INTRON_SPLICING_ACCEPTOR");
-				        							}
-				        						else if(intron.isSplicingDonor(position0))
-				        							{
-				        							consequence.splicing.add("INTRON_SPLICING_DONOR");
-				        							}
-				        						}
-				            				}
-				            			--exon_index;
-				            			}
+				            		
 				            		}
-			            		}//end of if reverse
-			        		if( wildrna!=null &&
-			        			consequence.position_in_cdna>=0)
-				    			{
-			            		consequence.position_protein=consequence.position_in_cdna/3;
-				    			}
-		            		}//end of not simple ATGC
-					++nRow;	
-		            container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(nRow),row,createDataCell(consequence)));
-		            found=true;
-					}//for(kg:genes)
-				if(!found)
-					{
-					++nRow;	
-		            container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(nRow),row,createDataCell(new Consequence())));
-					}
-				
-				exec.checkCanceled();
-    			}//while(iter.hasNext());
-    		safeClose(iter);
-    		
+				            	else // reverse orientation
+				            		{
+				            	
+				            		if(position0 < gene.getCdsStart())
+				            			{
+				            			consequence.type.add("UTR3");
+				            			}
+				            		else if( gene.getCdsEnd()<=position0 )
+				            			{
+				            			consequence.type.add("UTR5");
+				            			}
+				            		else
+					            		{
+					            		int exon_index = gene.getExonCount()-1;
+					            		while(exon_index >=0)
+					            			{
+					            			KnownGene.Exon exon= gene.getExon(exon_index);
+					            			for(int i= exon.getEnd()-1;
+					            				    i>= exon.getStart();
+					            				--i)
+					            				{
+					            				if(i==position0)
+					        						{
+					            					consequence.exonName= exon.getName();
+					        						}
+					            				if(i>= gene.getCdsEnd()) continue;
+					            				if(i<  gene.getCdsStart()) break;
+					            				
+					            				if(consequence.wildRNA==null)
+					        						{
+					            					consequence.wildRNA=new StringBuilder();
+					            					consequence.mutRNA=new MutedSequence(consequence.wildRNA);
+					        						}
+					            				
+					            				if(i==position0)
+					        						{
+					            					consequence.type.add("EXON");
+					            					consequence.position_in_cdna=consequence.wildRNA.length();
+					        						
+					        						//in splicing ?
+					        						if(exon.isSplicing(position0))
+					        							{
+					        							consequence.splicing.add( "INTRON_SPLICING");
+					        							
+					        							if(exon.isSplicingAcceptor(position0))
+					        								{
+					        								consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
+					        								}
+					        							else  if(exon.isSplicingDonor(position0))
+					        								{
+					        								consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        								}
+					        							}
+					        						
+					        						
+					        						consequence.mutRNA.mutations.put(
+					        								consequence.position_in_cdna,
+					        								complement(alt.charAt(0))
+					        								);
+					        						}
+					            				
+					            				consequence.wildRNA.append(complement(genomicSeq.charAt(i)));
+					            				if( consequence.wildRNA.length()%3==0 &&
+				            						consequence.wildRNA.length()>0 &&
+				            						consequence.wildProt==null)
+						            				{
+					            					consequence.wildProt=new ProteinCharSequence(geneticCode,consequence.wildRNA);
+					            					consequence.mutProt=new ProteinCharSequence(geneticCode,consequence.mutRNA);
+						            				}
+					            				
+					            				}
+					            			
+					            			KnownGene.Intron intron= exon.getPrevIntron();
+					            			if(intron!=null &&
+					            				intron.contains(position0))
+					            				{
+					            				consequence.intronName=intron.getName();
+					            				consequence.type.add("INTRON");
+					            				
+					            				if(intron.isSplicing(position0))
+					        						{
+					            					consequence.splicing.add("INTRON_SPLICING");
+					        						if(intron.isSplicingAcceptor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
+					        							}
+					        						else if(intron.isSplicingDonor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        							}
+					        						}
+					            				}
+					            			--exon_index;
+					            			}
+					            		}
+				            		}//end of if reverse
+				        		if( consequence.wildProt!=null &&
+				        			consequence.mutProt!=null && 
+				        			consequence.position_in_cdna>=0)
+					    			{
+				            		int pos_aa=consequence.position_in_cdna/3;
+				            		int mod= consequence.position_in_cdna%3;
+				            		consequence.wildCodon=""+
+					            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+0)+
+					            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+1)+
+					            		consequence.wildRNA.charAt(consequence.position_in_cdna-mod+2)
+				            			;
+				            		consequence.mutCodon=""+
+					            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+0)+
+					            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+1)+
+					            		consequence.mutRNA.charAt(consequence.position_in_cdna-mod+2)
+					            			;
+				            		consequence.position_protein=pos_aa+1;
+				            		consequence.wildAA=consequence.wildProt.charAt(pos_aa);
+				            		consequence.mutAA=consequence.mutProt.charAt(pos_aa);
+					    			if(isStop(consequence.wildProt.charAt(pos_aa)) &&
+					    			   !isStop(consequence.mutProt.charAt(pos_aa)))
+					    				{
+					    				consequence.type.add("EXON_STOP_LOST");
+					    				}
+					    			else if( !isStop(consequence.wildProt.charAt(pos_aa)) &&
+					    				 isStop(consequence.mutProt.charAt(pos_aa)))
+					    				{
+					    				consequence.type.add( "EXON_STOP_GAINED");
+					    				}
+					    			else if(consequence.wildProt.charAt(pos_aa)==consequence.mutProt.charAt(pos_aa))
+					    				{
+					    				consequence.type.add("EXON_CODING_SYNONYMOUS");
+					    				}
+					    			else
+					    				{
+					    				consequence.type.add("EXON_CODING_NON_SYNONYMOUS");
+					    				}
+					    			}
+				        		}//end of simpe ATCG
+			            	else
+			            		{
+				        		Integer wildrna=null;
+				        		
+				        		
+				        		
+				        		
+				        		if(gene.isForward())
+				            		{
+				            		if(position0 < gene.getCdsStart())
+				            			{
+				            			consequence.type.add("UTR5");
+				            			}
+				            		else if( gene.getCdsEnd()<= position0 )
+				            			{
+				            			consequence.type.add("UTR3");
+				            			}
+				            		else
+					            		{
+					            		int exon_index=0;
+					            		while(exon_index< gene.getExonCount())
+					            			{
+					            			KnownGene.Exon exon= gene.getExon(exon_index);
+					            			for(int i= exon.getStart();
+					            					i< exon.getEnd();
+					            					++i)
+					            				{
+					            				if(i==position0)
+					        						{
+					            					consequence.exonName=exon.getName();
+					        						}
+					            				if(i< gene.getCdsStart()) continue;
+					            				if(i>= gene.getCdsEnd() ) break;
+					        					
+					        					if(wildrna==null)
+					        						{
+					        						wildrna=0;
+					        						}
+					        					
+					        					if(i==position0)
+					        						{
+					        						consequence.type.add("EXON");
+					        						consequence.exonName=exon.getName();
+					        						consequence.position_in_cdna=wildrna;
+					        					
+					        						//in splicing ?
+					        						if(exon.isSplicing(position0))
+					        							{
+					        							consequence.splicing.add("SPLICING");
+					        							
+					        							if(exon.isSplicingAcceptor(position0))
+					        								{
+					        								consequence.splicing.add("SPLICING_ACCEPTOR");
+					        								}
+					        							else  if(exon.isSplicingDonor(position0))
+					        								{
+					        								consequence.splicing.add("SPLICING_DONOR");
+					        								}
+					        							}
+					        						}
+					        					
+					        					wildrna++;
+					            				}
+					            			KnownGene.Intron intron= exon.getNextIntron();
+					            			if(intron!=null && intron.contains(position0))
+					            				{
+					            				consequence.intronName=intron.getName();
+					            				consequence.type.add("INTRON");
+					            				
+					            				if(intron.isSplicing(position0))
+					        						{
+					            					consequence.splicing.add("INTRON_SPLICING");
+					        						if(intron.isSplicingAcceptor(position0))
+					        							{
+					        							consequence.splicing.add( "INTRON_SPLICING_ACCEPTOR");
+					        							}
+					        						else if(intron.isSplicingDonor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        							}
+					        						}
+					            				}
+					            			++exon_index;
+					            			}
+					            		}
+				            		}
+				            	else // reverse orientation
+				            		{
+				            	
+				            		if(position0 < gene.getCdsStart())
+				            			{
+				            			consequence.type.add("UTR3");
+				            			}
+				            		else if( gene.getCdsEnd()<=position0 )
+				            			{
+				            			consequence.type.add("UTR5");
+				            			}
+				            		else
+					            		{
+					            		
+					            		int exon_index = gene.getExonCount()-1;
+					            		while(exon_index >=0)
+					            			{
+					            			KnownGene.Exon exon= gene.getExon(exon_index);
+					            			for(int i= exon.getEnd()-1;
+					            				    i>= exon.getStart();
+					            				--i)
+					            				{
+					            				if(i==position0)
+					        						{
+					            					consequence.exonName= exon.getName();
+					        						}
+					            				if(i>= gene.getCdsEnd()) continue;
+					            				if(i<  gene.getCdsStart()) break;
+					            				
+					            				if(wildrna==null)
+					        						{
+					        						wildrna=0;
+					        						}
+					            				
+					            				if(i==position0)
+					        						{
+					            					consequence.type.add("EXON");
+					            					consequence.position_in_cdna=wildrna;
+					        						
+					        						//in splicing ?
+					        						if(exon.isSplicing(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING");
+					        							
+					        							if(exon.isSplicingAcceptor(position0))
+					        								{
+					        								consequence.splicing.add("INTRON_SPLICING_ACCEPTOR");
+					        								}
+					        							else  if(exon.isSplicingDonor(position0))
+					        								{
+					        								consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        								}
+					        							}
+					        						}
+					            				
+					            				wildrna++;
+					            				}
+					            			
+					            			KnownGene.Intron intron= exon.getPrevIntron();
+					            			if(intron!=null &&
+					            				intron.contains(position0))
+					            				{
+					            				consequence.intronName=intron.getName();
+					            				consequence.type.add("INTRON");
+					            				
+					            				if(intron.isSplicing(position0))
+					        						{
+					            					consequence.splicing.add("INTRON_SPLICING");
+					        						if(intron.isSplicingAcceptor(position0))
+					        							{
+					        							consequence.splicing.add( "INTRON_SPLICING_ACCEPTOR");
+					        							}
+					        						else if(intron.isSplicingDonor(position0))
+					        							{
+					        							consequence.splicing.add("INTRON_SPLICING_DONOR");
+					        							}
+					        						}
+					            				}
+					            			--exon_index;
+					            			}
+					            		}
+				            		}//end of if reverse
+				        		if( wildrna!=null &&
+				        			consequence.position_in_cdna>=0)
+					    			{
+				            		consequence.position_protein=consequence.position_in_cdna/3;
+					    			}
+			            		}//end of not simple ATGC
+						++nRow;	
+			            container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(nRow),row,createDataCell(consequence)));
+			            found=true;
+						}//for(kg:genes)
+					if(!found)
+						{
+						++nRow;	
+			            container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(nRow),row,createDataCell(new Consequence())));
+						}
+					
+					exec.checkCanceled();
+	    			}//while(iter.hasNext());
+	    	safeClose(iter);
+	      	}//end of for each chromosomes
     		
     	safeClose(container1);
         

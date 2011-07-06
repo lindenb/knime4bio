@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>Cut Region</name>
+    <shortDescription>Filters mutations in a given region</shortDescription>
+    
+    <fullDescription>
+        <intro>Filters mutations in a given region</intro>
+        <option name="CHROM">The CHROM Column in the VCF</option>
+        <option name="POS">The POS Column in the VCF</option>
+        <option name="chromosome">The selected chromosome</option>
+        <option name="chromStart">The 5&apos; index</option>
+        <option name="chromEnd">The 3&apos; index</option>
+        <option name="invert">invert the selection (discard items in the region)</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port name">VCF</inPort>
+        <outPort index="0" name="Accepted">VCF1</outPort>
+    </ports>    
+
+</knimeNode>

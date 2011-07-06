@@ -3,9 +3,8 @@
    <description name="Knime4Bio" url="http://code.google.com/p/knime4bio/">
       Knime4Bio
    </description>
-   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.3.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.3"/>
-   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.5.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.5"/>
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.6.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.6"/>
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.7.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.7"/>
    <category-def name="Knime" label="Knime">
       <description>
          Custom nodes for http://knime.org

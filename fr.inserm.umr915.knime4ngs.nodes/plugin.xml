@@ -23,6 +23,7 @@
    </extension>
    
    
+   
    <extension
          point="org.knime.workbench.repository.nodes">
          <!--
@@ -124,10 +125,7 @@
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.winnerloser.WinnerLoserNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.winnerloser.WinnerLoserNodeFactory"  />
-           <node 
-          	category-path="ngs"
-          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory" 
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory"  />   
+           
            <node 
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.goa.GoAnnotationNodeFactory" 
@@ -296,6 +294,14 @@
             category-path="ngs"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"/>
+        <node
+            category-path="ngs"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.cut.CutRegionNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.cut.CutRegionNodeFactory"/>    
+        <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory"  /> 
    </extension>
    
 </plugin>

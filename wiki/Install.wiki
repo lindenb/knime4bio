@@ -1,0 +1,12 @@
+#summary One-sentence summary of this page.
+
+= Installing the Knime4Bio Plugin from a local zip =
+
+As an alternative to installing from the update site, you can also install the Knime4Bio Plugin by downloading the update site as an archive and installing from it.
+
+ 
+  # Download the plugin
+  # Unzip the archive.
+  # In Knime, choose Help > Install New Software...
+  # In the "Work with" section, click the Add... button. The "Add Repository" dialog box appears.
+  # Click Local and select the directory you unzipped, then click OK. Its path appears in the "Location" field. Leave the "Name" field empty.

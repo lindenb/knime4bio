@@ -1,0 +1,26 @@
+Head
+
+
+
+= Motivation =
+
+Keeps the first lines of a table
+
+= Solution =
+
+Keeps the first lines of a table
+
+= Parameters =
+
+
+  * *N* : Number of lines
+
+= Input =
+
+
+  * *In-Port name* : Input
+
+= Output =
+
+
+  * *In-Port name* : Input

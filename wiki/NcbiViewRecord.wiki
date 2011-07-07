@@ -1,0 +1,25 @@
+Display NCBI
+
+
+
+= Motivation =
+
+Displays a NCBI Record
+
+= Solution =
+
+Displays a NCBI Record
+
+= Parameters =
+
+
+  * *ID* : The NCBI ID column
+  * *Database* : The NCBI database
+
+= Input =
+
+
+  * *input1* : Table
+
+= Output =
+

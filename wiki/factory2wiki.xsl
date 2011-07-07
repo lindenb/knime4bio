@@ -69,7 +69,7 @@
 = Output =
 
 </xsl:text>
-<xsl:apply-templates select="inPort"/>
+<xsl:apply-templates select="outPort"/>
 </xsl:template>
 
 

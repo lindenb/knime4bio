@@ -1,0 +1,26 @@
+GO
+
+
+
+= Motivation =
+
+Gene Ontology
+
+= Solution =
+
+Call the QuickGO API to get the protein in the domain of a given GO ID
+
+= Parameters =
+
+
+  * *Term* : The GO ID. e.g:  *GO:0003015* 
+  * *Taxon-ID* : NCBI taxon ID . Human=9606
+
+= Input =
+
+
+
+= Output =
+
+
+  * *QuickGO* : QuickGO result

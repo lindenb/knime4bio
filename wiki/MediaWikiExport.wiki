@@ -1,0 +1,24 @@
+Export to MediaWiki
+
+
+
+= Motivation =
+
+Exports the table to  a MediaWiki format
+
+= Solution =
+
+Exports the table to  a MediaWiki format
+
+= Parameters =
+
+
+  * *Filename* : outout filename
+
+= Input =
+
+
+  * *input* : Input Table
+
+= Output =
+

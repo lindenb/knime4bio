@@ -1,0 +1,27 @@
+MediaWiki exists
+
+
+
+= Motivation =
+
+Tests if a page exist in MediaWiki
+
+= Solution =
+
+Tests if a page exist in a MediaWiki installation
+
+= Parameters =
+
+
+  * *URI* : MediaWiki 'api.php' uri
+  * *column* : The column to search in mediawiki
+
+= Input =
+
+
+  * *In-Port name* : Input
+
+= Output =
+
+
+  * *Out-Port name* : Output

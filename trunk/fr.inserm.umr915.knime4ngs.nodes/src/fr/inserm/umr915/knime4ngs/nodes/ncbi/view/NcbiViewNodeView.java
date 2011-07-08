@@ -249,8 +249,8 @@ public class NcbiViewNodeView  extends AbstractNodeView<NcbiViewNodeModel>
 		
 		if(tables!=null && tables.length>0)
 			{
-			this.idColumn=this.nodeModel.ncbiIdColumn;
-			this.database=this.nodeModel.database;
+			this.idColumn=this.nodeModel.getNcbIdColumn();
+			this.database=this.nodeModel.getNcbIDatabase();
 			this.tableModel.setDataTable(tables[0]);
 			}
 		else

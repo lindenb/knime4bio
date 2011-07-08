@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>GenScan</name>
+    <shortDescription>GenScan</shortDescription>
+    
+    <fullDescription>
+        <intro>Displays a local BAM file using the Picard API. Not, this node still needs to be refreshed after each KNIME session.
+        The first table contains the VCF results. The second table contains the sample name and the path to a BAM file.</intro>
+        <option name="CHROM">The VCF CHROM column</option>
+        <option name="START">The VCF POS column. The genomic position (1-based)</option>
+        <option name="END">The Sample Column in the first table</option>
+        <option name="VALUE">The full path to a BAM file in  2nd table</option>
+        <option name="sample2">The Sample Column in the 2nd table</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="input1">VCF</inPort>
+       
+    </ports>   
+    <views>
+    	<view index="0" name="view0">View GenScan</view>
+    </views>
+</knimeNode>

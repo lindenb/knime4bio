@@ -1,24 +1,15 @@
 package fr.inserm.umr915.knime4ngs.nodes.sql.query;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.knime.base.data.append.column.AppendedColumnRow;
 import org.knime.core.data.DataCell;
-import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
-import org.knime.core.data.DataType;
 import org.knime.core.data.RowKey;
 import org.knime.core.data.container.CloseableRowIterator;
 import org.knime.core.data.def.BooleanCell;
@@ -32,14 +23,6 @@ import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
-import org.knime.core.node.port.PortObject;
-import org.knime.core.node.port.PortObjectSpec;
-import org.knime.core.node.port.PortType;
-import org.knime.core.node.port.database.DatabasePortObject;
-import org.knime.core.node.port.database.DatabaseQueryConnectionSettings;
-import org.knime.core.util.FileUtil;
-
-import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 import fr.inserm.umr915.knime4ngs.nodes.sql.AbstractSqlNodeModel;
 
 
@@ -64,12 +47,13 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	
 	public static final String JOIN_PROPERTIES[]=new String[]
 		{
-		"All matches, All discarded",//0
-		"One match, All discarded",//1
-		"Ignore Match, All dicarded",//2
-		"All Matches, Ignore dicarded",//3
-		"One Match, Ignore dicarded"//4
+		"Node1: Print ALL matches, Node2: Print ALL unmatched rows",//0
+		"Node1: Print ONLY ONE matche per ROW,  Node2: Print ALL unmatched rows",//1
+		"Node1: Ignore ALL Matching rows, Node2: Print ALL unmatched rows",//2
+		"Node1: Print ALL matches, Node2: Ignore ALL unmatched rows",//3
+		"Node1: Print ONLY ONE matche per ROW, Node2: Ignore ALL unmatched rows"//4
 		};
+	
 	
 	/** default property for table join */
 	public static final String DEFAULT_JOIN_PROPERTY=JOIN_PROPERTIES[1];
@@ -173,7 +157,8 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	        		{
 	        		
 	        		++nRow;
-	        		
+	        		exec.checkCanceled();
+	            	exec.setProgress(nRow/total,"SQL....");
 	        		DataRow row=iter.next();
 	        		
 	        		for(QueryParser.Column col: parser.getColumns())
@@ -271,8 +256,7 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 
 	        		
 	        		//
-	        		exec.checkCanceled();
-	            	exec.setProgress(nRow/total,"SQL....");
+	        		
 	        		}
 	        	if(container1==null)
 	        		{

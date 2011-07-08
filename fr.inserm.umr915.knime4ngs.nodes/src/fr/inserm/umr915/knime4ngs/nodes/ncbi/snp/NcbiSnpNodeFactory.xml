@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>NCBI Snp</name>
-    <shortDescription>NCBI Snp</shortDescription>
+    <name>NCBI dbSnp</name>
+    <shortDescription>Retrieves data from NCBI dbSnp</shortDescription>
     
     <fullDescription>
-        <intro>NCBI Snp</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Retrieves data from NCBI dbSnp</intro>
+        <option name="Entrez Query">words surrounded by two hashes will be replaced by the column value. ( Example: ##ID## )</option>
     </fullDescription>
     
     <ports>

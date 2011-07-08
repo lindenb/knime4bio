@@ -5,9 +5,8 @@
     <shortDescription>NCBI Pubmed</shortDescription>
     
     <fullDescription>
-        <intro>NCBI Pubmed</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Retrieves articles from NCBI Pubmed</intro>
+        <option name="Entrez Query">words surrounded by two hashes will be replaced by the column value. ( Example: ##CHROM## )</option>
     </fullDescription>
     
     <ports>

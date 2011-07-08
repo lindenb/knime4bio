@@ -2,12 +2,11 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>Head</name>
-    <shortDescription>Head</shortDescription>
+    <shortDescription>Keeps the first lines of a table</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Keeps the first lines of a table</intro>
+        <option name="N">Number of lines</option>
     </fullDescription>
     
     <ports>

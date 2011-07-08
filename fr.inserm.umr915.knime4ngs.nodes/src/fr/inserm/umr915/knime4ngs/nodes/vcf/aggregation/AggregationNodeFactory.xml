@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>Genomic Aggregation</name>
+    <shortDescription>Genomic Aggregation</shortDescription>
+    
+    <fullDescription>
+        <intro>Genomic Aggregation</intro>
+        <option name="CHROM">The CHROM Column</option>
+        <option name="POS">The POS Column</option>
+         <option name="VALUE">The numeric Column</option>
+        <option name="Threshold">Numeric Value</option>
+        <option name="prefix">New Column prefix</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="In-Port name">VCF</inPort>
+        <outPort index="0" name="Accepted">VCF1</outPort>
+    </ports>    
+
+</knimeNode>

@@ -306,6 +306,10 @@
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.aggregation.AggregationNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.aggregation.AggregationNodeFactory"  /> 
+        <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory"  /> 
    </extension>
    
 </plugin>

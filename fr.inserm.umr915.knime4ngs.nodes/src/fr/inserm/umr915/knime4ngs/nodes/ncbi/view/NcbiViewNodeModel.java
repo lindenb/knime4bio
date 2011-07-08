@@ -37,8 +37,7 @@ public class NcbiViewNodeModel  extends AbstractVCFNodeModel
 			NCBI_DATABASE_DEFAULT
 			);
 	
-	int ncbiIdColumn=-1;
-	String database=DATABASES[0];
+	
 	private BufferedDataTable internalDataTable=null;
     /**
      * Constructor for the node model.
@@ -68,7 +67,7 @@ public class NcbiViewNodeModel  extends AbstractVCFNodeModel
     		throw new InvalidSettingsException("Expected one table");
     		}
     	
-		this.ncbiIdColumn=findColumnIndex(inSpecs[0],this.m_ncbiIdColumn,IntCell.TYPE);
+		findColumnIndex(inSpecs[0],this.m_ncbiIdColumn,IntCell.TYPE);
     	return new DataTableSpec[0];
     	}
     
@@ -99,11 +98,25 @@ public class NcbiViewNodeModel  extends AbstractVCFNodeModel
 		this.internalDataTable=tables[0];
 		}
 
+	public int getNcbIdColumn()
+		{
+		if(internalDataTable==null)
+			{
+			return -1;
+			}
+		String s=this.m_ncbiIdColumn.getColumnName();
+		if(s==null || s.isEmpty()) return -1;
+		return internalDataTable.getDataTableSpec().findColumnIndex(s);
+		}
+	
+	public String getNcbIDatabase()
+		{
+		return this.m_ncbiDb.getStringValue();
+		}
+	
     @Override
     protected void reset()
     	{
-    	this.ncbiIdColumn=-1;
-    	this.database=DATABASES[0];
     	this.internalDataTable=null;
     	super.reset();
     	}

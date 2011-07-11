@@ -91,7 +91,7 @@ public class UniqNodeModel extends AbstractNodeModel
 		    for(String s:this.m_leftColumn.getIncludeList())
 				{
 				int j=inSpecs.findColumnIndex(s);
-				if(j==-1) throw new IllegalStateException();
+				if(j==-1) throw new IllegalStateException("Cannot find column "+s);
 				sorter.indexes.add(j);
 				sorter.comparators.add(CellSorter.getCellSorterByType( inSpecs.getColumnSpec(j).getType()));
 				}

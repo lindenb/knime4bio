@@ -143,7 +143,7 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 		        		prevVCF=position0;
 		        		List<DataRow> found=new ArrayList<DataRow>();
 		        		
-		        		
+		        		/* scan BED buffer */
 		        		boolean willCallNext=true;
 		        		int buffIndex=0;
 		        		while(buffIndex< buffer.size())
@@ -159,7 +159,6 @@ public class InRegionNodeModel extends AbstractVCFNodeModel
 		        				}
 		        			if(i<0)
 		        				{
-		        				
 		        				buffer.remove(buffIndex);
 		        				continue;
 		        				}

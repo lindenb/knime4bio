@@ -8,17 +8,16 @@
         <intro>apply a SQL Query to every row of the input table.</intro>
         <option name="Query: the SQL query">
         	The SQL query. Words starting with <b>?columnName</b> will be replace by the content of the table. Don't put a semi colon at the end of the query.
-        	Example: <i>Select chrom as C,chromStart as S,chromEnd as E where name= ?SNP</i>.
+        	Example: <pre>Select chrom as C,chromStart as S,chromEnd as E where name= ?SNP</pre>.
         </option>
          <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
         <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
         <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
-        <option name="join">Join type</option>
+        <option name="only one">Stop searching after first match.</option>
     </fullDescription>
     
     <ports>
         <inPort index="0" name="In-Port name">Input</inPort>
         <outPort index="0" name="Out-Port name">Output1</outPort>
-        <outPort index="1" name="Out-Port name">Output2</outPort>
     </ports>
 </knimeNode>

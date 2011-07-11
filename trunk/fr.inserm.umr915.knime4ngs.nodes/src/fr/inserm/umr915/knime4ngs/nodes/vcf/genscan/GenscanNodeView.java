@@ -173,7 +173,7 @@ public class GenscanNodeView<T extends NodeModel>  extends NodeView<T>
 					}
 				iter.close();
 				
-			
+				
 				
 				/* display data */
 				iter=table.iterator();
@@ -271,7 +271,7 @@ public class GenscanNodeView<T extends NodeModel>  extends NodeView<T>
 					}
 				iter.close();
 				
-				System.err.println("2maxVal "+maxVal);
+				
 				
 				final int radius=5;
 				for(String k:chromInfo.getChromosomes())

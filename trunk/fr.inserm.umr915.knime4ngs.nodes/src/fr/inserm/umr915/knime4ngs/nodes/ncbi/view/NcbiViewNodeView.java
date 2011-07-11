@@ -76,11 +76,11 @@ public class NcbiViewNodeView  extends AbstractNodeView<NcbiViewNodeModel>
 						}
 					else if(database.equalsIgnoreCase("gene"))
 						{
-						uri="http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=gene&id="+ncbiId+"&rettype=text&retmode=text";
+						uri="http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=gene&id="+ncbiId+"&rettype=text&retmode=xml";
 						}
 					else if(database.equalsIgnoreCase("snp"))
 						{
-						uri="http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id="+ncbiId+"&rettype=text&retmode=text";
+						uri="http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id="+ncbiId+"&rettype=text&retmode=xml";
 						}
 					else
 						{

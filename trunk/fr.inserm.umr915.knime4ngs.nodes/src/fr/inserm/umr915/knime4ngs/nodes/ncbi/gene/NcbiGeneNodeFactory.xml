@@ -5,7 +5,7 @@
     <shortDescription>NCBI Gene</shortDescription>
     
     <fullDescription>
-        <intro>NCBI Gene. Example: `##Symbol##[GENE] 9606[taxid]`</intro>
+        <intro>NCBI Gene. Example: <pre>##Symbol##[GENE] 9606[taxid]</pre></intro>
         <option name="QUERY">Entrez query. Use ##colname## to insert a value from the input table. e.g '<i>##Gene.name##[Symbol] 9606[TID]</i>'</option>
         <option name="LIMIT">limit number of results per query</option>
     </fullDescription>

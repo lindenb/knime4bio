@@ -10,6 +10,7 @@ import org.knime.base.data.append.column.AppendedColumnRow;
 import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
+import org.knime.core.data.DataType;
 import org.knime.core.data.RowKey;
 import org.knime.core.data.container.CloseableRowIterator;
 import org.knime.core.data.def.BooleanCell;
@@ -22,6 +23,7 @@ import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 import fr.inserm.umr915.knime4ngs.nodes.sql.AbstractSqlNodeModel;
 
@@ -43,24 +45,14 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	private final SettingsModelString m_sqlQuery = new SettingsModelString(QUERY_PROPERTY,DEFAULT_QUERY);
 	
 	/** property for table join */
-	public static final String JOIN_PROPERTY="join.method";
-	
-	public static final String JOIN_PROPERTIES[]=new String[]
-		{
-		"Node1: Print ALL matches, Node2: Print ALL unmatched rows",//0
-		"Node1: Print ONLY ONE matche per ROW,  Node2: Print ALL unmatched rows",//1
-		"Node1: Ignore ALL Matching rows, Node2: Print ALL unmatched rows",//2
-		"Node1: Print ALL matches, Node2: Ignore ALL unmatched rows",//3
-		"Node1: Print ONLY ONE matche per ROW, Node2: Ignore ALL unmatched rows"//4
-		};
-	
+	public static final String STOP_AFTER_FIRST_PROPERTY="join.method";	
 	
 	/** default property for table join */
-	public static final String DEFAULT_JOIN_PROPERTY=JOIN_PROPERTIES[1];
+	public static final boolean STOP_AFTER_FIRST_DEFAULT=false;
 	/** settings for table uri */
-	private final SettingsModelString m_join=new SettingsModelString(
-			JOIN_PROPERTY,
-			DEFAULT_JOIN_PROPERTY
+	private final SettingsModelBoolean m_stopAfterFirst=new SettingsModelBoolean(
+			STOP_AFTER_FIRST_PROPERTY,
+			STOP_AFTER_FIRST_DEFAULT
 			);	
 
 	
@@ -69,7 +61,7 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
      */
     protected SqlQueryNodeModel()
     	{
-        super(1,2);
+        super(1,1);
     	}
     
     @Override
@@ -77,7 +69,6 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
             final ExecutionContext exec) throws Exception
     	{
 		BufferedDataContainer container1=null;
-		BufferedDataContainer container2=null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet result=null;
@@ -89,16 +80,10 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 			BufferedDataTable inTable=inData[0];
 			int total=inTable.getRowCount();
 			
-			String joinChoice=m_join.getStringValue();
-			boolean ignoreMatches=(joinChoice.equals(JOIN_PROPERTIES[2]));
-			boolean ignoreDiscarded=(joinChoice.equals(JOIN_PROPERTIES[3]) || joinChoice.equals(JOIN_PROPERTIES[4]));
-			boolean onePerMatch=(joinChoice.equals(JOIN_PROPERTIES[1]) || joinChoice.equals(JOIN_PROPERTIES[4]));
+			boolean onePerMatch=m_stopAfterFirst.getBooleanValue();
 
-	       
-	        
+
 	      
-	        
-	        container2=exec.createDataContainer(inTable.getDataTableSpec());
 	
 	        int outRow=0;
 	        int nRow=0;
@@ -228,14 +213,16 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 		        			throw new IllegalArgumentException("data type not handled: "+col.dataColumnSpec.getType());
 		        			}
 		        		}
+	        		if(onePerMatch)
+	        			{
+	        			pstmt.setMaxRows(1);
+	        			}
 	        		boolean foundOne=false;
 	        		result=pstmt.executeQuery();
 	        		while(result.next())
 	        			{
 	        			outRow++;
 	        			foundOne=true;
-
-	        			if(ignoreMatches) break;
 	        			DataRow outrow=new AppendedColumnRow(
 	        					RowKey.createRowKey(outRow),
 	        					row,
@@ -244,19 +231,25 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	        			container1.addRowToTable(outrow);
 	        			if(onePerMatch) break;
 	        			}
-	        		result.close();
+	        		safeClose(result);
 	        		
 	        		if(!foundOne)
 		        		{
-		        		if(!ignoreDiscarded)
-			        		{
-			        		container2.addRowToTable(row);
-			        		}
+	        			DataCell empty[]=new DataCell[
+	        			     container1.getTableSpec().getNumColumns()-row.getNumCells()
+	        			     ];
+	        			for(int i=0;i< empty.length;++i)
+	        				{
+	        				empty[i]=DataType.getMissingCell();
+	        				}
+	        			++outRow;
+	        			DataRow outrow=new AppendedColumnRow(
+	        					RowKey.createRowKey(outRow),
+	        					row,
+	        					empty
+	        					);
+	        			container1.addRowToTable(outrow);
 		        		}
-
-	        		
-	        		//
-	        		
 	        		}
 	        	if(container1==null)
 	        		{
@@ -277,28 +270,24 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 				}
 	       
 			// once we are done, we close the container and return its table
-	        container1.close();
+	        safeClose(container1);
 	        BufferedDataTable out1 = container1.getTable();
 	        container1=null;
 	        
-	        container2.close();
-	        BufferedDataTable out2 = container2.getTable();
-	        container2=null;
+	       
 	        
-	        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
+	        BufferedDataTable array[]= new BufferedDataTable[]{out1};
 	        
 	    	return array;
 	    	}
 	catch(Exception err)
 		{
-		getLogger().error("Boum", err);
 		err.printStackTrace();
 		throw err;
 		}
 	finally
 		{
 		safeClose(container1);
-		safeClose(container2);
 		}
    }
     
@@ -312,14 +301,14 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 			throw new InvalidSettingsException("Expected one table");
 			}
 	
-    	return new DataTableSpec[]{null,(DataTableSpec)inSpecs[0]};
+    	return new DataTableSpec[]{null};
     	}
     
     @Override
     protected List<SettingsModel> getSettingsModel() {
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
     	L.add(this.m_sqlQuery);
-    	L.add(this.m_join);
+    	L.add(this.m_stopAfterFirst);
     	return L;
     	}
     

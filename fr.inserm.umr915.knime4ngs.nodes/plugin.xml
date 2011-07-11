@@ -309,7 +309,11 @@
         <node 
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory" 
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory"  /> 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory"  />
+        <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory"  /> 
    </extension>
    
 </plugin>

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>BED</name>
-    <shortDescription>Intersects BED</shortDescription>
+    <name>BED &#8745; VCF</name>
+    <shortDescription>Computes the intersection between a BED and a VCF table</shortDescription>
     
     <fullDescription>
-        <intro>Intersects BED</intro>
+        <intro>
+        	Computes the intersection between a BED table and a VCF table.
+        	Both tables must be sorted on chromosome/position.
+        	NULL values will be appended to the Unmatched VCF rows.  
+        </intro>
         <option name="CHROM">VCF input. Chromosome column</option>
-        <option name="POS">VCF input. POS column</option>
+        <option name="POS">VCF input. POS column (first base index=1)</option>
         <option name="chrom">BED input. Chromosome column</option>
-        <option name="chromStart">BED input. chromStart column</option>
-        <option name="chromEnd">BED input. chromEnd column</option>
+        <option name="chromStart">BED input. chromStart column (first base index=0)</option>
+        <option name="chromEnd">BED input. chromEnd column (first base index=0)</option>
     </fullDescription>
     
     <ports>
         <inPort index="0" name="In-Port 1">VCF</inPort>
         <inPort index="1" name="In-Port 2">BED</inPort>
         <outPort index="0" name="Accepted">Accepted VCF1</outPort>
-        <outPort index="1" name="Dicarded">Dicarded VCF2</outPort>
     </ports>
 </knimeNode>

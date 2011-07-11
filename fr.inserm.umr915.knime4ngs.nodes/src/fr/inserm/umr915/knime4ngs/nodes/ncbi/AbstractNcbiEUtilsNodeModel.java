@@ -94,7 +94,7 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 				"&term="+ URLEncoder.encode(query, "UTF-8")+	
 				"&retstart=0&retmax="+m_limit.getIntValue()+
 				"&usehistory=y&retmode=xml&email=3rd_party_app&tool=knime");
-		System.err.println(url);
+		//System.err.println(url);
 			XMLEventReader reader=this.xmlInputFactory.createXMLEventReader(url.openStream());
 			XMLEvent evt;
 			String QueryKey=null;
@@ -128,7 +128,7 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 				"&email=3rd_party_app&tool=knime"
 				)
 				;
-		System.err.println(url);
+		//System.err.println(url);
 		InputStream in=url.openStream();
 		List<DataCell[]> rows=parseXML(in);
 		in.close();

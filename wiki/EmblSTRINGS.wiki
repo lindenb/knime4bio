@@ -10,13 +10,6 @@ Find protein interacting with a known protein
 
 Queries the Embl String database ( [http://string.embl.de/] ) *STRING* ="Known and Predicted Protein-Protein Interactions".
 
-
-==References==
-Knime4Bio[https://code.google.com/p/knime4bio/].
-*Author:*  Pierre Lindenbaum [http://plindenbaum.blogspot.com] PhD, INSERM UMR 915, Institut du thorax, Nantes[http://www.umr915.univ-nantes.fr/]. 
-*Reference* :  _manuscript in preparation_ . Please, report any problem here[https://code.google.com/p/knime4bio/issues/list].
-
-
 = Parameters =
 
   * *Gene* : A column containing the  *Gene*  name.

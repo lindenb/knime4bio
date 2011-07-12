@@ -1,4 +1,4 @@
-#summary o display the short reads aligned at a given position
+#summary display the short reads aligned at a given position
 
 =Motivation=
 

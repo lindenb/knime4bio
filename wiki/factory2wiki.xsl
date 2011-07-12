@@ -6,6 +6,10 @@
 <xsl:output method="text"/>
 
 <xsl:template match="/">
+<xsl:text>#summary </xsl:text>
+<xsl:value-of select="knimeNode/shortDescription"/>
+<xsl:text>
+</xsl:text>
   <xsl:apply-templates select="knimeNode"/>
 </xsl:template>
 
@@ -58,18 +62,22 @@
 
 
 <xsl:template match="ports">
+<xsl:if test="inPort">
 <xsl:text>
 
 = Input =
 
 </xsl:text>
 <xsl:apply-templates select="inPort"/>
+</xsl:if>
+<xsl:if test="outPort">
 <xsl:text>
 
 = Output =
 
 </xsl:text>
 <xsl:apply-templates select="outPort"/>
+</xsl:if>
 </xsl:template>
 
 
@@ -79,10 +87,26 @@
 <xsl:value-of select="@name"/>
 <xsl:text>* : </xsl:text>
 <xsl:apply-templates/>
+<xsl:text>
+</xsl:text>
 </xsl:template>
 
 
+<xsl:template match="h3">
+<xsl:text>
+==</xsl:text>
+<xsl:apply-templates/>
+<xsl:text>==
+</xsl:text>
+</xsl:template>
 
+<xsl:template match="h4">
+<xsl:text>
+===</xsl:text>
+<xsl:apply-templates/>
+<xsl:text>===
+</xsl:text>
+</xsl:template>
 
 
 <xsl:template match="b">
@@ -103,5 +127,16 @@
 <xsl:value-of select="@href"/>
 <xsl:text>]</xsl:text>
 </xsl:template>
+
+<xsl:template match="pre">
+<xsl:text>
+{{{
+</xsl:text>
+<xsl:apply-templates/>
+<xsl:text>
+}}}
+</xsl:text>
+</xsl:template>
+
 
 </xsl:stylesheet>

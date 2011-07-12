@@ -314,6 +314,14 @@
           	category-path="ngs"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory"  /> 
+       <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory"  />      
+        <node 
+          	category-path="ngs"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory"  />                
    </extension>
    
 </plugin>

@@ -2,9 +2,7 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Sift Out</name>
-    <shortDescription>Generates the input for <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a>.
-
-</shortDescription>
+    <shortDescription>Generates the input for SIFT</shortDescription>
     
     <fullDescription>
         <intro>Generates the input for <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a>.

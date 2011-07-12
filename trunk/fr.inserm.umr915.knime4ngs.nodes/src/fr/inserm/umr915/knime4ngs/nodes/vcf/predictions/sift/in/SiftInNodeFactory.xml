@@ -2,7 +2,7 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Sift In</name>
-    <shortDescription>Parse <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a> Results</shortDescription>
+    <shortDescription>Parse SIFT Results</shortDescription>
     
     <fullDescription>
         <intro>Parse <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a> Results</intro>

@@ -4,7 +4,7 @@
     <name>Read VCF files</name>
     
     <shortDescription>
-       Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File.
+       Reads one or more VCF File.
 
     </shortDescription>
     

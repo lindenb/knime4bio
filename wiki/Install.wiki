@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+Install KNime4Bio
 
 = Installing the Knime4Bio Plugin from a local zip =
 

@@ -4,13 +4,13 @@
     <name>GO GeneOntology</name>
     <shortDescription>
 
-Download the gene inheriting a given <a href="http://www.geneontology.org/">GO</a> identifier using the QuickGO API.
+Download the gene inheriting a given GO identifier using the QuickGO API.
 
 
 </shortDescription>
     
     <fullDescription>
-        <intro>Call the QuickGO API to get the protein in the domain of a given GO ID.
+        <intro>Call the QuickGO API to get the protein in the domain of a given <a href="http://www.geneontology.org/">GO</a> ID.
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>

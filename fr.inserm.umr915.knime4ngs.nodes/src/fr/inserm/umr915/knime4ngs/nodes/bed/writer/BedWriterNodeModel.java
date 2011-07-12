@@ -118,8 +118,6 @@ public class BedWriterNodeModel extends AbstractVCFNodeModel
 						out.print("\t");
 						out.print(chromEnd);
 						out.print("\t");
-						out.print("+");
-						out.print("\t");
 						if(colName!=-1)
 							{
 							out.print(row.getCell(colName).toString());

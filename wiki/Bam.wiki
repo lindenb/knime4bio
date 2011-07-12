@@ -1,6 +1,8 @@
+#summary o display the short reads aligned at a given position
+
 =Motivation=
 
-We want to display the short reads at a given position
+We want to display the short reads aligned at a given position
 
 = Solution =
 

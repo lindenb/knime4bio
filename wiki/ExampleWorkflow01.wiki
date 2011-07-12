@@ -1,5 +1,4 @@
-# workflow composed with Solena 2011-07-12
-
+#summary a simple workflow, composed with Solena 2011-07-12
 VCF data look like this:
 {{{
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Brs8
@@ -37,6 +36,4 @@ Sample2   /full/pathSample2.vcf.gz
   * remove the duplicate data (CHROM/POS/REF/ALT/SAMPLE) if any (e.g. Dindel). Use a node: "Unix/Uniq" on `CHROM/POS/REF/ALT/SAMPLE`
  * Filter on the number of samples per SNP. The node `NGS/ SNP per Sample` will create a new column *sample.per.snp* that will be filtered by a * Numeric row splitter*.
  * extract the gene-name with a  `NGS/Extract INFO` and the tag *GN* (result is a String).
-
-
 

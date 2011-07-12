@@ -1,4 +1,10 @@
+#summary how to install the knime4bio plugin ?
+
 Install KNime4Bio
+
+= Installing from an update site=
+
+TODO
 
 = Installing the Knime4Bio Plugin from a local zip =
 

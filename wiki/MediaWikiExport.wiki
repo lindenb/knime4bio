@@ -4,7 +4,7 @@ Export to MediaWiki
 
 = Motivation =
 
-Exports the table to  a MediaWiki format
+Exports the table to  a MediaWiki format ,in order to insert the result in a loal mediawiki installation ( http://www.mediawiki.org/wiki/Help:Tables )
 
 = Solution =
 

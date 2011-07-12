@@ -5,7 +5,8 @@
     <shortDescription>Exports the table to  a MediaWiki format</shortDescription>
     
     <fullDescription>
-        <intro>Exports the table to  a MediaWiki format.
+        <intro>Exports the table to  a MediaWiki format in order to insert the result in a <a href="http://www.mediawiki.org/wiki/Help:Tables">local mediawiki installation</a>
+        
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>

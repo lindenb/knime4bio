@@ -86,7 +86,6 @@ public class WebBrowserNodeModel  extends AbstractNodeModel
 		 L.add(this.m_chromColumn);
 		 L.add(this.m_posColumn);
 		 L.add(this.m_build);
-		 for(SettingsModel s:L) System.err.println(s.toString());
 		return L;
 		}
 	@Override

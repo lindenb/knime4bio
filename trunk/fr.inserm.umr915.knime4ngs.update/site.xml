@@ -5,9 +5,5 @@
    </description>
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.8.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.8"/>
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.9.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.9"/>
-   <category-def name="Knime" label="Knime">
-      <description>
-         Custom nodes for http://knime.org
-      </description>
-   </category-def>
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.10.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.10"/>
 </site>

@@ -4,7 +4,7 @@
     <name>WebBrowser</name>
     <shortDescription>Opens a web browser to a genome browser.</shortDescription>
     
-    
+  
     <fullDescription>
         <intro>Opens a web browser to a genome browser. <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.<br/>This nodes uses the <a href="http://picard.sourceforge.net/">Picard Library</a> to read the BAMs.</p>
     </intro>

@@ -1,6 +1,6 @@
+#summary Exports the table to  a MediaWiki format
+
 Export to MediaWiki
-
-
 
 = Motivation =
 
@@ -8,17 +8,12 @@ Exports the table to  a MediaWiki format
 
 = Solution =
 
-Exports the table to  a MediaWiki format
+Exports the table to  a *MediaWiki* tabular format.
 
 = Parameters =
-
 
   * *Filename* : outout filename
 
 = Input =
 
-
   * *input* : Input Table
-
-= Output =
-

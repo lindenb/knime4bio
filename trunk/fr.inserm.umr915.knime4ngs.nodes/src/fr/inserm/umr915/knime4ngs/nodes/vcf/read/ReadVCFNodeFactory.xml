@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="default.png" type="Source">
-    <name>Read VCF</name>
+    <name>Read VCF files</name>
     
     <shortDescription>
-       Reads one or more VCF File
+       Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File.
+
     </shortDescription>
     
     <fullDescription>
-        <intro>Reads one or more VCF File associated to a sample name. It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped). It currently only supports one sample per VCF.</intro>
+        <intro>Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File associated to a sample name. It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped). It currently only supports one sample per VCF.
+
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="quality">Ignore VCF data with a quality lower than this value</option>
         <option name="SAMPLE">the SAMPLE column</option>
         <option name="VCF URI">the <b>absolute</b> path-to-vcf column</option>
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">The file descriptor. A file containing two columns (tab delimited). The first column contains a sample name and the second column is the <b>absolute path</b> to a VCF file (which can be g-zipped if needed)</inPort>
+        <inPort index="0" name="Input">The file descriptor. A file containing two columns (tab delimited). The a column contains a sample name and another column is the <b>absolute path</b> to a VCF file (which can be g-zipped if needed)</inPort>
         <outPort index="0" name="VCF">VCF data and the sample name</outPort>
-        <outPort index="1" name="Headers">Headers</outPort>
+        <outPort index="1" name="Headers">VCF Headers</outPort>
     </ports>    
 </knimeNode>

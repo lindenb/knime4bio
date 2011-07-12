@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Gene Context</name>
+    <name>UCSC Gene Context</name>
     <shortDescription>View Gene Context using UCSC known Genes</shortDescription>
     
     <fullDescription>
-        <intro>DView Gene Context using UCSC known Genes</intro>
+        <intro>Displays the gene Context using UCSC known Genes.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+	</intro>
+	 <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
+        <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>
+        <option name="jdbc.password">JDBC password. For the ucsc data it is empty</option>
         <option name="CHROM">The VCF CHROM column</option>
         <option name="POS">The VCF POS column. The genomic position (1-based)</option>
     </fullDescription>

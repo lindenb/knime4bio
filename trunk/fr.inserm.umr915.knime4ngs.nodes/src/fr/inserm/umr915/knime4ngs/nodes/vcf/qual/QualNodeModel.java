@@ -17,12 +17,7 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
 
-/**
- * This is the model implementation of VCFSource.
- * Reads a VCF file
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class QualNodeModel extends AbstractVCFNodeModel
 	{
 	final static double DEFAULT_MIN_QUAL=20;

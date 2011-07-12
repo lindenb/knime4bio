@@ -5,9 +5,7 @@ import org.knime.core.node.NodeFactory;
 import org.knime.core.node.NodeView;
 
 
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class QualNodeFactory
         extends NodeFactory<QualNodeModel> {
 

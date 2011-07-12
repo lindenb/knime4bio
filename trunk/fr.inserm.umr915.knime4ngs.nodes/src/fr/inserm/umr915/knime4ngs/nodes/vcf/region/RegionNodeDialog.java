@@ -10,7 +10,7 @@ import org.knime.core.node.util.ColumnFilter;
 
 
 
-
+@Deprecated
 public class RegionNodeDialog extends DefaultNodeSettingsPane
 	{
 	

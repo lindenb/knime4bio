@@ -26,7 +26,7 @@ import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 
 
 
-
+@Deprecated
 public class HomoPolymerNodeModel extends AbstractNodeModel
 	{ 
 	final static int DEFAULT_MAX_REPEAT=5;

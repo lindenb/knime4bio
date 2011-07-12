@@ -7,7 +7,7 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-
+@Deprecated
 public class UcscTranscriptNodePlugin extends Plugin {
     // The shared instance.
     private static UcscTranscriptNodePlugin plugin;

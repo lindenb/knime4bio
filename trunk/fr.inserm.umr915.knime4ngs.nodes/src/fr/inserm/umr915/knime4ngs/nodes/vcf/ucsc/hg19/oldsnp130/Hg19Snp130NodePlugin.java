@@ -5,7 +5,7 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.hg19.oldsnp130;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-
+@Deprecated
 public class  Hg19Snp130NodePlugin extends Plugin
 	{
     // The shared instance.

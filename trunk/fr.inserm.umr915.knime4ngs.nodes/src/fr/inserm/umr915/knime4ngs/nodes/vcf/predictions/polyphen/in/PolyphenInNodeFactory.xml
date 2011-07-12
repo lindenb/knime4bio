@@ -5,9 +5,16 @@
     <shortDescription>Parse Polyphen Results</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Intersection of VCF with a  <a href="http://genetics.bwh.harvard.edu/pph2/bgi.shtml">polyphen2</a> Results.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
+        <option name="CHROM">VCF CHROM</option>
+        <option name="POS">VCF POS</option>
+	<option name="REF">VCF REF</option>
+        <option name="ALT">VCF ALT</option>
+	<option name="POLYPHEN">POLYPHEN column containing the mutation</option>
     </fullDescription>
     
     <ports>

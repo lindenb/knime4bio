@@ -9,7 +9,7 @@ import org.knime.core.node.defaultnodesettings.DialogComponentString;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 import org.knime.core.node.util.ColumnFilter;
 
-
+@Deprecated
 public class GeneNameNodeDialog extends DefaultNodeSettingsPane
 	{
     protected GeneNameNodeDialog()

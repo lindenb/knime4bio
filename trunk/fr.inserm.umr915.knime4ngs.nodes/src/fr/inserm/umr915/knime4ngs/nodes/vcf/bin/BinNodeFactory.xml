@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Bin</name>
+    <name>UCSC Bin</name>
     <shortDescription>UCSC Jim Kent's bin</shortDescription>
     
     <fullDescription>
         <intro>
-This node adds a 'bin' column to the table. See http://plindenbaum.blogspot.com/2010/05/binning-genome.html
-this 'bin' column was an index described by Jim Kent in "The Human Genome Browser at UCSC", doi: 10.1101/gr.229102 . Genome Res. 2002. 12:996-1006 and on the UCSC Wiki. Citing:"Binning scheme for optimizing database accesses for genomic annotations that cover a particular region of the genome( ...) Features are put in the smallest bin in which they fit. (...) Typically, almost all features are in the smaller bins, and in the most common usage scenarios only the contents of a few of these smaller bins need to be examined. (...) Since all of these bins are in sizes of powers of two, the calculation of the bin number is a simple matter of bit shifting of the chromStart and chromEnd coordinates".
+This node adds a 'bin' column to the table. See <a href="http://plindenbaum.blogspot.com/2010/05/binning-genome.html">http://plindenbaum.blogspot.com/2010/05/binning-genome.html</a>
+this 'bin' column was an index described by Jim Kent in "The Human Genome Browser at UCSC", doi: 10.1101/gr.229102 . Genome Res. 2002. 12:996-1006 and on the UCSC Wiki. Citing:<i>Binning scheme for optimizing database accesses for genomic annotations that cover a particular region of the genome( ...) Features are put in the smallest bin in which they fit. (...) Typically, almost all features are in the smaller bins, and in the most common usage scenarios only the contents of a few of these smaller bins need to be examined. (...) Since all of these bins are in sizes of powers of two, the calculation of the bin number is a simple matter of bit shifting of the chromStart and chromEnd coordinates</i>.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <option name="CHROM">chromosome</option>
+        <option name="Chrom Start">Genomic position Start</option>
+	<option name="Chrom End">Genomic position End</option>
+	<option name="Bin column name">New column name</option>
+	<option name="First base is 1">First base has index=1</option>
     </fullDescription>
     
     <ports>

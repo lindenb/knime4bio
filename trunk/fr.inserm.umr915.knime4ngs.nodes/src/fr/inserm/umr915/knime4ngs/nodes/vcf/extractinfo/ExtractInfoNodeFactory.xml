@@ -5,7 +5,11 @@
     <shortDescription>Extracts a value from a INFO column in a VCF file</shortDescription>
     
     <fullDescription>
-        <intro>Extracts a value from a INFO column in a VCF file.</intro>
+        <intro>Extracts a key/value from a INFO column in a VCF file. Example of info field:<pre>AC=2;DB=1;ST=0:0,3:4;DP=7;NC=-3.73;UM=3;CQ=INTRONIC;MQ=60;AN=2;PA=11:0.930&amp;21:0.860&amp;31:0.950;MZ=0;GN=NOC2L;PS=1</pre>
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+</intro>
         <option name="INFO">the INFO column in the VCF</option>
         <option name="DataType">The type of data to be extracted (int, double, boolean, etc... )</option>
     	<option name="Flag">the name of the flag to be extracted</option>

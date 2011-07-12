@@ -7,7 +7,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,13 +32,9 @@ import org.knime.core.node.InvalidSettingsException;
 
 import fr.inserm.umr915.knime4ngs.corelib.bio.Segment;
 import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
-import fr.inserm.umr915.knime4ngs.nodes.vcf.winnerloser.WinnerLoserNodeModel;
 
 
-
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class UcscTranscriptNodeModel extends AbstractNodeModel
 	{
 	private class Transcript

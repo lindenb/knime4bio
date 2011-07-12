@@ -4,7 +4,7 @@ import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
 
 
 
-
+@Deprecated
 public class WinnerLoserNodeDialog extends DefaultNodeSettingsPane
 	{
 	

@@ -33,12 +33,7 @@ import org.knime.core.node.ExecutionContext;
 import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 
 
-
-
-
-/**
-
- */
+@Deprecated
 public class BasicPredictionNodeModel extends AbstractNodeModel
 	{
 	private static final int NUM_THREAD=4;

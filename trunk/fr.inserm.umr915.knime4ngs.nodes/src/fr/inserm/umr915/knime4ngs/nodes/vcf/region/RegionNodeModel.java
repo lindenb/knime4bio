@@ -17,13 +17,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
-
-/**
- * This is the model implementation of VCFSource.
- * Reads a VCF file
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class RegionNodeModel extends AbstractVCFNodeModel
 	{
 	
@@ -65,6 +59,7 @@ public class RegionNodeModel extends AbstractVCFNodeModel
 		        // the table will have three columns:
 				BufferedDataTable inTable=inData[0];
 				RowComparator rowComparator=new RowComparator();
+				@SuppressWarnings("unused")
 				SortedTable sortedTable=new SortedTable(inData[2], rowComparator, false, exec);
 				
 				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();

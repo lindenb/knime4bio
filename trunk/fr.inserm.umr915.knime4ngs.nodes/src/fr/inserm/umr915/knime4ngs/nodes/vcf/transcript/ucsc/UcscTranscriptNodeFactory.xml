@@ -2,10 +2,10 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Transcripts</name>
-    <shortDescription>Transcripts</shortDescription>
+    <shortDescription>DEPRECATED</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
+        <intro>DEPRECATED</intro>
         <option name="short name of first option (like in the dialog)">description of first option</option>
         <option name="short name of second option (like in the dialog)">description of second option</option>
     </fullDescription>

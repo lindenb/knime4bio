@@ -2,10 +2,13 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
     <name>NCBI Gene</name>
-    <shortDescription>NCBI Gene</shortDescription>
+    <shortDescription>Entrez query NCBI Gene</shortDescription>
     
     <fullDescription>
-        <intro>NCBI Gene. Example: <pre>##Symbol##[GENE] 9606[taxid]</pre></intro>
+        <intro>NCBI Gene. Example: <pre>##Symbol##[GENE] 9606[taxid]</pre>.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="QUERY">Entrez query. Use ##colname## to insert a value from the input table. e.g '<i>##Gene.name##[Symbol] 9606[TID]</i>'</option>
         <option name="LIMIT">limit number of results per query</option>
     </fullDescription>

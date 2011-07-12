@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>BED</name>
-    <shortDescription>Intersects BED</shortDescription>
+    <name>Intersect BED File</name>
+    <shortDescription>Intersects a BED file</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>get the Intersection of the table with a <b>Sorted (CHROM/START/END)</b> <a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> <b>file</b>.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+</intro>
+        <option name="CHROM">VCF CHROM</option>
+        <option name="POS">VCF position</option>
+	<option name="File URI">BED file URI. It can be gzipped. Data must be sorted on CHROM/START/END</option>
+        <option name="bed chrom">Chromosome column index in the BED file (first index is 1)</option>
+	<option name="bed start">Start column index in the BED file (first index is 1)</option>
+	<option name="bed end">End column index in the BED file (first index is 1)</option>
+	<option name="delimiter">Regular expression for the BED column delimiter</option>
+	<option name="prefix">Output column prefix</option>
+	<option name="stop after 1st hit">only use one hit per VCF row</option>
     </fullDescription>
     
     <ports>
         <inPort index="0" name="In-Port 1">VCF</inPort>
         <inPort index="1" name="In-Port 2">BED</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
-        <outPort index="1" name="Dicarded">Dicarded VCF2</outPort>
+        <outPort index="0" name="Accepted">Merged</outPort>
     </ports>
 </knimeNode>

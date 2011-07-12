@@ -4,11 +4,7 @@ import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
 import org.knime.core.node.defaultnodesettings.DialogComponentString;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
-
-
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class GoAnnotationNodeDialog extends DefaultNodeSettingsPane
 	{
     protected GoAnnotationNodeDialog()

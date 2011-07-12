@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>GO</name>
-    <shortDescription>Gene Ontology</shortDescription>
+    <name>GO GeneOntology</name>
+    <shortDescription>
+
+Download the gene inheriting a given <a href="http://www.geneontology.org/">GO</a> identifier using the QuickGO API.
+
+
+</shortDescription>
     
     <fullDescription>
-        <intro>Call the QuickGO API to get the protein in the domain of a given GO ID</intro>
+        <intro>Call the QuickGO API to get the protein in the domain of a given GO ID.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="Term">The GO ID. e.g: <b>GO:0003015</b></option>
         <option name="Taxon-ID">NCBI taxon ID . Human=9606</option>
     </fullDescription>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./../default.png" type="Source">
-    <name>VCFLoader</name>
+    <name>VCFLoader-DEPRECATED</name>
     
     <shortDescription>
-        Loads a VCF File
+        Loads a VCF File - DEPRECATED
     </shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
+        <intro>DEPRECATED</intro>
         
         
         <option name="short name of first option (like in the dialog)">description of first option</option>

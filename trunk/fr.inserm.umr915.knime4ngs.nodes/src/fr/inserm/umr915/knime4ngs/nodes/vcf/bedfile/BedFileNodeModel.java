@@ -25,6 +25,7 @@ import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
@@ -67,6 +68,8 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 	static final String COL_PREFIX_PROPERTY="column.prefix";
 	final static String DEFAULT_ICOL_PREFIX="ext.";
 	
+	static final String STOP_FIRST_PROPERTY="stop.first";
+	final static boolean STOP_FIRST_DEF=false;
 	
 	private final SettingsModelColumnName m_chrom1Col =
         new SettingsModelColumnName(CHROM1_COL_PROPERTY,DEFAULT_CHROM1_COL);
@@ -87,7 +90,8 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
         new SettingsModelString(FILE_IGNORE_PROPERTY,DEFAULT_FILE_IGNORE);
 	private final SettingsModelString m_columnPrefix =
         new SettingsModelString(COL_PREFIX_PROPERTY,DEFAULT_ICOL_PREFIX);
-	
+	private final SettingsModelBoolean m_stopFirst =
+        new SettingsModelBoolean(STOP_FIRST_PROPERTY,STOP_FIRST_DEF);
 	
 	class BedSorter
 	implements Comparator<List<String>>
@@ -129,7 +133,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
     /**
      * Constructor for the node model.
      */
-    protected BedFileNodeModel()
+    public BedFileNodeModel()
     	{
         super(1,1);
     	}
@@ -197,6 +201,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 		        		++nRow;
 		        		DataRow row=itervcf.next();
 		        		Position position0= vcfSorter.make(row);
+		        		if(position0==null) continue;
 		        		if(prevVCF!=null && prevVCF.compareTo(position0)>0)
 		        			{
 		        			throw new IOException(
@@ -277,7 +282,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 		        					}
 		        				else
 		        					{
-		        					//less columns that expected ?
+		        					//less columns than expected ?
 		        					while(bedRow.size()< inDataTableSpec2.getNumColumns() )
 		        						{
 		        						bedRow.add("");
@@ -340,6 +345,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 			        				row,
 			        				cells
 			        				));
+			        			if(this.m_stopFirst.getBooleanValue()) break;
 			        			}
 							}
 						else
@@ -356,7 +362,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 			        				));
 							}
 		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"Filtering....");
+		            	exec.setProgress(nRow/total,"BED....");
 		        		}
 		        	
 					} 
@@ -375,7 +381,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
 		        	throw new ExecuteException("No data in file to define a valid output table");
 		        	}
 				// once we are done, we close the container and return its table
-		        container1.close();
+		        safeClose(container1);
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
 		        
@@ -421,6 +427,7 @@ public class BedFileNodeModel extends AbstractVCFNodeModel
     	L.add(this.m_fileDelim);
     	L.add(this.m_fileIgnore);
     	L.add(this.m_columnPrefix);
+    	L.add(this.m_stopFirst);
     	return L;
     	}
 	}

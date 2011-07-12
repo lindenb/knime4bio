@@ -22,12 +22,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelString;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
-
-
-
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class GeneNameNodeModel extends AbstractVCFNodeModel
 	{
 	static final String DEFAULT_FLAG_PROPERTY="GN";

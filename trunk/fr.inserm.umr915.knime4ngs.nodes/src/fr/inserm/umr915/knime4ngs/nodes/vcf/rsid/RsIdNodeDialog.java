@@ -6,7 +6,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 
 
 
-
+@Deprecated
 public class RsIdNodeDialog extends DefaultNodeSettingsPane
 	{
     protected RsIdNodeDialog()

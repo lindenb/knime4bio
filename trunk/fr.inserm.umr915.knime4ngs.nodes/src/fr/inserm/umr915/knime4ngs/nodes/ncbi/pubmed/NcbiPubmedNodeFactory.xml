@@ -5,7 +5,10 @@
     <shortDescription>NCBI Pubmed</shortDescription>
     
     <fullDescription>
-        <intro>Retrieves articles from NCBI Pubmed</intro>
+        <intro>Retrieves articles from NCBI Pubmed.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="Entrez Query">words surrounded by two hashes will be replaced by the column value. ( Example: ##CHROM## )</option>
     </fullDescription>
     

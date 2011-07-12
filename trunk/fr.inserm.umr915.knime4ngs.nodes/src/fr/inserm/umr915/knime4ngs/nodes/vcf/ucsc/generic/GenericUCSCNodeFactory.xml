@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>UCSC Table</name>
-    <shortDescription>Read UCSC tables</shortDescription>
+    <name>UCSC Tables (Flat files)</name>
+    <shortDescription>Intersection with UCSC Flat files.</shortDescription>
     
     <fullDescription>
         <intro>Append positional data from UCSC tables from the flat files stored under <a href="http://hgdownload.cse.ucsc.edu/goldenPath/">http://hgdownload.cse.ucsc.edu/goldenPath/</a>.
-          Requirement: file containing the data should exists, is tab delimited and should be sorted on chrom/chromStart.
+          <p>Requirement: file containing the data must still exists since this node was compiled . This file should be tab delimited and sorted on chrom/chromStart.</p>
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
         	</intro>
         <option name="CHROM">Chromosome Column </option>
         <option name="POS">Position column (first base is 1)</option>

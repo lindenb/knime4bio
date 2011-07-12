@@ -1,3 +1,5 @@
+#summary download GO data for a given term in GO.
+
 GO GeneOntology
 
 

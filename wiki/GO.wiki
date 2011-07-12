@@ -1,24 +1,30 @@
-GO
+GO GeneOntology
 
 
 
 = Motivation =
 
-Gene Ontology
+
+
+Download the gene inheriting a given GO identifier using the QuickGO API.
+
+
+
 
 = Solution =
 
-Call the QuickGO API to get the protein in the domain of a given GO ID
+Call the QuickGO API to get the protein in the domain of a given GO[http://www.geneontology.org/] ID.
+
+
+==References==
+Knime4Bio[https://code.google.com/p/knime4bio/].  *Author:*  Pierre Lindenbaum[http://plindenbaum.blogspot.com] PhD, INSERM UMR 915, Institut du thorax, Nantes[http://www.umr915.univ-nantes.fr/].  *Reference* :  _manuscript in preparation_ . Please, report any problem here[https://code.google.com/p/knime4bio/issues/list].
+
 
 = Parameters =
 
 
   * *Term* : The GO ID. e.g:  *GO:0003015* 
   * *Taxon-ID* : NCBI taxon ID . Human=9606
-
-= Input =
-
-
 
 = Output =
 

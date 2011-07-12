@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="default.png" type="Source">
-    <name>BED</name>
-    <shortDescription>Save as BED file</shortDescription>
+    <name>Save as BED</name>
+    <shortDescription>Save as BED file.</shortDescription>
     
     <fullDescription>
-        <intro>Save table as BED file</intro>
+        <intro>
+	Save table as <a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED file</a>.
+
+	<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+	</intro>
         <option name="CHROM">The chromosome column</option>
         <option name="POS">The position start column</option>
         <option name="end">The position end column (optional)</option>
         <option name="first base is 1">Index of first base is <b>1</b>, not <b>0</b></option>
-        <option name="Name">The column to be used as a name in the BED file (optional)</option>
+        <option name="Name">The column to be used as a name in the BED file (optional). You could use a column merger to create a composite name from several columns.</option>
         <option name="filename">Output filename</option>
     </fullDescription>
     

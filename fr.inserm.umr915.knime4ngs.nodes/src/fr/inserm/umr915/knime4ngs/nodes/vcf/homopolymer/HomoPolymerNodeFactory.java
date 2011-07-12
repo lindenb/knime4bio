@@ -4,13 +4,7 @@ import org.knime.core.node.NodeDialogPane;
 import org.knime.core.node.NodeFactory;
 import org.knime.core.node.NodeView;
 
-
-/**
- * <code>NodeFactory</code> for the "VCFSource" Node.
- * Reads a VCF file
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class HomoPolymerNodeFactory 
         extends NodeFactory<HomoPolymerNodeModel> {
 

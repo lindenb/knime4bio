@@ -28,12 +28,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
-/**
- * This is the model implementation of VCFLoader.
- * Loads a VCF File
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 	{
 	final static int DEFAULT_MIN_DEPTH=4;

@@ -5,7 +5,7 @@ import org.knime.core.node.defaultnodesettings.DialogComponentNumber;
 import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 
 
-
+@Deprecated
 public class HomoPolymerNodeDialog extends DefaultNodeSettingsPane
 	{
     protected HomoPolymerNodeDialog()

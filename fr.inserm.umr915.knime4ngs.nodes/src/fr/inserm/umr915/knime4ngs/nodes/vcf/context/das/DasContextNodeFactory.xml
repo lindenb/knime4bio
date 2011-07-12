@@ -5,9 +5,16 @@
     <shortDescription>DNA context(DAS)</shortDescription>
     
     <fullDescription>
-        <intro>Extract Gene Name from VCF</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Retrieves the DNA of a mutation using a <a href="http://www.biodas.org">DAS</a> server.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+	</intro>
+        <option name="DAS DNA URL">DAS DNA URL. example for UCSC hg19:<pre>http://genome.ucsc.edu/cgi-bin/das/hg19/dna</pre></option>
+        <option name="CHROM">VCF CHROM</option>
+	<option name="POS">VCF Position</option>
+	<option name="extend">number of bases on each side</option>
     </fullDescription>
     
     <ports>

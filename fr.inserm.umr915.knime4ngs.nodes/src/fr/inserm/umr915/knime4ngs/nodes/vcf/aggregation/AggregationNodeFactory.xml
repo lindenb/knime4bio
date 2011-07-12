@@ -2,10 +2,17 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="default.png" type="Source">
     <name>Genomic Aggregation</name>
-    <shortDescription>Genomic Aggregation</shortDescription>
+    <shortDescription>Genomic Aggregation. Creates a table of genomics region having a numeric value greater or lower than a given value.
+
+
+</shortDescription>
     
     <fullDescription>
-        <intro>Genomic Aggregation</intro>
+        <intro>Genomic Aggregation.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="CHROM">The CHROM Column</option>
         <option name="POS">The POS Column</option>
          <option name="VALUE">The numeric Column</option>

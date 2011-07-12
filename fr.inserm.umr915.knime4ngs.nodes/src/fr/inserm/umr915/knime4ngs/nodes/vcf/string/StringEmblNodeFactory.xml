@@ -5,7 +5,11 @@
     <shortDescription>Queries the Embl STRING database</shortDescription>
     
     <fullDescription>
-        <intro>Queries the <a href="http://string.embl.de/">Embl String database</a>. <b>STRING</b>:Known and Predicted Protein-Protein Interactions</intro>
+        <intro>Queries the <a href="http://string.embl.de/">Embl String database</a>. <b>STRING</b>:Known and Predicted Protein-Protein Interactions.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="Gene">A column containing the <b>Gene</b> name.</option>
         <option name="taxon">NCBI Taxon ID</option>
         <option name="score">Embl STRING score; See <a href="http://string.embl.de/help/index.jsp?topic=/org.string-db.docs/api.html">http://string.embl.de/help/index.jsp?topic=/org.string-db.docs/api.html</a></option>

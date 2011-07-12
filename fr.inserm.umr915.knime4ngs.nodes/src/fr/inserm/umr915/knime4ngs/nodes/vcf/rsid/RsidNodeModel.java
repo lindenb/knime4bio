@@ -44,7 +44,7 @@ import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 
 
 
-
+@Deprecated
 public class RsidNodeModel extends AbstractNodeModel
 	{
 	private static final int NUM_THREAD=10;

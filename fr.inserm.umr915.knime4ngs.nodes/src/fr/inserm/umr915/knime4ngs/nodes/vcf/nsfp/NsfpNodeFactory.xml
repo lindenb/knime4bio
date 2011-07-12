@@ -5,7 +5,11 @@
     <shortDescription>dbNSFP: functional predictions from multiple algorithms for the comprehensive collection of human non-synonymous SNPs (NSs)</shortDescription>
     
     <fullDescription>
-        <intro>Join data with NSFP 1.1 database (<a href="http://sites.google.com/site/jpopgen/dbNSFP">http://sites.google.com/site/jpopgen/dbNSFP</a> )</intro>
+        <intro>Join data with NSFP 1.1 database (<a href="http://sites.google.com/site/jpopgen/dbNSFP">http://sites.google.com/site/jpopgen/dbNSFP</a> ).
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
         <option name="Path">Path to <b>Zipped</b> version of NSFP (<b>NOT</b> 7-zip). Each entry must be sorted on chrom/position.</option>
         <option name="CHROM">VCF CHROM column</option>
         <option name="POS">VCF POS column</option>

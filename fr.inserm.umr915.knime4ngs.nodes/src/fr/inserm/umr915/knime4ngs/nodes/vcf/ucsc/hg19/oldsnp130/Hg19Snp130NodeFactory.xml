@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
-    <name>hg19Snp130</name>
-    <shortDescription>DBSNP version 130 ofr hg19</shortDescription>
+    <name>hg19Snp130 DEPRECATED</name>
+    <shortDescription>DBSNP version 130 ofr hg19 DEPRECATED</shortDescription>
     
     <fullDescription>
-        <intro>DBSNP version 130 ofr hg19</intro>
+        <intro>DBSNP version 130 ofr hg19 DEPRECATED</intro>
     	 <option name="Show hg19Snp130">show hg19Snp130 in the output (DBSNP version 130 ofr hg19)</option>
     	 <option name="Show hg19Snp130">show hg19Snp130 in the output (DBSNP version 130 ofr hg19)</option>
     	 <option name="Show hg19Snp130">show hg19Snp130 in the output (DBSNP version 130 ofr hg19)</option>

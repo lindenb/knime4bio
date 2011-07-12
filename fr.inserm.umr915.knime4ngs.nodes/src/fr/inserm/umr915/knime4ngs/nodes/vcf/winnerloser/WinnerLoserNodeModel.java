@@ -29,6 +29,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModel;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc.UcscTranscriptNodeModel;
 
+@Deprecated
 public class WinnerLoserNodeModel extends AbstractVCFNodeModel
 	{
 	final static int DEFAULT_MIN_SAMPLE_PER_GENE=0;

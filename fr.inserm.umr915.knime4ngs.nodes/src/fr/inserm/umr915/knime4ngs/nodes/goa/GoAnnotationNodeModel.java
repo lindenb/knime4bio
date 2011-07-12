@@ -5,18 +5,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.knime.core.data.DataCell;
 import org.knime.core.data.DataColumnSpec;
 import org.knime.core.data.DataColumnSpecCreator;
-import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.RowKey;
-import org.knime.core.data.container.CloseableRowIterator;
 import org.knime.core.data.def.DefaultRow;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.BufferedDataContainer;
@@ -27,14 +23,10 @@ import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
-import fr.inserm.umr915.knime4ngs.nodes.vcf.transcript.ucsc.UcscTranscriptNodeModel;
 
 
 
-/**
-
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class GoAnnotationNodeModel extends AbstractVCFNodeModel
 	{
 	static final String GENONTOLOGY_PROPERTY="go.terms";

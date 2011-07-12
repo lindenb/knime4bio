@@ -6,7 +6,11 @@
     
     <fullDescription>
         <intro>Displays a local BAM file using the Picard API. Not, this node still needs to be refreshed after each KNIME session.
-        The first table contains the VCF results. The second table contains the sample name and the path to a BAM file.</intro>
+        The first table contains the VCF results. The second table contains the sample name and the path to a BAM file.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.<br/>This nodes uses the <a href="http://picard.sourceforge.net/">Picard Library</a> to read the BAMs.</p>
+
+</intro>
         <option name="CHROM">The VCF CHROM column</option>
         <option name="POS">The VCF POS column. The genomic position (1-based)</option>
         <option name="sample1">The Sample Column in the first table</option>

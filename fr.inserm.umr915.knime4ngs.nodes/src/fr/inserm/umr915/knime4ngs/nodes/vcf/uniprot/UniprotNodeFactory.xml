@@ -2,10 +2,14 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="default.png" type="Source">
     <name>Uniprot</name>
-    <shortDescription>Finds features in Uniprot entries</shortDescription>
+    <shortDescription>Finds features in Uniprot entries.
+
+
+
+</shortDescription>
     
     <fullDescription>
-        <intro>Finds features in Uniprot entries</intro>
+        <intro>Finds features in Uniprot entries. <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p></intro>
         <option name="ACN">Column containing the Uniprot accession number</option>
         <option name="POS">position in the peptidic sequence (first amino acid has index=1)</option>
     </fullDescription>

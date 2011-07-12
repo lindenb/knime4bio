@@ -4,10 +4,7 @@ import org.knime.core.node.NodeDialogPane;
 import org.knime.core.node.NodeFactory;
 import org.knime.core.node.NodeView;
 
-
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class RegionNodeFactory
         extends NodeFactory<RegionNodeModel> {
 

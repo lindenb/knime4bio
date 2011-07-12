@@ -9,18 +9,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 
 import fr.inserm.umr915.knime4ngs.corelib.knime.DataTypeColumnFilter;
 
-
-/**
- * <code>NodeDialog</code> for the "VCFLoader" Node.
- * Loads a VCF File
- *
- * This node dialog derives from {@link DefaultNodeSettingsPane} which allows
- * creation of a simple dialog with standard components. If you need a more 
- * complex dialog please derive directly from 
- * {@link org.knime.core.node.NodeDialogPane}.
- * 
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class VCFLoaderNodeDialog extends DefaultNodeSettingsPane {
 
     /**

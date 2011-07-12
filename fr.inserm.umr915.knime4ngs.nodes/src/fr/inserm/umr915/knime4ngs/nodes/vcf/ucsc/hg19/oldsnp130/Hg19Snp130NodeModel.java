@@ -10,19 +10,14 @@ import java.io.BufferedReader;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.regex.Pattern;
 import java.net.URL;
 import org.knime.base.data.append.column.AppendedColumnRow;
-import org.knime.base.data.sort.SortedTable;
 import org.knime.core.data.DataCell;
-import org.knime.core.data.DataType;
 import org.knime.core.data.DataColumnSpec;
 import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataRow;
-import org.knime.core.data.DataTable;
 import org.knime.core.data.DataTableSpec;
-import org.knime.core.data.RowIterator;
 import org.knime.core.data.RowKey;
 import org.knime.core.data.container.CloseableRowIterator;
 import org.knime.core.data.def.IntCell;
@@ -31,24 +26,16 @@ import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
-import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
-import org.knime.core.node.NodeLogger;
 import org.knime.core.node.NodeModel;
 import org.knime.core.node.NodeSettingsRO;
 import org.knime.core.node.NodeSettingsWO;
-import org.knime.core.node.defaultnodesettings.SettingsModel;
-import org.knime.core.node.port.PortType;
 import org.knime.core.node.CanceledExecutionException;
-import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.ExecutionMonitor;
 
-/**
- *  Hg19Snp130NodeModel
- *    
- */
+@Deprecated
 public class Hg19Snp130NodeModel
 	extends NodeModel
 	{

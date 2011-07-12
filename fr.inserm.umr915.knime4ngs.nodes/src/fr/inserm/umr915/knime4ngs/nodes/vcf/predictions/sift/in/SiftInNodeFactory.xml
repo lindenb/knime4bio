@@ -2,12 +2,15 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Sift In</name>
-    <shortDescription>Parse Sift Results</shortDescription>
+    <shortDescription>Parse <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a> Results</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Parse <a href="http://sift.jcvi.org/www/SIFT_chr_coords_submit.html">SIFT</a> Results</intro>
+        <option name="CHROM">VCF CHROM</option>
+        <option name="POS">VCF POS</option>
+	<option name="REF">VCF REF</option>
+        <option name="ALT">VCF ALT</option>
+	<option name="SIFT">Sift column containing the mutation</option>
     </fullDescription>
     
     <ports>

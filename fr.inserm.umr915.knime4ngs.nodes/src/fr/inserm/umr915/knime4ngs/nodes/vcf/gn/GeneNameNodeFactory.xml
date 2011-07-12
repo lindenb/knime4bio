@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Gene Name</name>
-    <shortDescription>Gene Name</shortDescription>
+    <name>Gene Name DEPRECATED</name>
+    <shortDescription>Gene Name DEPRECATED</shortDescription>
     
     <fullDescription>
-        <intro>Extract Gene Name from VCF</intro>
+        <intro>Extract Gene Name from VCF DEPRECATED</intro>
         <option name="short name of first option (like in the dialog)">description of first option</option>
         <option name="short name of second option (like in the dialog)">description of second option</option>
     </fullDescription>

@@ -7,9 +7,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelDoubleBounded;
 
 
-/**
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class RsFilterNodeDialog extends DefaultNodeSettingsPane
 	{
     protected RsFilterNodeDialog()

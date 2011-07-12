@@ -4,12 +4,7 @@ import org.knime.core.node.NodeDialogPane;
 import org.knime.core.node.NodeFactory;
 import org.knime.core.node.NodeView;
 
-/**
- * <code>NodeFactory</code> for the "VCFLoader" Node.
- * Loads a VCF File
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class VCFLoaderNodeFactory 
         extends NodeFactory<VCFLoaderNodeModel>
 	{

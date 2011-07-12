@@ -31,12 +31,7 @@ import fr.inserm.umr915.knime4ngs.corelib.knime.AbstractNodeModel;
 
 
 
-/**
- * This is the model implementation of VCFSource.
- * Reads a VCF file
- *
- * @author Pierre Lindenbaum
- */
+@Deprecated
 public class RsFilterNodeModel extends AbstractNodeModel
 	{ 
 	private URL serverURL=null;

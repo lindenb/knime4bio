@@ -3,9 +3,11 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.bedfile;
 import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.defaultnodesettings.DefaultNodeSettingsPane;
+import org.knime.core.node.defaultnodesettings.DialogComponentBoolean;
 import org.knime.core.node.defaultnodesettings.DialogComponentColumnNameSelection;
 import org.knime.core.node.defaultnodesettings.DialogComponentNumber;
 import org.knime.core.node.defaultnodesettings.DialogComponentString;
+import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
@@ -69,6 +71,10 @@ public class BedFileNodeDialog extends DefaultNodeSettingsPane
                 new SettingsModelString( BedFileNodeModel.COL_PREFIX_PROPERTY, BedFileNodeModel.DEFAULT_ICOL_PREFIX),
                    "Column prefix",
                    true,10
+       			));
+    	addDialogComponent(new DialogComponentBoolean(
+                new SettingsModelBoolean( BedFileNodeModel.STOP_FIRST_PROPERTY, BedFileNodeModel.STOP_FIRST_DEF),
+                   "Stop after first hit"
        			));
     	}
 	}

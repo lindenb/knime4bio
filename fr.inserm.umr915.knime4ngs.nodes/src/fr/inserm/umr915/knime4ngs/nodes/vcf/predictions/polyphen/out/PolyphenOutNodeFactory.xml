@@ -2,14 +2,18 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Polyphen Out</name>
-    <shortDescription>Generates data for polyphen</shortDescription>
+    <shortDescription>Generates data for polyphen2</shortDescription>
     
     <fullDescription>
-        <intro>Insert long description here...</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <intro>Generates data for <a href="http://genetics.bwh.harvard.edu/pph2/bgi.shtml">polyphen2</a>. <i>"PolyPhen-2 (Polymorphism Phenotyping v2) is a tool which predicts possible impact of an amino acid substitution on the structure and function of a human protein using straightforward physical and comparative considerations. Please, use the form below to submit your query."</i>
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
+        <option name="CHROM">VCF CHROM</option>
+        <option name="POS">VCF POS</option>
+	<option name="REF">VCF REF</option>
+        <option name="ALT">VCF ALT</option>
     </fullDescription>
-    
     <ports>
         <inPort index="0" name="VCF">VCF</inPort>
     </ports>    

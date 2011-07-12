@@ -5,7 +5,10 @@
     <shortDescription>Concatenates two tables</shortDescription>
     
     <fullDescription>
-        <intro>Concatenates two tables</intro>
+        <intro>Concatenates two tables.
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
      </fullDescription>
     
     <ports>

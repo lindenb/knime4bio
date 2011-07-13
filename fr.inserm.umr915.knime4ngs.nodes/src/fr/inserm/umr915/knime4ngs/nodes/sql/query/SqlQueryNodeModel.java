@@ -59,7 +59,7 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
     /**
      * Constructor for the node model.
      */
-    protected SqlQueryNodeModel()
+    public SqlQueryNodeModel()
     	{
         super(1,1);
     	}
@@ -142,8 +142,7 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	        		{
 	        		
 	        		++nRow;
-	        		exec.checkCanceled();
-	            	exec.setProgress(nRow/total,"SQL....");
+	        		
 	        		DataRow row=iter.next();
 	        		
 	        		for(QueryParser.Column col: parser.getColumns())
@@ -250,6 +249,8 @@ public class SqlQueryNodeModel extends AbstractSqlNodeModel
 	        					);
 	        			container1.addRowToTable(outrow);
 		        		}
+	        		exec.checkCanceled();
+	            	exec.setProgress(nRow/total,"SQL....");
 	        		}
 	        	if(container1==null)
 	        		{

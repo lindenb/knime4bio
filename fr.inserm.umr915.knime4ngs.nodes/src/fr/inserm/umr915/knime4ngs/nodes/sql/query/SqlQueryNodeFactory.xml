@@ -6,6 +6,11 @@
     
     <fullDescription>
         <intro>apply a SQL Query to every row of the input table.
+<h3>Example</h3>
+Example1:<br/>
+<pre>select chrom,chromStart from hg19.snp132 where name= ?ID limit 1</pre>
+Example2:<br/>
+<pre>select name from hg19.snp132 where chrom= ?CHROM and chromStart &lt;=( ?POS -1 ) and ( ?POS -1 ) &lt; chromEnd limit 1 </pre>
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>

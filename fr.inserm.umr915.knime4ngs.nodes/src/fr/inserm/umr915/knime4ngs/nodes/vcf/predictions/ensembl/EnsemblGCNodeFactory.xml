@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Ensembl GC</name>
-    <shortDescription>Filters VCF on Ensembl GC Prediction</shortDescription>
+    <name>Ensembl CQ</name>
+    <shortDescription>Filters VCF on Ensembl CQ Prediction</shortDescription>
     
     <fullDescription>
-        <intro>Filters VCF on Ensembl GC Prediction
+        <intro>Filters VCF on Ensembl CQ Prediction
         
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>

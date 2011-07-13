@@ -1,6 +1,10 @@
 package fr.inserm.umr915.knime4ngs.nodes.vcf.substitution;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.container.CloseableRowIterator;
@@ -9,22 +13,30 @@ import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
 import org.knime.core.node.InvalidSettingsException;
+import org.knime.core.node.defaultnodesettings.SettingsModel;
+import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 
-import fr.inserm.umr915.knime4ngs.corelib.bio.Mutation;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
 
 
-
-/**
- * This is the model implementation of VCFSource.
- * Reads a VCF file
- *
- * @author Pierre Lindenbaum
- */
 public class SubstitutionNodeModel extends AbstractVCFNodeModel
 	{
+	/** ref column */
+	static final String REF_COL_PROPERTY="ref.col";
+	static final String REF_COL_DEFAULT="REF";
+	private final SettingsModelColumnName m_refColumn = new SettingsModelColumnName(
+			REF_COL_PROPERTY,
+			REF_COL_DEFAULT
+			);
+	/** alt column */
+	static final String ALT_COL_PROPERTY="alt.col";
+	static final String ALT_COL_DEFAULT="ALT";
+	private final SettingsModelColumnName m_altColumn = new SettingsModelColumnName(
+			ALT_COL_PROPERTY,
+			ALT_COL_DEFAULT
+			);
     /**
      * Constructor for the node model.
      */
@@ -35,7 +47,9 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
     
     private static boolean isATGC(String s)
     	{
-    	return Mutation.isATGC(s);
+    	if(s==null || s.length()!=1) return false;
+    	int c= s.toUpperCase().charAt(0);
+    	return c>='A' && c<='Z';
     	}
     @Override
     protected BufferedDataTable[] execute(
@@ -52,8 +66,8 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 				BufferedDataTable inTable=inData[0];
 		       
 				DataTableSpec inDataTableSpec = inTable.getDataTableSpec();
-				int columnRef= findColumnIndex(inDataTableSpec,"REF",StringCell.TYPE);
-				int columnAlt= findColumnIndex(inDataTableSpec,"ALT",StringCell.TYPE);
+				int columnRef= findColumnIndex(inDataTableSpec,this.m_refColumn,StringCell.TYPE);
+				int columnAlt= findColumnIndex(inDataTableSpec,this.m_altColumn,StringCell.TYPE);
 		        container1 = exec.createDataContainer(inDataTableSpec);
 		        container2 = exec.createDataContainer(inDataTableSpec);
 		        
@@ -66,8 +80,12 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 		        		{
 		        		++nRow;
 		        		DataRow row=iter.next();
-		        		String ref=StringCell.class.cast(row.getCell(columnRef)).getStringValue();
-		        		String alt=StringCell.class.cast(row.getCell(columnAlt)).getStringValue();
+		        		DataCell cell=row.getCell(columnRef);
+		        		if(cell.isMissing()) continue;
+		        		String ref=StringCell.class.cast(cell).getStringValue();
+		        		cell=row.getCell(columnAlt);
+		        		if(cell.isMissing()) continue;
+		        		String alt=StringCell.class.cast(cell).getStringValue();
 						
 		        		if(isATGC(ref) && isATGC(alt))
 							{
@@ -78,7 +96,7 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 							container2.addRowToTable(row);
 							}
 		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"Filtering....");
+		            	exec.setProgress(nRow/total,"Substitutions....");
 		        		}
 		        
 					} 
@@ -88,15 +106,15 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 					}
 				finally
 					{
-					if(iter!=null) iter.close();
+					safeClose(iter);
 					}
 		        
 				// once we are done, we close the container and return its table
-		        container1.close();
+				safeClose(container1);
 		        BufferedDataTable out1 = container1.getTable();
 		        container1=null;
 		        
-		        container2.close();
+		        safeClose(container2);
 		        BufferedDataTable out2 = container2.getTable();
 		        container2=null;
 		        BufferedDataTable array[]= new BufferedDataTable[]{out1,out2};
@@ -110,8 +128,8 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 			}
 		finally
 			{
-			if(container1!=null) container1.close();
-			if(container2!=null) container2.close();
+			safeClose(container1);
+			safeClose(container2);
 			}
        }
     
@@ -123,9 +141,18 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
     		throw new InvalidSettingsException("Expected one table");
     		}
     	
-    	findColumnIndex(inSpecs[0],"REF",StringCell.TYPE);
-    	findColumnIndex(inSpecs[0],"ALT",StringCell.TYPE);
+    	findColumnIndex(inSpecs[0],this.m_refColumn,StringCell.TYPE);
+    	findColumnIndex(inSpecs[0],this.m_altColumn,StringCell.TYPE);
     	return new DataTableSpec[]{inSpecs[0],inSpecs[0]};
     	}
+    
+    @Override
+	protected List<SettingsModel> getSettingsModel() {
+		List<SettingsModel> arrayModel=new ArrayList<SettingsModel>(super.getSettingsModel());
+		arrayModel.add(this.m_refColumn);
+		arrayModel.add(this.m_altColumn);
+		return arrayModel;
+		}
+    
 	}
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>Numeric Column filter</name>
+    <shortDescription>Filter a set of columns all having their numeric values between a range of values.</shortDescription>
+    
+    <fullDescription>
+        <intro>Filter a set of columns all having their numeric values between a range of values.
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+</intro>
+        <option name="Columns">The numeric columns to be observed</option>
+        <option name="Bounds">Min/max value (inclusive)</option>
+        <option name="All">All column must satisfy the criteria. Else only one column per row must satisfy the criteria</option>
+    	<option name="Invert">Invert the selection.</option>
+    </fullDescription>
+    
+    <ports>
+    	<inPort index="0" name="Input0">Input 1</inPort>
+        <outPort index="0" name="Output0">Output</outPort>
+    </ports>
+</knimeNode>

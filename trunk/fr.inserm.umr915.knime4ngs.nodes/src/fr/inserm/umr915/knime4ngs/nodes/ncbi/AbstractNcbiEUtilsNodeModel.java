@@ -166,8 +166,7 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 	        		{
 	        		DataRow row=iter.next();
 	        		++nRow;
-	        		exec.checkCanceled();
-	            	exec.setProgress(nRow/total,"NCBI....");
+	        		
 	            	
 	            	List<DataCell[]> cells=scan(row,spec1);
 	            	if(cells!=null && !cells.isEmpty())
@@ -185,6 +184,8 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 	            		outIndex++;
             			container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(outIndex),row,empty));
 	            		}
+	            	exec.checkCanceled();
+	            	exec.setProgress(nRow/total,"NCBI....");
 	        		}
 				} 
 	        catch (Exception e)

@@ -500,7 +500,7 @@ public class LocalUcscPredictionNodeModel extends AbstractSqlNodeModel
 				        		
 				        		if(refBase!=null && !String.valueOf(genomicSeq.charAt(position0)).equalsIgnoreCase(refBase))
 				        			{
-				        			System.err.println("WARNING REF!=GENOMIC SEQ!!! at "+genomicSeq.charAt(position0)+"/"+refBase);
+				        			System.err.println("WARNING REF!=GENOMIC SEQ!!! at "+currentChromosome+":"+(position0+1)+":"+genomicSeq.charAt(position0)+"/"+refBase);
 				        			}
 				        		
 				        		if(gene.isForward())

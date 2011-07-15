@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.knime.base.data.append.column.AppendedColumnRow;
+import org.knime.core.data.DataCell;
 import org.knime.core.data.DataColumnSpec;
 import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataRow;
@@ -167,8 +168,12 @@ public class DasContextNodeModel extends AbstractVCFNodeModel
 		        		++nRow;
 		        		DataRow row=iter.next();
 		        		handler.dna=null;
-		        		String chrom=StringCell.class.cast(row.getCell(chromColumn)).getStringValue();
-		        		int pos0=IntCell.class.cast(row.getCell(pos0Column)).getIntValue();
+		        		DataCell cell=row.getCell(chromColumn);
+		        		if(cell.isMissing()) continue;
+		        		String chrom=StringCell.class.cast(cell).getStringValue();
+		        		cell=row.getCell(pos0Column);
+		        		if(cell.isMissing()) continue;
+		        		int pos0=IntCell.class.cast(cell).getIntValue();
 		        		
 		        		int leftLen=extend;
 		        		if(pos0-leftLen<1) leftLen=pos0-1;

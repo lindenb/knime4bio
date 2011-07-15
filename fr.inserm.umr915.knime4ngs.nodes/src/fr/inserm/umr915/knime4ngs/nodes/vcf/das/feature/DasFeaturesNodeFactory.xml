@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>DAS Features</name>
+    <shortDescription>Retrieves some annotation using a Distributed Annotation Server.</shortDescription>
+    
+    <fullDescription>
+        <intro>Retrieves some annotation using a Distributed Annotation Server (<a href="http://www.biodas.org">DAS</a>).
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+	</intro>
+        <option name="DAS URI">DAS DNA URL for Features. example for UCSC hg19:<br/>
+        <pre>http://genome.ucsc.edu/cgi-bin/das/hg19/features?segment=__POSITION__;type=knownGene</pre><br/>
+        The word <b>__POSITION__</b> will be replaced by the coordinate in the row
+        </option>
+    <option name="CHROM">VCF CHROM</option>
+	<option name="POS">VCF Position</option>
+	<option name="Max hit">Maximum number of DAS record per row.</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Input">Input</inPort>
+        <outPort index="0" name="Output">Output</outPort>
+    </ports>
+</knimeNode>

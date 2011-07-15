@@ -316,7 +316,11 @@
         <node 
           	category-path="/ngs/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory" 
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory"  />                
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory"  /> 
+        <node 
+          	category-path="/ngs/biows"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory"  />               
    </extension>
    
 </plugin>

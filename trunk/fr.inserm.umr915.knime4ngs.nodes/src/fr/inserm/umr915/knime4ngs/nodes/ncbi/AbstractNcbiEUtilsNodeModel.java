@@ -34,11 +34,11 @@ import fr.inserm.umr915.knime4ngs.corelib.knime.ExecuteException;
 
 public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 	{
-    final static String TERM_PROPERTY="ncbi.query"; 
+    public final static String TERM_PROPERTY="ncbi.query"; 
 	private final SettingsModelString m_term = new SettingsModelString(TERM_PROPERTY,"");
 	
-	 final static String LIMIT_PROPERTY="ncbi.qlimit"; 
-	 final static int LIMIT_DEFAULT=10; 
+	public  final static String LIMIT_PROPERTY="ncbi.qlimit"; 
+	public  final static int LIMIT_DEFAULT=10; 
 	private final SettingsModelInteger m_limit = new SettingsModelInteger(LIMIT_PROPERTY,LIMIT_DEFAULT);
 	
 	protected XMLInputFactory xmlInputFactory;

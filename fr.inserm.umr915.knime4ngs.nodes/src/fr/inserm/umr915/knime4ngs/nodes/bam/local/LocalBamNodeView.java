@@ -106,7 +106,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 				Integer highlight
 				) throws Exception
 				{
-				System.err.println("calling bamImage");
+				//System.err.println("calling bamImage");
 				if(refSeq==null  || refSeq.trim().isEmpty())
 					{
 					throw new IllegalArgumentException("bad chromosome");
@@ -116,7 +116,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 					throw new IllegalArgumentException("bad chromStart:"+chromStart);
 					}
 				
-				System.err.println("2calling bamImage");
+				//System.err.println("2calling bamImage");
 		
 				
 				

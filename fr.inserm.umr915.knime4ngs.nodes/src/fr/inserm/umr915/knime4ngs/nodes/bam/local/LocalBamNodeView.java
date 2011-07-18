@@ -8,15 +8,21 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -60,6 +66,7 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 	private JLabel bamIconLabel;
 	private JTextField countRowsLabel;
 	private Lookup bamThread=null;
+	private JTextField build=null;
 	
 	
 	/**
@@ -346,9 +353,23 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 		
 		
 			{
-			JPanel pane2=new JPanel(new BorderLayout());
+			JPanel pane2=new JPanel(new BorderLayout(5,5));
 			this.bamIconLabel=new JLabel();
-			pane2.add(new JScrollPane(this.bamIconLabel));
+			pane2.add(new JScrollPane(this.bamIconLabel),BorderLayout.CENTER);
+			bot=new JPanel(new FlowLayout(FlowLayout.LEADING));
+			pane2.add(bot,BorderLayout.SOUTH);
+			bot.add(new JLabel("Build:",JTextField.RIGHT));
+			bot.add(this.build=new JTextField("hg19",8));
+			bot.add(new JButton(new AbstractAction("Open Browser")
+				{
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void actionPerformed(ActionEvent event)
+					{
+					openBrowser();
+					}
+				}));
 			left.addTab("Bam",pane2);
 			}
 		
@@ -363,6 +384,43 @@ public class LocalBamNodeView  extends AbstractNodeView<LocalBamNodeModel>
 		{
 		updateSelection();
 		countRowsLabel.setText("Rows: "+this.tableModel.getRowCount());
+		}
+	
+	private void openBrowser()
+		{
+
+		int n= this.table.getSelectedRow();
+		if(n==-1) return;
+		n= this.table.convertRowIndexToModel(n);
+		if(n==-1) return;
+		Object o1=this.tableModel.getValueAt(n,this.chromColumn);
+		if(o1==null || !(o1 instanceof String)) return;
+		String chrom=o1.toString();
+		Object o2=this.tableModel.getValueAt(n,this.posColumn);
+		if(o2==null || !(o2 instanceof Integer)) return;
+		Integer pos=(Integer)o2;
+		
+		String assembly=this.build.getText().trim();
+		if(assembly.isEmpty()) return;
+		
+		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+		if(desktop==null || !desktop.isSupported(java.awt.Desktop.Action.BROWSE)) return;
+		
+		try
+			{
+			java.net.URI uri = new java.net.URI(
+				"http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&db="+
+				URLEncoder.encode(assembly, "UTF-8")+"&position="+
+				URLEncoder.encode(chrom+":"+
+						(pos-1)+"-"+
+						(pos+1), "UTF-8")
+				);
+			desktop.browse( uri );
+			}
+		catch(Exception err)
+			{
+			JOptionPane.showMessageDialog(this.table, String.valueOf(err.getMessage()));
+			}
 		}
 	
 	private void updateSelection()

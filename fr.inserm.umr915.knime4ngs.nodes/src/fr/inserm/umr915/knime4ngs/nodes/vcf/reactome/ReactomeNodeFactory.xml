@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="reactome.png" type="Source">
+    <name>Reactome pathways</name>
+    <shortDescription>Find the pathways in the Reactome Database</shortDescription>
+    
+    <fullDescription>
+        <intro>Find the <b>Pathways</b> in the <a href="http://www.reactome.org">Reactome Database</a> for a given UniProt-ID<br/>
+        <i>(Last tested: 2011-07-19)</i>.<br/>
+
+
+<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
+
+	</intro>
+        <option name="UniProtID">A column containing a <b>Uniprot</b> identifier. e.g:<br/>
+        <pre>Q04637</pre><br/>
+        </option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Input">Input</inPort>
+        <outPort index="0" name="Output">Output</outPort>
+    </ports>
+</knimeNode>

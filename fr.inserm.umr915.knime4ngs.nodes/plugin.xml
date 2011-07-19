@@ -285,6 +285,12 @@
             category-path="/ngs/biows"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"/>
+        
+        <node 
+          	category-path="/ngs/biows"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.reactome.ReactomeNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.reactome.ReactomeNodeFactory"  /> 
+        
         <node
             category-path="/ngs/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.cut.CutRegionNodeFactory"

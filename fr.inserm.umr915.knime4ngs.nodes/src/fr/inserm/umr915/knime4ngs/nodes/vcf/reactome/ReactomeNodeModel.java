@@ -107,13 +107,13 @@ public class ReactomeNodeModel extends AbstractVCFNodeModel
 		        				con2.disconnect();
 		        				if(location==null)
 		        					{
-		        					System.err.println("Cannot find redirect for "+url);
+		        					//System.err.println("Cannot find redirect for "+url);
 		        					break;
 		        					}
 		        				
 		        				if(!location.startsWith(PREFIX))
 		        					{
-		        					System.err.println("Location :"+location+" doesn't start with "+PREFIX);
+		        					System.err.println("Location :"+location+" doesn't start with "+PREFIX+" this node might not be up-to-date.");
 		        					break;
 		        					}
 		        				location="http://www.reactome.org/cgi-bin/taboutputter?"+

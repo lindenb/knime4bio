@@ -36,7 +36,7 @@ public class BedFileNodeDialog extends DefaultNodeSettingsPane
     	addDialogComponent(new DialogComponentString(
                 new SettingsModelString( BedFileNodeModel.FILENAME_URI_PROPERTY, BedFileNodeModel.DEFAULT_FILENAME_URI),
                    "File URI",
-                   true,0
+                   true,50
        			));
     	
     	addDialogComponent(new DialogComponentNumber(

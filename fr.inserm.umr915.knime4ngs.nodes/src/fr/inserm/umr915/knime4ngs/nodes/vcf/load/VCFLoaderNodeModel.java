@@ -89,9 +89,10 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
     	Pattern semicolon=Pattern.compile("[\\;]");
     	BufferedDataContainer container=null;
     	int nRows=0;
+    	int iterCount=0;
     	int sampleCol= this.findColumnIndex(inTable.getDataTableSpec(), this.m_sampleColumn.getStringValue());
     	int vcfCol= this.findColumnIndex(inTable.getDataTableSpec(), this.m_vcfColumn.getStringValue());
-    	
+    	float total=inTable.getRowCount();
     	try
 	    	{
     		DataTableSpec dataTableSpec=new DataTableSpec(createVcfDataColumnSpec());
@@ -102,7 +103,7 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 	    		{
 	    		DataRow row=iter.next();
 	    		StringCell sample= StringCell.class.cast(row.getCell(sampleCol));
-				
+	    		exec.setProgress(iterCount/total,"Addin row "+nRows);
 	    		
 	    		String uri="http://srv-clc-02.irt.univ-nantes.prive:8080/biomachin/samples?vcf="+
 	    			URLEncoder.encode(StringCell.class.cast(row.getCell(vcfCol)).getStringValue(),"UTF-8")+
@@ -164,12 +165,14 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 			        exec.checkCanceled();
 		            if(nRows%1000000==0)
 		            	{
-		            	exec.setProgress("Adding row " + nRows);
+		            	//exec.setProgress("Adding row " + nRows);
 		            	//TODO
 		            	break;
 		            	}
 					
 					}
+				++iterCount;
+				exec.setProgress(iterCount/total,"Addin row "+nRows);
 				reader.close();
 				reader=null;
 	    		}

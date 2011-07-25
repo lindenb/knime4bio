@@ -103,7 +103,7 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 	    		{
 	    		DataRow row=iter.next();
 	    		StringCell sample= StringCell.class.cast(row.getCell(sampleCol));
-	    		exec.setProgress(iterCount/total,"Addin row "+nRows);
+	    		exec.setProgress(iterCount/total,"Adding row "+nRows);
 	    		
 	    		String uri="http://srv-clc-02.irt.univ-nantes.prive:8080/biomachin/samples?vcf="+
 	    			URLEncoder.encode(StringCell.class.cast(row.getCell(vcfCol)).getStringValue(),"UTF-8")+
@@ -163,12 +163,6 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 			    
 		            // check if the execution monitor was canceled
 			        exec.checkCanceled();
-		            if(nRows%1000000==0)
-		            	{
-		            	//exec.setProgress("Adding row " + nRows);
-		            	//TODO
-		            	break;
-		            	}
 					
 					}
 				++iterCount;

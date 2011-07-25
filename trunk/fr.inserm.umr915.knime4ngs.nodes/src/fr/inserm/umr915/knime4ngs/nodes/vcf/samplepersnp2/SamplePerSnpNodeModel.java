@@ -1,10 +1,10 @@
-package fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp;
+package fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.knime.base.data.append.column.AppendedColumnRow;
@@ -45,20 +45,6 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 			POS_COL_DEFAULT
 			);
 	
-	/** ref column */
-	static final String REF_COL_PROPERTY="ref.col";
-	static final String REF_COL_DEFAULT="REF";
-	private final SettingsModelColumnName m_refColumn = new SettingsModelColumnName(
-			REF_COL_PROPERTY,
-			REF_COL_DEFAULT
-			);
-	/** alt column */
-	static final String ALT_COL_PROPERTY="alt.col";
-	static final String ALT_COL_DEFAULT="ALT";
-	private final SettingsModelColumnName m_altColumn = new SettingsModelColumnName(
-			ALT_COL_PROPERTY,
-			ALT_COL_DEFAULT
-			);
 	
 	/** sample column */
 	static final String SAMPLE_COL_PROPERTY="sample.col";
@@ -76,8 +62,7 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 		int chromColumn;
 		int sampleColumn;
 		int positionColumn;
-		int refColumn;
-		int altColumn;
+		
 		
 		public  Mutation getMutation(DataRow row)
 			{
@@ -86,9 +71,7 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 					StringCell.class.cast(row.getCell(this.chromColumn)).getStringValue(),
 					IntCell.class.cast(row.getCell(this.positionColumn)).getIntValue()
 					),
-				StringCell.class.cast(row.getCell(this.refColumn)).getStringValue(), 
-				StringCell.class.cast(row.getCell(this.altColumn)).getStringValue()
-				);
+				"A",  "T" ); //use always the same variation
 			}
 		
 		@Override
@@ -119,9 +102,7 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 		sorter.chromColumn = inSpecs.findColumnIndex(this.m_chromColumn.getStringValue());
 		sorter.sampleColumn = inSpecs.findColumnIndex(this.m_sampleColumn.getStringValue());
 		sorter.positionColumn = inSpecs.findColumnIndex(this.m_posColumn.getStringValue());
-		sorter.refColumn = inSpecs.findColumnIndex(this.m_refColumn.getStringValue());
-		sorter.altColumn = inSpecs.findColumnIndex(this.m_altColumn.getStringValue());
-	
+		
 		//collect sample names
 		double total= inTable.getRowCount();
 		BufferedDataContainer container=exec.createDataContainer(createTableSpec(inSpecs));;
@@ -145,7 +126,7 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 						{
 						if(prevMutation.compareTo(mutation)>0)
 							{
-							throw new IllegalStateException( "Table should have been sorted on CHROM/POS/REF/ALT but got "+prevMutation+">"+mutation );
+							throw new IllegalStateException( "Table should have been sorted on CHROM/POS but got "+prevMutation+">"+mutation );
 							}
 						}
 					}
@@ -155,26 +136,17 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 					&& !rowBuffer.isEmpty()
 					)
 					{
-					Map<String, Integer> sample2count=new HashMap<String, Integer>();
+					Set<String> sampleSet=new HashSet<String>();
 					
 					for(DataRow r: rowBuffer)
 						{
 						DataCell c=r.getCell(sorter.sampleColumn);
 						if(c.isMissing()) throw new IllegalStateException("Empty sample=null in "+r.getKey());
 						String sample=StringCell.class.cast(c).getStringValue();
-						Integer count= sample2count.get(sample);
-						if(count==null)
-							{
-							count=0;
-							}
-						else
-							{
-							getLogger().warn("mutation defined twice for "+sample+" "+r);
-							}
-						sample2count.put(sample,count+1);
+						sampleSet.add(sample);
 						}
 					
-					int samples_per_mutation= sample2count.size();
+					int samples_per_mutation= sampleSet.size();
 					
 					
 					for(DataRow buffrow: rowBuffer)
@@ -217,10 +189,9 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 			throws InvalidSettingsException
 		{
 		if(tables.length!=1 || tables[0]==null) throw new InvalidSettingsException("Expected one table");
+		
 		findColumnIndex(tables[0],this.m_chromColumn,StringCell.TYPE);
 		findColumnIndex(tables[0],this.m_posColumn,IntCell.TYPE);
-		findColumnIndex(tables[0],this.m_refColumn,StringCell.TYPE);
-		findColumnIndex(tables[0],this.m_altColumn,StringCell.TYPE);
 		findColumnIndex(tables[0],this.m_sampleColumn,StringCell.TYPE);
 		DataTableSpec inSpecs=createTableSpec(tables[0]);
 		return new DataTableSpec[]{inSpecs};
@@ -238,8 +209,6 @@ public class SamplePerSnpNodeModel extends AbstractVCFNodeModel
 		List<SettingsModel> arrayModel=new ArrayList<SettingsModel>(super.getSettingsModel());
 		arrayModel.add(this.m_chromColumn);
 		arrayModel.add(this.m_posColumn);
-		arrayModel.add(this.m_refColumn);
-		arrayModel.add(this.m_altColumn);
 		arrayModel.add(this.m_sampleColumn);
 		return arrayModel;
 		}

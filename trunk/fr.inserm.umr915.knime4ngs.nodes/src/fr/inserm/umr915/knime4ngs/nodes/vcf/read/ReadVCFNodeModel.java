@@ -109,12 +109,17 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 	    	{
     		container1 = exec.createDataContainer(createVcfDataColumnSpec());
     		container2 = exec.createDataContainer(createVcfHeaderDataColumnSpec());
-    		
+    		int iterCount=0;
+    		float total=inTable.getRowCount();
 	    	iter=inTable.iterator();
 	    	while(iter.hasNext())
 	    		{
+	    		++iterCount;
+	    		exec.setProgress(iterCount/total,"Reading");
 	    		DataRow row=iter.next();
+	    		if(row.getCell(sampleCol).isMissing()) continue;
 	    		StringCell sample= StringCell.class.cast(row.getCell(sampleCol));
+	    		if(row.getCell(uriCol).isMissing()) continue;
 	    		String uri=StringCell.class.cast(row.getCell(uriCol)).getStringValue();
 				reader=openReader(uri);
 				String line;
@@ -183,14 +188,16 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 			        container1.addRowToTable(new DefaultRow(
 			        		RowKey.createRowKey(nRows1),
 			        		cells));
-			    
+			        
 		            // check if the execution monitor was canceled
-			        exec.checkCanceled();
-		            exec.setProgress("Adding row " + nRows1);
-
+			        if(nRows1%10000==0)
+			        	{
+			        	exec.checkCanceled();
+			        	}
 					}
 				reader.close();
 				reader=null;
+				exec.setProgress(iterCount/total,"Reading");
 	    		}
 	    	safeClose(iter);
 	    	iter=null;

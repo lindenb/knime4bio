@@ -6,8 +6,13 @@
     
     <fullDescription>
         <intro>Group the mutations by CHROM/POS/REF/ALT. Displaying the common columns for each samples</intro>
-        <option name="short name of first option (like in the dialog)">description of first option</option>
-        <option name="short name of second option (like in the dialog)">description of second option</option>
+        <option name="CHROM">CHROM column</option>
+        <option name="POS">POS column</option>
+        <option name="REF">REF column</option>
+        <option name="ALT">ALT column</option>
+        <option name="Sample">Sample column</option>
+        <option name="Left">The columns you want on the left (specific to a SNP:CHROM/POS/REF/ALT</option>
+        <option name="top">The columns you want on the top (specific to a Sample (eg: FORMAT and CALL))</option>
     </fullDescription>
     
     <ports>

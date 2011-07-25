@@ -7,7 +7,8 @@
     <fullDescription>
         <intro>Find the <b>Pathways</b> in the <a href="http://www.reactome.org">Reactome Database</a> for a given UniProt-ID<br/>
         <i>(Last tested: 2011-07-19)</i>.<br/>
-
+Reactome is manually curated and peer-reviewed pathway database.
+This custom node uses a column containing some Uniprot IDs and get the pathways associated to the protein.
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 

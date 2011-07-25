@@ -11,6 +11,10 @@
         Rows must be sorted by chom/pos/ref/alt/sample
         
         
+        This node counts the number of times a variant (defined as a genomic position and an alternative allele) was found among all the sequenced samples.
+        Those mutations shared between several unrelated samples, are insightly either a common variation between the sample, or an error in the reference sequence.
+        
+        
         <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
         
         </intro>

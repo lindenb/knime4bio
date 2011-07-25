@@ -11,6 +11,7 @@ import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.DataType;
 import org.knime.core.data.container.CloseableRowIterator;
+import org.knime.core.data.def.IntCell;
 import org.knime.core.data.def.StringCell;
 import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
@@ -19,6 +20,8 @@ import org.knime.core.node.InvalidSettingsException;
 import org.knime.core.node.defaultnodesettings.SettingsModel;
 import org.knime.core.node.defaultnodesettings.SettingsModelBoolean;
 import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
+
+import fr.inserm.umr915.knime4ngs.corelib.knime.ExecuteException;
 import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
 
 
@@ -44,7 +47,7 @@ public class NormalizeChromNodeModel extends AbstractVCFNodeModel
     /**
      * Constructor for the node model.
      */
-    protected NormalizeChromNodeModel()
+    public NormalizeChromNodeModel()
     	{
         super(1,1);
     	}
@@ -82,7 +85,18 @@ public class NormalizeChromNodeModel extends AbstractVCFNodeModel
 		        		DataCell cell= row.getCell(chromCol);
 		        		if(!cell.isMissing())
 		        			{
-		        			String c=StringCell.class.cast(cell).getStringValue().trim();
+		        			String c;
+		        			if(cell.getType().equals(IntCell.TYPE))
+		        				{
+		        				int n=IntCell.class.cast(cell).getIntValue();
+		        				if(n<0) throw new ExecuteException("Bad chromosome ID: "+cell.toString());
+		        				c=String.valueOf(n);
+		        				}
+		        			else
+		        				{
+		        				c=StringCell.class.cast(cell).getStringValue().trim();
+		        				}
+		        			
 		        			if( c.isEmpty() ||
 		        				c.equalsIgnoreCase("NULL")  ||
 		        				c.equalsIgnoreCase("NIL")  ||

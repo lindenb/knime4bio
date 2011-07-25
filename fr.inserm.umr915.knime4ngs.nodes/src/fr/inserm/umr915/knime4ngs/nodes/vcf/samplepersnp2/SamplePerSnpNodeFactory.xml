@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Sample/Snp (CHROM/POS/REF/ALT)</name>
-    <shortDescription>Gets the number of Samples having a given SNP</shortDescription>
+    <name>Sample/Snp (CHROM/POS)</name>
+    <shortDescription>Gets the number of Samples having a SNP at a given position</shortDescription>
     
     <fullDescription>
         <intro>
         This node gets the number of Samples having a given SNP.
         It adds an integer column for the number of columns per snp.
-        Rows must be sorted by chom/pos/ref/alt/sample
+        This node only considers the positions (CHROM/POS), but not REF and ALT.
+        Rows must be sorted by chom/pos/sample
         
         
         <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
@@ -16,8 +17,6 @@
         </intro>
         <option name="CHROM">The CHROM column</option>
         <option name="POS">The POS column</option>
-        <option name="REF">The REF column</option>
-        <option name="ALT">The ALT column</option>
         <option name="Sample">The Sample column</option>
     </fullDescription>
     

@@ -181,6 +181,10 @@ public class WigNodeModel extends AbstractVCFNodeModel
 					{
 					int i=s.indexOf('=');
 					currPosition=Integer.parseInt(s.substring(i+1));
+					/* WIGs ARE +1 based !!! see http://genome.ucsc.edu/goldenPath/help/wiggle.html
+					"For a chromosome of length N, the first position is 1 and the last position is N."
+					*/
+					currPosition--;
 					}
 				else if(s.startsWith("step="))
 					{

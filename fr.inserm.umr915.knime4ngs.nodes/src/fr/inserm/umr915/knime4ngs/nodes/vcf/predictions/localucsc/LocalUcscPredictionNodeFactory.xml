@@ -5,9 +5,10 @@
     <shortDescription>Variant effect predictor using UCSC KnownGene</shortDescription>
     
     <fullDescription>
-        <intro>Variant effect predictor  using the <b>UCSC KnownGene</b> table. 
-        
-       	 <i>Note for IRT/nantes users: use port 3316 in the JDBC uri</i>
+        <intro>Variant effect predictor  using the <b>UCSC KnownGene</b> table.<br/>
+        The mysql database <b>MUST</b> contain a copy of the <b>UCSC KnownGene</b> table. (eg: <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19">http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/knownGene.txt.gz</a>)
+       	<br/>
+       	<i>Note for IRT/nantes users: use port 3316 in the JDBC uri</i>
 
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>

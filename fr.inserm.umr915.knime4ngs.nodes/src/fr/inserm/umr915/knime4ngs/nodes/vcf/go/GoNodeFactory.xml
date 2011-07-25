@@ -12,6 +12,12 @@ Download the gene inheriting a given GO identifier using the QuickGO API.
     <fullDescription>
         <intro>Call the QuickGO API to get the protein in the domain of a given <a href="http://www.geneontology.org/">GO</a> ID.
 
+
+This node is a wrapper around the QuickGO service for GeneOntology.
+It returns all the proteins that have been annotated by a GO term or by its descendant.
+The rows of this table, joined to a VCF pipeline are used to select the only SNPs linked to a GO term.
+
+
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>
         <option name="Term">The GO ID. e.g: <b>GO:0003015</b></option>

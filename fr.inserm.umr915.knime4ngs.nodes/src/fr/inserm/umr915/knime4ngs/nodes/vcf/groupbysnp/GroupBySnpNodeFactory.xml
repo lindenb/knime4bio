@@ -5,7 +5,12 @@
     <shortDescription>Group by Snp</shortDescription>
     
     <fullDescription>
-        <intro>Group the mutations by CHROM/POS/REF/ALT. Displaying the common columns for each samples</intro>
+        <intro>
+        Group the mutations by CHROM/POS/REF/ALT. Displaying the common columns for each samples.
+        
+        
+        
+        </intro>
         <option name="CHROM">CHROM column</option>
         <option name="POS">POS column</option>
         <option name="REF">REF column</option>

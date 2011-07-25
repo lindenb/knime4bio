@@ -5,7 +5,10 @@
     <shortDescription>Tests if a page exists in MediaWiki</shortDescription>
     
     <fullDescription>
-        <intro>Tests if a page exists in a MediaWiki installation.
+        <intro>
+Mediawiki is the popular wiki platform used by Wikipedia.
+This node tests whether an article in a mediawiki installation exists and appends the boolean value to the table.
+Hence, this node can be used to quickly tell a user if a gene has already been annotated by a colleague.
 
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>

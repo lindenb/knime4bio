@@ -2,7 +2,7 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>hg19Snp130 DEPRECATED</name>
-    <shortDescription>DBSNP version 130 ofr hg19 DEPRECATED</shortDescription>
+    <shortDescription>DBSNP version 130 of hg19 DEPRECATED</shortDescription>
     
     <fullDescription>
         <intro>DBSNP version 130 ofr hg19 DEPRECATED</intro>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Group by Snp</name>
-    <shortDescription>Group by Snp</shortDescription>
+    <name>Group by Snv</name>
+    <shortDescription>Group by Snv</shortDescription>
     
     <fullDescription>
         <intro>
@@ -16,7 +16,7 @@
         <option name="REF">REF column</option>
         <option name="ALT">ALT column</option>
         <option name="Sample">Sample column</option>
-        <option name="Left">The columns you want on the left (specific to a SNP:CHROM/POS/REF/ALT</option>
+        <option name="Left">The columns you want on the left (specific to a SNV:CHROM/POS/REF/ALT</option>
         <option name="top">The columns you want on the top (specific to a Sample (eg: FORMAT and CALL))</option>
     </fullDescription>
     

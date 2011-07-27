@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Sample/Snp (CHROM/POS)</name>
-    <shortDescription>Gets the number of Samples having a SNP at a given position</shortDescription>
+    <name>Sample/Snv (CHROM/POS)</name>
+    <shortDescription>Gets the number of Samples having a SNV at a given position</shortDescription>
     
     <fullDescription>
         <intro>
-        This node gets the number of Samples having a given SNP.
-        It adds an integer column for the number of columns per snp.
+        This node gets the number of Samples having a given SNV.
+        It adds an integer column for the number of columns per snv.
         This node only considers the positions (CHROM/POS), but not REF and ALT.
         Rows must be sorted by chom/pos/sample
         
@@ -25,7 +25,7 @@
     
     <ports>
         <inPort index="0" name="input">input</inPort>
-        <outPort index="0" name="ouptput">ouptput</outPort>
+        <outPort index="0" name="Output">Output</outPort>
     </ports>    
 
 </knimeNode>

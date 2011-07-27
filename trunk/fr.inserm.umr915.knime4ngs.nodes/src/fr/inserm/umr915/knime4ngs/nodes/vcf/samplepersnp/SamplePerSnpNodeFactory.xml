@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="../default.png" type="Source">
-    <name>Sample/Snp (CHROM/POS/REF/ALT)</name>
-    <shortDescription>Gets the number of Samples having a given SNP</shortDescription>
+    <name>Sample/Snv (CHROM/POS/REF/ALT)</name>
+    <shortDescription>Gets the number of Samples having a given SNV</shortDescription>
     
     <fullDescription>
         <intro>
-        This node gets the number of Samples having a given SNP.
-        It adds an integer column for the number of columns per snp.
-        Rows must be sorted by chom/pos/ref/alt/sample
+        This node gets the number of Samples having a given SNV.
+        It adds an integer column for the number of columns per snv.
+        Rows <b>must</b> be sorted by chom/pos/ref/alt/sample.
         
         
         This node counts the number of times a variant (defined as a genomic position and an alternative allele) was found among all the sequenced samples.
@@ -27,7 +27,7 @@
     
     <ports>
         <inPort index="0" name="input">input</inPort>
-        <outPort index="0" name="ouptput">ouptput</outPort>
+        <outPort index="0" name="Output">Output</outPort>
     </ports>    
 
 </knimeNode>

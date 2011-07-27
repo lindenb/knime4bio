@@ -5,7 +5,21 @@
     <shortDescription>Group VCF data by Gene</shortDescription>
     
     <fullDescription>
-        <intro>Group the mutations by <b>gene</b>. Displaying the number of samples affected, the number of distinct mutation and the number of SNPs found in each sample.
+        <intro>Group the mutations by <b>gene</b>. Displaying the number of samples affected, the number of distinct mutation and the number of SNVs found in each sample. From this kind of table:<br/>
+<pre>
+#CHROM  POS   REF   ALT   GENE   SAMPLE
+chr1    1     A     T     Gene1  Sample1
+chr1    1     A     T     Gene1  Sample2
+chr1    2     G     C     Gene1  Sample2
+chr2    3     A     T     Gene2  Sample2
+</pre>
+It generates the following pivot table:
+<pre>
+#Gene   CHROM   Sample1  Sample2
+Gene1   chr1    1        2
+Gene2   chr2    0        1
+</pre>
+
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>

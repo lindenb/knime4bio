@@ -12,11 +12,13 @@ Example1:<br/>
 Example2:<br/>
 <pre>select name from hg19.snp132 where chrom= ?CHROM and chromStart &lt;=( ?POS -1 ) and ( ?POS -1 ) &lt; chromEnd limit 1 </pre>
 
+<br/>See also Biostar: <a href="http://biostar.stackexchange.com/questions/474">What are the public SQL servers for bioinformatics ?</a>.
+
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>
         <option name="Query: the SQL query">
         	The SQL query. Words starting with <b>?columnName</b> will be replace by the content of the table. Don't put a semi colon at the end of the query.
-        	Example: <pre>Select chrom as C,chromStart as S,chromEnd as E where name= ?SNP</pre>.
+        	Example: <pre>Select chrom as C,chromStart as S,chromEnd as E from hg19.snp132 where name= ?SNP</pre>.
         </option>
          <option name="jdbc.uri">JDBC uri. For the ucsc data it is: jdbc:mysql://genome-mysql.cse.ucsc.edu/hg19</option>
         <option name="jdbc.user">JDBC user. For the ucsc data it is: "genome"</option>

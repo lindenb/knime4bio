@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="igv.png" type="Source">
+    <name>IGV</name>
+    <shortDescription>Opens a window in IGV</shortDescription>
+    
+  
+    <fullDescription>
+        <intro>
+        "The <a href="http://www.broadinstitute.org/software/igv/">Integrative Genomics Viewer (IGV)</a> is a high-performance visualization tool for interactive exploration of large, integrated datasets".
+        This node opens tells IGV to open a given genomic location. 
+        
+        See also <a href="http://www.broadinstitute.org/igv/PortCommands">http://www.broadinstitute.org/igv/PortCommands</a>
+        
+        
+        <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.<br/>This nodes uses the <a href="http://picard.sourceforge.net/">Picard Library</a> to read the BAMs.</p>
+    </intro>
+        <option name="CHROM">The VCF CHROM column</option>
+        <option name="POS">The VCF POS column. The genomic position (1-based)</option>
+        <option name="IGV host">The host for IGV (see <a href="http://www.broadinstitute.org/igv/PortCommands">http://www.broadinstitute.org/igv/PortCommands</a>)</option>
+        <option name="IGV port">The port for IGV (see <a href="http://www.broadinstitute.org/igv/PortCommands">http://www.broadinstitute.org/igv/PortCommands</a>)</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="input1">VCF</inPort>
+    </ports>   
+    <views>
+    	<view index="0" name="view0">View browser</view>
+    </views>
+</knimeNode>

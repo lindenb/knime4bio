@@ -4,7 +4,19 @@ Install KNime4Bio
 
 = Installing from an update site=
 
-TODO
+(see also: http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-34.htm , )
+
+  * Open knime
+  * Menu Help > Install New Software. The install dialog will appear. 
+  * Click on "Add..."
+    * Name:  KNime4BIO
+    * URL: http://xxxxxxxxxxxxxxxxxxxxxxx.univ-nantes.fr/public_html/eclipse/plugins/fr.inserm.umr915.knime4ngs.update/
+    * press OK
+  * Select the latest version ok knime4bio, accept the license, finish.
+
+If you need to update your workbench:
+
+  * Menu File > "Update Knime..."
 
 = Installing the Knime4Bio Plugin from a local zip =
 

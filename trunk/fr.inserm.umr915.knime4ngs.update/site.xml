@@ -3,13 +3,13 @@
    <description name="Knime4Bio" url="http://code.google.com/p/knime4bio/">
       Knime4Bio
    </description>
-   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.11.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.11">
-      <category name="knime4bio"/>
-   </feature>
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.12.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.12">
       <category name="knime4bio"/>
    </feature>
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.13.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.13">
+      <category name="knime4bio"/>
+   </feature>
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.14.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.14">
       <category name="knime4bio"/>
    </feature>
    <category-def name="knime4bio" label="Knime4Bio">

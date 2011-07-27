@@ -13,7 +13,7 @@
 </intro>
         <option name="CHROM">VCF CHROM</option>
         <option name="POS">VCF position</option>
-	<option name="File URI">BED file URI. It can be gzipped. Data must be sorted on CHROM/START/END</option>
+	<option name="File URI">BED file URI. It can be gzipped or BGZipped . Data must be sorted on CHROM/START/END</option>
         <option name="bed chrom">Chromosome column index in the BED file (first index is 1)</option>
 	<option name="bed start">Start column index in the BED file (first index is 1)</option>
 	<option name="bed end">End column index in the BED file (first index is 1)</option>

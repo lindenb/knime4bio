@@ -12,7 +12,7 @@
 </intro>
         <option name="CHROM">The VCF CHROM column</option>
         <option name="POS">The VCF POS column (first base is '1')</option>
-        <option name="Wig URI">URI of the <a href="https://cgwb.nci.nih.gov/goldenPath/help/wiggle.html">WIG</a> (possibly gzipped); Eitheir fixed or variable intervals.</option>
+        <option name="Wig URI">URI of the <a href="https://cgwb.nci.nih.gov/goldenPath/help/wiggle.html">WIG</a> (possibly gzipped or bgzipped); Eitheir fixed or variable intervals.</option>
         <option name="Column-name">New Column name</option>
     </fullDescription>
     

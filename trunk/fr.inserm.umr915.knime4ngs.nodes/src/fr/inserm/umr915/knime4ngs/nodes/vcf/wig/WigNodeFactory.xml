@@ -11,7 +11,7 @@
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p></intro>
         <option name="CHROM">The CHROM column</option>
         <option name="POS">The POS column (first base is '1')</option>
-        <option name="Wig URI">URI of the <a href="https://cgwb.nci.nih.gov/goldenPath/help/wiggle.html">WIG</a> (possibly gzipped); Eitheir fixed or variable intervals.</option>
+        <option name="Wig URI">URI of the <a href="https://cgwb.nci.nih.gov/goldenPath/help/wiggle.html">WIG</a> (possibly gzipped or bgzipped); Eitheir fixed or variable intervals.</option>
         <option name="Column-name">New Column name</option>
          <option name="Use step">Use start+'wig.step' instead of start+'wig.span' to get the end of a genomic region.</option>
     </fullDescription>

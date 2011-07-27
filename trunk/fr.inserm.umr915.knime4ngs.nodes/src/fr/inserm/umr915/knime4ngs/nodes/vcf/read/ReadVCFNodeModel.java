@@ -2,6 +2,7 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.read;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -138,6 +139,14 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 								new StringCell(line.substring(2))
 								));
 							}
+						else
+							{
+							final String H="#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT";
+							if(!line.startsWith(H))
+								{
+								throw new IOException("Expected VCF header to start with \n"+H+" but got "+line);
+								}
+							}
 						continue;
 						}
 					
@@ -145,7 +154,12 @@ public class ReadVCFNodeModel extends AbstractVCFNodeModel
 					String tokens[]=tab.split(line);
 					if(tokens.length<9)
 						{
-						throw new IOException("Error expected 9 columns but got "+tokens.length +" in "+line);
+						StringWriter sw=new StringWriter();
+						for(int i=0;i< tokens.length;++i)
+							{
+							sw.append("\n("+i+")\t\""+tokens[i]+"\"");
+							}
+						throw new IOException("Error expected 9 columns but got "+tokens.length +" in "+line+ sw);
 						}
 					
 					

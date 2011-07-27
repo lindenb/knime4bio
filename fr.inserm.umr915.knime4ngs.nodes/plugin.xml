@@ -323,6 +323,10 @@
           	category-path="/ngs/bioview"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory"  />
+       <node 
+          	category-path="/ngs/bioview"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.igv.IGVNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.igv.IGVNodeFactory"  />
         <node 
           	category-path="/ngs/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory" 

@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
+import net.sf.samtools.util.BlockCompressedInputStream;
 
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTable;
@@ -72,15 +72,14 @@ public abstract class AbstractNodeModel  extends NodeModel
 			}
 		if(uri.toLowerCase().endsWith(".gz"))
 			{
-			in=new GZIPInputStream(in);
+			in=new BlockCompressedInputStream(in);
 			}
 		return in;
 		}
 	
 	protected BufferedReader openReader(String uri) throws IOException
 		{
-		getLogger().info("opening "+uri);
-		return new BufferedReader(new InputStreamReader(openStream(uri)));
+		return new BufferedReader(new InputStreamReader(openStream(uri),"UTF-8"));
 		}
 	
 	protected static NodeLogger getLogger()

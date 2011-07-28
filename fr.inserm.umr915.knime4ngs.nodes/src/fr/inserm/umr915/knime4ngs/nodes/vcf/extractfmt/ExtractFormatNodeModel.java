@@ -2,6 +2,7 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 
@@ -68,7 +69,18 @@ public class ExtractFormatNodeModel extends AbstractVCFNodeModel
         super(1,1);
     	}
     
-
+    private List<String> extractFields() throws InvalidSettingsException 
+		{
+		TreeSet<String> tags=new TreeSet<String>();
+		for(String S:this.m_flag.getStringValue().split("[ \n\t,;]+"))
+			{
+			S=S.trim();
+			if(S.isEmpty()) continue;
+			tags.add(S);
+			}
+		if(tags.isEmpty()) throw new InvalidSettingsException("No tag was defined");
+		return new ArrayList<String>(tags);
+		}
     
     @Override
     protected BufferedDataTable[] execute(
@@ -91,7 +103,7 @@ public class ExtractFormatNodeModel extends AbstractVCFNodeModel
 				DataTableSpec merged=new DataTableSpec(inDataTableSpec1,createDataTableSpec());
 		        container1 = exec.createDataContainer(merged);
 		        DataType datatype=getDataType();
-		        final String theTag=m_flag.getStringValue().trim();
+		        final List<String> theTags=extractFields();
 		        double total=table1.getRowCount();
 		        int nRow=0;
 		        RowIterator iter1=null;
@@ -103,95 +115,107 @@ public class ExtractFormatNodeModel extends AbstractVCFNodeModel
 		        		{
 		        		++nRow;
 		        		DataRow row=iter1.next();
-		        		DataCell appendcell=DataType.getMissingCell();
+		        		DataCell appendcells[]=new DataCell[theTags.size()];
 		        		DataCell fmtCell= row.getCell(formatCol);
 		        		DataCell callCell= row.getCell(callCol);
+		        		
+		        		
+		        		for(int tagIdx=0;tagIdx<theTags.size();++tagIdx)
+		        			{
+		        			appendcells[tagIdx]=DataType.getMissingCell();
+		        			}
+		        		
 		        		if(!(fmtCell.isMissing() || callCell.isMissing()))
 		        			{
-		        			String tokens[]=colon.split(StringCell.class.cast(fmtCell).getStringValue());
-		        			int tagIndex=-1;
-		        			for(int i=0;i< tokens.length;++i)
-		        				{
-		        				if(tokens[i].equals(theTag))
-		        					{
-		        					tagIndex=i;
-		        					break;
+		        			for(int tagIdx=0;tagIdx<theTags.size();++tagIdx)
+			        			{
+			        			String theTag=theTags.get(tagIdx);
+			        			String tokens[]=colon.split(StringCell.class.cast(fmtCell).getStringValue());
+			        			int tagIndex=-1;
+			        			for(int i=0;i< tokens.length;++i)
+			        				{
+			        				if(tokens[i].equals(theTag))
+			        					{
+			        					tagIndex=i;
+			        					break;
+			        					}
+			        				}
+			        			if(tagIndex!=-1)
+			        				{
+			        				tokens=colon.split(StringCell.class.cast(callCell).getStringValue());
+			        				if(tagIndex<tokens.length)
+			        					{
+			        					String value=tokens[tagIndex];
+			        					
+	
+					        			if(value.isEmpty())
+					        				{
+					        				appendcells[tagIdx]=DataType.getMissingCell();
+					        				}
+					        			else if(datatype.equals(DoubleCell.TYPE))
+					        				{
+					        				try {
+					        					appendcells[tagIdx]=new DoubleCell(Double.parseDouble(value));
+												} 
+					        				catch (Exception e)
+												{
+					        					appendcells[tagIdx]=DataType.getMissingCell();
+												}
+					        				}
+					        			else if(datatype.equals(LongCell.TYPE))
+					        				{
+					        				try {
+					        					appendcells[tagIdx]=new LongCell(Long.parseLong(value));
+												} 
+					        				catch (Exception e)
+												{
+					        					appendcells[tagIdx]=DataType.getMissingCell();
+												}
+					        				}
+					        			else if(datatype.equals(IntCell.TYPE))
+					        				{
+					        				try {
+					        					appendcells[tagIdx]=new IntCell(Integer.parseInt(value));
+												} 
+					        				catch (Exception e)
+												{
+					        					appendcells[tagIdx]=DataType.getMissingCell();
+												}
+					        				}
+					        			else if(datatype.equals(BooleanCell.TYPE))
+					        				{
+					        				try {
+					        					
+					        					if(value.equals("1")) value="true";
+					        					if(value.equals("0")) value="false";
+					        					value=value.toLowerCase();
+					        					if(value.equals("t")) value="true";
+					        					if(value.equals("f")) value="false";
+					        					if(value.equals("y")) value="true";
+					        					if(value.equals("n")) value="false";
+					        					appendcells[tagIdx]=Boolean.parseBoolean(value)?BooleanCell.TRUE:BooleanCell.FALSE;
+												} 
+					        				catch (Exception e)
+												{
+					        					appendcells[tagIdx]=DataType.getMissingCell();
+												}
+					        				}
+					        			else
+					        				{
+					        				try {
+					        					appendcells[tagIdx]=new StringCell(value);
+												} 
+					        				catch (Exception e)
+												{
+					        					appendcells[tagIdx]=DataType.getMissingCell();
+												}
+					        				}
+					        			}
 		        					}
 		        				}
-		        			if(tagIndex!=-1)
-		        				{
-		        				tokens=colon.split(StringCell.class.cast(callCell).getStringValue());
-		        				if(tagIndex<tokens.length)
-		        					{
-		        					String value=tokens[tagIndex];
-		        					
-
-				        			if(value.isEmpty())
-				        				{
-				        				appendcell=DataType.getMissingCell();
-				        				}
-				        			else if(datatype.equals(DoubleCell.TYPE))
-				        				{
-				        				try {
-				        					appendcell=new DoubleCell(Double.parseDouble(value));
-											} 
-				        				catch (Exception e)
-											{
-											appendcell=DataType.getMissingCell();
-											}
-				        				}
-				        			else if(datatype.equals(LongCell.TYPE))
-				        				{
-				        				try {
-				        					appendcell=new LongCell(Long.parseLong(value));
-											} 
-				        				catch (Exception e)
-											{
-											appendcell=DataType.getMissingCell();
-											}
-				        				}
-				        			else if(datatype.equals(IntCell.TYPE))
-				        				{
-				        				try {
-				        					appendcell=new IntCell(Integer.parseInt(value));
-											} 
-				        				catch (Exception e)
-											{
-											appendcell=DataType.getMissingCell();
-											}
-				        				}
-				        			else if(datatype.equals(BooleanCell.TYPE))
-				        				{
-				        				try {
-				        					
-				        					if(value.equals("1")) value="true";
-				        					if(value.equals("0")) value="false";
-				        					value=value.toLowerCase();
-				        					if(value.equals("t")) value="true";
-				        					if(value.equals("f")) value="false";
-				        					if(value.equals("y")) value="true";
-				        					if(value.equals("n")) value="false";
-				        					appendcell=Boolean.parseBoolean(value)?BooleanCell.TRUE:BooleanCell.FALSE;
-											} 
-				        				catch (Exception e)
-											{
-											appendcell=DataType.getMissingCell();
-											}
-				        				}
-				        			else
-				        				{
-				        				try {
-				        					appendcell=new StringCell(value);
-											} 
-				        				catch (Exception e)
-											{
-											appendcell=DataType.getMissingCell();
-											}
-				        				}
-				        			}
-	        					}
-	        				}
-		        		container1.addRowToTable(new AppendedColumnRow(row,appendcell));
+		        			}
+		        			
+		        		container1.addRowToTable(new AppendedColumnRow(row,appendcells));
 		        		exec.checkCanceled();
 		            	exec.setProgress(nRow/total,"Extracting FORMAT....");
 		        		}
@@ -249,9 +273,14 @@ public class ExtractFormatNodeModel extends AbstractVCFNodeModel
     
     private DataTableSpec createDataTableSpec() throws InvalidSettingsException
     	{
-    	if(m_flag.getStringValue().trim().isEmpty()) throw new InvalidSettingsException("Empty flag");
-    	DataColumnSpec cols[]=new DataColumnSpec[1];
-    	cols[0]=new DataColumnSpecCreator(m_flag.getStringValue(),getDataType()).createSpec();
+    	List<String> tags=extractFields();
+    	if(tags.isEmpty()) throw new InvalidSettingsException("No tag was defined");
+    	DataColumnSpec cols[]=new DataColumnSpec[tags.size()];
+    	DataType t=getDataType();
+    	for(int i=0;i< tags.size();++i)
+    		{
+    		cols[i]=new DataColumnSpecCreator(tags.get(i),t).createSpec();
+    		}
     	return new DataTableSpec(cols);
     	}
     

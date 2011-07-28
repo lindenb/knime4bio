@@ -15,7 +15,7 @@
         <option name="FORMAT">the FORMAT column in the VCF</option>
         <option name="CALL">the CALL column in the VCF</option>
         <option name="DataType">The type of data to be extracted (int, double, boolean, etc... )</option>
-    	<option name="Flag">the name of the flag to be extracted</option>
+    	<option name="Flag">the name of the flag to be extracted (many separated by a comma or a whitespace)</option>
     </fullDescription>
     
     <ports>

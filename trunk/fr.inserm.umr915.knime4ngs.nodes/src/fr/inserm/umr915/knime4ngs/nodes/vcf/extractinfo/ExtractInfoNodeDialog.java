@@ -23,8 +23,8 @@ public class ExtractInfoNodeDialog extends DefaultNodeSettingsPane
     	
     	addDialogComponent(new DialogComponentString(
                 new SettingsModelString( ExtractInfoNodeModel.FLAG_PROPERTY, ExtractInfoNodeModel.DEFAULT_FLAG),
-                   "Flag name",
-                   true,50
+                   "Flag name (multiple separated by a space or a comma)",
+                   true,30
        			));
     	addDialogComponent(new DialogComponentStringSelection(
                 new SettingsModelString( ExtractInfoNodeModel.DATATYPE_PROPERTY, ExtractInfoNodeModel.DEFAULT_DATATYPE),

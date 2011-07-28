@@ -30,8 +30,8 @@ public class ExtractFormatNodeDialog extends DefaultNodeSettingsPane
     	
     	addDialogComponent(new DialogComponentString(
                 new SettingsModelString( ExtractFormatNodeModel.FLAG_PROPERTY, ExtractFormatNodeModel.DEFAULT_FLAG),
-                   "Flag name",
-                   true,50
+                   "Flag name (many separated by a comma or a space)",
+                   true,30
        			));
     	addDialogComponent(new DialogComponentStringSelection(
                 new SettingsModelString( ExtractFormatNodeModel.DATATYPE_PROPERTY, ExtractFormatNodeModel.DEFAULT_DATATYPE),

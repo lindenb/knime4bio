@@ -136,6 +136,11 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"/>
            
+          <node
+            category-path="ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.distance.DistanceSnpNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.distance.DistanceSnpNodeFactory"/> 
+           
            <node
             category-path="ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2.SamplePerSnpNodeFactory"

@@ -1,9 +1,0 @@
-=Motivation=
-
-keep SNPs having a column INFO  containing a gene Name
-
-= Solution =
-
-use the following row filter:
-
-[https://knime4bio.googlecode.com/svn/wiki/SnpInGene.png]]

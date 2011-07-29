@@ -1,4 +1,5 @@
-==Motivation==
+#summary excluding some chromosome from the analysis
+
 you want to remove one or more chromosomes from a VCF file.
 ==Solution==
 Create a row filter:

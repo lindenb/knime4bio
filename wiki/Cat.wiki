@@ -1,12 +1,5 @@
-Cat
+#summary Concatenates two tables
 
-
-
-= Motivation =
-
-Concatenates two tables
-
-= Solution =
 
 Concatenates two tables
 

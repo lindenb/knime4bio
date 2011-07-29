@@ -1,12 +1,6 @@
-NCBI Gene
+#summary NCBI Gene
 
-
-
-= Motivation =
-
-NCBI Gene
-
-= Solution =
+Retrieves records from NCBI genes
 
 NCBI Gene. Example: `##Symbol##[GENE] 9606[taxid]`
 

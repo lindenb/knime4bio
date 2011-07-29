@@ -1,4 +1,5 @@
-= Motivation =
+#summary displaying a NCBI record
+
 We want to display a NCBI record
 = Solution =
 * create a new "View NCBI" sink.
@@ -6,4 +7,3 @@ We want to display a NCBI record
 the type of database (pubmed, gene, etc...)
 = Screenshot = 
 [https://knime4bio.googlecode.com/svn/wiki/ViewNcbi01.png]
-

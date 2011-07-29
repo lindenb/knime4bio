@@ -1,0 +1,20 @@
+#summary exclude SNVs found in another VCF
+
+"I want to only keep the SNV from List1 that are not part of List2"
+
+Create the following workflow 
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110729a.png]
+
+The *Join* Node will add a '?/nil' value if it cannot find a SNV from List1 in List2:
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110729b.png]
+
+The *Row* filter: remove the SNV having a '?/nil' in the joined List2
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110729c.png]
+
+Remove the empty/unused columns:
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110729d.png]
+

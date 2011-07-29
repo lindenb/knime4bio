@@ -1,14 +1,6 @@
-MediaWiki exists
-
-
-
-= Motivation =
+#summary Tests if a page exist in MediaWiki
 
 Tests if a page exist in MediaWiki
-
-= Solution =
-
-Tests if a page exist in a MediaWiki installation
 
 = Parameters =
 

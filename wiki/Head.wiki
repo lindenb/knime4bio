@@ -1,14 +1,6 @@
-Head
+#summary Keeps the first rows of a table
 
-
-
-= Motivation =
-
-Keeps the first lines of a table
-
-= Solution =
-
-Keeps the first lines of a table
+Keeps the first rows of a table
 
 = Parameters =
 

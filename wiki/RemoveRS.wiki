@@ -1,3 +1,4 @@
+#summary excluding SNP having a rs## in dbSNP
 =Motivation=
 excluding SNP having a rs## in dbSNP
 

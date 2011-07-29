@@ -1,46 +1,30 @@
-=Motivation=
-Reading a set of VCF files.
-=Solution=
+#summary   Reads one or more VCF File.
+       
+Reads one or more VCF File.
+    
 
-we loop over each file in a give director. Another column containing the name of the sample is joined at the end.
+= Solution =
 
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF01.png]
+Reads one or more VCF[http://www.1000genomes.org/node/101] File associated to a sample name.
+It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped ,or bgzipped).
+It currently only supports one sample per VCF.
 
-==Create a List File Node==
-list the *.vcf.gz files in a given directory
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF02.png]
-==Extract the Sample Name==
-in the current case, the sample name is extracted from the file path.
-{{{
-String s=$Location$ ;
-int i=s.indexOf("Brs");
-s=s.substring(i);
-i=s.indexOf(".");
-s=s.substring(0,i);
-return s;
-}}}
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF03.png]
-==Extract the Sample Index==
-Just return the file Index in the list of file
+= Parameters =
 
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF04.png]
 
-==Process each VCF in a sub-workflow==
+  * *quality* : Ignore VCF data with a quality lower than this value
+  * *SAMPLE* : the SAMPLE column
+  * *VCF URI* : the  *absolute*  path-to-vcf column
 
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF05.png]
+= Input =
 
-  * ExludingChromosomes 
-  * FilterQuality 
-  * FilterDepth
-  * FilterPrediction
-  * [RemoveRS]
-  * SnpInGene
-  * FilterPrediction
 
-and append the iteration index
+  * *Input* : A table containing at least two columns. A column contains a sample name and another column is the  *absolute path*  to a VCF file (which can be g-zipped if needed)
 
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF07.png]
 
-==Join Sample-Name & VCF==
+= Output =
 
-[https://knime4bio.googlecode.com/svn/wiki/ReadingVCF06.png]
+
+  * *VCF* : VCF data and the sample name
+
+  * *Headers* : VCF Headers

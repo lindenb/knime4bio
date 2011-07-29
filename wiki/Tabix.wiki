@@ -1,0 +1,22 @@
+#summary Join a VCF with a file indexed with a TABIX file.
+
+This node joins a file indexed with TABIX (http://samtools.sourceforge.net/tabix.shtml[http://samtools.sourceforge.net/tabix.shtml]). 
+
+= Parameters =
+
+
+  * *CHROM* : The CHROM column in the VCF
+  * *POS* : The POS column in the VCF
+  * *Tabix File* : The file indexed with tabix
+  * *Prefix* : Column prefix for the tabix columns
+
+= Input =
+
+
+  * *In-Port 1* : VCF In
+
+
+= Output =
+
+
+  * *out* : VCF Out

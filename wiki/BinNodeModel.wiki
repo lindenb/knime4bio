@@ -1,3 +1,4 @@
+#summary  creates a UCSC Jim Kent's 'Bin' column
 creates a UCSC Jim Kent's 'Bin' column
 
 = Motivation =

@@ -1,4 +1,5 @@
-==Motivation==
+#summary filtering on QUAL
+
 you want to only keep the mutations having a **QUAL** greater than a given value
 ==Solution==
 Create a Numeric Row Splitter:

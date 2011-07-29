@@ -1,12 +1,4 @@
-Tail
-
-
-
-= Motivation =
-
-Keeps the last rows of a table
-
-= Solution =
+#sumamry Keeps the last rows of a table
 
 Keeps the last rows of a table
 

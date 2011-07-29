@@ -1,12 +1,5 @@
-NCBI Pubmed
+#summary NCBI Pubmed
 
-
-
-= Motivation =
-
-NCBI Pubmed
-
-= Solution =
 
 Retrieves articles from NCBI Pubmed
 

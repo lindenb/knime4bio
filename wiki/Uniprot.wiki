@@ -1,6 +1,6 @@
-=Motivation=
+#summary search for a functional region
 
-We want to know wether a mutation is contained within the functional region of a protain
+We want to know whether a mutation is contained within the functional region of a protain
 
 =Solution=
 

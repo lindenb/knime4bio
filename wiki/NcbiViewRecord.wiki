@@ -1,14 +1,6 @@
-Display NCBI
+#summary Display a NCBI record
 
-
-
-= Motivation =
-
-Displays a NCBI Record
-
-= Solution =
-
-Displays a NCBI Record
+this node displays a NCBI Record
 
 = Parameters =
 
@@ -22,4 +14,3 @@ Displays a NCBI Record
   * *input1* : Table
 
 = Output =
-

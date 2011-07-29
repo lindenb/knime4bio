@@ -1,10 +1,4 @@
-Echo
-
-
-
-= Motivation =
-
-Text-area to table
+#summary Text-area to table
 
 = Solution =
 
@@ -20,4 +14,3 @@ Transforms the content of a text-area to a table. One row per line.
 
 
 = Output =
-

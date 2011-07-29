@@ -40,14 +40,27 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 			POS_COL_DEFAULT
 			);
 	
-	
+	/** sample column */
+	static final String SAMPLE_COL_PROPERTY="sample.col";
+	static final String SAMPLE_COL_DEFAULT="Sample";
+	private final SettingsModelColumnName m_sampleColumn = new SettingsModelColumnName(
+			SAMPLE_COL_PROPERTY,
+			SAMPLE_COL_DEFAULT
+			);
 	
 	private static class Sorter
 		implements Comparator<DataRow>
 		{
+		int sampleColumn;
 		int chromColumn;
 		int positionColumn;
 		
+		public String getSample(DataRow row)
+			{
+			DataCell k=row.getCell(this.sampleColumn);
+			if(k.isMissing()) return null;
+			return StringCell.class.cast(k).getStringValue();
+			}
 		
 		public  Position getPosition(DataRow row)
 			{
@@ -90,6 +103,7 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 		CloseableRowIterator iter=null;
 		
 		Sorter sorter=new Sorter();
+		sorter.sampleColumn =inSpecs.findColumnIndex(this.m_sampleColumn.getStringValue());
 		sorter.chromColumn = inSpecs.findColumnIndex(this.m_chromColumn.getStringValue());
 		sorter.positionColumn = inSpecs.findColumnIndex(this.m_posColumn.getStringValue());
 		
@@ -101,6 +115,7 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 		try
 			{
 			Position prevPosition=null;
+			String prevSample=null;
 			iter=inTable.iterator();
 			int nRow=0;
 			while(iter.hasNext())
@@ -108,14 +123,29 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 				DataRow row=iter.next();
 				nRow++;
 				row=iter.next();
+				String sample=sorter.getSample(row);
+				if(sample==null) continue;
 				Position position=sorter.getPosition(row);
+				if(position==null) continue;
 				DataCell distCell=DataType.getMissingCell();
+				if(prevSample!=null)
+					{
+					if(prevSample.compareTo(sample)>0)
+						{
+						throw new IllegalStateException( "Table should have been sorted on Sample/CHROM/POS but got "+prevSample+">"+sample );
+						}
+					else if(prevSample.compareTo(sample)<0)
+						{
+						prevPosition=null;
+						}
+					}
+				
 				if(prevPosition!=null)
 					{
 					int cmp = prevPosition.compareTo(position);
 					if(cmp>0)
 						{
-						throw new IllegalStateException( "Table should have been sorted on CHROM/POS but got "+prevPosition+">"+position );
+						throw new IllegalStateException( "Table should have been sorted on Sample/CHROM/POS but got "+prevPosition+">"+position );
 						}
 					if(prevPosition.getChromosome().equals(position.getChromosome()))
 						{
@@ -123,6 +153,7 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 						}
 					}
 				prevPosition=position;
+				prevSample=sample;
 				container.addRowToTable(new AppendedColumnRow(row,distCell));
 	            exec.checkCanceled();
 	            exec.setProgress(nRow/total,"Getting distance");
@@ -151,6 +182,7 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 		if(tables.length!=1 || tables[0]==null) throw new InvalidSettingsException("Expected one table");
 		findColumnIndex(tables[0],this.m_chromColumn,StringCell.TYPE);
 		findColumnIndex(tables[0],this.m_posColumn,IntCell.TYPE);
+		findColumnIndex(tables[0],this.m_sampleColumn,StringCell.TYPE);
 		DataTableSpec inSpecs=createTableSpec(tables[0]);
 		return new DataTableSpec[]{inSpecs};
 		}
@@ -167,6 +199,7 @@ public class DistanceSnpNodeModel extends AbstractVCFNodeModel
 		List<SettingsModel> arrayModel=new ArrayList<SettingsModel>(super.getSettingsModel());
 		arrayModel.add(this.m_chromColumn);
 		arrayModel.add(this.m_posColumn);
+		arrayModel.add(this.m_sampleColumn);
 		return arrayModel;
 		}
 	}

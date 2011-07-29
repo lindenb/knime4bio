@@ -26,7 +26,10 @@ public class DistanceSnpNodeDialog extends DefaultNodeSettingsPane
                 new SettingsModelColumnName(
                 	DistanceSnpNodeModel.POS_COL_PROPERTY, DistanceSnpNodeModel.POS_COL_DEFAULT),
                     "Pos:",0,new DataTypeColumnFilter(IntCell.TYPE)));
-    	
+    	addDialogComponent(new DialogComponentColumnNameSelection(
+                new SettingsModelColumnName(
+                	DistanceSnpNodeModel.SAMPLE_COL_PROPERTY, DistanceSnpNodeModel.SAMPLE_COL_DEFAULT),
+                    "Sample:",0,new DataTypeColumnFilter(StringCell.TYPE)));
     	}
 	}
 

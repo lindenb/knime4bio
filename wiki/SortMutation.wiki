@@ -1,4 +1,4 @@
-=Motivation=
+#summary sorting on chrom/pos/ref/alt
 
 Some nodes requires that the mutation should be sorted on CHROM/POS/REF/ALT
 
@@ -7,5 +7,3 @@ Some nodes requires that the mutation should be sorted on CHROM/POS/REF/ALT
 Use a 'Sort' Node
 
 [https://knime4bio.googlecode.com/svn/wiki/SortMutation.png]
-
-

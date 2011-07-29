@@ -1,14 +1,6 @@
-Uniq
+#summary prints the uniq rows from a sorted table
 
-
-
-= Motivation =
-
-Output the uniq rows from a sorted table
-
-= Solution =
-
-Output the uniq rows from a  *sorted*  table. A  *Column Resorter*  Might be needed
+prints the uniq rows from a  *sorted*  table. A  *Column Resorter*  Might be needed if the columns are not in the correct order.
 
 = Parameters =
 

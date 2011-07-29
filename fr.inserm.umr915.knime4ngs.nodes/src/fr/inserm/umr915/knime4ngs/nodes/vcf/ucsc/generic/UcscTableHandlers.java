@@ -125,7 +125,6 @@ public class UcscTableHandlers
 ,"hg19.ntOoaHaplo"
 ,"hg19.ntSssSnps"
 ,"hg19.ntSssTop5p"
-,"hg19.omimGene"
 ,"hg19.oreganno"
 ,"hg19.orfeomeGenes"
 ,"hg19.pgNA12878"
@@ -15335,81 +15334,6 @@ DataCell cells[]=new DataCell[6];
 		else
 			{
 			cells[5]=new IntCell(Integer.parseInt(tokens[5]));
-			}
-		return cells;
-		}
-	}
-;
-if(id.equals("hg19.omimGene")) return 
-new UcscDatabaseHandler()
-	{
-	public String getUrl()
-		{
-		return "http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/omimGene.txt.gz";
-		}
-public int getChromColumn() { return 1;}
-public int getChromStartColumn() { return 2;}
-public int getChromEndColumn() { return 3;}
-	public DataTableSpec getDataTableSpec()
-		{
-		DataColumnSpec  colSpecs[]=new DataColumnSpec[5];
-		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
-		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
-		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
-		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
-		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
-		return new DataTableSpec(colSpecs);
-		}
-	public String getDatabaseName()
-		{
-		return "hg19";
-		}
-	public String getTableName()
-		{
-		return "omimGene";
-		}
-	public DataCell[] parse(String tokens[])
-		{
-DataCell cells[]=new DataCell[5];
-		if(tokens.length<=0 || tokens[0].equals("NULL"))
-			{
-			cells[0]=DataType.getMissingCell();
-			}
-		else
-			{
-			cells[0]=new IntCell(Integer.parseInt(tokens[0]));
-			}
-		if(tokens.length<=1 || tokens[1].equals("NULL"))
-			{
-			cells[1]=DataType.getMissingCell();
-			}
-		else
-			{
-			cells[1]=new StringCell((tokens[1]));
-			}
-		if(tokens.length<=2 || tokens[2].equals("NULL"))
-			{
-			cells[2]=DataType.getMissingCell();
-			}
-		else
-			{
-			cells[2]=new IntCell(Integer.parseInt(tokens[2]));
-			}
-		if(tokens.length<=3 || tokens[3].equals("NULL"))
-			{
-			cells[3]=DataType.getMissingCell();
-			}
-		else
-			{
-			cells[3]=new IntCell(Integer.parseInt(tokens[3]));
-			}
-		if(tokens.length<=4 || tokens[4].equals("NULL"))
-			{
-			cells[4]=DataType.getMissingCell();
-			}
-		else
-			{
-			cells[4]=new StringCell((tokens[4]));
 			}
 		return cells;
 		}

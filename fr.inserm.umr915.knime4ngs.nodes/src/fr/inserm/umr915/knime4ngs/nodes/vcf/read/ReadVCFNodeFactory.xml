@@ -9,7 +9,9 @@
     </shortDescription>
     
     <fullDescription>
-        <intro>Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File associated to a sample name. It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped ,or bgzipped). It currently only supports one sample per VCF.
+        <intro>Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File associated to a sample name.
+        It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped ,or bgzipped).
+        It currently only supports one sample per VCF.
 
 
 
@@ -21,7 +23,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">The file descriptor. A file containing two columns (tab delimited). The a column contains a sample name and another column is the <b>absolute path</b> to a VCF file (which can be g-zipped if needed)</inPort>
+        <inPort index="0" name="Input">A table containing at least two columns. A column contains a sample name and another column is the <b>absolute path</b> to a VCF file (which can be g-zipped if needed)</inPort>
         <outPort index="0" name="VCF">VCF data and the sample name</outPort>
         <outPort index="1" name="Headers">VCF Headers</outPort>
     </ports>    

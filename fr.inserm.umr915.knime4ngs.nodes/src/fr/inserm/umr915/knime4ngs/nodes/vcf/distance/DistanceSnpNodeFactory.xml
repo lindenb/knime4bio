@@ -8,13 +8,15 @@
         <intro>
         Computes the distance with the previous SNV.
         It appends a new column with this distance.
-        <b>Warning</b>, it doesn't take into account the sample's name.
-	Mutations must be sorted on CHROM/POS.        
+        
+	Mutations must be sorted on SAMPLE/CHROM/POS. 
+
         
 	<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a 
 href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
         
         </intro>
+        <option name="SAMPLE">The SAMPLE column</option>
         <option name="CHROM">The CHROM column</option>
         <option name="POS">The POS column</option>
     </fullDescription>

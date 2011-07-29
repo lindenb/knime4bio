@@ -2,7 +2,6 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic;
 import org.knime.core.data.*;
 import org.knime.core.data.def.*;
 import java.sql.*;
-import fr.inserm.umr915.knime4ngs.nodes.vcf.bin.UcscBin;
 public class UcscTableMysqlHandlers
 	{
 	private static String TABLE_IDS[]=new String[]{
@@ -127,7 +126,6 @@ public class UcscTableMysqlHandlers
 ,"hg19.ntOoaHaplo"
 ,"hg19.ntSssSnps"
 ,"hg19.ntSssTop5p"
-,"hg19.omimGene"
 ,"hg19.oreganno"
 ,"hg19.orfeomeGenes"
 ,"hg19.pgNA12878"
@@ -7428,49 +7426,6 @@ DataCell cells[]=new DataCell[6];
 			if(row.wasNull()) cells[4]=DataType.getMissingCell();
 			cells[5]=new IntCell(row.getInt("score"));
 			if(row.wasNull()) cells[5]=DataType.getMissingCell();
-		return cells;
-		}
-	}
-;
-if(id.equals("hg19.omimGene")) return 
-new UcscDatabaseMysqlHandler()
-	{
-public int getBinColumn() { return 0;}
-public int getChromColumn() { return 1;}
-public int getChromStartColumn() { return 2;}
-public int getChromEndColumn() { return 3;}
-public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name from hg19.omimGene where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
-	public DataTableSpec getDataTableSpec()
-		{
-		DataColumnSpec  colSpecs[]=new DataColumnSpec[5];
-		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
-		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
-		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
-		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
-		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
-		return new DataTableSpec(colSpecs);
-		}
-	public String getDatabaseName()
-		{
-		return "hg19";
-		}
-	public String getTableName()
-		{
-		return "omimGene";
-		}
-	public DataCell[] parse(ResultSet row) throws SQLException
-		{
-DataCell cells[]=new DataCell[5];
-			cells[0]=new IntCell(row.getInt("bin"));
-			if(row.wasNull()) cells[0]=DataType.getMissingCell();
-			cells[1]=new StringCell(row.getString("chrom"));
-			if(row.wasNull()) cells[1]=DataType.getMissingCell();
-			cells[2]=new IntCell(row.getInt("chromStart"));
-			if(row.wasNull()) cells[2]=DataType.getMissingCell();
-			cells[3]=new IntCell(row.getInt("chromEnd"));
-			if(row.wasNull()) cells[3]=DataType.getMissingCell();
-			cells[4]=new StringCell(row.getString("name"));
-			if(row.wasNull()) cells[4]=DataType.getMissingCell();
 		return cells;
 		}
 	}

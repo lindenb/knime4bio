@@ -1,14 +1,7 @@
-NCBI dbSnp
-
-
-
-= Motivation =
+#summary NCBI dbSnp
 
 Retrieves data from NCBI dbSnp
 
-= Solution =
-
-Retrieves data from NCBI dbSnp
 
 = Parameters =
 

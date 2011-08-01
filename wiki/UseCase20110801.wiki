@@ -2,7 +2,7 @@
 
 "I want to join my SNVs with a list of SNVs found in the 1000G project"
 
-Download the file from the 1000G project: a VCF (*.vcf). indexed with tabix *AND* its index (*.vcf.tbi).
+Download the file from the 1000G project: a VCF (.vcf). indexed with tabix *AND* its index (.vcf.tbi).
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110801a.png]
 
@@ -17,5 +17,3 @@ As the 1000G project uses '1', '2', etc... from the chromosomes names, normalize
 Use a Tabix node to join the data.
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110801d.png]
-
-

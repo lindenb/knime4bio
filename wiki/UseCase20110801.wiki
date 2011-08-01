@@ -1,0 +1,21 @@
+#summary join SNVs found in the 1000 genomes project
+
+"I want to join my SNVs with a list of SNVs found in the 1000G project"
+
+Download the file from the 1000G project: a VCF (*.vcf). indexed with tabix *AND* its index (*.vcf.tbi).
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110801a.png]
+
+Create the following workflow 
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110801b.png]
+
+As the 1000G project uses '1', '2', etc... from the chromosomes names, normalize the CHROM names
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110801c.png]
+
+Use a Tabix node to join the data.
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110801d.png]
+
+

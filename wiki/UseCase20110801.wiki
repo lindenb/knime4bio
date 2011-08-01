@@ -10,7 +10,7 @@ Create the following workflow
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110801b.png]
 
-As the 1000G project uses '1', '2', etc... from the chromosomes names, normalize the CHROM names
+As the 1000G project uses '1', '2', etc... as the chromosomes names, normalize the CHROM column
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110801c.png]
 

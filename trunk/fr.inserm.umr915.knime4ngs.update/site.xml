@@ -15,6 +15,9 @@
    <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.17.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.17">
       <category name="knime4bio"/>
    </feature>
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.18.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.18">
+      <category name="knime4bio"/>
+   </feature>
    <category-def name="knime4bio" label="Knime4Bio">
       <description>
          plugins for KNIME.

@@ -9,6 +9,7 @@ import org.knime.core.node.defaultnodesettings.SettingsModelColumnName;
 import org.knime.core.node.defaultnodesettings.SettingsModelInteger;
 import org.knime.core.node.defaultnodesettings.SettingsModelString;
 import fr.inserm.umr915.knime4ngs.corelib.knime.DataTypeColumnFilter;
+import fr.inserm.umr915.knime4ngs.nodes.ncbi.EInfo;
 
 
 public class ELinkNodeDialog extends DefaultNodeSettingsPane
@@ -25,13 +26,13 @@ public class ELinkNodeDialog extends DefaultNodeSettingsPane
     	addDialogComponent(new DialogComponentStringSelection(
     			new SettingsModelString(ELinkNodeModel.DB_IN_PROPERTY, ELinkNodeModel.DB_IN_DEFAULT),
     			"Database Type Input",
-    			ELinkNodeModel.ALL_NCBI_DB
+    			EInfo.getDatabases()
     			));
     	
     	addDialogComponent(new DialogComponentStringSelection(
     			new SettingsModelString(ELinkNodeModel.DB_OUT_PROPERTY, ELinkNodeModel.DB_OUT_DEFAULT),
     			"Database Type Output",
-    			ELinkNodeModel.ALL_NCBI_DB
+    			EInfo.getDatabases()
     			));
     	
     	addDialogComponent(new DialogComponentNumber(

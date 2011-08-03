@@ -6,7 +6,9 @@ import java.util.List;
 
 
 import org.knime.base.data.replace.ReplacedColumnsDataRow;
+import org.knime.base.data.replace.ReplacedColumnsTable;
 import org.knime.core.data.DataCell;
+import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.DataType;
@@ -63,15 +65,23 @@ public class NormalizeChromNodeModel extends AbstractVCFNodeModel
 			BufferedDataContainer container1=null;
 			BufferedDataTable inTable=inData[0];
 			DataTableSpec inSpec= inTable.getDataTableSpec();
-			int chromCol= findColumnIndex(inSpec,m_chromCol,StringCell.TYPE);
+			int chromCol= inSpec.findColumnIndex(m_chromCol.getColumnName());
+			if(chromCol==-1) throw new ExecuteException("Cannot find column for chrom");
+			if(!(inSpec.getColumnSpec(chromCol).getType().equals(IntCell.TYPE) ||
+				 inSpec.getColumnSpec(chromCol).getType().equals(StringCell.TYPE)
+			   ))
+				{
+				throw new ExecuteException("Bad type for chrom:"+inSpec.getColumnSpec(chromCol).getType());
+				}
 			
-			
-			
+			DataTableSpec spec2= ReplacedColumnsTable.createTableSpec(inSpec,
+					new DataColumnSpecCreator(inSpec.getColumnSpec(chromCol).getName(),StringCell.TYPE).createSpec(),
+					chromCol);
 			
 			try
 		    	{
 		       
-		        container1 = exec.createDataContainer(inSpec);
+		        container1 = exec.createDataContainer(spec2);
 
 		        double total=inTable.getRowCount();
 		        int nRow=0;
@@ -111,7 +121,19 @@ public class NormalizeChromNodeModel extends AbstractVCFNodeModel
 		        			}
 		        		if(!cell.isMissing())
 		        			{
-		        			String c=StringCell.class.cast(cell).getStringValue().trim().toLowerCase();
+		        			String c;
+		        			if(cell.getType().equals(IntCell.TYPE))
+		        				{
+		        				int n=IntCell.class.cast(cell).getIntValue();
+		        				if(n<0) throw new ExecuteException("Bad chromosome ID: "+cell.toString());
+		        				c=String.valueOf(n);
+		        				}
+		        			else
+		        				{
+		        				c=StringCell.class.cast(cell).getStringValue().trim();
+		        				}
+		        			
+		        			c=c.trim().toLowerCase();
 		        			if(c.startsWith("chrom")) c=c.substring(5).trim();
 		        			else if(c.startsWith("k")) c=c.substring(1).trim();
 		        			else if(c.startsWith("chr")) c=c.substring(3).trim();
@@ -186,10 +208,19 @@ public class NormalizeChromNodeModel extends AbstractVCFNodeModel
     		}
     	
     	DataTableSpec in=inSpecs[0];
-    	findColumnIndex(in,m_chromCol,StringCell.TYPE);
+    	int chromCol= in.findColumnIndex(m_chromCol.getColumnName());
+		if(chromCol==-1) throw new InvalidSettingsException("Cannot find column for chrom");
+		if(!(in.getColumnSpec(chromCol).getType().equals(IntCell.TYPE) ||
+				in.getColumnSpec(chromCol).getType().equals(StringCell.TYPE)
+		   ))
+			{
+			throw new InvalidSettingsException("Bad type for chrom:"+in.getColumnSpec(chromCol).getType());
+			}
+		DataTableSpec spec2= ReplacedColumnsTable.createTableSpec(in,
+				new DataColumnSpecCreator(in.getColumnSpec(chromCol).getName(),StringCell.TYPE).createSpec(),
+				chromCol);
     	
-    	
-    	return new DataTableSpec[]{in};
+    	return new DataTableSpec[]{spec2};
     	}
     
     @Override

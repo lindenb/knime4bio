@@ -116,11 +116,13 @@ public class TabixNodeModel extends AbstractVCFNodeModel
 		        			{
 		        			String chrom = StringCell.class.cast(row.getCell(chromCol)).getStringValue();
 		        			int position1 = IntCell.class.cast(row.getCell(posCol)).getIntValue();
-		        			TabixReader.Iterator iterator=tabReader.query(chrom+":"+position1);
+		        			TabixReader.Iterator iterator=tabReader.query(chrom+":"+position1+"-"+position1);
 		        			String line;
 		        			while(iterator!=null &&
 		        				(line=iterator.next())!=null)
 		        				{
+		        				
+		        				//System.err.println("match\n\t"+line+" vs\n\t"+row+"\n\t"+nRow);
 		        				String tokens[]=tab.split(line);
 		        				DataCell cells[]=new DataCell[inDataTableSpec2.getNumColumns()];
 			        			for(int i=0;i< cells.length;++i)
@@ -144,6 +146,7 @@ public class TabixNodeModel extends AbstractVCFNodeModel
 		        		
 						if(!found)
 							{
+							//System.err.println("nothing for "+row);
 							DataCell empty[]=new DataCell[inDataTableSpec2.getNumColumns()];
 		        			for(int i=0;i< empty.length;++i)
 		        				{
@@ -155,6 +158,7 @@ public class TabixNodeModel extends AbstractVCFNodeModel
 			        				row, empty));
 							
 							}
+						
 		        		exec.checkCanceled();
 		            	exec.setProgress(nRow/total,"Joining....");
 		        		}

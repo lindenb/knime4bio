@@ -250,7 +250,13 @@
             category-path="/ngs/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"/>   
-            
+      
+      
+      <node
+            category-path="/ngs/ncbi"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"/> 
+      
       <node
             category-path="/ngs/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.tabix.TabixNodeFactory"
@@ -339,7 +345,9 @@
         <node 
           	category-path="/ngs/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory" 
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory"  />               
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory"  />    
+            
+                       
    </extension>
    
 </plugin>

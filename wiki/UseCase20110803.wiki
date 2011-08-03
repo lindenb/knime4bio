@@ -1,0 +1,26 @@
+#summary join the Genomic Evolutionary Rate Profiling (GERP) scores to a VCF
+
+The GRP data are available as a BiwWig file at http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw (see the description here: http://genome.ucsc.edu/cgi-bin/hgc?g=allHg19RS_BW&i=allHg19RS_BW )
+
+Download the data ( 7Go)
+{{{
+wget "http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw" 
+}}}
+
+Create the following workflow:
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110803a.png]
+
+
+configure the bigwig node
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110803b.png]
+
+Execute...
+
+[https://knime4bio.googlecode.com/svn/wiki/Solena20110803c.png]
+
+
+
+
+

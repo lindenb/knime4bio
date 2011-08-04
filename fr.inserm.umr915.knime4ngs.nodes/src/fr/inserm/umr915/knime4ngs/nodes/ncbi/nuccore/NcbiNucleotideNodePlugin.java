@@ -2,7 +2,7 @@
  * $Revision$ $Date$ $Author$
  *
  */
-package fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam;
+package fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -16,14 +16,14 @@ import org.osgi.framework.BundleContext;
  *
  * @author Pierre Lindenbaum
  */
-public class  SamContextNodePlugin extends Plugin {
+public class  NcbiNucleotideNodePlugin extends Plugin {
     // The shared instance.
-    private static  SamContextNodePlugin plugin;
+    private static  NcbiNucleotideNodePlugin plugin;
 
     /**
      * The constructor.
      */
-    public  SamContextNodePlugin() {
+    public  NcbiNucleotideNodePlugin() {
         super();
         plugin = this;
     }
@@ -57,7 +57,7 @@ public class  SamContextNodePlugin extends Plugin {
      * 
      * @return Singleton instance of the Plugin
      */
-    public static  SamContextNodePlugin getDefault() {
+    public static  NcbiNucleotideNodePlugin getDefault() {
         return plugin;
     }
 

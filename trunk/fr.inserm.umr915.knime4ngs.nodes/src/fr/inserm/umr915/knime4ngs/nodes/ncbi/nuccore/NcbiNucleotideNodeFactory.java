@@ -1,4 +1,4 @@
-package fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam;
+package fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore;
 
 import org.knime.core.node.NodeDialogPane;
 import org.knime.core.node.NodeFactory;
@@ -11,15 +11,21 @@ import org.knime.core.node.NodeView;
  *
  * @author Pierre Lindenbaum
  */
-public class SamContextNodeFactory
-        extends NodeFactory<SamContextNodeModel> {
+public class NcbiNucleotideNodeFactory
+        extends NodeFactory<AbstractNcbiSeqNodeModel> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public SamContextNodeModel createNodeModel() {
-        return new SamContextNodeModel();
+    public AbstractNcbiSeqNodeModel createNodeModel() {
+        return new AbstractNcbiSeqNodeModel()
+        	{
+        	@Override
+        	protected String getDatabase() {
+        		return "nucleotide";
+        		}
+        	};
     }
 
     /**
@@ -34,8 +40,8 @@ public class SamContextNodeFactory
      * {@inheritDoc}
      */
     @Override
-    public NodeView<SamContextNodeModel> createNodeView(final int viewIndex,
-            final SamContextNodeModel nodeModel) {
+    public NodeView<AbstractNcbiSeqNodeModel> createNodeView(final int viewIndex,
+            final AbstractNcbiSeqNodeModel nodeModel) {
         throw new IllegalStateException();
     }
 
@@ -52,7 +58,7 @@ public class SamContextNodeFactory
      */
     @Override
     public NodeDialogPane createNodeDialogPane() {
-        return new SamContextNodeDialog();
+        return new NcbiSequenceNodeDialog();
     }
 
 }

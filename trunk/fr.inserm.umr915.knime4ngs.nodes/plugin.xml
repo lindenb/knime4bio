@@ -255,7 +255,18 @@
       <node
             category-path="/ngs/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"/> 
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"/>
+            
+      <node
+            category-path="/ngs/ncbi"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiNucleotideNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiNucleotideNodeFactory"/>        
+      
+       <node
+            category-path="/ngs/ncbi"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiProteinNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiProteinNodeFactory"/>
+      
       
       <node
             category-path="/ngs/vcf/intersections"

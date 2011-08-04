@@ -39,7 +39,7 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 	
 	public  final static String LIMIT_PROPERTY="ncbi.qlimit"; 
 	public  final static int LIMIT_DEFAULT=10; 
-	private final SettingsModelInteger m_limit = new SettingsModelInteger(LIMIT_PROPERTY,LIMIT_DEFAULT);
+	protected final SettingsModelInteger m_limit = new SettingsModelInteger(LIMIT_PROPERTY,LIMIT_DEFAULT);
 	
 	protected XMLInputFactory xmlInputFactory;
 	protected AbstractNcbiEUtilsNodeModel()
@@ -89,6 +89,23 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 		{
 		String query=getQuery(row,spec);
 		if(query==null || query.isEmpty()) return Collections.emptyList();
+		
+		if(query.matches("[0-9]+"))
+			{
+			URL url= new URL("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db="+getDatabase()+
+					"&id="+URLEncoder.encode(query,"UTF-8")+
+					"&retmode=xml"+
+					"&email=3rd_party_app&tool=knime"
+					)
+					;
+			//System.err.println(url);
+			InputStream in=url.openStream();
+			List<DataCell[]> rows=parseXML(in);
+			in.close();
+			return rows;
+			}
+		
+		
 		URL url= new URL(
 				"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db="+getDatabase()+
 				"&term="+ URLEncoder.encode(query, "UTF-8")+	

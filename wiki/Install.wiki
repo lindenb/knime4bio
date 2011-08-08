@@ -3,6 +3,8 @@
 Install KNime4Bio
 
 = Installing from an update site=
+( *if you cannot install this plugin from the update site, see the next paragraph.* )
+
 
 (see also: http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-34.htm , )
 
@@ -18,6 +20,8 @@ Install KNime4Bio
 If you need to update your workbench:
 
   * Menu File > "Update Knime..."
+
+
 
 = Installing the Knime4Bio Plugin from a local zip =
 

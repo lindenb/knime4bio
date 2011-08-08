@@ -83,6 +83,7 @@
             category-path="/ngs/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"/>
+          
          <node
             category-path="/ngs/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.tail.TailNodeFactory"
@@ -91,7 +92,10 @@
             category-path="/ngs/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"/>   
-         
+          <node
+            category-path="/ngs/linux"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.sum.SumNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.sum.SumNodeFactory"/>
          <node
             category-path="/ngs/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.cat.CatNodeFactory"
@@ -353,6 +357,10 @@
           	category-path="/ngs/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory"  /> 
+        <node 
+          	category-path="/ngs/vcf"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmtmulti.ExtractFormatMultiNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmtmulti.ExtractFormatMultiNodeFactory"  /> 
         <node 
           	category-path="/ngs/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory" 

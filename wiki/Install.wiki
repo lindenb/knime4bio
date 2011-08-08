@@ -28,3 +28,15 @@ As an alternative to installing from the update site, you can also install the K
   # In Knime, choose Help > Install New Software...
   # In the "Work with" section, click the Add... button. The "Add Repository" dialog box appears.
   # Click Local and select the directory you unzipped, then click OK. Its path appears in the "Location" field. Leave the "Name" field empty.
+
+= Configure the Proxy/Firewall=
+
+If you're working behind a *proxy/firewall*, you'll need to configure the proxy. Go to
+{{{
+File/preferences/Network
+}}}
+ and change the parameters.
+
+The process is explained below:
+
+http://www.mkyong.com/web-development/how-to-configure-proxy-settings-in-eclipse/ 

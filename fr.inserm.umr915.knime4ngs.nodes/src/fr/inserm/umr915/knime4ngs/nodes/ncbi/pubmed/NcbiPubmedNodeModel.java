@@ -106,6 +106,11 @@ public class NcbiPubmedNodeModel extends AbstractNcbiEUtilsNodeModel
 				curr[2]=new StringCell( reader.getElementText());
 				--depth;
 				}
+			else if(localName.equals("MedlineTA") && curr[2].isMissing())//sometimes ISOAbbreviation is missing
+				{
+				curr[2]=new StringCell( reader.getElementText());
+				--depth;
+				}
 			else if(localName.equals("ArticleTitle") && curr[3].isMissing() && depth==5)
 				{
 				curr[3]=new StringCell( reader.getElementText());

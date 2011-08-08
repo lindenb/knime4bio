@@ -23,7 +23,7 @@ If you need to update your workbench:
 As an alternative to installing from the update site, you can also install the Knime4Bio Plugin by downloading the update site as an archive and installing from it.
 
  
-  # Download the plugin
+  # Download the plugin from the download area: http://code.google.com/p/knime4bio/downloads/list
   # Unzip the archive.
   # In Knime, choose Help > Install New Software...
   # In the "Work with" section, click the Add... button. The "Add Repository" dialog box appears.

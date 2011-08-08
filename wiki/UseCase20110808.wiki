@@ -9,7 +9,7 @@ Create the following workflow:
 
 NCBI ESearch: Create an Entrez Query
 
-[https://knime4bio.googlecode.com/svn/wiki/Solena20110803b.png]
+[https://knime4bio.googlecode.com/svn/wiki/UseCase20110808b.png]
 
 NCBI Pubmed: Retrieve the pubmed entries
 

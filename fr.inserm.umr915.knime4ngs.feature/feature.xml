@@ -2,15 +2,21 @@
 <feature
       id="fr.inserm.umr915.knime4ngs.feature"
       label="Knime4bio"
-      version="1.0.19"
+      version="1.0.20"
       provider-name="Pierre Lindenbaum">
 
    <description url="http://code.google.com/p/knime4bio/">
-      Custom Knime Node for biological analysis
+      Custom Knime Nodes for NGS data interpretation.
    </description>
 
    <copyright url="http://code.google.com/p/knime4bio/">
       Pierre Lindenbaum PhD 2011
+
+* The MySQL Java Connector /open source software is provided under the GPL License. See http://dev.mysql.com/downloads/connector/j/
+
+* The BigWig java API (http://code.google.com/p/bigwig/) is provided under the GNU Lesser GPL license.
+
+* The Samtools Picard API (http://picard.sourceforge.net/) is provided under the Apache License V2.0, MIT License.
    </copyright>
 
    <license url="http://matt.might.net/articles/crapl/">
@@ -122,10 +128,13 @@ PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <url>
-      <discovery label="Source code" url="http://code.google.com/p/knime4bio/"/>
+      <update label="eclipse/plugins/fr.inserm.umr915.knime4ngs.update" url="http://redonlab.univ-nantes.fr/public_html/eclipse/plugins/fr.inserm.umr915.knime4ngs.update/"/>
+      <discovery label="Knime4Bio: Source code" url="http://code.google.com/p/knime4bio/"/>
       <discovery label="My Blog" url="http://plindenbaum.blogspot.com"/>
       <discovery label="Twitter" url="http://twitter.com/yokofakun"/>
       <discovery label="My Lab" url="http://www.umr915.univ-nantes.fr/"/>
+      <discovery label="Knime4Bio: wiki" url="http://code.google.com/p/knime4bio/w/list"/>
+      <discovery label="Knime4Bio: video" url="http://www.youtube.com/watch?v=zPdcbybEnSM"/>
    </url>
 
    <plugin

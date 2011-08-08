@@ -13,18 +13,18 @@ NCBI ESearch: Create an Entrez Query
 
 NCBI Pubmed: Retrieve the pubmed entries
 
-[https://knime4bio.googlecode.com/svn/wiki/Solena20110803c.png]
+[https://knime4bio.googlecode.com/svn/wikiUseCase20110808c.png]
 
 Pubmed Cite-In: Retrieve the number of time the articles have been cited.
 
-[https://knime4bio.googlecode.com/svn/wiki/Solena20110803d.png]
+[https://knime4bio.googlecode.com/svn/wiki/UseCase20110808d.png]
 
 Sort on the number of time the articles have been cited.
 
-[https://knime4bio.googlecode.com/svn/wiki/Solena20110803e.png]
+[https://knime4bio.googlecode.com/svn/wiki/UseCase20110808e.png]
 
 Head : Keep the 10 first record
 
 And display the result:
 
-[https://knime4bio.googlecode.com/svn/wiki/Solena20110803f.png]
+[https://knime4bio.googlecode.com/svn/wiki/UseCase20110808f.png]

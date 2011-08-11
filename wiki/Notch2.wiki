@@ -9,7 +9,7 @@ Nat Genet. 2011 Mar 6;43(4):306-8.
 }}}
 
 [https://knime4bio.googlecode.com/svn/wiki/Notch2a.png]
-
+(use right-click/View image, to see a larger picture)
 
 Exomes of six patients from a previously published study [NOTCH2]  affected by the Hajdu Cheney syndrome.
 

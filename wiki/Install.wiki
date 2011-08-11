@@ -13,7 +13,7 @@ Install KNime4Bio
   * Menu Help > Install New Software. The install dialog will appear. 
   * Click on "Add..."
     * Name:  KNime4BIO
-    * URL: http://xxxxxxxxxxxxxxxxxxxxxxx.univ-nantes.fr/public_html/eclipse/plugins/fr.inserm.umr915.knime4ngs.update/
+    * URL: http://redonlab.univ-nantes.fr/public_html/eclipse/plugins/fr.inserm.umr915.knime4ngs.update/ (note: for an unknown reason our server is sometimes Temporarily Unavailable, if you cannot reach that page, please, install the plugin from a local zip: see below )
     * press OK
   * Select the latest version ok knime4bio, accept the license, finish.
 

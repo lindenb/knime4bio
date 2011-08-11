@@ -8,7 +8,7 @@ Isidor B, Lindenbaum P, Pichon O, Bézieau S, Dina C, Jacquemont S, Martin-Coign
 Nat Genet. 2011 Mar 6;43(4):306-8.
 }}}
 
-[https://knime4bio.googlecode.com/svn/wiki/Notch2.png]
+[https://knime4bio.googlecode.com/svn/wiki/Notch2a.png]
 
 
 Exomes of six patients from a previously published study [NOTCH2]  affected by the Hajdu Cheney syndrome.

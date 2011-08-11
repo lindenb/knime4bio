@@ -11,7 +11,7 @@ Nat Genet. 2011 Mar 6;43(4):306-8.
 [https://knime4bio.googlecode.com/svn/wiki/Notch2a.png]
 (use right-click/View image, to see a larger picture)
 
-Exomes of six patients from a previously published study [NOTCH2]  affected by the Hajdu Cheney syndrome.
+Exomes of six patients affected by the Hajdu Cheney syndrome.
 
 The short reads were mapped to the Human genome using bwa 0.5.9  and the variants were called with samtools mpileup 0.1.17.
 Homozygous variants, known SNPs (from dbSNP), and poor-quality variants were discarded.

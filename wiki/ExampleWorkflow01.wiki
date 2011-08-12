@@ -17,23 +17,41 @@ Sample2   /full/pathSample2.vcf.gz
 }}}
 
   *  read this file with a node: */IO/Read/FileReader*
-    * read Row Id: yes
-    * read column header yes
-  *  Let's ignore chromosomes X, Y and MT : Add a "Row Filter"
-    * "exclude rows"
-    * use regular expression
-    * column "CHROM"
-    * pattern :`(X|Y|M)`
-  * ignore SNP with a known rs-id: Add a "Row Filter"
-    * "exclude rows"
-    * use regular expression
-    * column "ID"
-    * pattern:  rs[0-9]+
-  *  normalize the chromosome name (e.g: chr01 => chr1, 23 => chrX , etc.. )  with a node NGS/Chrom normalization. Useful if you need to join the data with the UCSC
-  * Filter on Depth: Extract the field *DP* as an integer with a node `NGS/Extract INFO`. Then, filter with a "numeric row filter" on the new DP column.
-  * Filter on Ensembl Variant Prediction tool; Extract the field *CQ* as an String with a node `NGS/Extract INFO`. Then, filter with a node "NGS/Ensembl CQ.
-  * for the remaining steps, the nodes must be sorted on CHROM/POS/REF/ALT/SAMPLE using a "Sort" node.
-  * remove the duplicate data (CHROM/POS/REF/ALT/SAMPLE) if any (e.g. Dindel). Use a node: "Unix/Uniq" on `CHROM/POS/REF/ALT/SAMPLE`
- * Filter on the number of samples per SNP. The node `NGS/ SNP per Sample` will create a new column *sample.per.snp* that will be filtered by a * Numeric row splitter*.
- * extract the gene-name with a  `NGS/Extract INFO` and the tag *GN* (result is a String).
 
+    * read Row Id: yes
+
+    * read column header yes
+
+  *  Let's ignore chromosomes X, Y and MT : Add a "Row Filter"
+
+    * "exclude rows"
+
+    * use regular expression
+
+    * column "CHROM"
+
+    * pattern :`(X|Y|M)`
+
+  * ignore SNP with a known rs-id: Add a "Row Filter"
+
+    * "exclude rows"
+
+    * use regular expression
+
+    * column "ID"
+
+    * pattern:  rs[0-9]+
+
+  *  normalize the chromosome name (e.g: chr01 => chr1, 23 => chrX , etc.. )  with a node NGS/Chrom normalization. Useful if you need to join the data with the UCSC
+
+  * Filter on Depth: Extract the field *DP* as an integer with a node `NGS/Extract INFO`. Then, filter with a "numeric row filter" on the new DP column.
+
+  * Filter on Ensembl Variant Prediction tool; Extract the field *CQ* as an String with a node `NGS/Extract INFO`. Then, filter with a node "NGS/Ensembl CQ.
+
+  * for the remaining steps, the nodes must be sorted on CHROM/POS/REF/ALT/SAMPLE using a "Sort" node.
+
+  * remove the duplicate data (CHROM/POS/REF/ALT/SAMPLE) if any (e.g. Dindel). Use a node: "Unix/Uniq" on `CHROM/POS/REF/ALT/SAMPLE`
+
+ * Filter on the number of samples per SNP. The node `NGS/ SNP per Sample` will create a new column *sample.per.snp* that will be filtered by a * Numeric row splitter*.
+
+ * extract the gene-name with a  `NGS/Extract INFO` and the tag *GN* (result is a String).

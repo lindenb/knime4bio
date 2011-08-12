@@ -17,7 +17,7 @@ Install KNime4Bio
     * Name:  KNime4BIO
     * URL: http://redonlab.univ-nantes.fr/public_html/eclipse/plugins/fr.inserm.umr915.knime4ngs.update/ 
     * press OK
-  * Select the latest version ok knime4bio, accept the license, finish.
+  * Browse the available nodes in the trees and find the latest version of knime4bio (at the time of this writing the version is *1.0.20* ) , accept the license, finish.
 
 If you need to update your workbench:
 

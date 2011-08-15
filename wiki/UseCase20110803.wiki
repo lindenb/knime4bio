@@ -1,8 +1,8 @@
 #summary join the Genomic Evolutionary Rate Profiling (GERP) scores to a VCF
 
-The GRP data are available as a BiwWig file at http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw (see the description here: http://genome.ucsc.edu/cgi-bin/hgc?g=allHg19RS_BW&i=allHg19RS_BW )
+The GRP data are available as a BigWig file at http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw (see the description here: http://genome.ucsc.edu/cgi-bin/hgc?g=allHg19RS_BW&i=allHg19RS_BW )
 
-Download the data ( 7Go)
+Download the data (7Go)
 {{{
 wget "http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw" 
 }}}
@@ -10,8 +10,6 @@ wget "http://hgdownload.cse.ucsc.edu/gbdb/hg19/bbi/All_hg19_RS.bw"
 Create the following workflow:
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110803a.png]
-
-*UPDATE*: one node is missing here: VCF are indexing their first base at '1' but the current bigwig use '0', so a new column 'POS0' should be inserted just after the "Read VCFs node", with a *java Snpippet Node* and the following code:
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110803d.png]
 
@@ -22,6 +20,4 @@ configure the bigwig node
 Execute...
 
 [https://knime4bio.googlecode.com/svn/wiki/Solena20110803c.png]
-
-
 

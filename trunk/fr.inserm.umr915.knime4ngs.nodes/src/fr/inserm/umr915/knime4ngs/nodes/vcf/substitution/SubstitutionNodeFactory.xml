@@ -16,7 +16,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">VCF</inPort>
+        <inPort index="0" name="VCF">A VCF-like table containing the REF and ALT columns</inPort>
         <outPort index="0" name="Substitutions">Substitutions</outPort>
         <outPort index="1" name="Indels">Indels</outPort>
     </ports>    

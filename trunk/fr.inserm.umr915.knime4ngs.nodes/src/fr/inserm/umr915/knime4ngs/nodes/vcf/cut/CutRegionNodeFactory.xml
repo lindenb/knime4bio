@@ -19,8 +19,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">VCF</inPort>
-        <outPort index="0" name="Accepted">VCF1</outPort>
+        <inPort index="0" name="VCF">A VCF-like table</inPort>
+        <outPort index="0" name="Sliced VCF">The sliced VCF</outPort>
     </ports>    
 
 </knimeNode>

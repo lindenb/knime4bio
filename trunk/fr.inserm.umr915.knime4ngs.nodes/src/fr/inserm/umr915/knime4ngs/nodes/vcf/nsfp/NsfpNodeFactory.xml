@@ -18,8 +18,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">VCF in</inPort>
-        <outPort index="0" name="Accepted">VCF out</outPort>
+        <inPort index="0" name="Sorted VCF">VCF-like table sorted on CHROM/POS/REF/ALT</inPort>
+        <outPort index="0" name="VCF+dbNSFP">VCF joined to the dbNSFP data</outPort>
     </ports>    
 
 </knimeNode>

@@ -20,7 +20,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">List of VCF</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
+        <inPort index="0" name="VCF/CQ">A table containing a CQ  (Consequences predicted by Ensembl) column</inPort>
+        <outPort index="0" name="Accepted VCF">Accepted VCF1</outPort>
     </ports>
 </knimeNode>

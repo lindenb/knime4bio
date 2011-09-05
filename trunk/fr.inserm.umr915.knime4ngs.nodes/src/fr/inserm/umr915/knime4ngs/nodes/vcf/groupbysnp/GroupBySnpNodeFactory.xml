@@ -21,8 +21,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">input</inPort>
-        <outPort index="0" name="Accepted">output</outPort>
+        <inPort index="0" name="Sorted VCF">A VCF-like table sorted on CHROM/POS/REF/ALT/SAMPLE</inPort>
+        <outPort index="0" name="called-data=(Snv/Sample)">A pivot table for called-data=f(y=SNV,x=Sample)</outPort>
     </ports>    
 
 </knimeNode>

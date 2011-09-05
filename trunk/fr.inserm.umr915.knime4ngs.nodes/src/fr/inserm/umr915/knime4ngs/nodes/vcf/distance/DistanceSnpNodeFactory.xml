@@ -22,8 +22,8 @@ href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http:
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input">input</inPort>
-        <outPort index="0" name="Output">Output</outPort>
+        <inPort index="0" name="Sorted VCF">sorted VCF-like table (SAMPLE/CHROM/POS)</inPort>
+        <outPort index="0" name="VCF+Distance">Appends a new column to the VCF containing the distance</outPort>
     </ports>    
 
 </knimeNode>

@@ -5,7 +5,7 @@
     <shortDescription>GenScan (Manhattan plot)</shortDescription>
     
     <fullDescription>
-        <intro>This <b>experimental</b> node displays a manhattan plot.
+        <intro>This <b>experimental</b> node displays a manhattan plot. Currently, the display takes some times to appear and the result looks bad.
         
 
 
@@ -18,10 +18,10 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input1">VCF</inPort>
+        <inPort index="0" name="VCF">A VCF-like table (CHROM/POS)</inPort>
        
     </ports>   
     <views>
-    	<view index="0" name="view0">View GenScan</view>
+    	<view index="0" name="View as Genescan">View GenScan</view>
     </views>
 </knimeNode>

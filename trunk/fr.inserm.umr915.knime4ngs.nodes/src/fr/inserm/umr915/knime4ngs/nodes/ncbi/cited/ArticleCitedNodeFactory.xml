@@ -14,7 +14,7 @@
     </fullDescription>
     
     <ports>
-    	<inPort index="0" name="In-Port name">Input 1</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="PMID">A table containing a pubmed identifier PMID</inPort>
+        <outPort index="0" name="Cited articles">Appends the dcount the articles citing the given article</outPort>
     </ports>
 </knimeNode>

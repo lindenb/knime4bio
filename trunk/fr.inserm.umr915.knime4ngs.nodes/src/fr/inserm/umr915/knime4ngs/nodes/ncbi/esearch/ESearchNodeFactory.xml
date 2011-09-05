@@ -16,6 +16,6 @@
     </fullDescription>
     
     <ports>
-        <outPort index="0" name="Out-Port name">NCBI Ids</outPort>
+        <outPort index="0" name="NCBI-Entrez-ID">NCBI Ids</outPort>
     </ports>
 </knimeNode>

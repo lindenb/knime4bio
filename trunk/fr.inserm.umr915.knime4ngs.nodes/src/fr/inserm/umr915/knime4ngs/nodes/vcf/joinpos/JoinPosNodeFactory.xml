@@ -5,7 +5,7 @@
     <shortDescription>Joins a VCF table with another Chrom/Position table</shortDescription>
     
     <fullDescription>
-        <intro>Joins a VCF table with another Chrom/Position table. The first (left) table is the reference table, that is to say that empty cells will be appended if no match is found.
+        <intro>Joins a VCF table with another Chrom/Position table. The first (left) table is the reference table, that is to say that empty cells will be appended if no match is found. Note: you could also use a standard KNIME 'join' node to get this result.
 
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
@@ -17,8 +17,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">Left VCF</inPort>
-        <inPort index="1" name="In-Port 2">Right Data</inPort>
-        <outPort index="0" name="out">VCF1</outPort>
+        <inPort index="0" name="1st sorted VCF">1st VCF-like table sorted on CHROM/POS</inPort>
+        <inPort index="1" name="2nd sorted VCF">2nd VCF-like table sorted on CHROM/POS</inPort>
+        <outPort index="0" name="Joined VCF">Left VCF 'left' joined to Right VCF.</outPort>
     </ports>
 </knimeNode>

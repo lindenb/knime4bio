@@ -17,8 +17,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">input</inPort>
-        <outPort index="0" name="Accepted">output</outPort>
+        <inPort index="0" name="Gene">A table containing a 'gene' column</inPort>
+        <outPort index="0" name="Embl STRING  data">appends the columns found in the Embl String database to the original table</outPort>
     </ports> 
 
 </knimeNode>

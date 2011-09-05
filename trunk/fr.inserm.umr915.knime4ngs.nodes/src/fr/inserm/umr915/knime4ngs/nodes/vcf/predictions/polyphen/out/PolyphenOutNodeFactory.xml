@@ -15,7 +15,7 @@
         <option name="ALT">VCF ALT</option>
     </fullDescription>
     <ports>
-        <inPort index="0" name="VCF">VCF</inPort>
+        <inPort index="0" name="VCF">VCF-like table (CHROM/POS/REF/ALT)</inPort>
     </ports>    
     
 </knimeNode>

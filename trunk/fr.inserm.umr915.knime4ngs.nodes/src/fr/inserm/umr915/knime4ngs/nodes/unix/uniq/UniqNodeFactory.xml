@@ -14,7 +14,7 @@
     </fullDescription>
     
     <ports>
-    	<inPort index="0" name="Input0">Input 1</inPort>
-        <outPort index="0" name="Output0">Output</outPort>
+    	<inPort index="0" name="Sorted table">Sorted Input table</inPort>
+        <outPort index="0" name="Uniq">Uniq rows</outPort>
     </ports>
 </knimeNode>

@@ -19,9 +19,9 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input1">VCF</inPort>
+        <inPort index="0" name="Genomic coordinates">a VCF-like table (CHROM/POS)</inPort>
     </ports>   
     <views>
-    	<view index="0" name="view0">View Context</view>
+    	<view index="0" name="View context">View Context</view>
     </views>
 </knimeNode>

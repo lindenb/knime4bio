@@ -14,7 +14,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="Identifier">A table containing some entrez identifiers</inPort>
+        <outPort index="0" name="Nucleotide">Appends the sequence found in NCBI Entrez/Nucleotide</outPort>
     </ports>
 </knimeNode>

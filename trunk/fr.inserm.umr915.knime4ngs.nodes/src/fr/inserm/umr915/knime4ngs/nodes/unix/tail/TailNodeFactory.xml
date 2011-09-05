@@ -13,7 +13,7 @@
      </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="Input Table">Input table</inPort>
+        <outPort index="0" name="Last rows">Last rows of the input table</outPort>
     </ports>
 </knimeNode>

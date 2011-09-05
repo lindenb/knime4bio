@@ -13,7 +13,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="Identifiers">A table containing some keywords</inPort>
+        <outPort index="0" name="Pubmed">Appends the data found in NCBI/Pubmed</outPort>
     </ports>
 </knimeNode>

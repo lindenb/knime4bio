@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF</inPort>
-        <outPort index="0" name="out">VCF1</outPort>
+        <inPort index="0" name="Numeric data">A table containing some numeric data</inPort>
+        <outPort index="0" name="Appends the sum/mean/mean/max">Appends the sum/mean/mean/max to the input table</outPort>
     </ports>
 </knimeNode>

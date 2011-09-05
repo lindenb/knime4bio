@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">Input</inPort>
-        <outPort index="0" name="out">Output</outPort>
+        <inPort index="0" name="sorted VCF">A sorted VCF-like table (CHROM/POS)</inPort>
+        <outPort index="0" name="VCF+WIG">The VCF file joined to the WIG data </outPort>
     </ports>
 </knimeNode>

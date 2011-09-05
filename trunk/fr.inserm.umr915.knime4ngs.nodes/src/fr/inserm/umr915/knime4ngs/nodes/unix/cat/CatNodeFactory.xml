@@ -12,8 +12,8 @@
      </fullDescription>
     
     <ports>
-    	<inPort index="0" name="In-Port name">Input 1</inPort>
-    	<inPort index="1" name="In-Port name">Input 2</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+    	<inPort index="0" name="Table 1">Table 1</inPort>
+    	<inPort index="1" name="Table 2">Table 2</inPort>
+        <outPort index="0" name="Table 1 + Table 2">Concatenated tables</outPort>
     </ports>
 </knimeNode>

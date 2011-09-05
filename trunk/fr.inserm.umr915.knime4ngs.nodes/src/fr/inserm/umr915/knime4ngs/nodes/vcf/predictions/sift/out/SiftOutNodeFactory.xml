@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="VCF">VCF</inPort>
+        <inPort index="0" name="VCF">VCF data to be exported (CHROM/POS/REF/ALT)</inPort>
     </ports>    
     
 </knimeNode>

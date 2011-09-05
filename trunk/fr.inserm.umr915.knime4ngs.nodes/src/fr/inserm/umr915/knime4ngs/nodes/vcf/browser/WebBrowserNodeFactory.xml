@@ -14,9 +14,9 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input1">VCF</inPort>
+        <inPort index="0" name="Genomic coordinates">Some genomic coordinates (CHROM/POS)</inPort>
     </ports>   
     <views>
-    	<view index="0" name="view0">View browser</view>
+    	<view index="0" name="Web Browser">View browser</view>
     </views>
 </knimeNode>

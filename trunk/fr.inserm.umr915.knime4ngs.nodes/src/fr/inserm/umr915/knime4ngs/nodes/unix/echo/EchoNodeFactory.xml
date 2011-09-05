@@ -13,6 +13,6 @@
      </fullDescription>
     
     <ports>
-        <outPort index="0" name="Out-Port name">Lines</outPort>
+        <outPort index="0" name="Lines">Lines</outPort>
     </ports>
 </knimeNode>

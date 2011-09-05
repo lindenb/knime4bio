@@ -19,7 +19,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF</inPort>
-        <outPort index="0" name="out">VCF1</outPort>
+        <inPort index="0" name="VCF">A VCF-like table containing an INFO column</inPort>
+        <outPort index="0" name="VCF+flag">A new column containing the extracted flag</outPort>
     </ports>
 </knimeNode>

@@ -19,7 +19,7 @@ This custom node uses a column containing some Uniprot IDs and get the pathways 
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">Input</inPort>
-        <outPort index="0" name="Output">Output</outPort>
+        <inPort index="0" name="UniProt">UniProt identifier</inPort>
+        <outPort index="0" name="Pathway data">Reactome Pathway data</outPort>
     </ports>
 </knimeNode>

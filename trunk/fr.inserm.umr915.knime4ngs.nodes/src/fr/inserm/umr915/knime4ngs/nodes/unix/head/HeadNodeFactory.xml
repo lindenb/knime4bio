@@ -14,7 +14,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="Input table">Input table</inPort>
+        <outPort index="0" name="First lines">First lines of the input table</outPort>
     </ports>
 </knimeNode>

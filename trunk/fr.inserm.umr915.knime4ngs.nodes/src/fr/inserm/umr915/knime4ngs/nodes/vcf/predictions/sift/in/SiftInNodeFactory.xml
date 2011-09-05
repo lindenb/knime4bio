@@ -14,9 +14,9 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="in1">VCF</inPort>
-        <inPort index="1" name="int2">SIFT result</inPort>
-        <outPort index="0" name="out1">VCF</outPort>
+        <inPort index="0" name="VCF">VCF-like table</inPort>
+        <inPort index="1" name="SIFT">Sorted SIFT result</inPort>
+        <outPort index="0" name="VCF+SIFT">VCF with the joined SIFT data</outPort>
     </ports>    
     
 </knimeNode>

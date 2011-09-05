@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">Input</inPort>
-        <outPort index="0" name="out">Output</outPort>
+        <inPort index="0" name="VCF">VCF-like table (CHROM/POS)</inPort>
+        <outPort index="0" name="VCF+Big WIG/BED data">Appends the data found in the Big Bed/Wig file to the input table.</outPort>
     </ports>
 </knimeNode>

@@ -24,7 +24,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF In</inPort>
-        <outPort index="0" name="out">VCF Out</outPort>
+        <inPort index="0" name="VCF">A VCF-like table (CHROM/POS)</inPort>
+        <outPort index="0" name="VCF+Tabix">The input VCF and the data joined from the Tabix file</outPort>
     </ports>
 </knimeNode>

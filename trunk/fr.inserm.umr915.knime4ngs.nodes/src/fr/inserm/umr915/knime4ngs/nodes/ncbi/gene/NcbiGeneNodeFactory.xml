@@ -14,7 +14,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="Identifier">A table containing some identifiers</inPort>
+        <outPort index="0" name="NCBI-Gene">Appends the data found in NCBI-GENE</outPort>
     </ports>
 </knimeNode>

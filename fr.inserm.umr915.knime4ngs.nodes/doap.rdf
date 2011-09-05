@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns="http://usefulinc.com/ns/doap#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:admin="http://webns.net/mvcb/">
+ <name>KNime4Bio</name>
+ <shortname>KNime4Bio</shortname>
+ <shortdesc>KNime custom nodes for  the interpretation of NGS data</shortdesc>
+ <description>KNime custom nodes for  the interpretation of Next Generation Sequencing data</description>
+ <homepage rdf:resource="http://code.google.com/p/knime4bio/" />
+ <wiki rdf:resource="http://code.google.com/p/knime4bio/w/list" />
+
+ <download-page rdf:resource="http://code.google.com/p/knime4bio/downloads/list" />
+ <bug-database rdf:resource="http://code.google.com/p/knime4bio/issues/list" />
+ <category rdf:resource="http://en.wikipedia.org/wiki/Bioinformatics" />
+ <programming-language>java</programming-language>
+ <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
+ <maintainer>
+  <foaf:Person>
+     <foaf:name>Pierre Lindenbaum</foaf:name>
+     <foaf:homepage rdf:resource="http://plindenbaum.blogspot.com"/>
+     <foaf:mbox_sha1sum>72b989f15449a699877d5116426abb71a461514d</foaf:mbox_sha1sum>
+  </foaf:Person>
+ </maintainer>
+ <repository>
+   <SVNRepository>
+     <browse rdf:resource='http://code.google.com/p/knime4bio/source/browse/' />
+   </SVNRepository>
+
+ </repository> 
+</Project>

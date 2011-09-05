@@ -25,6 +25,6 @@
         <inPort index="0" name="input1">VCF</inPort>
     </ports>   
     <views>
-    	<view index="0" name="view0">View browser</view>
+    	<view index="0" name="IGV">View browser</view>
     </views>
 </knimeNode>

@@ -27,7 +27,7 @@ Example2:<br/>
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output1</outPort>
+        <inPort index="0" name="Identifiers">A table containing some identfiers</inPort>
+        <outPort index="0" name="Join SQL data">Original table 'left' joined with the mysql data</outPort>
     </ports>
 </knimeNode>

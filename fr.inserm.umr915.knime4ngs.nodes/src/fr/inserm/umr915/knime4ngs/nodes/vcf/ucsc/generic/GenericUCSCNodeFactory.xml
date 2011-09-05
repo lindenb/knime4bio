@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF</inPort>
-        <outPort index="0" name="Accepted">VCF</outPort>
+        <inPort index="0" name="VCF">A VCF-like table (CHROM/START)</inPort>
+        <outPort index="0" name="VCF and UCSC data">the joined data between the VCF and the data from the UCSC.</outPort>
     </ports>
 </knimeNode>

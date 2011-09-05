@@ -15,8 +15,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">VCF</inPort>
-        <outPort index="0" name="Substitution">Annotation</outPort>
+        <inPort index="0" name="Uniprot ACN">A table containing a Uniprot accession and a position in the protein</inPort>
+        <outPort index="0" name="Annotations">appends the annotation found in Uniprot</outPort>
     </ports>    
    
 </knimeNode>

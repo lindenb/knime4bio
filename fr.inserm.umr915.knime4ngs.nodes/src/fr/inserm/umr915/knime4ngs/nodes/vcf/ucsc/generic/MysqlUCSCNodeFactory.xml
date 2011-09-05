@@ -24,7 +24,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF</inPort>
-        <outPort index="0" name="Accepted">Output</outPort>
+        <inPort index="0" name="VCF">A VCF-like table</inPort>
+        <outPort index="0" name="VCF+UCSC data">The data of the VCF joined with the data of the UCSC.</outPort>
     </ports>
 </knimeNode>

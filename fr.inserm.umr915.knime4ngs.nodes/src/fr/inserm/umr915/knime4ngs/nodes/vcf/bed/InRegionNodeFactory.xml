@@ -21,8 +21,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">VCF</inPort>
-        <inPort index="1" name="In-Port 2">BED</inPort>
-        <outPort index="0" name="Accepted">Accepted VCF1</outPort>
+        <inPort index="0" name="sorted VCF">VCF-like table sorted on CHROM/POSITION</inPort>
+        <inPort index="1" name="sorted BED">BED-like table sorted on CHROM/START/END</inPort>
+        <outPort index="0" name="VCF joined to bed">VCF joined to BED data. NULL values will be appended to the Unmatched VCF rows</outPort>
     </ports>
 </knimeNode>

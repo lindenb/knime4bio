@@ -26,8 +26,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input">input</inPort>
-        <outPort index="0" name="Output">Output</outPort>
+        <inPort index="0" name="Sorted VCF">A sorted VCF-like table (chom/pos/ref/alt/sample) </inPort>
+        <outPort index="0" name="VCF + Sample/SNV">Appends a columns with the number of samples per SNV.</outPort>
     </ports>    
 
 </knimeNode>

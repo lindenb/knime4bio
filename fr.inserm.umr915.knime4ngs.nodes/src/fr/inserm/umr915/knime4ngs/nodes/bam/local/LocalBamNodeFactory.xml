@@ -19,10 +19,10 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="input1">VCF</inPort>
-        <inPort index="1" name="input2">Table Sample/BAM</inPort>
+        <inPort index="0" name="VCF-like table">A VCF-like table (CHROM/POS/SAMPLE)</inPort>
+        <inPort index="1" name="Samples and BAM full path">A table with two columns: Sample and full path to BAM file</inPort>
     </ports>   
     <views>
-    	<view index="0" name="view0">View Bam</view>
+    	<view index="0" name="view bam">View Bam</view>
     </views>
 </knimeNode>

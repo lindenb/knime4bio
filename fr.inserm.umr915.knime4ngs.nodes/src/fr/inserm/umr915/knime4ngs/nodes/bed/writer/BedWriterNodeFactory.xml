@@ -19,6 +19,6 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">List of VCF</inPort>
+        <inPort index="0" name="The Genomic positions to be saved as BED">A table containing some genomic coordinate and a column that will be used as a label</inPort>
     </ports>
 </knimeNode>

@@ -19,7 +19,7 @@ this 'bin' column was an index described by Jim Kent in "The Human Genome Browse
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Accepted">Output</outPort>
+        <inPort index="0" name="Genomic coordinates">A table containing some genomic coordinates</inPort>
+        <outPort index="0" name="bin column appended">The input table and a new 'bin' table</outPort>
     </ports>
 </knimeNode>

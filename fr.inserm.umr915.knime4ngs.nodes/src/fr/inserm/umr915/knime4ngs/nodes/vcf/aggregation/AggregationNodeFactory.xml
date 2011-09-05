@@ -21,8 +21,8 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">VCF</inPort>
-        <outPort index="0" name="Accepted">VCF1</outPort>
+        <inPort index="0" name="sorted Genomic positions + score">A table containing some  sorted genomic coordinates and a score for each position</inPort>
+        <outPort index="0" name="Aggregation">Aggregation of the genomic regions having a numeric value greater or lower than the user  defined  value</outPort>
     </ports>    
 
 </knimeNode>

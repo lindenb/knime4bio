@@ -20,13 +20,13 @@
         <option name="POS">Position column (first base is 1)</option>
         <option name="REF">REF column</option>
         <option name="ALT">ALT column</option>
-        <option name="genome reference">Full path to reference genome indexed with samtools</option>
+        <option name="genome reference">Full path to reference genome indexed with samtools faidx</option>
         <option name="mRNA">add mRNA sequence</option>
         <option name="protein">add protein sequence</option>
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In1">VCF</inPort>
-        <outPort index="0" name="Out">Annotated VCF</outPort>
+        <inPort index="0" name="VCF">A VCF-like table (CHROM/POSITION/REF/ALT) </inPort>
+        <outPort index="0" name="VCF+prediction UCSC">Annotated VCF containing the predicton of the consequences  of a mutation (wild AA, mutated AA, position in protein , etc...)</outPort>
     </ports>    
 </knimeNode>

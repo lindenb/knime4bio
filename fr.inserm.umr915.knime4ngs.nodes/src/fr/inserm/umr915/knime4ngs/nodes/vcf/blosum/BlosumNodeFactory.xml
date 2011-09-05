@@ -15,7 +15,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="in">Input</inPort>
-        <outPort index="0" name="out">Output</outPort>
+        <inPort index="0" name="Amino acids">Table with two columns: Amino acid 1 and Amino acid 2</inPort>
+        <outPort index="0" name="Blosum score">Appends a new column with the blosum score</outPort>
     </ports>
 </knimeNode>

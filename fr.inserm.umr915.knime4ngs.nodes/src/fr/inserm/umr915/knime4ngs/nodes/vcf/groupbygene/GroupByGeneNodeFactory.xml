@@ -32,8 +32,8 @@ Gene2   chr2    0        1
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port name">input</inPort>
-        <outPort index="0" name="Accepted">output</outPort>
+        <inPort index="0" name="VCF file">A VCF-like table (CHROM/POS/REF/ALT)</inPort>
+        <outPort index="0" name="Mutations per Gene per Sample">A table with count_mutations=f(y=GENE,x=SAMPLE)</outPort>
     </ports>    
 
 </knimeNode>

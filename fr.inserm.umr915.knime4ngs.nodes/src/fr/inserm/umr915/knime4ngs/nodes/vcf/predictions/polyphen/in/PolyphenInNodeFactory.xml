@@ -18,9 +18,9 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="in1">VCF</inPort>
-        <inPort index="1" name="int2">Polyphen result</inPort>
-        <outPort index="0" name="out1">VCF</outPort>
+        <inPort index="0" name="sorted VCF">VCF-like table sorted on CHROM/POS/REF/ALT</inPort>
+        <inPort index="1" name="Sorted PPH2 Results">Polyphen result</inPort>
+        <outPort index="0" name="VCF+PPH2">VCF data joined to the PPH2 data</outPort>
     </ports>    
     
 </knimeNode>

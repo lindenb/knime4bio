@@ -15,7 +15,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="In-Port 1">Input</inPort>
-        <outPort index="0" name="out">Output</outPort>
+        <inPort index="0" name="Orginal chromosome name">A table containing a column chromosome</inPort>
+        <outPort index="0" name="Modified chromosome name">The original table with the normalized CHROM column</outPort>
     </ports>
 </knimeNode>

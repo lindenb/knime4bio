@@ -18,7 +18,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">Input</inPort>
-        <outPort index="0" name="Output">Output</outPort>
+        <inPort index="0" name="Genomic Positions">table with Genomic Positions (CHROM/Position)</inPort>
+        <outPort index="0" name="Append DNA context">The new table appends the DNA context arround a mutation</outPort>
     </ports>
 </knimeNode>

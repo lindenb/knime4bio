@@ -15,7 +15,7 @@
     </fullDescription>
     
     <ports>
-    	<inPort index="0" name="In-Port name">Input</inPort>
-        <outPort index="0" name="Out-Port name">Output</outPort>
+        <inPort index="0" name="PMID">A table containing a PMID</inPort>
+        <outPort index="0" name="ELink">Appends the data found in NCBI-ELink</outPort>
     </ports>
 </knimeNode>

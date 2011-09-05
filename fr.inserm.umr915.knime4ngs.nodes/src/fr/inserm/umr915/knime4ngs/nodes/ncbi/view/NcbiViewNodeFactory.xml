@@ -17,6 +17,6 @@
         <inPort index="0" name="input1">Table</inPort>
     </ports>   
     <views>
-    	<view index="0" name="view0">View NCBI Record</view>
+    	<view index="0" name="view ncbi">View NCBI Record</view>
     </views>
 </knimeNode>

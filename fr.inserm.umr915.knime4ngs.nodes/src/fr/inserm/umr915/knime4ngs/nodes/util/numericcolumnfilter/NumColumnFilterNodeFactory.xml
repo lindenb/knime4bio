@@ -17,7 +17,7 @@
     </fullDescription>
     
     <ports>
-    	<inPort index="0" name="Input0">Input 1</inPort>
-        <outPort index="0" name="Output0">Output</outPort>
+    	<inPort index="0" name="Numeric columns">Numeric columns</inPort>
+        <outPort index="0" name="The filtered table">Filtered table</outPort>
     </ports>
 </knimeNode>

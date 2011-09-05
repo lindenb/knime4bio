@@ -21,7 +21,7 @@
     </fullDescription>
     
     <ports>
-        <inPort index="0" name="Input">Input</inPort>
-        <outPort index="0" name="Output">Output</outPort>
+        <inPort index="0" name="Genomic coordinates">A table containing a genomic position (CHROM and Position)</inPort>
+        <outPort index="0" name="Append the DAS annotations">The new table joins the data found in the DAS annotations (label, link , start, end , strand, type, etc... )</outPort>
     </ports>
 </knimeNode>

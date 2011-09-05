@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>fr.inserm.umr915.knime4ngs.update</name>
+	<comment></comment>
+	<projects>
+		<project>fr.inserm.umr915.knime4ngs.feature</project>
+		<project>fr.inserm.umr915.knime4ngs.nodes</project>
+		<project>net.sf.picard</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.pde.UpdateSiteBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.pde.UpdateSiteNature</nature>
+	</natures>
+</projectDescription>

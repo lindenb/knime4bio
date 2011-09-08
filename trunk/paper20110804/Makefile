@@ -1,3 +1,4 @@
+LATEXDIFFDIR=/home/lindenb/package/latexdiff/compiled/bin/
 all:knime.pdf
 knime.pdf:knime.dvi
 	dvipdf $<
@@ -25,6 +26,16 @@ fig01.pnm:fig01.png
 	pngtopnm $< > $@
 knime.rtf:knime.pdf
 	latex2rtf -F -b knime.bbl -a knime.aux knime.tex
-clean:
+diff:knime-diff175.pdf
+knime-diff175.pdf:knime-diff175.dvi
+	dvipdf $<
+knime-diff175.dvi:knime-diff175.tex  knime.bib fig01.eps
+	-latex --interaction=batchmode $<	
+knime-diff175.tex:knime.tex
+	echo "check latexdiff is in the PATH"
+	$(LATEXDIFFDIR)/latexdiff-svn -r 175 $<
+clean:clean175
 	rm -f knime.aux knime.bbl knime.bib knime.blg knime.dvi knime.log knime.pdf pubmed.xml knime.rtf
+clean175:
+	rm -f knime-diff175.*
 

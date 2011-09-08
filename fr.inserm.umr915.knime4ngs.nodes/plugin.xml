@@ -194,7 +194,11 @@
           <node
             category-path="/ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"/> 
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"/>
+          <node
+            category-path="/ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"/> 
             
           <node
             category-path="/ngs/vcf"

@@ -114,7 +114,9 @@ public class CatNodeModel extends AbstractNodeModel
     	DataTableSpec spec2=inSpecs[1];
     	if(spec1.getNumColumns()!=spec2.getNumColumns())
     		{
-    		throw new InvalidSettingsException("not the same number of columns");
+    		throw new InvalidSettingsException("not the same number of columns:"+
+    				"top:"+spec1.getNumColumns()+" bottom:"+spec2.getNumColumns()
+    				);
     		}
     	for(int i=0;i< spec1.getNumColumns();++i)
     		{

@@ -198,10 +198,29 @@ public class BigBedFileNodeModel extends AbstractVCFNodeModel
 			        				{
 			        				BedFeature f=bigiter.next();
 			        				++outIndex;
+			        				
+			        				DataCell cell;
+			        				if( f.getRestOfFields()==null ||
+			        					f.getRestOfFields().length==0 ||
+			        					(f.getRestOfFields().length==1 && f.getRestOfFields()[0].isEmpty()))
+			        					{
+			        					cell=DataType.getMissingCell();
+			        					}
+			        				else
+			        					{
+			        					StringBuilder toks=new StringBuilder();
+			        					for(String s:f.getRestOfFields())
+			        						{
+			        						if(toks.length()!=0) toks.append('|');
+			        						toks.append(s);
+			        						}
+			        					cell=new StringCell(toks.toString());
+			        					}
+			        				
 			        				container1.addRowToTable(new AppendedColumnRow(RowKey.createRowKey(outIndex),row,
 			        					new IntCell(f.getStartBase()),
 			        					new IntCell(f.getEndBase()),
-			        					(f.getRestOfFields()==null || f.getRestOfFields().isEmpty()? DataType.getMissingCell(): new StringCell(f.getRestOfFields()))
+			        					cell
 			        					));
 			        				found=true;
 			        				}

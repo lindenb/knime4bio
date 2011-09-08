@@ -11,9 +11,9 @@
     <fullDescription>
         <intro>Reads one or more <a href="http://www.1000genomes.org/node/101">VCF</a> File associated to a sample name.
         It takes as an input a table containing a SAMPLE name and a full file path/URL to a VCF file (possibly gzipped ,or bgzipped).
-        It currently only supports one sample per VCF.
+        It currently only supports one sample/call per VCF.
 
-
+		See also the node: <b> Read ONE VCF</b>.
 
 <h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
 </intro>
@@ -24,7 +24,7 @@
     
     <ports>
         <inPort index="0" name="Sample name and path to VCF">A table containing at least two columns. A column contains a sample name and another column is the <b>absolute path</b> to a VCF file (which can be g-zipped if needed)</inPort>
-        <outPort index="0" name="VCF/Sample">VCF data and the sample name</outPort>
+        <outPort index="0" name="VCF/Sample">VCF data and the sample names</outPort>
         <outPort index="1" name="VCF Headers/Sample">VCF Headers</outPort>
     </ports>    
 </knimeNode>

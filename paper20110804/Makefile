@@ -23,6 +23,8 @@ fig01.ps:fig01.pnm
 	pnmtops -noturn -imagewidth 3.5 $< > $@
 fig01.pnm:fig01.png
 	pngtopnm $< > $@
+knime.rtf:knime.pdf
+	latex2rtf -F -b knime.bbl -a knime.aux knime.tex
 clean:
-	rm -f knime.aux knime.bbl knime.bib knime.blg knime.dvi knime.log knime.pdf pubmed.xml
+	rm -f knime.aux knime.bbl knime.bib knime.blg knime.dvi knime.log knime.pdf pubmed.xml knime.rtf
 

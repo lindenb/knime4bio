@@ -9,7 +9,7 @@ knime.dvi:knime.tex knime.bib fig01.eps
 	bibtex knime
 	latex $<
 	latex $<
-	
+	latex $<
 		
 pubmed.xml:
 	curl "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id=21177655,21873641,21221095,18269742,20080505,16845108,19689959,21531983,21067998,21447597,17098935,21520341,11337480,1208982,16500937,18957448,19505943,19920128,20354512,20639541,21378989,21653522,21208982" > $@

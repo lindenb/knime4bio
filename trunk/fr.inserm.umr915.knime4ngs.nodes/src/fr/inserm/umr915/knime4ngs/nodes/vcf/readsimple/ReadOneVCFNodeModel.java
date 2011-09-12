@@ -59,27 +59,19 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
         super(0, 2);
     	}
 
-    private boolean isSampleDefined()
-    	{
-    	return !(this.m_sampleColumn.getStringValue().trim().isEmpty());
-    	}
+    
     private DataTableSpec createVcfHeaderDataColumnSpec()
     	{
-    	boolean hasSample=isSampleDefined();
-    	DataColumnSpec[] allColSpecs = new DataColumnSpec[2+(hasSample?1:0)];
-    	if(hasSample)
-    		{
-    		allColSpecs[0] =  new DataColumnSpecCreator("SAMPLE", StringCell.TYPE).createSpec();
-    		}
-    	allColSpecs[0+(hasSample?1:0)] =  new DataColumnSpecCreator("URI", StringCell.TYPE).createSpec();
-		allColSpecs[1+(hasSample?1:0)] =  new DataColumnSpecCreator("HEADER", StringCell.TYPE).createSpec();
+ 
+    	DataColumnSpec[] allColSpecs = new DataColumnSpec[2];
+    	allColSpecs[0] =  new DataColumnSpecCreator("URI", StringCell.TYPE).createSpec();
+		allColSpecs[1] =  new DataColumnSpecCreator("HEADER", StringCell.TYPE).createSpec();
 		return new DataTableSpec(allColSpecs);
     	}
     
     private DataTableSpec createVcfDataColumnSpec()
 		{
-    	boolean hasSample=isSampleDefined();
-		DataColumnSpec[] allColSpecs = new DataColumnSpec[10+(hasSample?1:0)];
+		DataColumnSpec[] allColSpecs = new DataColumnSpec[11];
 		
 	    allColSpecs[0] =  new DataColumnSpecCreator("CHROM", StringCell.TYPE).createSpec();
 	    allColSpecs[1] =  new DataColumnSpecCreator("POS", IntCell.TYPE).createSpec();
@@ -91,10 +83,7 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 	    allColSpecs[7] =  new DataColumnSpecCreator("INFO", StringCell.TYPE).createSpec();
 	    allColSpecs[8] =  new DataColumnSpecCreator("FORMAT", StringCell.TYPE).createSpec();
 	    allColSpecs[9] = new DataColumnSpecCreator("CALL", StringCell.TYPE).createSpec();
-	    if(hasSample)
-		    {
-		    allColSpecs[10] =  new DataColumnSpecCreator("SAMPLE", StringCell.TYPE).createSpec();
-		    }
+		allColSpecs[10] =  new DataColumnSpecCreator("SAMPLE", StringCell.TYPE).createSpec();
 	    return new DataTableSpec( allColSpecs);
 		}
 
@@ -106,7 +95,6 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
             final ExecutionContext exec) throws Exception
         {
     	if(inData!=null && inData.length!=0) throw new IllegalArgumentException("bad input");
-    	boolean hasSample=isSampleDefined();
     	BufferedReader reader=null;
     	Pattern tab=Pattern.compile("[\t]");
     	BufferedDataContainer container1=null;
@@ -118,7 +106,7 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 	    	{
     		container1 = exec.createDataContainer(createVcfDataColumnSpec());
     		container2 = exec.createDataContainer(createVcfHeaderDataColumnSpec());
-    		StringCell sample=new StringCell(this.m_sampleColumn.getStringValue().trim());
+    		StringCell sample=null;
 
 	    	
     		String uri=this.m_vcfColumn.getStringValue();
@@ -132,13 +120,10 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 					if(line.startsWith("##"))
 						{
 						nRows2++;
-						DataCell cells[]=new DataCell[2+(hasSample?1:0)];
-						if(hasSample)
-							{
-							cells[0]=sample;
-							}
-						cells[0+(hasSample?1:0)]=new StringCell(uri);
-						cells[1+(hasSample?1:0)]=new StringCell(line.substring(2));
+						DataCell cells[]=new DataCell[2];
+						
+						cells[0]=new StringCell(uri);
+						cells[1]=new StringCell(line.substring(2));
 						
 						container2.addRowToTable(new DefaultRow(
 							RowKey.createRowKey(nRows2),
@@ -152,10 +137,21 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 							{
 							throw new IOException("Expected VCF header to start with \n"+H+" but got "+line);
 							}
+						String tokens[]=tab.split(line);
+						if(tokens.length<10) throw new IOException("Column for call missing in "+line);
+						if(!this.m_sampleColumn.getStringValue().trim().isEmpty())
+							{
+							sample=new StringCell(this.m_sampleColumn.getStringValue().trim());
+							}
+						else
+							{
+							sample=new StringCell(tokens[9].trim());
+							}	
 						}
 					continue;
 					}
 				
+				if(sample==null) throw new IOException("Header was not found.");
 				
 				String tokens[]=tab.split(line);
 				if(tokens.length<9)
@@ -191,7 +187,7 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 					continue;
         			}
 				
-				DataCell[] cells = new DataCell[10+(hasSample?1:0)];
+				DataCell[] cells = new DataCell[11];
 				
 				cells[0] = new StringCell(tokens[0]); //chrom
 	            cells[1] = new IntCell(Integer.parseInt(tokens[1])); //pos
@@ -203,11 +199,8 @@ public class ReadOneVCFNodeModel extends AbstractVCFNodeModel
 	            cells[7] = new StringCell(tokens[7]);//info
 	            cells[8] = new StringCell(tokens[8]);//format
 	            cells[9] = new StringCell(tokens[9]);//call
-	            if(hasSample)
-		            {
-		            cells[10] = sample;
-		            }
-	            ++nRows1;
+	            cells[10] = sample;
+		        ++nRows1;
 		        container1.addRowToTable(new DefaultRow(
 		        		RowKey.createRowKey(nRows1),
 		        		cells));

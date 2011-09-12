@@ -17,7 +17,7 @@ You can group several of those nodes using a - Cat - node.
 = Parameters =
 
   * *quality* : Ignore VCF data with a quality lower than this value
-  * *SAMPLE* : the SAMPLE name (optional)
+  * *SAMPLE* : the SAMPLE name (if not defined, the header of the 10th column will be used)
   * *VCF file* : vcf file. Valid extensions are: vcf, vcf.gz, vcf.bgz 
 
 = Output =

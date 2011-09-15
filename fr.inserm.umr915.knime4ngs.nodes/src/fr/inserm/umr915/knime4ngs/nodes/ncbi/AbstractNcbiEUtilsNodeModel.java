@@ -171,7 +171,7 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 	        		new DataTableSpec(spec1,
 	        		spec2
 	        		));
-	        int total=inTable.getRowCount();
+	        float total=inTable.getRowCount();
 	        
 	        
 	        int nRow=0;

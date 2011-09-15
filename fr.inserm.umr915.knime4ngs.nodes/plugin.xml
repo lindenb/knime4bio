@@ -26,12 +26,18 @@
             level-id="bioview"
             name="Visualization"
             path="/ngs"/>
-        
+        <category
+	            description="Integragen.com"
+	            level-id="integragen"
+	            name="Integragen"
+	            path="/ngs/vcf"/>
 	     <category
 	            description="Predictions"
 	            level-id="predictions"
 	            name="Predictions"
 	            path="/ngs/vcf"/>       
+            
+              
             
 	  	     <category
 		            description="SIFT"
@@ -124,6 +130,15 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"/>
           
+        <node
+            category-path="/ngs/vcf/integragen"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadindel.LoadIgIndelNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadindel.LoadIgIndelNodeFactory"/>
+        
+         <node
+            category-path="/ngs/vcf/integragen"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadsnp.LoadIgSnpNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadsnp.LoadIgSnpNodeFactory"/>
         
          <node 
           	category-path="/ngs/vcf/predictions"

@@ -49,7 +49,7 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 	//VCF URL
 	static final String VCF_COL_DEFAULT="vcf";
 	static final String VCF_COL_PROPERTY="sampleVcf";
-	private final SettingsModelColumnName m_vcfColumn =  new SettingsModelColumnName( VCF_COL_PROPERTY,VCF_COL_PROPERTY);
+	private final SettingsModelColumnName m_vcfColumn =  new SettingsModelColumnName( VCF_COL_PROPERTY,VCF_COL_DEFAULT);
 	
 	
     public VCFLoaderNodeModel()
@@ -166,7 +166,7 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
 					
 					}
 				++iterCount;
-				exec.setProgress(iterCount/total,"Addin row "+nRows);
+				exec.setProgress(iterCount/total,"Adding row "+nRows);
 				reader.close();
 				reader=null;
 	    		}
@@ -193,7 +193,7 @@ public class VCFLoaderNodeModel extends AbstractVCFNodeModel
     @Override
     protected DataTableSpec[] configure(final DataTableSpec[] inSpecs)
             throws InvalidSettingsException {
-    	getLogger().info("calling configure");
+    	
         if(inSpecs==null || inSpecs.length!=1)
         	{
         	throw new InvalidSettingsException("Expect one input.");

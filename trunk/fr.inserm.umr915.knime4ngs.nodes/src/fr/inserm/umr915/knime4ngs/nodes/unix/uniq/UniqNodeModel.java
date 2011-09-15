@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.knime.base.data.append.column.AppendedColumnRow;
 import org.knime.core.data.DataCell;
+import org.knime.core.data.DataColumnSpec;
+import org.knime.core.data.DataColumnSpecCreator;
 import org.knime.core.data.DataRow;
 import org.knime.core.data.DataTableSpec;
 import org.knime.core.data.RowIterator;
+import org.knime.core.data.def.IntCell;
 import org.knime.core.node.BufferedDataContainer;
 import org.knime.core.node.BufferedDataTable;
 import org.knime.core.node.ExecutionContext;
@@ -44,6 +48,15 @@ public class UniqNodeModel extends AbstractNodeModel
 			DUPLICATE_DEFAULT
 			);
 	
+	/** show count  */
+	static final String SHOW_COUNT_PROPERTY="show.count";
+	static final boolean  SHOW_COUNT_DEFAULT=false;
+	private final SettingsModelBoolean m_showCount = new SettingsModelBoolean(
+			SHOW_COUNT_PROPERTY,
+			SHOW_COUNT_DEFAULT
+			);
+	
+	
 	static class Sorter implements Comparator<DataRow>
 		{
 		List<Integer> indexes=new ArrayList<Integer>();
@@ -74,144 +87,207 @@ public class UniqNodeModel extends AbstractNodeModel
         super(1,1);
     	}
     
+    private DataTableSpec createDataTableSpec(DataTableSpec in)
+    	{
+    	if(this.m_showCount.getBooleanValue())
+    		{
+    		return new DataTableSpec(in,new DataTableSpec(new DataColumnSpec[]{
+    				new DataColumnSpecCreator("uniq.count",IntCell.TYPE).createSpec(),	
+    			}));
+    		}
+    	return in;
+    	}
+    
     @Override
     protected BufferedDataTable[] execute(
     		final BufferedDataTable[] inData,
             final ExecutionContext exec
             ) throws Exception
-            {
-		BufferedDataContainer container1=null;
-		RowIterator iter=null;
-		try
-	    	{
-			BufferedDataTable inTable=inData[0];
+	            {
+			BufferedDataContainer container1=null;
+			RowIterator iter=null;
+			try
+		    	{
+				BufferedDataTable inTable=inData[0];
+				
+				Sorter sorter=new Sorter();
+		        DataTableSpec inSpecs=inTable.getDataTableSpec();
+			    for(String s:this.m_leftColumn.getIncludeList())
+					{
+					int j=inSpecs.findColumnIndex(s);
+					if(j==-1) throw new IllegalStateException("Cannot find column "+s);
+					sorter.indexes.add(j);
+					sorter.comparators.add(CellSorter.getCellSorterByType( inSpecs.getColumnSpec(j).getType()));
+					}
+				
+				if(sorter.indexes.isEmpty())
+					{
+					throw new ExecuteException("No columns defined");
+					}
+			    
+		        container1 = exec.createDataContainer(createDataTableSpec(inSpecs));
+		        int nRow=0;
+		        float total=inTable.getRowCount();
+		      	DataRow prev=null;
+		        try {
+		        	iter=inTable.iterator();
+		        	if(this.m_showCount.getBooleanValue())
+			        		{
+		        			List<DataRow> buffer=new ArrayList<DataRow>();
+				        	while(iter.hasNext())
+				        		{
+				        		DataRow r=iter.next();
+				        		++nRow;
+				        		exec.checkCanceled();
+				            	exec.setProgress(nRow/total,"Uniq/Count....");
+								if(buffer.isEmpty())
+									{
+									buffer.add(r);
+									continue;
+									}
+								int diff=sorter.compare(buffer.get(0),r);
+				
+								if(diff==0)
+									{
+									buffer.add(r);
+									}
+								else if(diff>0)
+									{
+									throw new ExecuteException("Expected rows to be sorted with "+sorter+" but got\n"+prev +"\nand\nthen "+r);
+									}
+								else
+									{
+									for(DataRow dr:buffer)
+										{
+										container1.addRowToTable(
+											new AppendedColumnRow(
+												dr,
+												new IntCell(buffer.size())
+												)
+											);
+										}
+									buffer.clear();
+									buffer.add(r);
+									}
+				        		}
+					       if(!buffer.isEmpty())
+								{
+						    	for(DataRow dr:buffer)
+										{
+										container1.addRowToTable(
+											new AppendedColumnRow(
+												dr,
+												new IntCell(buffer.size())
+												)
+											);
+										}
+								}
+			        	}
+		        	else if(this.m_showDuplicates.getBooleanValue()==false)
+			        	{
+			        	while(iter.hasNext())
+			        		{
+			        		DataRow r=iter.next();
+			        		++nRow;
+			        		exec.checkCanceled();
+			            	exec.setProgress(nRow/total,"Uniq....");
+							if(prev==null)
+								{
+								prev=r;
+								continue;
+								}
+							int diff=sorter.compare(prev,r);
 			
-			Sorter sorter=new Sorter();
-	        DataTableSpec inSpecs=inTable.getDataTableSpec();
-		    for(String s:this.m_leftColumn.getIncludeList())
-				{
-				int j=inSpecs.findColumnIndex(s);
-				if(j==-1) throw new IllegalStateException("Cannot find column "+s);
-				sorter.indexes.add(j);
-				sorter.comparators.add(CellSorter.getCellSorterByType( inSpecs.getColumnSpec(j).getType()));
-				}
-			
-			if(sorter.indexes.isEmpty())
-				{
-				throw new ExecuteException("No columns defined");
-				}
-		    
-	        container1 = exec.createDataContainer(inSpecs);
-	        int nRow=0;
-	        float total=inTable.getRowCount();
-	      	DataRow prev=null;
-	        try {
-	        	iter=inTable.iterator();
-	        	if(this.m_showDuplicates.getBooleanValue()==false)
-		        	{
-		        	while(iter.hasNext())
-		        		{
-		        		DataRow r=iter.next();
-		        		++nRow;
-		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"Uniq....");
-						if(prev==null)
-							{
-							prev=r;
-							continue;
-							}
-						int diff=sorter.compare(prev,r);
-		
-						if(diff==0)
-							{
-							//continue
-							}
-						else if(diff>0)
-							{
-							throw new ExecuteException("Expected rows to be sorted with "+sorter+" but got\n"+prev +"\nand\nthen "+r);
-							}
-						else
-							{
-							container1.addRowToTable(prev);
-							prev=r;
-							}
-		        		}
-			       if(prev!=null)
-						{
-						container1.addRowToTable(prev);
-						}
-		        	}
-	        	else
-	        		{
-	        		int count=0;
-		        	while(iter.hasNext())
-		        		{
-		        		DataRow r=iter.next();
-		        		++nRow;
-		        		exec.checkCanceled();
-		            	exec.setProgress(nRow/total,"Uniq....");
-						if(prev==null)
-							{
-							prev=r;
-							count=1;
-							continue;
-							}
-						int diff=sorter.compare(prev,r);
-		
-						if(diff==0)
-							{
-							count++;
-							//continue
-							}
-						else if(diff>0)
-							{
-							throw new ExecuteException("Expected rows to be sorted: but got "+prev +" and then "+r);
-							}
-						else
-							{
-							if(count>1)
+							if(diff==0)
+								{
+								//continue
+								}
+							else if(diff>0)
+								{
+								throw new ExecuteException("Expected rows to be sorted with "+sorter+" but got\n"+prev +"\nand\nthen "+r);
+								}
+							else
 								{
 								container1.addRowToTable(prev);
+								prev=r;
 								}
-							prev=r;
-							count=1;
+			        		}
+				       if(prev!=null)
+							{
+							container1.addRowToTable(prev);
 							}
+			        	}
+		        	else
+		        		{
+		        		int count=0;
+			        	while(iter.hasNext())
+			        		{
+			        		DataRow r=iter.next();
+			        		++nRow;
+			        		exec.checkCanceled();
+			            	exec.setProgress(nRow/total,"Uniq....");
+							if(prev==null)
+								{
+								prev=r;
+								count=1;
+								continue;
+								}
+							int diff=sorter.compare(prev,r);
+			
+							if(diff==0)
+								{
+								count++;
+								//continue
+								}
+							else if(diff>0)
+								{
+								throw new ExecuteException("Expected rows to be sorted: but got "+prev +" and then "+r);
+								}
+							else
+								{
+								if(count>1)
+									{
+									container1.addRowToTable(prev);
+									}
+								prev=r;
+								count=1;
+								}
+			        		}
+				       if(prev!=null && count>1)
+							{
+							container1.addRowToTable(prev);
+							}
+			        	
 		        		}
-			       if(prev!=null && count>1)
-						{
-						container1.addRowToTable(prev);
-						}
-		        	
-	        		}
-		       } 
-	        catch (Exception e)
-				{
-	        	e.printStackTrace();
-				throw e;
-				}
-			finally
-				{
-				safeClose(iter);
-				}
-	        
-			// once we are done, we close the container and return its table
-	        safeClose(container1);
-	        BufferedDataTable out1 = container1.getTable();
-	        container1=null;
-	        BufferedDataTable array[]= new BufferedDataTable[]{out1};
-	    	return array;
-	    	}
-	catch(Exception err)
-		{
-		getLogger().error("Boum", err);
-		err.printStackTrace();
-		throw err;
-		}
-	finally
-		{
-		safeClose(container1);
-		}
-   }
+			       } 
+		        catch (Exception e)
+					{
+		        	e.printStackTrace();
+					throw e;
+					}
+				finally
+					{
+					safeClose(iter);
+					}
+		        
+				// once we are done, we close the container and return its table
+		        safeClose(container1);
+		        BufferedDataTable out1 = container1.getTable();
+		        container1=null;
+		        BufferedDataTable array[]= new BufferedDataTable[]{out1};
+		    	return array;
+		    	}
+		catch(Exception err)
+			{
+			getLogger().error("Boum", err);
+			err.printStackTrace();
+			throw err;
+			}
+		finally
+			{
+			safeClose(container1);
+			}
+	   }
     
     @Override
     protected DataTableSpec[] configure(DataTableSpec[] inSpecs)
@@ -221,7 +297,7 @@ public class UniqNodeModel extends AbstractNodeModel
     		{
     		throw new InvalidSettingsException("expected one table");
     		}
-    	return new DataTableSpec[]{inSpecs[0]};
+    	return new DataTableSpec[]{createDataTableSpec(inSpecs[0])};
     	}
     
     @Override
@@ -229,6 +305,7 @@ public class UniqNodeModel extends AbstractNodeModel
     	List<SettingsModel> L=new ArrayList<SettingsModel>( super.getSettingsModel());
     	L.add(this.m_leftColumn);
     	L.add(this.m_showDuplicates);
+    	L.add(this.m_showCount);
     	return L;
     	} 
     

@@ -20,6 +20,10 @@ public class UniqNodeDialog extends DefaultNodeSettingsPane
                 new SettingsModelBoolean(
                 		UniqNodeModel.DUPLICATE_PROPERTY, UniqNodeModel.DUPLICATE_DEFAULT),
                     "Show duplicated rows."));
+    	addDialogComponent(new DialogComponentBoolean(
+                new SettingsModelBoolean(
+                		UniqNodeModel.SHOW_COUNT_PROPERTY, UniqNodeModel.SHOW_COUNT_DEFAULT),
+                    "Show count"));
     	}
 	}
 

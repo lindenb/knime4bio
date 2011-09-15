@@ -73,7 +73,7 @@ public class GroupByGeneNodeModel extends AbstractVCFNodeModel
 			SAMPLE_COL_DEFAULT
 			);
 	
-	/** sample column */
+	/** Gene column */
 	static final String GENE_COL_PROPERTY="gene.col";
 	static final String GENE_COL_DEFAULT="GENE";
 	private final SettingsModelColumnName m_geneColumn = new SettingsModelColumnName(

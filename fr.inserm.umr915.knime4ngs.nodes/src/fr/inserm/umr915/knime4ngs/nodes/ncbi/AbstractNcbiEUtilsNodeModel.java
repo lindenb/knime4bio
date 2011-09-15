@@ -136,6 +136,12 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 					}
 				}
 		reader.close();
+		if(WebEnv==null || QueryKey==null)
+			{
+			System.err.println("Error: got a problem with "+query+"\n"+url+"\nproblem with WebEnv/QueryKey\n"+
+			"Don't be evil with the NCBI. Don't submit too much data");
+			return new ArrayList<DataCell[]>();
+			}
 		if(count==0) return Collections.emptyList(); 
 		if(count>m_limit.getIntValue()) count=m_limit.getIntValue();
 		url= new URL("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db="+getDatabase()+
@@ -147,7 +153,17 @@ public abstract class AbstractNcbiEUtilsNodeModel extends AbstractNodeModel
 				;
 		//System.err.println(url);
 		InputStream in=url.openStream();
-		List<DataCell[]> rows=parseXML(in);
+		List<DataCell[]> rows=null;
+		try
+			{
+			rows=parseXML(in);
+			}
+		catch(Exception err)
+			{
+			System.err.println("Error: got an error with "+query+"\n"+url+"\n"+err.getMessage()+"\n"+
+					"Don't be evil with the NCBI. Don't submit too much data");
+			rows=new ArrayList<DataCell[]>();
+			}
 		in.close();
 		return rows;
 		}

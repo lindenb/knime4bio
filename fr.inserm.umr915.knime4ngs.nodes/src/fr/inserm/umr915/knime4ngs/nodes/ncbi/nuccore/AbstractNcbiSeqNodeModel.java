@@ -222,7 +222,7 @@ public abstract class AbstractNcbiSeqNodeModel extends AbstractNcbiEUtilsNodeMod
 	        		new DataTableSpec(spec1,
 	        		spec2
 	        		));
-	        int total=inTable.getRowCount();
+	        float total=inTable.getRowCount();
 	        
 	        int rowOut=0;
 	        int nRow=0;
@@ -295,7 +295,7 @@ public abstract class AbstractNcbiSeqNodeModel extends AbstractNcbiEUtilsNodeMod
 		        					}
 		        				}
 			        		reader.close();
-			        		if(count!=0)
+			        		if(count!=0 && QueryKey!=null && WebEnv!=null)
 				        		{
 				        		if(count>m_limit.getIntValue()) count=m_limit.getIntValue();
 				        		String uri= "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db="+getDatabase()+

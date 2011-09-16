@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Node extension for KNIME Workbench
 Bundle-SymbolicName: fr.inserm.umr915.knime4ngs.nodes;singleton:=true
-Bundle-Version: 1.0.23
+Bundle-Version: 1.0.24
 Bundle-Vendor: Pierre Lindenbaum
 Bundle-ClassPath: knime4ngs.jar
 Require-Bundle: org.eclipse.core.runtime,

@@ -215,7 +215,7 @@ public abstract class AbstractSqlNodeModel extends AbstractNodeModel
 	                case Types.VARBINARY:	
 	                case Types.LONGVARBINARY:
 	                	{
-	                	cell= readBlob(m_result, i);
+	                	cell= readBlob(m_result, i+1);
 	                	break;
 	                	}
 	               default:

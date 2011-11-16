@@ -173,7 +173,11 @@ public class EVSNodeModel extends AbstractVCFNodeModel
 			        		int pos=IntCell.class.cast(cell).getIntValue();
 			        		
 			        		EvsData data=port.getEvsData(chrom+":"+pos+"-"+(pos+1));
-			        		if(data==null) break;
+			        		
+			        		if(data==null)
+			        			{
+			        			break;
+			        			}
 			        		if(data.getStart()!=pos) break;
 			        		for(SnpData snp: data.getSnpList())
 			        			{

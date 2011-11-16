@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>Select Samples</name>
+    <shortDescription>Select the Samples using a boolean query</shortDescription>
+    
+    <fullDescription>
+        <intro>
+        This node select the Samples using a sql-like query
+       
+        Rows <b>must</b> be sorted by chom/pos/ref/alt/sample.
+        
+        <b>AND nodes</b>:<pre>(A and B &amp;&amp; C and D)</pre><br/>
+        <b>OR nodes</b>:<pre>(A OR B || C or D)</pre><br/>
+        <b>NOT nodes</b>:<pre>!(A)</pre><br/>
+        <b>Samples nodes</b>:<pre>Sample1</pre><br/>
+       
+       <b>Example</b>:<pre>(Sample_1 and "Sample 3" and not("Sample 4" or "Sample2"))</pre>
+        
+
+                
+        </intro>
+        <option name="CHROM">The CHROM column</option>
+        <option name="POS">The POS column</option>
+        <option name="REF">The REF column</option>
+        <option name="ALT">The ALT column</option>
+        <option name="Sample">The Sample column</option>
+        <option name="Query">The Query</option>
+        <option name="USe REF/ALT">Should we use the REF and ALT column to answer if two mutations are the same ?</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Sorted VCF">A sorted VCF-like table (chom/pos/ref/alt/sample) </inPort>
+        <outPort index="0" name="VCF ">The rows matching the query</outPort>
+    </ports>    
+
+</knimeNode>

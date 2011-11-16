@@ -164,6 +164,11 @@
             category-path="ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2.SamplePerSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2.SamplePerSnpNodeFactory"/>
+           
+             <node
+            category-path="ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.selectsamples.SelectSamplesNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.selectsamples.SelectSamplesNodeFactory"/>
             
           <node 
           	category-path="/ngs/sql"
@@ -334,6 +339,11 @@
             category-path="/ngs/biows"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"/>
+            
+        <node
+            category-path="/ngs/biows"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.evs.EVSNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.evs.EVSNodeFactory"/>
         
         <node 
           	category-path="/ngs/biows"

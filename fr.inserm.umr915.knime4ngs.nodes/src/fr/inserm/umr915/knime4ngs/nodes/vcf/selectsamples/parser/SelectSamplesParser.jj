@@ -1,0 +1,245 @@
+
+
+options {
+        JDK_VERSION = "1.6";
+        STATIC=false;
+        IGNORE_CASE=true;
+       
+        }
+
+PARSER_BEGIN(SelectSamplesParser)
+package fr.inserm.umr915.knime4ngs.nodes.vcf.selectsamples.parser;
+import java.util.*;
+
+
+/**
+ * ExprLangParser
+ */
+public class SelectSamplesParser
+    {
+    public abstract class Node
+      {
+      public abstract boolean eval(Set<String> samples);
+      @Override
+      public abstract String toString();
+      
+      }
+    
+    public class NotNode extends Node
+      {
+      private Node child;
+    NotNode(Node child)
+      {
+      this.child=child;
+      }
+       @Override
+       public boolean eval(Set<String> samples)
+           {
+           return !child.eval(samples);
+           }
+      @Override
+      public String toString()
+         {
+         return "NOT("+ child.toString()+")";
+         }
+
+      }
+    
+    
+    
+    public class Sample extends Node
+      {
+      private String name;
+      public Sample(String name)
+         {
+         this.name=name;
+         }
+        @Override
+       public boolean eval(Set<String> samples)
+           {
+           return samples.contains(name);
+           }
+      public String toString()
+         {
+         return this.name;
+         }
+    
+      }
+    
+    
+    
+    public abstract class YNode
+      extends Node 
+      {
+      List<Node> children=new ArrayList<Node>();
+      }
+      
+    public class AndNode
+      extends YNode 
+      {
+      @Override
+      public boolean eval(Set<String> samples)
+           {
+           for(Node c: children)
+            {
+            if(!c.eval(samples)) return false;
+            }
+        return true;
+           }
+      
+      
+      @Override
+      public String toString()
+         {
+         StringBuilder b=new StringBuilder();
+         b.append("(");
+         for(int i=0;i< children.size();++i)
+            {
+            if(i>0) b.append(" AND ");
+            b.append(children.get(i).toString());
+            }
+         b.append(")");
+         return b.toString();
+         }
+      }
+    public class OrNode
+      extends YNode 
+      {
+       @Override
+      public boolean eval(Set<String> samples)
+           {
+           for(Node c: children)
+            {
+            if(c.eval(samples)) return true;
+            }
+        return false;
+           }
+      
+      @Override
+      public String toString()
+         {
+         StringBuilder b=new StringBuilder();
+         b.append("(");
+         for(int i=0;i< children.size();++i)
+            {
+            if(i>0) b.append(" OR ");
+            b.append(children.get(i).toString());
+            }
+         b.append(")");
+         return b.toString();
+         }
+      }
+      
+    private String unescape(String s)
+        {
+        StringBuilder b=new StringBuilder();
+        s=s.substring(1,s.length()-1);
+        for(int i=0;i< s.length();++i)
+            {
+            if(s.charAt(i)=='\\' && i+1 < s.length())
+                {
+                i++;
+                }
+            
+            b.append(s.charAt(i));
+            }
+        return b.toString();
+        }
+    
+    
+    public static void main(String args[])
+      {
+      try
+         {
+         Node n=new SelectSamplesParser(System.in).input();
+         Set<String> set=new HashSet<String>();
+         set.add("A");
+         set.add("B");
+         System.out.println(n.eval(set));
+         }
+      catch(Throwable err)
+         {
+         err.printStackTrace();
+         }
+      }
+    } 
+PARSER_END(SelectSamplesParser)
+
+SKIP :
+{
+        " "
+|       "\r"
+|       "\t"
+|       "\n"
+}
+
+TOKEN:
+{
+  <#LETTER: (["A"-"Z"]|["a"-"z"]|"_")>
+| <#DIGIT: (["0"-"9"])>
+| <#ESCAPE_CHAR: "\\" ["n","t","b","r","f","\\","'","\""] >
+| <SIMPLE_QUOTE_LITERAL: "\'" ( (~["\'","\\","\n","\r"]) | <ESCAPE_CHAR> )* "\'" >
+| <DOUBLE_QUOTE_LITERAL: "\"" ( (~["\"","\\","\n","\r"]) | <ESCAPE_CHAR> )* "\"" >
+| <LPAR: "(">
+| <RPAR: ")">
+| <NOT: ("not"|"!") >
+| <AND: "&&"|"and">
+| <OR: "||"|"or">
+| <IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)*>
+}
+
+public Node input():
+   {
+   Node n;
+   }
+   {
+   n=expr() <EOF>
+      {
+      return n;
+      }
+   }
+
+private Node expr():
+    {
+    boolean negate=false;
+    Node node=null;
+    OrNode orNode=null;
+    AndNode andNode=null;
+    Node leftN;
+    Node rightN;
+    }
+    {
+    (<NOT> { negate=true;} )?
+    (
+     <LPAR>
+        leftN=expr() { node=leftN;}
+        (
+           <OR> rightN=expr() {orNode=new OrNode(); node=orNode;  orNode.children.add(leftN); orNode.children.add(rightN);}
+         ( <OR> rightN=expr() {orNode.children.add(rightN);} )*    
+        |  <AND> rightN=expr() {andNode=new AndNode(); node=andNode;  andNode.children.add(leftN); andNode.children.add(rightN);}
+         ( <AND> rightN=expr() {andNode.children.add(rightN);} )*    
+        )?
+    <RPAR>
+    | node=sample()
+    )
+     {
+     return negate ? new NotNode(node):node;
+     }
+    }
+
+
+
+
+
+private Sample sample():
+    {
+    Token t;
+    }
+    {
+    ( t=<IDENTIFIER> {return new Sample(t.image); }
+    | t=<SIMPLE_QUOTE_LITERAL> {return new Sample(unescape(t.image)); }
+    | t=<DOUBLE_QUOTE_LITERAL> {return new Sample(unescape(t.image)); }
+    )
+    }
+
+

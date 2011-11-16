@@ -97,7 +97,7 @@ public class LoadIgSnpNodeModel extends LoadIgNodeModel
     	switch(index)
     		{
     		case  0: 
-    			if(!tokens[index].startsWith("Position."))
+    			if(!tokens[index].toLowerCase().startsWith("position"))
     				{
     				throw new ExecuteException(
     						"In line "+line+"\nfile\""+uri+"\"\n"+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="evs.png" type="Source">
+    <name>Exome Variant Server</name>
+    <shortDescription>Exome Variant Server</shortDescription>
+    
+    <fullDescription>
+        <intro>Calls the web service for the <b>Exome Variant Server</b>. <a href="http://evs.gs.washington.edu/EVS/"></a>
+
+</intro>
+        <option name="CHROM">the CHROM column in the VCF</option>
+        <option name="POS">the POS column in the VCF</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="VCF-like table">VCF-like</inPort>
+        <outPort index="0" name="VCF+Data from EVS">the VCF and the data from EVS</outPort>
+    </ports>
+</knimeNode>

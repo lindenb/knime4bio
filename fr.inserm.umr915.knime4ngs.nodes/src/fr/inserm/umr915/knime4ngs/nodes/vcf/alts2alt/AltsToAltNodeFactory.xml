@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>ALTS to ALT</name>
+    <shortDescription>convert the comma separated alleles in ALT to some new rows</shortDescription>
+    
+    <fullDescription>
+        <intro>
+        Convert the comma separated alleles in ALT to some new rows.
+        For example the following ALT cells:
+<pre>ALT
+A,T
+G,C</pre>
+        will be converted to
+<pre>ALT  ALT.src
+A    A,T
+T    A,T
+G    G,C
+C    G,C</pre>
+               
+        </intro>
+       
+        <option name="ALT">The ALT column</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Table with ALTS">A table containing a ALT column</inPort>
+        <outPort index="0" name="Table with ALT+ALT.src">The new table</outPort>
+    </ports>    
+
+</knimeNode>

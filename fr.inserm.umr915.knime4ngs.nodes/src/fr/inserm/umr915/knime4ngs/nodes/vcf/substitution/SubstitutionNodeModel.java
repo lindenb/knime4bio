@@ -3,6 +3,7 @@ package fr.inserm.umr915.knime4ngs.nodes.vcf.substitution;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.knime.core.data.DataCell;
 import org.knime.core.data.DataRow;
@@ -57,6 +58,7 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
             final ExecutionContext exec
             ) throws Exception
             {
+    		Pattern mulSnv=Pattern.compile("[A-Za-z](,[A-Za-z])+");
 			BufferedDataContainer container1=null;
 			BufferedDataContainer container2=null;
 			try
@@ -87,7 +89,7 @@ public class SubstitutionNodeModel extends AbstractVCFNodeModel
 		        		if(cell.isMissing()) continue;
 		        		String alt=StringCell.class.cast(cell).getStringValue();
 						
-		        		if(isATGC(ref) && isATGC(alt))
+		        		if(isATGC(ref) && (isATGC(alt) || mulSnv.matcher(alt).matches()))
 							{
 							container1.addRowToTable(row);
 							}

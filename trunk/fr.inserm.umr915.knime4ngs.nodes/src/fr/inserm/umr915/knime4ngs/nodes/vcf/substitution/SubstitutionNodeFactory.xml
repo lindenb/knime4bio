@@ -2,15 +2,9 @@
 <!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
 <knimeNode icon="./default.png" type="Source">
     <name>Split Substitution/Indels</name>
-    <shortDescription>Split substitutions / indel</shortDescription>
-    
+    <shortDescription>Split SNV / indel</shortDescription>
     <fullDescription>
-        <intro>Split substitutions / indel
-        
- 
-<h3>References</h3><p><a href="https://code.google.com/p/knime4bio/">Knime4Bio</a>. <b>Author:</b> <a href="http://plindenbaum.blogspot.com">Pierre Lindenbaum</a> PhD, <a href="http://www.umr915.univ-nantes.fr/">INSERM UMR 915, Institut du thorax, Nantes</a>. <b>Reference</b>: <i>manuscript in preparation</i>. Please, report any problem <a href="https://code.google.com/p/knime4bio/issues/list">here</a>.</p>
-        
-        </intro>
+        <intro>Split SNV / INDELS</intro>
         <option name="REF">VCF REF column</option>
         <option name="ALT">VCF ALT column</option>
     </fullDescription>

@@ -8,7 +8,8 @@
         <intro>Calls the web service for the <b>Exome Variant Server</b>. <a href="http://evs.gs.washington.edu/EVS/"></a>
 
 </intro>
-        <option name="CHROM">the CHROM column in the VCF</option>
+        <option name="CHROM">the CHROM column in the VCF. The Chromosome name should be normalized (e.g. '1' or 'chr1')
+</option>
         <option name="POS">the POS column in the VCF</option>
     </fullDescription>
     

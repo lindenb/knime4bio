@@ -35,22 +35,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SnpData }
-     * 
-     */
-    public SnpData createSnpData() {
-        return new SnpData();
-    }
-
-    /**
-     * Create an instance of {@link ArrayList }
-     * 
-     */
-    public ArrayList createArrayList() {
-        return new ArrayList();
-    }
-
-    /**
      * Create an instance of {@link GetEvsData }
      * 
      */
@@ -67,19 +51,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ArrayList }
+     * 
+     */
+    public ArrayList createArrayList() {
+        return new ArrayList();
+    }
+
+    /**
+     * Create an instance of {@link SiteCoverageInfo }
+     * 
+     */
+    public SiteCoverageInfo createSiteCoverageInfo() {
+        return new SiteCoverageInfo();
+    }
+
+    /**
      * Create an instance of {@link GetEvsDataResponse }
      * 
      */
     public GetEvsDataResponse createGetEvsDataResponse() {
         return new GetEvsDataResponse();
-    }
-
-    /**
-     * Create an instance of {@link FunctionInfo }
-     * 
-     */
-    public FunctionInfo createFunctionInfo() {
-        return new FunctionInfo();
     }
 
     /**
@@ -91,11 +83,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SiteCoverageInfo }
+     * Create an instance of {@link FunctionInfo }
      * 
      */
-    public SiteCoverageInfo createSiteCoverageInfo() {
-        return new SiteCoverageInfo();
+    public FunctionInfo createFunctionInfo() {
+        return new FunctionInfo();
+    }
+
+    /**
+     * Create an instance of {@link SnpData }
+     * 
+     */
+    public SnpData createSnpData() {
+        return new SnpData();
     }
 
     /**

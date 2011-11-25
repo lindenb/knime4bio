@@ -22,9 +22,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="uaAlleleCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="aaAlleleCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="totalAlleleCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="uaAlleleAndCount" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="aaAlleleAndCount" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="totalAlleleAndCount" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="uaMAF" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="aaMAF" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="totalMAF" type="{http://www.w3.org/2001/XMLSchema}double"/>
@@ -41,6 +38,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="rsIds" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="filters" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="clinicalLink" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="dbsnpVersion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="uaGenotypeCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="aaGenotypeCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="totalGenotypeCounts" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="onExomeChip" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -57,9 +59,6 @@ import javax.xml.bind.annotation.XmlType;
     "uaAlleleCounts",
     "aaAlleleCounts",
     "totalAlleleCounts",
-    "uaAlleleAndCount",
-    "aaAlleleAndCount",
-    "totalAlleleAndCount",
     "uaMAF",
     "aaMAF",
     "totalMAF",
@@ -75,7 +74,12 @@ import javax.xml.bind.annotation.XmlType;
     "hasAtLeastOneAccession",
     "rsIds",
     "filters",
-    "clinicalLink"
+    "clinicalLink",
+    "dbsnpVersion",
+    "uaGenotypeCounts",
+    "aaGenotypeCounts",
+    "totalGenotypeCounts",
+    "onExomeChip"
 })
 public class SnpData {
 
@@ -85,9 +89,6 @@ public class SnpData {
     protected String uaAlleleCounts;
     protected String aaAlleleCounts;
     protected String totalAlleleCounts;
-    protected String uaAlleleAndCount;
-    protected String aaAlleleAndCount;
-    protected String totalAlleleAndCount;
     protected double uaMAF;
     protected double aaMAF;
     protected double totalMAF;
@@ -104,6 +105,11 @@ public class SnpData {
     protected String rsIds;
     protected String filters;
     protected String clinicalLink;
+    protected String dbsnpVersion;
+    protected String uaGenotypeCounts;
+    protected String aaGenotypeCounts;
+    protected String totalGenotypeCounts;
+    protected boolean onExomeChip;
 
     /**
      * Gets the value of the positionString property.
@@ -239,78 +245,6 @@ public class SnpData {
      */
     public void setTotalAlleleCounts(String value) {
         this.totalAlleleCounts = value;
-    }
-
-    /**
-     * Gets the value of the uaAlleleAndCount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUaAlleleAndCount() {
-        return uaAlleleAndCount;
-    }
-
-    /**
-     * Sets the value of the uaAlleleAndCount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUaAlleleAndCount(String value) {
-        this.uaAlleleAndCount = value;
-    }
-
-    /**
-     * Gets the value of the aaAlleleAndCount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAaAlleleAndCount() {
-        return aaAlleleAndCount;
-    }
-
-    /**
-     * Sets the value of the aaAlleleAndCount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAaAlleleAndCount(String value) {
-        this.aaAlleleAndCount = value;
-    }
-
-    /**
-     * Gets the value of the totalAlleleAndCount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTotalAlleleAndCount() {
-        return totalAlleleAndCount;
-    }
-
-    /**
-     * Sets the value of the totalAlleleAndCount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTotalAlleleAndCount(String value) {
-        this.totalAlleleAndCount = value;
     }
 
     /**
@@ -663,6 +597,118 @@ public class SnpData {
      */
     public void setClinicalLink(String value) {
         this.clinicalLink = value;
+    }
+
+    /**
+     * Gets the value of the dbsnpVersion property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDbsnpVersion() {
+        return dbsnpVersion;
+    }
+
+    /**
+     * Sets the value of the dbsnpVersion property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDbsnpVersion(String value) {
+        this.dbsnpVersion = value;
+    }
+
+    /**
+     * Gets the value of the uaGenotypeCounts property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUaGenotypeCounts() {
+        return uaGenotypeCounts;
+    }
+
+    /**
+     * Sets the value of the uaGenotypeCounts property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUaGenotypeCounts(String value) {
+        this.uaGenotypeCounts = value;
+    }
+
+    /**
+     * Gets the value of the aaGenotypeCounts property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAaGenotypeCounts() {
+        return aaGenotypeCounts;
+    }
+
+    /**
+     * Sets the value of the aaGenotypeCounts property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAaGenotypeCounts(String value) {
+        this.aaGenotypeCounts = value;
+    }
+
+    /**
+     * Gets the value of the totalGenotypeCounts property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTotalGenotypeCounts() {
+        return totalGenotypeCounts;
+    }
+
+    /**
+     * Sets the value of the totalGenotypeCounts property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTotalGenotypeCounts(String value) {
+        this.totalGenotypeCounts = value;
+    }
+
+    /**
+     * Gets the value of the onExomeChip property.
+     * 
+     */
+    public boolean isOnExomeChip() {
+        return onExomeChip;
+    }
+
+    /**
+     * Sets the value of the onExomeChip property.
+     * 
+     */
+    public void setOnExomeChip(boolean value) {
+        this.onExomeChip = value;
     }
 
 }

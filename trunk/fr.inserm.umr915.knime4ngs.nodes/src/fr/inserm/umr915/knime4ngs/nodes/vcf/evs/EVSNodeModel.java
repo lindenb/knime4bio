@@ -37,6 +37,7 @@ import fr.inserm.umr915.knime4ngs.nodes.vcf.AbstractVCFNodeModel;
  */
 public class EVSNodeModel extends AbstractVCFNodeModel
 	{
+	private static final int EVS_COLUMN_COUNT=26;
 
 	/** chrom column */
 	static final String CHROM_COL_PROPERTY="chrom.col";
@@ -168,11 +169,12 @@ public class EVSNodeModel extends AbstractVCFNodeModel
 			        		DataCell cell=row.getCell(chromCol);
 			        		if(cell.isMissing()) break;
 			        		String chrom=StringCell.class.cast(cell).getStringValue();
+			        		if(chrom.toLowerCase().startsWith("chr")) chrom=chrom.substring(3);
 			        		cell=row.getCell(posCol);
 			        		if(cell.isMissing()) break;
 			        		int pos=IntCell.class.cast(cell).getIntValue();
 			        		
-			        		EvsData data=port.getEvsData(chrom+":"+pos+"-"+(pos+1));
+			        		EvsData data=port.getEvsData(chrom+":"+pos+"-"+(pos));
 			        		
 			        		if(data==null)
 			        			{
@@ -181,43 +183,48 @@ public class EVSNodeModel extends AbstractVCFNodeModel
 			        		if(data.getStart()!=pos) break;
 			        		for(SnpData snp: data.getSnpList())
 			        			{
-			        			DataCell appendcells[]=new DataCell[25];
-			        			appendcells[0]=(snp.getPositionString()==null?DataType.getMissingCell():new StringCell(snp.getPositionString()));
-			        			appendcells[1]=new IntCell(snp.getChrPosition());
-			        			appendcells[2]=(snp.getAlleles()==null?DataType.getMissingCell():new StringCell(snp.getAlleles()));
-			        			appendcells[3]=(snp.getUaAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getUaAlleleCounts()));
-			        			appendcells[4]=(snp.getAaAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getAaAlleleCounts()));
-			        			appendcells[5]=(snp.getTotalAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getTotalAlleleCounts()));
-			        			appendcells[6]=(snp.getUaAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getUaAlleleAndCount()));
-			        			appendcells[7]=(snp.getAaAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getAaAlleleAndCount()));
-			        			appendcells[8]=(snp.getTotalAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getTotalAlleleAndCount()));
-			        			appendcells[9]=new DoubleCell(snp.getUaMAF());
-			        			appendcells[10]=new DoubleCell(snp.getAaMAF());
-			        			appendcells[11]=new DoubleCell(snp.getTotalMAF());
-			        			appendcells[12]= new IntCell(snp.getAvgSampleReadDepth());
-			        			appendcells[13]=(snp.getGeneList()==null?DataType.getMissingCell():new StringCell(snp.getGeneList()));
+			        			DataCell appendcells[]=new DataCell[EVS_COLUMN_COUNT];
+			        			int col=0;
+			        			appendcells[col++]=(snp.getPositionString()==null?DataType.getMissingCell():new StringCell(snp.getPositionString()));
+			        			appendcells[col++]=new IntCell(snp.getChrPosition());
+			        			appendcells[col++]=(snp.getAlleles()==null?DataType.getMissingCell():new StringCell(snp.getAlleles()));
+			        			appendcells[col++]=(snp.getUaAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getUaAlleleCounts()));
+			        			appendcells[col++]=(snp.getAaAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getAaAlleleCounts()));
+			        			appendcells[col++]=(snp.getTotalAlleleCounts()==null?DataType.getMissingCell():new StringCell(snp.getTotalAlleleCounts()));
+			        			//appendcells[6]=(snp.getUaAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getUaAlleleAndCount()));
+			        			//appendcells[7]=(snp.getAaAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getAaAlleleAndCount()));
+			        			//appendcells[8]=(snp.getTotalAlleleAndCount()==null?DataType.getMissingCell():new StringCell(snp.getTotalAlleleAndCount()));
+			        			appendcells[col++]=new DoubleCell(snp.getUaMAF());
+			        			appendcells[col++]=new DoubleCell(snp.getAaMAF());
+			        			appendcells[col++]=new DoubleCell(snp.getTotalMAF());
+			        			appendcells[col++]= new IntCell(snp.getAvgSampleReadDepth());
+			        			appendcells[col++]=(snp.getGeneList()==null?DataType.getMissingCell():new StringCell(snp.getGeneList()));
 			        			
 			        			SnpFunction func=snp.getSnpFunction();
 			        			if(func==null)
 			        				{
-			        				appendcells[14]=DataType.getMissingCell();
+			        				appendcells[col++]=DataType.getMissingCell();
 			        				}
 			        			else
 			        				{
-			        				appendcells[14]=new StringCell(asJson(func));
+			        				appendcells[col++]=new StringCell(asJson(func));
 			        				}
-			        			appendcells[15]=(snp.getConservationScore()==null?DataType.getMissingCell():new StringCell(snp.getConservationScore()));
-			        			appendcells[16]=(snp.getConservationScoreGERP()==null?DataType.getMissingCell():new StringCell(snp.getConservationScoreGERP()));
-			        			appendcells[17]=(snp.getRefAllele()==null?DataType.getMissingCell():new StringCell(snp.getRefAllele()));
-			        			appendcells[18]=(snp.getAltAlleles()==null?DataType.getMissingCell():new StringCell(snp.getAltAlleles()));
-			        			appendcells[19]=(snp.getAncestralAllele()==null?DataType.getMissingCell():new StringCell(snp.getAncestralAllele()));
-			        			appendcells[20]=(snp.getChromosome()==null?DataType.getMissingCell():new StringCell(snp.getChromosome()));
-			        			appendcells[21]=(snp.getHasAtLeastOneAccession()==null?DataType.getMissingCell():new StringCell(snp.getHasAtLeastOneAccession()));
-			        			appendcells[22]=(snp.getRsIds()==null?DataType.getMissingCell():new StringCell(snp.getRsIds()));
-			        			appendcells[23]=(snp.getFilters()==null?DataType.getMissingCell():new StringCell(snp.getFilters()));
-			        			appendcells[24]=(snp.getClinicalLink()==null?DataType.getMissingCell():new StringCell(snp.getClinicalLink()));
-
-			        			
+			        			appendcells[col++]=(snp.getConservationScore()==null?DataType.getMissingCell():new StringCell(snp.getConservationScore()));
+			        			appendcells[col++]=(snp.getConservationScoreGERP()==null?DataType.getMissingCell():new StringCell(snp.getConservationScoreGERP()));
+			        			appendcells[col++]=(snp.getRefAllele()==null?DataType.getMissingCell():new StringCell(snp.getRefAllele()));
+			        			appendcells[col++]=(snp.getAltAlleles()==null?DataType.getMissingCell():new StringCell(snp.getAltAlleles()));
+			        			appendcells[col++]=(snp.getAncestralAllele()==null?DataType.getMissingCell():new StringCell(snp.getAncestralAllele()));
+			        			appendcells[col++]=(snp.getChromosome()==null?DataType.getMissingCell():new StringCell(snp.getChromosome()));
+			        			appendcells[col++]=(snp.getHasAtLeastOneAccession()==null?DataType.getMissingCell():new StringCell(snp.getHasAtLeastOneAccession()));
+			        			appendcells[col++]=(snp.getRsIds()==null?DataType.getMissingCell():new StringCell(snp.getRsIds()));
+			        			appendcells[col++]=(snp.getFilters()==null?DataType.getMissingCell():new StringCell(snp.getFilters()));
+			        			appendcells[col++]=(snp.getClinicalLink()==null?DataType.getMissingCell():new StringCell(snp.getClinicalLink()));
+			        			//added 25 nov
+			        			appendcells[col++]=(snp.getDbsnpVersion()==null?DataType.getMissingCell():new StringCell(snp.getDbsnpVersion()));
+			        			appendcells[col++]=(snp.getUaGenotypeCounts()==null?DataType.getMissingCell():new StringCell(snp.getUaGenotypeCounts()));
+			        			appendcells[col++]=(snp.getAaGenotypeCounts()==null?DataType.getMissingCell():new StringCell(snp.getAaGenotypeCounts()));
+			        			appendcells[col++]=(snp.getTotalGenotypeCounts()==null?DataType.getMissingCell():new StringCell(snp.getTotalGenotypeCounts()));
+			        			//
 			        			container1.addRowToTable(new AppendedColumnRow(row,appendcells));
 			        			found=true;
 			        			}
@@ -225,7 +232,7 @@ public class EVSNodeModel extends AbstractVCFNodeModel
 			        		} while(false);
 		        		if(!found)
 		        			{
-		        			DataCell appendcells[]=new DataCell[25];
+		        			DataCell appendcells[]=new DataCell[EVS_COLUMN_COUNT];
 		        			for(int i=0;i< appendcells.length;++i) appendcells[i]=DataType.getMissingCell();
 		        			container1.addRowToTable(new AppendedColumnRow(row,appendcells));
 		        			}
@@ -267,32 +274,38 @@ public class EVSNodeModel extends AbstractVCFNodeModel
     
     private DataTableSpec createDataTableSpec() throws InvalidSettingsException
     	{
-    	DataColumnSpec a[]=new DataColumnSpec[25];
-    	a[0]=new DataColumnSpecCreator("evs.PositionString", StringCell.TYPE).createSpec();
-    	a[1]=new DataColumnSpecCreator("evs.ChrPosition", IntCell.TYPE).createSpec();
-    	a[2]=new DataColumnSpecCreator("evs.Alleles", StringCell.TYPE).createSpec();
-    	a[3]=new DataColumnSpecCreator("evs.UaAlleleCounts", StringCell.TYPE).createSpec();
-    	a[4]=new DataColumnSpecCreator("evs.AaAlleleCounts", StringCell.TYPE).createSpec();
-    	a[5]=new DataColumnSpecCreator("evs.TotalAlleleCounts", StringCell.TYPE).createSpec();
-    	a[6]=new DataColumnSpecCreator("evs.UaAlleleAndCount", StringCell.TYPE).createSpec();
-    	a[7]=new DataColumnSpecCreator("evs.AaAlleleAndCount", StringCell.TYPE).createSpec();
-    	a[8]=new DataColumnSpecCreator("evs.TotalAlleleAndCount", StringCell.TYPE).createSpec();
-    	a[9]=new DataColumnSpecCreator("evs.UaMAF", DoubleCell.TYPE).createSpec();
-    	a[10]=new DataColumnSpecCreator("evs.AaMAF", DoubleCell.TYPE).createSpec();
-    	a[11]=new DataColumnSpecCreator("evs.TotalMAF", DoubleCell.TYPE).createSpec();
-    	a[12]=new DataColumnSpecCreator("evs.AvgSampleReadDepth", IntCell.TYPE).createSpec();
-    	a[13]=new DataColumnSpecCreator("evs.GeneList", StringCell.TYPE).createSpec();
-    	a[14]=new DataColumnSpecCreator("evs.SnpFunction", StringCell.TYPE).createSpec();
-    	a[15]=new DataColumnSpecCreator("evs.ConservationScore", StringCell.TYPE).createSpec();
-    	a[16]=new DataColumnSpecCreator("evs.ConservationScoreGERP", StringCell.TYPE).createSpec();
-    	a[17]=new DataColumnSpecCreator("evs.RefAllele", StringCell.TYPE).createSpec();
-    	a[18]=new DataColumnSpecCreator("evs.AltAlleles", StringCell.TYPE).createSpec();
-    	a[19]=new DataColumnSpecCreator("evs.AncestralAllele", StringCell.TYPE).createSpec();
-    	a[20]=new DataColumnSpecCreator("evs.Chromosome", StringCell.TYPE).createSpec();
-    	a[21]=new DataColumnSpecCreator("evs.HasAtLeastOneAccession", StringCell.TYPE).createSpec();
-    	a[22]=new DataColumnSpecCreator("evs.RsIds", StringCell.TYPE).createSpec();
-    	a[23]=new DataColumnSpecCreator("evs.Filters", StringCell.TYPE).createSpec();
-    	a[24]=new DataColumnSpecCreator("evs.ClinicalLink", StringCell.TYPE).createSpec();
+    	DataColumnSpec a[]=new DataColumnSpec[EVS_COLUMN_COUNT];
+    	int col=0;
+    	a[col++]=new DataColumnSpecCreator("evs.PositionString", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.ChrPosition", IntCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.Alleles", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.UaAlleleCounts", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AaAlleleCounts", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.TotalAlleleCounts", StringCell.TYPE).createSpec();
+    	//a[col++]=new DataColumnSpecCreator("evs.UaAlleleAndCount", StringCell.TYPE).createSpec();
+    	//a[col++]=new DataColumnSpecCreator("evs.AaAlleleAndCount", StringCell.TYPE).createSpec();
+    	//a[col++]=new DataColumnSpecCreator("evs.TotalAlleleAndCount", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.UaMAF", DoubleCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AaMAF", DoubleCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.TotalMAF", DoubleCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AvgSampleReadDepth", IntCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.GeneList", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.SnpFunction", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.ConservationScore", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.ConservationScoreGERP", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.RefAllele", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AltAlleles", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AncestralAllele", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.Chromosome", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.HasAtLeastOneAccession", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.RsIds", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.Filters", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.ClinicalLink", StringCell.TYPE).createSpec();
+    	//added 25 nov
+    	a[col++]=new DataColumnSpecCreator("evs.DbsnpVersion", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.UaGenotypeCounts", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.AaGenotypeCounts", StringCell.TYPE).createSpec();
+    	a[col++]=new DataColumnSpecCreator("evs.TotalGenotypeCounts", StringCell.TYPE).createSpec();
     	return new DataTableSpec(a);
     	}
     

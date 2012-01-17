@@ -331,6 +331,11 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"/>
             
+         <node 
+          	category-path="/ngs/vcf/intersections"
+          	factory-class="fr.inserm.umr915.knime4ngs.nodes.bed.bedinterbed.BedInterBedNodeFactory" 
+            id="fr.inserm.umr915.knime4ngs.nodes.bed.bedinterbed.BedInterBedNodeFactory"  />     
+            
        <node
             category-path="/ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.bed.writer.BedWriterNodeFactory"

@@ -35,51 +35,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetEvsData }
-     * 
-     */
-    public GetEvsData createGetEvsData() {
-        return new GetEvsData();
-    }
-
-    /**
-     * Create an instance of {@link SnpFunction }
-     * 
-     */
-    public SnpFunction createSnpFunction() {
-        return new SnpFunction();
-    }
-
-    /**
-     * Create an instance of {@link ArrayList }
-     * 
-     */
-    public ArrayList createArrayList() {
-        return new ArrayList();
-    }
-
-    /**
      * Create an instance of {@link SiteCoverageInfo }
      * 
      */
     public SiteCoverageInfo createSiteCoverageInfo() {
         return new SiteCoverageInfo();
-    }
-
-    /**
-     * Create an instance of {@link GetEvsDataResponse }
-     * 
-     */
-    public GetEvsDataResponse createGetEvsDataResponse() {
-        return new GetEvsDataResponse();
-    }
-
-    /**
-     * Create an instance of {@link EvsData }
-     * 
-     */
-    public EvsData createEvsData() {
-        return new EvsData();
     }
 
     /**
@@ -96,6 +56,46 @@ public class ObjectFactory {
      */
     public SnpData createSnpData() {
         return new SnpData();
+    }
+
+    /**
+     * Create an instance of {@link GetEvsData }
+     * 
+     */
+    public GetEvsData createGetEvsData() {
+        return new GetEvsData();
+    }
+
+    /**
+     * Create an instance of {@link ArrayList }
+     * 
+     */
+    public ArrayList createArrayList() {
+        return new ArrayList();
+    }
+
+    /**
+     * Create an instance of {@link EvsData }
+     * 
+     */
+    public EvsData createEvsData() {
+        return new EvsData();
+    }
+
+    /**
+     * Create an instance of {@link SnpFunction }
+     * 
+     */
+    public SnpFunction createSnpFunction() {
+        return new SnpFunction();
+    }
+
+    /**
+     * Create an instance of {@link GetEvsDataResponse }
+     * 
+     */
+    public GetEvsDataResponse createGetEvsDataResponse() {
+        return new GetEvsDataResponse();
     }
 
     /**

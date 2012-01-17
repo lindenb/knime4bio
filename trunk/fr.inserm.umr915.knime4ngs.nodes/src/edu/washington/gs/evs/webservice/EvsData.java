@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="stop" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="strand" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="evsWebServiceVersion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="evsDataSourceVersion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="snpList" type="{http://webservice.evs.gs.washington.edu/}snpData" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="setOfSiteCoverageInfo" type="{http://webservice.evs.gs.washington.edu/}siteCoverageInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -39,6 +41,8 @@ import javax.xml.bind.annotation.XmlType;
     "start",
     "stop",
     "strand",
+    "evsWebServiceVersion",
+    "evsDataSourceVersion",
     "snpList",
     "setOfSiteCoverageInfo"
 })
@@ -48,6 +52,8 @@ public class EvsData {
     protected int start;
     protected int stop;
     protected String strand;
+    protected String evsWebServiceVersion;
+    protected String evsDataSourceVersion;
     @XmlElement(nillable = true)
     protected List<SnpData> snpList;
     @XmlElement(nillable = true)
@@ -131,6 +137,54 @@ public class EvsData {
      */
     public void setStrand(String value) {
         this.strand = value;
+    }
+
+    /**
+     * Gets the value of the evsWebServiceVersion property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEvsWebServiceVersion() {
+        return evsWebServiceVersion;
+    }
+
+    /**
+     * Sets the value of the evsWebServiceVersion property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEvsWebServiceVersion(String value) {
+        this.evsWebServiceVersion = value;
+    }
+
+    /**
+     * Gets the value of the evsDataSourceVersion property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEvsDataSourceVersion() {
+        return evsDataSourceVersion;
+    }
+
+    /**
+     * Sets the value of the evsDataSourceVersion property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEvsDataSourceVersion(String value) {
+        this.evsDataSourceVersion = value;
     }
 
     /**

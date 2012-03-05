@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="default.png" type="Source">
+    <name>Read MPileup VCF</name>
+    
+    <shortDescription>
+       Reads one samtools MPileup VCF File.
+    </shortDescription>
+    
+    <fullDescription>
+        <intro>Reads <b>one</b> <a href="http://www.1000genomes.org/node/101">VCF</a> File and
+        containing more than one sample.
+        if a GT (genotype) field is found in the FORMAT column and GT=0/0 then the
+        column for this sample is set to NULL.
+        
+        An extra column "samples.per.snp" is also appended.
+
+
+		</intro>
+        <option name="quality">Ignore VCF data with a quality lower than this value</option>
+        <option name="VCF file">vcf file. Valid extensions are: vcf, vcf.gz, vcf.bgz </option>
+    </fullDescription>
+    
+    <ports>
+       <outPort index="0" name="VCF/Sample">VCF data</outPort>
+       <outPort index="1" name="VCF Headers/Sample">VCF Headers</outPort>
+    </ports>
+</knimeNode>

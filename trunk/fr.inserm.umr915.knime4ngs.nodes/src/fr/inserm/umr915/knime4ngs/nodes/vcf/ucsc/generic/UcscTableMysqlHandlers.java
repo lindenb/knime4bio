@@ -25,6 +25,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.agilentCgh8x60k"
 ,"hg19.agilentCghSnp2x400k"
 ,"hg19.agilentCghSnp4x180k"
+,"hg19.agilentCghSnpCancer4x180k"
 ,"hg19.agilentHrd1x1m"
 ,"hg19.altSeqHaplotypes"
 ,"hg19.altSeqPatches"
@@ -61,6 +62,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.ccdsKgMap"
 ,"hg19.cgapSage"
 ,"hg19.consIndelsHgMmCanFam"
+,"hg19.cosmic"
 ,"hg19.cpgIslandExt"
 ,"hg19.ctgPos"
 ,"hg19.ctgPos2"
@@ -72,6 +74,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.eioJcviNASPos"
 ,"hg19.ensGene"
 ,"hg19.estOrientInfo"
+,"hg19.evoCpg"
 ,"hg19.evofold"
 ,"hg19.exoniphy"
 ,"hg19.fishClones"
@@ -79,6 +82,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.gad"
 ,"hg19.gap"
 ,"hg19.gc5Base"
+,"hg19.geneReviews"
 ,"hg19.geneid"
 ,"hg19.genomicSuperDups"
 ,"hg19.genscan"
@@ -103,10 +107,20 @@ public class UcscTableMysqlHandlers
 ,"hg19.hg19ContigDiff"
 ,"hg19.hgIkmc"
 ,"hg19.hgdpGeo"
+,"hg19.hiSeqDepthTop10Pct"
+,"hg19.hiSeqDepthTop1Pct"
+,"hg19.hiSeqDepthTop5Pct"
+,"hg19.hiSeqDepthTopPt1Pct"
+,"hg19.hiSeqDepthTopPt5Pct"
 ,"hg19.hinv70Coding"
 ,"hg19.hinv70NonCoding"
 ,"hg19.hinv70PseudoGene"
 ,"hg19.illuminaProbes"
+,"hg19.iscaBenign"
+,"hg19.iscaLikelyBenign"
+,"hg19.iscaLikelyPathogenic"
+,"hg19.iscaPathogenic"
+,"hg19.iscaUncertain"
 ,"hg19.jaxQtlAsIs"
 ,"hg19.jaxQtlPadded"
 ,"hg19.knownAlt"
@@ -114,6 +128,29 @@ public class UcscTableMysqlHandlers
 ,"hg19.knownGene"
 ,"hg19.laminB1"
 ,"hg19.laminB1Lads"
+,"hg19.lincRNAsCTAdipose"
+,"hg19.lincRNAsCTAdrenal"
+,"hg19.lincRNAsCTBrain"
+,"hg19.lincRNAsCTBrain_R"
+,"hg19.lincRNAsCTBreast"
+,"hg19.lincRNAsCTColon"
+,"hg19.lincRNAsCTForeskin_R"
+,"hg19.lincRNAsCTHeart"
+,"hg19.lincRNAsCTKidney"
+,"hg19.lincRNAsCTLiver"
+,"hg19.lincRNAsCTLung"
+,"hg19.lincRNAsCTLymphNode"
+,"hg19.lincRNAsCTOvary"
+,"hg19.lincRNAsCTPlacenta_R"
+,"hg19.lincRNAsCTProstate"
+,"hg19.lincRNAsCTSkeletalMuscle"
+,"hg19.lincRNAsCTTestes"
+,"hg19.lincRNAsCTTestes_R"
+,"hg19.lincRNAsCTThyroid"
+,"hg19.lincRNAsCTWhiteBloodCell"
+,"hg19.lincRNAsCThLF_r1"
+,"hg19.lincRNAsCThLF_r2"
+,"hg19.lincRNAsTranscripts"
 ,"hg19.mgcGenes"
 ,"hg19.microsat"
 ,"hg19.mrnaOrientInfo"
@@ -126,6 +163,9 @@ public class UcscTableMysqlHandlers
 ,"hg19.ntOoaHaplo"
 ,"hg19.ntSssSnps"
 ,"hg19.ntSssTop5p"
+,"hg19.numtS"
+,"hg19.numtSAssembled"
+,"hg19.numtSMitochondrion"
 ,"hg19.oreganno"
 ,"hg19.orfeomeGenes"
 ,"hg19.pgNA12878"
@@ -148,6 +188,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.phyloP46wayPrimates"
 ,"hg19.polyaDb"
 ,"hg19.polyaPredict"
+,"hg19.pseudoYale60"
 ,"hg19.recombRate"
 ,"hg19.refFlat"
 ,"hg19.refGene"
@@ -156,6 +197,7 @@ public class UcscTableMysqlHandlers
 ,"hg19.rnaCluster"
 ,"hg19.sestanBrainAtlas"
 ,"hg19.sgpGene"
+,"hg19.sibGene"
 ,"hg19.simpleRepeat"
 ,"hg19.snp131"
 ,"hg19.snp131CodingDbSnp"
@@ -167,6 +209,12 @@ public class UcscTableMysqlHandlers
 ,"hg19.snp132Flagged"
 ,"hg19.snp132Mult"
 ,"hg19.snp132OrthoPt2Pa2Rm2"
+,"hg19.snp135"
+,"hg19.snp135CodingDbSnp"
+,"hg19.snp135Common"
+,"hg19.snp135Flagged"
+,"hg19.snp135Mult"
+,"hg19.snp135OrthoPt3Pa2Rm2"
 ,"hg19.snpArrayAffy250Nsp"
 ,"hg19.snpArrayAffy250Sty"
 ,"hg19.snpArrayAffy5"
@@ -1298,6 +1346,64 @@ public String getPreparedStatement() { return "select bin,chrom,chromStart,chrom
 	public String getTableName()
 		{
 		return "agilentCghSnp4x180k";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[10];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("reserved"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.agilentCghSnpCancer4x180k")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,reserved from hg19.agilentCghSnpCancer4x180k where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[10];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".reserved",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "agilentCghSnpCancer4x180k";
 		}
 	public DataCell[] parse(ResultSet row) throws SQLException
 		{
@@ -3312,6 +3418,49 @@ DataCell cells[]=new DataCell[6];
 		}
 	}
 ;
+if(id.equals("hg19.cosmic")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name from hg19.cosmic where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[5];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "cosmic";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[5];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
 if(id.equals("hg19.cpgIslandExt")) return 
 new UcscDatabaseMysqlHandler()
 	{
@@ -3896,6 +4045,64 @@ DataCell cells[]=new DataCell[10];
 		}
 	}
 ;
+if(id.equals("hg19.evoCpg")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,reserved from hg19.evoCpg where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[10];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".reserved",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "evoCpg";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[10];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("reserved"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
 if(id.equals("hg19.evofold")) return 
 new UcscDatabaseMysqlHandler()
 	{
@@ -4331,6 +4538,49 @@ DataCell cells[]=new DataCell[14];
 			if(row.wasNull()) cells[12]=DataType.getMissingCell();
 			cells[13]=new DoubleCell(row.getDouble("sumSquares"));
 			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.geneReviews")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name from hg19.geneReviews where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[5];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "geneReviews";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[5];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
 		return cells;
 		}
 	}
@@ -6072,6 +6322,206 @@ DataCell cells[]=new DataCell[8];
 		}
 	}
 ;
+if(id.equals("hg19.hiSeqDepthTop10Pct")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd from hg19.hiSeqDepthTop10Pct where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[4];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "hiSeqDepthTop10Pct";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[4];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.hiSeqDepthTop1Pct")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd from hg19.hiSeqDepthTop1Pct where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[4];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "hiSeqDepthTop1Pct";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[4];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.hiSeqDepthTop5Pct")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd from hg19.hiSeqDepthTop5Pct where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[4];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "hiSeqDepthTop5Pct";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[4];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.hiSeqDepthTopPt1Pct")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd from hg19.hiSeqDepthTopPt1Pct where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[4];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "hiSeqDepthTopPt1Pct";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[4];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.hiSeqDepthTopPt5Pct")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd from hg19.hiSeqDepthTopPt5Pct where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[4];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "hiSeqDepthTopPt5Pct";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[4];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
 if(id.equals("hg19.hinv70Coding")) return 
 new UcscDatabaseMysqlHandler()
 	{
@@ -6336,6 +6786,326 @@ DataCell cells[]=new DataCell[13];
 			if(row.wasNull()) cells[11]=DataType.getMissingCell();
 			cells[12]=new StringCell(row.getString("chromStarts"));
 			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.iscaBenign")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,attrCount,attrTags,attrVals from hg19.iscaBenign where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrCount",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrTags",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrVals",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "iscaBenign";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("attrCount"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("attrTags"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("attrVals"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.iscaLikelyBenign")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,attrCount,attrTags,attrVals from hg19.iscaLikelyBenign where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrCount",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrTags",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrVals",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "iscaLikelyBenign";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("attrCount"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("attrTags"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("attrVals"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.iscaLikelyPathogenic")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,attrCount,attrTags,attrVals from hg19.iscaLikelyPathogenic where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrCount",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrTags",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrVals",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "iscaLikelyPathogenic";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("attrCount"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("attrTags"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("attrVals"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.iscaPathogenic")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,attrCount,attrTags,attrVals from hg19.iscaPathogenic where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrCount",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrTags",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrVals",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "iscaPathogenic";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("attrCount"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("attrTags"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("attrVals"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.iscaUncertain")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,attrCount,attrTags,attrVals from hg19.iscaUncertain where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrCount",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrTags",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".attrVals",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "iscaUncertain";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("attrCount"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("attrTags"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("attrVals"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
 		return cells;
 		}
 	}
@@ -6691,6 +7461,1211 @@ DataCell cells[]=new DataCell[4];
 			if(row.wasNull()) cells[2]=DataType.getMissingCell();
 			cells[3]=new IntCell(row.getInt("chromEnd"));
 			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTAdipose")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTAdipose where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTAdipose";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTAdrenal")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTAdrenal where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTAdrenal";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTBrain")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTBrain where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTBrain";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTBrain_R")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTBrain_R where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTBrain_R";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTBreast")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTBreast where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTBreast";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTColon")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTColon where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTColon";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTForeskin_R")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTForeskin_R where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTForeskin_R";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTHeart")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTHeart where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTHeart";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTKidney")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTKidney where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTKidney";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTLiver")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTLiver where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTLiver";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTLung")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTLung where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTLung";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTLymphNode")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTLymphNode where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTLymphNode";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTOvary")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTOvary where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTOvary";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTPlacenta_R")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTPlacenta_R where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTPlacenta_R";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTProstate")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTProstate where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTProstate";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTSkeletalMuscle")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTSkeletalMuscle where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTSkeletalMuscle";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTTestes")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTTestes where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTTestes";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTTestes_R")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTTestes_R where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTTestes_R";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTThyroid")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTThyroid where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTThyroid";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCTWhiteBloodCell")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCTWhiteBloodCell where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCTWhiteBloodCell";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCThLF_r1")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCThLF_r1 where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCThLF_r1";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsCThLF_r2")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,rawScore,log2RawScore from hg19.lincRNAsCThLF_r2 where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[8];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".rawScore",DoubleCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".log2RawScore",DoubleCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsCThLF_r2";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[8];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new DoubleCell(row.getDouble("rawScore"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new DoubleCell(row.getDouble("log2RawScore"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.lincRNAsTranscripts")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 2;}
+public int getChromStartColumn() { return 4;}
+public int getChromEndColumn() { return 5;}
+public String getPreparedStatement() { return "select bin,name,chrom,strand,txStart,txEnd,cdsStart,cdsEnd,exonCount,exonStarts,exonEnds from hg19.lincRNAsTranscripts where chrom=? and not(txEnd<=? or txStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[11];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txStart",IntCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txEnd",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsStart",IntCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsEnd",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonCount",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonStarts",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonEnds",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "lincRNAsTranscripts";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[11];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new IntCell(row.getInt("txStart"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("txEnd"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new IntCell(row.getInt("cdsStart"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("cdsEnd"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("exonCount"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("exonStarts"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("exonEnds"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
 		return cells;
 		}
 	}
@@ -7426,6 +9401,171 @@ DataCell cells[]=new DataCell[6];
 			if(row.wasNull()) cells[4]=DataType.getMissingCell();
 			cells[5]=new IntCell(row.getInt("score"));
 			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.numtS")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand from hg19.numtS where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[7];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "numtS";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[7];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.numtSAssembled")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,thickStart,thickEnd,reserved,blockCount,blockSizes,chromStarts from hg19.numtSAssembled where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[13];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickStart",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".thickEnd",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".reserved",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".blockCount",IntCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".blockSizes",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStarts",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "numtSAssembled";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[13];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("thickStart"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("thickEnd"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("reserved"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new IntCell(row.getInt("blockCount"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("blockSizes"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("chromStarts"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.numtSMitochondrion")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand from hg19.numtSMitochondrion where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[7];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "numtSMitochondrion";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[7];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
 		return cells;
 		}
 	}
@@ -8691,6 +10831,67 @@ DataCell cells[]=new DataCell[9];
 		}
 	}
 ;
+if(id.equals("hg19.pseudoYale60")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 2;}
+public int getChromStartColumn() { return 4;}
+public int getChromEndColumn() { return 5;}
+public String getPreparedStatement() { return "select bin,name,chrom,strand,txStart,txEnd,cdsStart,cdsEnd,exonCount,exonStarts,exonEnds from hg19.pseudoYale60 where chrom=? and not(txEnd<=? or txStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[11];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txStart",IntCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txEnd",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsStart",IntCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsEnd",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonCount",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonStarts",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonEnds",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "pseudoYale60";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[11];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new IntCell(row.getInt("txStart"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("txEnd"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new IntCell(row.getInt("cdsStart"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("cdsEnd"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("exonCount"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("exonStarts"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("exonEnds"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
 if(id.equals("hg19.recombRate")) return 
 new UcscDatabaseMysqlHandler()
 	{
@@ -9196,6 +11397,67 @@ DataCell cells[]=new DataCell[16];
 			if(row.wasNull()) cells[14]=DataType.getMissingCell();
 			cells[15]=new StringCell(row.getString("exonFrames"));
 			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.sibGene")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 2;}
+public int getChromStartColumn() { return 4;}
+public int getChromEndColumn() { return 5;}
+public String getPreparedStatement() { return "select bin,name,chrom,strand,txStart,txEnd,cdsStart,cdsEnd,exonCount,exonStarts,exonEnds from hg19.sibGene where chrom=? and not(txEnd<=? or txStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[11];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txStart",IntCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".txEnd",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsStart",IntCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".cdsEnd",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonCount",IntCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonStarts",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exonEnds",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "sibGene";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[11];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new IntCell(row.getInt("txStart"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("txEnd"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new IntCell(row.getInt("cdsStart"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("cdsEnd"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new IntCell(row.getInt("exonCount"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("exonStarts"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("exonEnds"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
 		return cells;
 		}
 	}
@@ -10099,6 +12361,591 @@ public String getPreparedStatement() { return "select bin,chrom,chromStart,chrom
 	public String getTableName()
 		{
 		return "snp132OrthoPt2Pa2Rm2";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[23];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new StringCell(row.getString("humanObserved"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("humanAllele"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new StringCell(row.getString("humanStrand"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("chimpChrom"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new IntCell(row.getInt("chimpStart"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new IntCell(row.getInt("chimpEnd"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("chimpAllele"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("chimpStrand"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+			cells[13]=new StringCell(row.getString("orangChrom"));
+			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+			cells[14]=new IntCell(row.getInt("orangStart"));
+			if(row.wasNull()) cells[14]=DataType.getMissingCell();
+			cells[15]=new IntCell(row.getInt("orangEnd"));
+			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+			cells[16]=new StringCell(row.getString("orangAllele"));
+			if(row.wasNull()) cells[16]=DataType.getMissingCell();
+			cells[17]=new StringCell(row.getString("orangStrand"));
+			if(row.wasNull()) cells[17]=DataType.getMissingCell();
+			cells[18]=new StringCell(row.getString("macaqueChrom"));
+			if(row.wasNull()) cells[18]=DataType.getMissingCell();
+			cells[19]=new IntCell(row.getInt("macaqueStart"));
+			if(row.wasNull()) cells[19]=DataType.getMissingCell();
+			cells[20]=new IntCell(row.getInt("macaqueEnd"));
+			if(row.wasNull()) cells[20]=DataType.getMissingCell();
+			cells[21]=new StringCell(row.getString("macaqueAllele"));
+			if(row.wasNull()) cells[21]=DataType.getMissingCell();
+			cells[22]=new StringCell(row.getString("macaqueStrand"));
+			if(row.wasNull()) cells[22]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,refNCBI,refUCSC,observed,molType,class,valid,avHet,avHetSE,func,locType,weight,exceptions,submitterCount,submitters,alleleFreqCount,alleles,alleleNs,alleleFreqs,bitfields from hg19.snp135 where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[26];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refNCBI",StringCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refUCSC",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".observed",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".molType",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".class",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".valid",StringCell.TYPE).createSpec();
+		colSpecs[13]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHet",DoubleCell.TYPE).createSpec();
+		colSpecs[14]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHetSE",DoubleCell.TYPE).createSpec();
+		colSpecs[15]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".func",StringCell.TYPE).createSpec();
+		colSpecs[16]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".locType",StringCell.TYPE).createSpec();
+		colSpecs[17]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".weight",IntCell.TYPE).createSpec();
+		colSpecs[18]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exceptions",StringCell.TYPE).createSpec();
+		colSpecs[19]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitterCount",IntCell.TYPE).createSpec();
+		colSpecs[20]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitters",StringCell.TYPE).createSpec();
+		colSpecs[21]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqCount",IntCell.TYPE).createSpec();
+		colSpecs[22]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleles",StringCell.TYPE).createSpec();
+		colSpecs[23]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleNs",StringCell.TYPE).createSpec();
+		colSpecs[24]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqs",StringCell.TYPE).createSpec();
+		colSpecs[25]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bitfields",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[26];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new StringCell(row.getString("refNCBI"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("refUCSC"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("observed"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("molType"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("class"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("valid"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+			cells[13]=new DoubleCell(row.getDouble("avHet"));
+			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+			cells[14]=new DoubleCell(row.getDouble("avHetSE"));
+			if(row.wasNull()) cells[14]=DataType.getMissingCell();
+			cells[15]=new StringCell(row.getString("func"));
+			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+			cells[16]=new StringCell(row.getString("locType"));
+			if(row.wasNull()) cells[16]=DataType.getMissingCell();
+			cells[17]=new IntCell(row.getInt("weight"));
+			if(row.wasNull()) cells[17]=DataType.getMissingCell();
+			cells[18]=new StringCell(row.getString("exceptions"));
+			if(row.wasNull()) cells[18]=DataType.getMissingCell();
+			cells[19]=new IntCell(row.getInt("submitterCount"));
+			if(row.wasNull()) cells[19]=DataType.getMissingCell();
+			cells[20]=new StringCell(row.getString("submitters"));
+			if(row.wasNull()) cells[20]=DataType.getMissingCell();
+			cells[21]=new IntCell(row.getInt("alleleFreqCount"));
+			if(row.wasNull()) cells[21]=DataType.getMissingCell();
+			cells[22]=new StringCell(row.getString("alleles"));
+			if(row.wasNull()) cells[22]=DataType.getMissingCell();
+			cells[23]=new StringCell(row.getString("alleleNs"));
+			if(row.wasNull()) cells[23]=DataType.getMissingCell();
+			cells[24]=new StringCell(row.getString("alleleFreqs"));
+			if(row.wasNull()) cells[24]=DataType.getMissingCell();
+			cells[25]=new StringCell(row.getString("bitfields"));
+			if(row.wasNull()) cells[25]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135CodingDbSnp")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,transcript,frame,alleleCount,funcCodes,alleles,codons,peptides from hg19.snp135CodingDbSnp where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[12];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".transcript",StringCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".frame",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleCount",IntCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".funcCodes",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleles",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".codons",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".peptides",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135CodingDbSnp";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[12];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new StringCell(row.getString("transcript"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("frame"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new IntCell(row.getInt("alleleCount"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("funcCodes"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("alleles"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("codons"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("peptides"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135Common")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,refNCBI,refUCSC,observed,molType,class,valid,avHet,avHetSE,func,locType,weight,exceptions,submitterCount,submitters,alleleFreqCount,alleles,alleleNs,alleleFreqs,bitfields from hg19.snp135Common where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[26];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refNCBI",StringCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refUCSC",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".observed",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".molType",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".class",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".valid",StringCell.TYPE).createSpec();
+		colSpecs[13]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHet",DoubleCell.TYPE).createSpec();
+		colSpecs[14]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHetSE",DoubleCell.TYPE).createSpec();
+		colSpecs[15]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".func",StringCell.TYPE).createSpec();
+		colSpecs[16]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".locType",StringCell.TYPE).createSpec();
+		colSpecs[17]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".weight",IntCell.TYPE).createSpec();
+		colSpecs[18]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exceptions",StringCell.TYPE).createSpec();
+		colSpecs[19]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitterCount",IntCell.TYPE).createSpec();
+		colSpecs[20]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitters",StringCell.TYPE).createSpec();
+		colSpecs[21]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqCount",IntCell.TYPE).createSpec();
+		colSpecs[22]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleles",StringCell.TYPE).createSpec();
+		colSpecs[23]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleNs",StringCell.TYPE).createSpec();
+		colSpecs[24]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqs",StringCell.TYPE).createSpec();
+		colSpecs[25]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bitfields",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135Common";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[26];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new StringCell(row.getString("refNCBI"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("refUCSC"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("observed"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("molType"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("class"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("valid"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+			cells[13]=new DoubleCell(row.getDouble("avHet"));
+			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+			cells[14]=new DoubleCell(row.getDouble("avHetSE"));
+			if(row.wasNull()) cells[14]=DataType.getMissingCell();
+			cells[15]=new StringCell(row.getString("func"));
+			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+			cells[16]=new StringCell(row.getString("locType"));
+			if(row.wasNull()) cells[16]=DataType.getMissingCell();
+			cells[17]=new IntCell(row.getInt("weight"));
+			if(row.wasNull()) cells[17]=DataType.getMissingCell();
+			cells[18]=new StringCell(row.getString("exceptions"));
+			if(row.wasNull()) cells[18]=DataType.getMissingCell();
+			cells[19]=new IntCell(row.getInt("submitterCount"));
+			if(row.wasNull()) cells[19]=DataType.getMissingCell();
+			cells[20]=new StringCell(row.getString("submitters"));
+			if(row.wasNull()) cells[20]=DataType.getMissingCell();
+			cells[21]=new IntCell(row.getInt("alleleFreqCount"));
+			if(row.wasNull()) cells[21]=DataType.getMissingCell();
+			cells[22]=new StringCell(row.getString("alleles"));
+			if(row.wasNull()) cells[22]=DataType.getMissingCell();
+			cells[23]=new StringCell(row.getString("alleleNs"));
+			if(row.wasNull()) cells[23]=DataType.getMissingCell();
+			cells[24]=new StringCell(row.getString("alleleFreqs"));
+			if(row.wasNull()) cells[24]=DataType.getMissingCell();
+			cells[25]=new StringCell(row.getString("bitfields"));
+			if(row.wasNull()) cells[25]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135Flagged")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,refNCBI,refUCSC,observed,molType,class,valid,avHet,avHetSE,func,locType,weight,exceptions,submitterCount,submitters,alleleFreqCount,alleles,alleleNs,alleleFreqs,bitfields from hg19.snp135Flagged where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[26];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refNCBI",StringCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refUCSC",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".observed",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".molType",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".class",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".valid",StringCell.TYPE).createSpec();
+		colSpecs[13]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHet",DoubleCell.TYPE).createSpec();
+		colSpecs[14]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHetSE",DoubleCell.TYPE).createSpec();
+		colSpecs[15]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".func",StringCell.TYPE).createSpec();
+		colSpecs[16]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".locType",StringCell.TYPE).createSpec();
+		colSpecs[17]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".weight",IntCell.TYPE).createSpec();
+		colSpecs[18]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exceptions",StringCell.TYPE).createSpec();
+		colSpecs[19]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitterCount",IntCell.TYPE).createSpec();
+		colSpecs[20]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitters",StringCell.TYPE).createSpec();
+		colSpecs[21]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqCount",IntCell.TYPE).createSpec();
+		colSpecs[22]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleles",StringCell.TYPE).createSpec();
+		colSpecs[23]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleNs",StringCell.TYPE).createSpec();
+		colSpecs[24]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqs",StringCell.TYPE).createSpec();
+		colSpecs[25]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bitfields",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135Flagged";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[26];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new StringCell(row.getString("refNCBI"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("refUCSC"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("observed"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("molType"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("class"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("valid"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+			cells[13]=new DoubleCell(row.getDouble("avHet"));
+			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+			cells[14]=new DoubleCell(row.getDouble("avHetSE"));
+			if(row.wasNull()) cells[14]=DataType.getMissingCell();
+			cells[15]=new StringCell(row.getString("func"));
+			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+			cells[16]=new StringCell(row.getString("locType"));
+			if(row.wasNull()) cells[16]=DataType.getMissingCell();
+			cells[17]=new IntCell(row.getInt("weight"));
+			if(row.wasNull()) cells[17]=DataType.getMissingCell();
+			cells[18]=new StringCell(row.getString("exceptions"));
+			if(row.wasNull()) cells[18]=DataType.getMissingCell();
+			cells[19]=new IntCell(row.getInt("submitterCount"));
+			if(row.wasNull()) cells[19]=DataType.getMissingCell();
+			cells[20]=new StringCell(row.getString("submitters"));
+			if(row.wasNull()) cells[20]=DataType.getMissingCell();
+			cells[21]=new IntCell(row.getInt("alleleFreqCount"));
+			if(row.wasNull()) cells[21]=DataType.getMissingCell();
+			cells[22]=new StringCell(row.getString("alleles"));
+			if(row.wasNull()) cells[22]=DataType.getMissingCell();
+			cells[23]=new StringCell(row.getString("alleleNs"));
+			if(row.wasNull()) cells[23]=DataType.getMissingCell();
+			cells[24]=new StringCell(row.getString("alleleFreqs"));
+			if(row.wasNull()) cells[24]=DataType.getMissingCell();
+			cells[25]=new StringCell(row.getString("bitfields"));
+			if(row.wasNull()) cells[25]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135Mult")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,score,strand,refNCBI,refUCSC,observed,molType,class,valid,avHet,avHetSE,func,locType,weight,exceptions,submitterCount,submitters,alleleFreqCount,alleles,alleleNs,alleleFreqs,bitfields from hg19.snp135Mult where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[26];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".score",IntCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".strand",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refNCBI",StringCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".refUCSC",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".observed",StringCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".molType",StringCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".class",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".valid",StringCell.TYPE).createSpec();
+		colSpecs[13]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHet",DoubleCell.TYPE).createSpec();
+		colSpecs[14]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".avHetSE",DoubleCell.TYPE).createSpec();
+		colSpecs[15]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".func",StringCell.TYPE).createSpec();
+		colSpecs[16]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".locType",StringCell.TYPE).createSpec();
+		colSpecs[17]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".weight",IntCell.TYPE).createSpec();
+		colSpecs[18]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".exceptions",StringCell.TYPE).createSpec();
+		colSpecs[19]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitterCount",IntCell.TYPE).createSpec();
+		colSpecs[20]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".submitters",StringCell.TYPE).createSpec();
+		colSpecs[21]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqCount",IntCell.TYPE).createSpec();
+		colSpecs[22]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleles",StringCell.TYPE).createSpec();
+		colSpecs[23]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleNs",StringCell.TYPE).createSpec();
+		colSpecs[24]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".alleleFreqs",StringCell.TYPE).createSpec();
+		colSpecs[25]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bitfields",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135Mult";
+		}
+	public DataCell[] parse(ResultSet row) throws SQLException
+		{
+DataCell cells[]=new DataCell[26];
+			cells[0]=new IntCell(row.getInt("bin"));
+			if(row.wasNull()) cells[0]=DataType.getMissingCell();
+			cells[1]=new StringCell(row.getString("chrom"));
+			if(row.wasNull()) cells[1]=DataType.getMissingCell();
+			cells[2]=new IntCell(row.getInt("chromStart"));
+			if(row.wasNull()) cells[2]=DataType.getMissingCell();
+			cells[3]=new IntCell(row.getInt("chromEnd"));
+			if(row.wasNull()) cells[3]=DataType.getMissingCell();
+			cells[4]=new StringCell(row.getString("name"));
+			if(row.wasNull()) cells[4]=DataType.getMissingCell();
+			cells[5]=new IntCell(row.getInt("score"));
+			if(row.wasNull()) cells[5]=DataType.getMissingCell();
+			cells[6]=new StringCell(row.getString("strand"));
+			if(row.wasNull()) cells[6]=DataType.getMissingCell();
+			cells[7]=new StringCell(row.getString("refNCBI"));
+			if(row.wasNull()) cells[7]=DataType.getMissingCell();
+			cells[8]=new StringCell(row.getString("refUCSC"));
+			if(row.wasNull()) cells[8]=DataType.getMissingCell();
+			cells[9]=new StringCell(row.getString("observed"));
+			if(row.wasNull()) cells[9]=DataType.getMissingCell();
+			cells[10]=new StringCell(row.getString("molType"));
+			if(row.wasNull()) cells[10]=DataType.getMissingCell();
+			cells[11]=new StringCell(row.getString("class"));
+			if(row.wasNull()) cells[11]=DataType.getMissingCell();
+			cells[12]=new StringCell(row.getString("valid"));
+			if(row.wasNull()) cells[12]=DataType.getMissingCell();
+			cells[13]=new DoubleCell(row.getDouble("avHet"));
+			if(row.wasNull()) cells[13]=DataType.getMissingCell();
+			cells[14]=new DoubleCell(row.getDouble("avHetSE"));
+			if(row.wasNull()) cells[14]=DataType.getMissingCell();
+			cells[15]=new StringCell(row.getString("func"));
+			if(row.wasNull()) cells[15]=DataType.getMissingCell();
+			cells[16]=new StringCell(row.getString("locType"));
+			if(row.wasNull()) cells[16]=DataType.getMissingCell();
+			cells[17]=new IntCell(row.getInt("weight"));
+			if(row.wasNull()) cells[17]=DataType.getMissingCell();
+			cells[18]=new StringCell(row.getString("exceptions"));
+			if(row.wasNull()) cells[18]=DataType.getMissingCell();
+			cells[19]=new IntCell(row.getInt("submitterCount"));
+			if(row.wasNull()) cells[19]=DataType.getMissingCell();
+			cells[20]=new StringCell(row.getString("submitters"));
+			if(row.wasNull()) cells[20]=DataType.getMissingCell();
+			cells[21]=new IntCell(row.getInt("alleleFreqCount"));
+			if(row.wasNull()) cells[21]=DataType.getMissingCell();
+			cells[22]=new StringCell(row.getString("alleles"));
+			if(row.wasNull()) cells[22]=DataType.getMissingCell();
+			cells[23]=new StringCell(row.getString("alleleNs"));
+			if(row.wasNull()) cells[23]=DataType.getMissingCell();
+			cells[24]=new StringCell(row.getString("alleleFreqs"));
+			if(row.wasNull()) cells[24]=DataType.getMissingCell();
+			cells[25]=new StringCell(row.getString("bitfields"));
+			if(row.wasNull()) cells[25]=DataType.getMissingCell();
+		return cells;
+		}
+	}
+;
+if(id.equals("hg19.snp135OrthoPt3Pa2Rm2")) return 
+new UcscDatabaseMysqlHandler()
+	{
+public int getBinColumn() { return 0;}
+public int getChromColumn() { return 1;}
+public int getChromStartColumn() { return 2;}
+public int getChromEndColumn() { return 3;}
+public String getPreparedStatement() { return "select bin,chrom,chromStart,chromEnd,name,humanObserved,humanAllele,humanStrand,chimpChrom,chimpStart,chimpEnd,chimpAllele,chimpStrand,orangChrom,orangStart,orangEnd,orangAllele,orangStrand,macaqueChrom,macaqueStart,macaqueEnd,macaqueAllele,macaqueStrand from hg19.snp135OrthoPt3Pa2Rm2 where chrom=? and not(chromEnd<=? or chromStart>?) and bin=?";}
+	public DataTableSpec getDataTableSpec()
+		{
+		DataColumnSpec  colSpecs[]=new DataColumnSpec[23];
+		colSpecs[0]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".bin",IntCell.TYPE).createSpec();
+		colSpecs[1]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chrom",StringCell.TYPE).createSpec();
+		colSpecs[2]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromStart",IntCell.TYPE).createSpec();
+		colSpecs[3]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chromEnd",IntCell.TYPE).createSpec();
+		colSpecs[4]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".name",StringCell.TYPE).createSpec();
+		colSpecs[5]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".humanObserved",StringCell.TYPE).createSpec();
+		colSpecs[6]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".humanAllele",StringCell.TYPE).createSpec();
+		colSpecs[7]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".humanStrand",StringCell.TYPE).createSpec();
+		colSpecs[8]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chimpChrom",StringCell.TYPE).createSpec();
+		colSpecs[9]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chimpStart",IntCell.TYPE).createSpec();
+		colSpecs[10]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chimpEnd",IntCell.TYPE).createSpec();
+		colSpecs[11]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chimpAllele",StringCell.TYPE).createSpec();
+		colSpecs[12]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".chimpStrand",StringCell.TYPE).createSpec();
+		colSpecs[13]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".orangChrom",StringCell.TYPE).createSpec();
+		colSpecs[14]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".orangStart",IntCell.TYPE).createSpec();
+		colSpecs[15]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".orangEnd",IntCell.TYPE).createSpec();
+		colSpecs[16]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".orangAllele",StringCell.TYPE).createSpec();
+		colSpecs[17]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".orangStrand",StringCell.TYPE).createSpec();
+		colSpecs[18]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".macaqueChrom",StringCell.TYPE).createSpec();
+		colSpecs[19]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".macaqueStart",IntCell.TYPE).createSpec();
+		colSpecs[20]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".macaqueEnd",IntCell.TYPE).createSpec();
+		colSpecs[21]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".macaqueAllele",StringCell.TYPE).createSpec();
+		colSpecs[22]=new DataColumnSpecCreator(getDatabaseName()+"."+getTableName()+".macaqueStrand",StringCell.TYPE).createSpec();
+		return new DataTableSpec(colSpecs);
+		}
+	public String getDatabaseName()
+		{
+		return "hg19";
+		}
+	public String getTableName()
+		{
+		return "snp135OrthoPt3Pa2Rm2";
 		}
 	public DataCell[] parse(ResultSet row) throws SQLException
 		{

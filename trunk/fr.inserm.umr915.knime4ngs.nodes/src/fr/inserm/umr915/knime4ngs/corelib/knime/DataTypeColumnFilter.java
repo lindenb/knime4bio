@@ -7,30 +7,48 @@ import org.knime.core.node.util.ColumnFilter;
 
 public class DataTypeColumnFilter implements ColumnFilter
 	{
-	private DataType dataType;
+	private DataType dataTypes[];
 	
 	public DataTypeColumnFilter()
 		{
+		this.dataTypes=new DataType[]{StringCell.TYPE};
 		}
 	
-	public DataTypeColumnFilter(DataType dataType)
+	
+	public DataTypeColumnFilter(DataType...dataTypes)
 		{
-		this.dataType=dataType;
-		if(this.dataType==null) this.dataType=StringCell.TYPE;
+		this.dataTypes=new DataType[dataTypes.length];
+		System.arraycopy(dataTypes, 0, this.dataTypes,0, this.dataTypes.length);
 		}
+
+	
 	@Override
 	public boolean includeColumn(DataColumnSpec colSpec)
 		{
-		return colSpec.getType().equals(this.dataType);
+		for(DataType dt:this.dataTypes)
+			{
+			if(colSpec.getType().equals(dt)) return true;
+			}
+		return false;
 		}
 
 	@Override
 	public String allFilteredMsg()
 		{
-		return "No column having type="+this.dataType.getClass().getSimpleName();
+		String s="";
+		for(DataType dt:this.dataTypes)
+			{
+			s+= " "+ dt.getClass().getSimpleName();
+			}
+		return "No column having type(s)="+s;
 		}
 	@Override
 	public String toString() {
-		return getClass().getName()+" {"+this.dataType.getClass()+"}";
+		String s="";
+		for(DataType dt:this.dataTypes)
+			{
+			s+= " "+ dt.getClass().getSimpleName();
+			}
+		return getClass().getName()+" {"+s+"}";
 		}
 	}

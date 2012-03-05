@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode icon="../default.png" type="Source">
+    <name>Numeric VCF split</name>
+    <shortDescription>
+    discard data per SNPs on a numeric value
+    </shortDescription>
+    
+    <fullDescription>
+        <intro>
+        For a given observed numerical column and for all the
+        samples of a given SNP, will accept or discard a
+        set of  chom/pos/ref/alt/sample if all the observed value
+        are contained in the specified range of data.
+        
+        Rows <b>must</b> be sorted by chom/pos/ref/alt/sample.
+        
+        
+        
+        </intro>
+        <option name="CHROM">The CHROM column</option>
+        <option name="POS">The POS column</option>
+        <option name="REF">The REF column</option>
+        <option name="ALT">The ALT column</option>
+        <option name="use Ref/Alt">Use Ref/Alt to group the data for the same SNP</option>
+        <option name="Observed">The observed column</option>
+        <option name="min">min observed value</option>
+        <option name="max">max observed value</option>
+        <option name="invert">invert result</option>
+    </fullDescription>
+    
+    <ports>
+        <inPort index="0" name="Sorted VCF">A sorted VCF-like table (chom/pos/ref/alt/sample) </inPort>
+        <outPort index="0" name="VCF">Filtered data</outPort>
+    </ports>    
+
+</knimeNode>

@@ -217,6 +217,11 @@
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"/>
           <node
             category-path="/ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.readmulti.ReadMultiVCFNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.readmulti.ReadMultiVCFNodeFactory"/>
+            
+          <node
+            category-path="/ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"/> 
             
@@ -330,6 +335,12 @@
             category-path="/ngs/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"/>
+  
+         <node
+            category-path="/ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.numericsplit.VCFNumericSplitNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.numericsplit.VCFNumericSplitNodeFactory"/>
+  
             
          <node 
           	category-path="/ngs/vcf/intersections"

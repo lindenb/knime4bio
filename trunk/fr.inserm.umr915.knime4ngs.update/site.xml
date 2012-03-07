@@ -3,7 +3,7 @@
    <description name="Knime4Bio" url="http://code.google.com/p/knime4bio/">
       A set of custom nodes for the interpretation of Next Generation Sequencing data with KNIME.
    </description>
-   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.30.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.30">
+   <feature url="features/fr.inserm.umr915.knime4ngs.feature_1.0.32.jar" id="fr.inserm.umr915.knime4ngs.feature" version="1.0.32">
       <category name="knime4bio"/>
    </feature>
    <category-def name="knime4bio" label="Knime4Bio">

@@ -315,6 +315,11 @@
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"/>
      <node
+            category-path="/ngs/vcf"
+            factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractsnpeff.ExtractSnpEffNodeFactory"
+            id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractsnpeff.ExtractSnpEffNodeFactory"/>
+
+     <node
             category-path="/ngs/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"/>

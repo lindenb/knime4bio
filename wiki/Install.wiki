@@ -2,6 +2,11 @@
 
 Install KNime4Bio
 
+<font color="red">
+
+=March 2012: OUR SERVER ARE CURRENTLY UNDER REPAIR=
+=KNIME4BIO WILL BE UNAVAILABLE FOR A FEW DAYS=
+</font>
 = Installing from an update site=
 
 <h2>(*note: for an unknown reason our server is sometimes "temporarily unavailable", if you cannot reach the update page, please, install the plugin from a local zip, as described in he next paragraph.* )</h2>

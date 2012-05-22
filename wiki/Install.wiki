@@ -4,9 +4,6 @@ Install KNime4Bio
 
 = Installing from an update site=
 
-<h2>(*note: for an unknown reason our server is sometimes "temporarily unavailable", if you cannot reach the update page, please, install the plugin from a local zip, as described in he next paragraph.* )</h2>
-
-
 (see also: http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-34.htm , )
 
 

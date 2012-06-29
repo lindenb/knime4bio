@@ -1,0 +1,13 @@
+- fixed build problems
+- moved the knime4bio category under community
+
+-- Diese und die folgenden Zeilen werden ignoriert --
+
+M    .classpath
+M    META-INF/MANIFEST.MF
+M    src/fr/inserm/umr915/knime4ngs/nodes/vcf/load/VCFLoaderNodeFactory.xml
+A    bin
+M    build.properties
+M    plugin.xml
+A    .settings
+A    .settings/org.eclipse.jdt.core.prefs

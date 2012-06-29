@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.mysql.jdbc
-Bundle-SymbolicName: com.mysql.jdbc
+Bundle-SymbolicName: com.mysql.jdbc;singleton:=true
 Bundle-Version: 5.1.12
 Bundle-ClassPath: mysql-connector-java-5.1.12-bin.jar
 Export-Package: com.mysql.jdbc,
@@ -16,3 +16,4 @@ Export-Package: com.mysql.jdbc,
  com.mysql.jdbc.util,
  org.gjt.mm.mysql
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

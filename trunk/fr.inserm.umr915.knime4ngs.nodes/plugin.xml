@@ -7,35 +7,35 @@
          point="org.knime.workbench.repository.categories">
       <category
             description="KNime4Bio"
-            level-id="ngs"
+            level-id="knime4bio"
             name="KNime4Bio"
-            path="/"/>
+            path="/community"/>
      <category
             description="VCF"
             level-id="vcf"
             name="VCF"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
      
      <category
             description="Misc Bio"
             level-id="biows"
             name="Misc. Bio"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
      <category
             description="Visualization"
             level-id="bioview"
             name="Visualization"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
         <category
 	            description="Integragen.com"
 	            level-id="integragen"
 	            name="Integragen"
-	            path="/ngs/vcf"/>
+	            path="/community/knime4bio/vcf"/>
 	     <category
 	            description="Predictions"
 	            level-id="predictions"
 	            name="Predictions"
-	            path="/ngs/vcf"/>       
+	            path="/community/knime4bio/vcf"/>       
             
               
             
@@ -43,28 +43,28 @@
 		            description="SIFT"
 		            level-id="sift"
 		            name="SIFT"
-		            path="/ngs/vcf/predictions"/>
+		            path="/community/knime4bio/vcf/predictions"/>
 		    <category
 		            description="Polyphen2"
 		            level-id="pph2"
 		            name="Polyphen"
-		            path="/ngs/vcf/predictions"/>      
+		            path="/community/knime4bio/vcf/predictions"/>      
 		  <category
 	            description="DNA context"
 	            level-id="dnacontext"
 	            name="Context"
-	            path="/ngs/vcf"/>                    		
+	            path="/community/knime4bio/vcf"/>                    		
      <category
             description="NCBI E-Utilities"
             level-id="ncbi"
             name="NCBI"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
      
      <category
 	            description="Intersections"
 	            level-id="intersections"
 	            name="Intersections"
-	            path="/ngs/vcf"/>
+	            path="/community/knime4bio/vcf"/>
 	            
     
      
@@ -72,12 +72,12 @@
             description="SQL"
             level-id="sql"
             name="SQL"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
       <category
             description="Utilities"
             level-id="linux"
             name="Utilities"
-            path="/ngs"/>
+            path="/community/knime4bio"/>
    </extension>
    
    
@@ -86,339 +86,333 @@
          point="org.knime.workbench.repository.nodes">
 
           <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.head.HeadNodeFactory"/>
           
          <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.tail.TailNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.tail.TailNodeFactory"/>
          <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.echo.EchoNodeFactory"/>   
           <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.sum.SumNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.sum.SumNodeFactory"/>
          <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.cat.CatNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.cat.CatNodeFactory"/>
          <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.unix.uniq.UniqNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.unix.uniq.UniqNodeFactory"/>   
          <node
-            category-path="/ngs/vcf/predictions/pph2"
+            category-path="/community/knime4bio/vcf/predictions/pph2"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.out.PolyphenOutNodeFactory"/>
       
       	 <node
-            category-path="/ngs/vcf/predictions/sift"
+            category-path="/community/knime4bio/vcf/predictions/sift"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.out.SiftOutNodeFactory"/>
          
          <node
-            category-path="/ngs/vcf/predictions/pph2"
+            category-path="/community/knime4bio/vcf/predictions/pph2"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in.PolyphenInNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.polyphen.in.PolyphenInNodeFactory"/> 
          
          <node
-            category-path="/ngs/vcf/predictions/sift"
+            category-path="/community/knime4bio/vcf/predictions/sift"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.sift.in.SiftInNodeFactory"/>
           
         <node
-            category-path="/ngs/vcf/integragen"
+            category-path="/community/knime4bio/vcf/integragen"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadindel.LoadIgIndelNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadindel.LoadIgIndelNodeFactory"/>
         
          <node
-            category-path="/ngs/vcf/integragen"
+            category-path="/community/knime4bio/vcf/integragen"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadsnp.LoadIgSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.integragen.loadsnp.LoadIgSnpNodeFactory"/>
         
          <node 
-          	category-path="/ngs/vcf/predictions"
+          	category-path="/community/knime4bio/vcf/predictions"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.nsfp.NsfpNodeFactory"  /> 
         
          <node 
-          	category-path="/ngs/vcf/intersections"
+          	category-path="/community/knime4bio/vcf/intersections"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.joinpos.JoinPosNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.joinpos.JoinPosNodeFactory"  />
             
           <node
-            category-path="ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp.SamplePerSnpNodeFactory"/>
            
           <node
-            category-path="ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.distance.DistanceSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.distance.DistanceSnpNodeFactory"/> 
            
            <node
-            category-path="ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2.SamplePerSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.samplepersnp2.SamplePerSnpNodeFactory"/>
            
              <node
-            category-path="ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.selectsamples.SelectSamplesNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.selectsamples.SelectSamplesNodeFactory"/>
             
           <node 
-          	category-path="/ngs/sql"
+          	category-path="/community/knime4bio/sql"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.sql.query.SqlQueryNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.sql.query.SqlQueryNodeFactory" 
             />  
           
            <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bin.BinNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.bin.BinNodeFactory" 
             />  
           
            <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.substitution.SubstitutionNodeFactory" 
             />  
           
            <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbygene.GroupByGeneNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbygene.GroupByGeneNodeFactory" 
             />  
           
            <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbysnp.GroupBySnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.groupbysnp.GroupBySnpNodeFactory" 
             /> 
           
           <node 
-          	category-path="/ngs/vcf/dnacontext"
+          	category-path="/community/knime4bio/vcf/dnacontext"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.das.DasContextNodeFactory" 
             />
-          <node 
-          	category-path="/ngs/vcf/dnacontext"
-          	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam.SamContextNodeFactory"
-            id="fr.inserm.umr915.knime4ngs.nodes.vcf.context.sam.SamContextNodeFactory" 
-            /> 
-         
           <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.read.ReadVCFNodeFactory"/>
           <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.readmulti.ReadMultiVCFNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.readmulti.ReadMultiVCFNodeFactory"/>
             
           <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.readsimple.ReadOneVCFNodeFactory"/> 
             
           <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.bam.local.LocalBamNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.bam.local.LocalBamNodeFactory"/>  
           <node
-            category-path="/ngs/vcf/predictions"
+            category-path="/community/knime4bio/vcf/predictions"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.localucsc.LocalUcscPredictionNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.localucsc.LocalUcscPredictionNodeFactory"/>
           <node
-            category-path="/ngs/vcf/predictions"
+            category-path="/community/knime4bio/vcf/predictions"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.blosum.BlosumNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.blosum.BlosumNodeFactory"/>
    		 <node
-            category-path="/ngs/vcf/predictions"
+            category-path="/community/knime4bio/vcf/predictions"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.ensembl.EnsemblGCNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.predictions.ensembl.EnsemblGCNodeFactory"/>
     	<node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bed.InRegionNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.bed.InRegionNodeFactory"/>
         <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bedfile.BedFileNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.bedfile.BedFileNodeFactory"/>
        <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.GenericUCSCNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.GenericUCSCNodeFactory"/>    
        <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.MysqlUCSCNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.generic.MysqlUCSCNodeFactory"/>  
        
        <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.gene.NcbiGeneNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.gene.NcbiGeneNodeFactory"/>  
        <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.pubmed.NcbiPubmedNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.pubmed.NcbiPubmedNodeFactory"/>
        <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.elink.ELinkNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.elink.ELinkNodeFactory"/>
        <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.snp.NcbiSnpNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.snp.NcbiSnpNodeFactory"/>
       <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.view.NcbiViewNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.view.NcbiViewNodeFactory"/>
             
       <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.cited.ArticleCitedNodeFactory"/>   
       
       
       <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.esearch.ESearchNodeFactory"/>
             
       <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiNucleotideNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiNucleotideNodeFactory"/>        
       
        <node
-            category-path="/ngs/ncbi"
+            category-path="/community/knime4bio/ncbi"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiProteinNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.ncbi.nuccore.NcbiProteinNodeFactory"/>
       
       
       <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.tabix.TabixNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.tabix.TabixNodeFactory"/>
       <node
-            category-path="/ngs/bioview"
+            category-path="/community/knime4bio/bioview"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.kgview.KgViewNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.ucsc.kgview.KgViewNodeFactory"/>
             
      <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractinfo.ExtractInfoNodeFactory"/>
      <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractsnpeff.ExtractSnpEffNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractsnpeff.ExtractSnpEffNodeFactory"/>
 
      <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.mw.export.MediaWikiExportNodeFactory"/>
       <node
-            category-path="/ngs/linux"
+            category-path="/community/knime4bio/linux"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.mw.exists.MediaWikiExistsNodeFactory"/>
       
        <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.wig.WigNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.wig.WigNodeFactory"/>
         <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.bbfile.BigBedFileNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.bbfile.BigBedFileNodeFactory"/>
        <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.chr.NormalizeChromNodeFactory"/>
   
          <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.numericsplit.VCFNumericSplitNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.numericsplit.VCFNumericSplitNodeFactory"/>
   
             
          <node 
-          	category-path="/ngs/vcf/intersections"
+          	category-path="/community/knime4bio/vcf/intersections"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.bed.bedinterbed.BedInterBedNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.bed.bedinterbed.BedInterBedNodeFactory"  />     
             
        <node
-            category-path="/ngs/vcf"
+            category-path="/community/knime4bio/vcf"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.bed.writer.BedWriterNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.bed.writer.BedWriterNodeFactory"/>
         <node
-            category-path="/ngs/biows"
+            category-path="/community/knime4bio/biows"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.uniprot.UniprotNodeFactory"/>
             
         <node
-            category-path="/ngs/biows"
+            category-path="/community/knime4bio/biows"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.evs.EVSNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.evs.EVSNodeFactory"/>
         
         <node 
-          	category-path="/ngs/biows"
+          	category-path="/community/knime4bio/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.reactome.ReactomeNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.reactome.ReactomeNodeFactory"  /> 
         
         <node
-            category-path="/ngs/vcf/intersections"
+            category-path="/community/knime4bio/vcf/intersections"
             factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.cut.CutRegionNodeFactory"
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.cut.CutRegionNodeFactory"/>    
         <node 
-          	category-path="/ngs/biows"
+          	category-path="/community/knime4bio/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.go.GoNodeFactory"  /> 
        <node 
-          	category-path="/ngs/biows"
+          	category-path="/community/knime4bio/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.aggregation.AggregationNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.aggregation.AggregationNodeFactory"  /> 
         <node 
-          	category-path="/ngs/bioview"
+          	category-path="/community/knime4bio/bioview"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.genscan.GenScanNodeFactory"  />
         <node 
-          	category-path="/ngs/linux"
+          	category-path="/community/knime4bio/linux"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.util.numericcolumnfilter.NumColumnFilterNodeFactory"  /> 
        <node 
-          	category-path="/ngs/biows"
+          	category-path="/community/knime4bio/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.string.StringEmblNodeFactory"  />      
         <node 
-          	category-path="/ngs/bioview"
+          	category-path="/community/knime4bio/bioview"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.browser.WebBrowserNodeFactory"  />
        <node 
-          	category-path="/ngs/bioview"
+          	category-path="/community/knime4bio/bioview"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.igv.IGVNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.igv.IGVNodeFactory"  />
         <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmt.ExtractFormatNodeFactory"  /> 
         <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmtmulti.ExtractFormatMultiNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.extractfmtmulti.ExtractFormatMultiNodeFactory"  /> 
             
        <node 
-          	category-path="/ngs/vcf"
+          	category-path="/community/knime4bio/vcf"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.alts2alt.AltsToAltNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.alts2alt.AltsToAltNodeFactory"  />      
             
         <node 
-          	category-path="/ngs/biows"
+          	category-path="/community/knime4bio/biows"
           	factory-class="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory" 
             id="fr.inserm.umr915.knime4ngs.nodes.vcf.das.feature.DasFeaturesNodeFactory"  />    
             

@@ -7,9 +7,9 @@ Bundle-Vendor: Pierre Lindenbaum
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.6.0,4.0.0)",
  org.knime.workbench.repository;bundle-version="[2.4.0,3.0.0)",
  org.knime.base;bundle-version="[2.4.0,3.0.0)",
- net.sf.picard;bundle-version="1.35.0",
- com.mysql.jdbc;bundle-version="5.1.12",
+ net.sf.picard;bundle-version="1.100.0",
+ com.mysql.jdbc;bundle-version="5.1.26",
  org.broad.igv.bbfile;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 

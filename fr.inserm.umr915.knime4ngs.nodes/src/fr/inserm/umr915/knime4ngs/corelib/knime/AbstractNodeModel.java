@@ -109,10 +109,11 @@ public abstract class AbstractNodeModel  extends NodeModel
 		return new BufferedReader(new InputStreamReader(openStream(uri),"UTF-8"));
 		}
 	
+	/*
 	protected static NodeLogger getLogger()
 		{
 		return AbstractNodeModel.logger;
-		}
+		}*/
 	
 	protected List<SettingsModel> getSettingsModel()
 		{

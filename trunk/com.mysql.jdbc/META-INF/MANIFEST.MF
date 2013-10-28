@@ -2,18 +2,20 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.mysql.jdbc
 Bundle-SymbolicName: com.mysql.jdbc;singleton:=true
-Bundle-Version: 5.1.12
-Bundle-ClassPath: mysql-connector-java-5.1.12-bin.jar
+Bundle-Version: 5.1.26
+Bundle-ClassPath: mysql-connector-java-5.1.26-bin.jar
 Export-Package: com.mysql.jdbc,
+ com.mysql.jdbc.authentication,
  com.mysql.jdbc.exceptions,
  com.mysql.jdbc.exceptions.jdbc4,
  com.mysql.jdbc.integration.c3p0,
  com.mysql.jdbc.integration.jboss,
  com.mysql.jdbc.interceptors,
  com.mysql.jdbc.jdbc2.optional,
+ com.mysql.jdbc.jmx,
  com.mysql.jdbc.log,
  com.mysql.jdbc.profiler,
  com.mysql.jdbc.util,
  org.gjt.mm.mysql
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path=""/>
-	<classpathentry exported="true" kind="lib" path="picard-1.35.jar"/>
-	<classpathentry exported="true" kind="lib" path="sam-1.35.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-ant-1.8.2-bzip2.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-jexl-2.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="picard-1.100.jar"/>
+	<classpathentry exported="true" kind="lib" path="sam-1.100.jar"/>
+	<classpathentry exported="true" kind="lib" path="snappy-java-1.0.3-rc3.jar"/>
+	<classpathentry exported="true" kind="lib" path="tribble-1.100.jar"/>
+	<classpathentry exported="true" kind="lib" path="variant-1.100.jar"/>
+
 	<classpathentry kind="output" path="bin"/>
 </classpath>

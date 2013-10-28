@@ -2,9 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Picard
 Bundle-SymbolicName: net.sf.picard
-Bundle-Version: 1.35.0
-Bundle-ClassPath: picard-1.35.jar,
- sam-1.35.jar
+Bundle-Version: 1.100.0
+Bundle-ClassPath:  apache-ant-1.8.2-
+ bzip2.jar,commons-jexl-2.1.1.jar,co
+ mmons-logging-1.1.1.jar,picard-1.10
+ 0.jar,sam-1.100.jar,snappy-java-1.0
+ .3-rc3.jar,tribble-1.100.jar,varian
+ t-1.100.jar
 Export-Package: net.sf.picard,
  net.sf.picard.analysis,
  net.sf.picard.analysis.directed,
@@ -21,4 +25,4 @@ Export-Package: net.sf.picard,
  net.sf.samtools.apps,
  net.sf.samtools.example,
  net.sf.samtools.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
